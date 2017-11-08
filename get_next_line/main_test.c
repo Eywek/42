@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:06:10 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/08 15:17:12 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/08 17:45:02 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int main(int argc, const char *argv[])
 	printf("content = '%s'\n", line);
 	printf("read = %d\n", get_next_line(fd, &line));
 	printf("content = '%s'\n", line);
+	printf("read = %d\n", get_next_line(fd, &line));
 	return 0;
 }
