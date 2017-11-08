@@ -1,0 +1,69 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/07 16:58:50 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/07 19:31:56 by vtouffet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../libft/includes/libft.h"
+#include "get_next_line.h"
+
+static void	reduce_buffer(char buffer[], size_t start, size_t stop)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < stop)
+	{
+		if (i < start)
+			buffer[i] = buffer[start + i];
+		else
+			buffer[i] = 0;
+		++i;
+	}
+}
+
+static int	iterate(char **line, char buffer[], size_t total_size)
+{
+	size_t		size;
+
+	size = 0;
+	while (buffer[size])
+	{
+		if (buffer[size] == '\n')
+		{
+			*line = ft_strncat(*line, buffer, size);
+			reduce_buffer(buffer, size + 1, total_size);
+			return (1);
+		}
+		++size;
+	}
+	return (0);
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	static char	buffer[BUFF_SIZE];
+	static int	ended;
+	ssize_t		bytes;
+
+	if (ended)
+	{
+		if (iterate(line, buffer, (size_t)ft_strlen(buffer)) == 1)
+			return (1);
+		return (0);
+	}
+	while ((bytes = read(fd, buffer, BUFF_SIZE)) > 0)
+	{
+		if (bytes < BUFF_SIZE)
+			ended = 1;
+		if (iterate(line, buffer, (size_t)ft_strlen(buffer)) == 1)
+			return (1);
+	}
+	return (-1);
+}
