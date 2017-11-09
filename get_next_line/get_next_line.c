@@ -27,14 +27,14 @@ static t_cache	*find_fd_from_cache(t_cache *cache, const int fd)
 	return (NULL);
 }
 
-void			create_cache_line(t_cache **cache, const int fd, char *tmp, int size)
+void			create_cache_line(t_cache **cache, const int fd, char *tmp, int size, int tmp_size)
 {
 	t_cache	*ptr;
 	t_cache	*list;
 
 	if (!(list = (t_cache*)ft_memalloc(sizeof(t_cache))))
 		return ;
-	list->content = ft_strsub(tmp, (unsigned int)size + 1, (size_t)(ft_strlen(tmp) - size + 1));
+	list->content = ft_strsub(tmp, (unsigned int)size + 1, (size_t)(tmp_size - size + 1));
 	list->fd = fd;
 	list->next = NULL;
 	if (*cache)
@@ -51,25 +51,53 @@ void			create_cache_line(t_cache **cache, const int fd, char *tmp, int size)
 int                get_next_line(const int fd, char **line)
 {
     static t_cache  *cache;
-    char            buffer[BUFF_SIZE];
+    char            buffer[BUFF_SIZE + 1];
     ssize_t         bytes;
     char 			*tmp;
+    int             size;
 
     if (find_fd_from_cache(cache, fd))
         tmp = find_fd_from_cache(cache, fd)->content;
     else
         tmp = ft_strnew(1);
-    while ((bytes = read(fd, buffer, BUFF_SIZE)) > 0 && ft_strchr(tmp, '\n') == NULL)
+    while (ft_strchr(tmp, '\n') == NULL && (bytes = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[bytes] = '\0';
 		tmp = ft_strjoin(tmp, buffer);
 	}
 	if (bytes == -1)
 		return (-1);
+    size = ft_strlen(tmp);
     if (ft_strchr(tmp, '\n'))
 		*line = ft_strsub(tmp, 0, ft_strchr(tmp, '\n') - tmp);
 	else
 		*line = ft_strdup(tmp);
-    create_cache_line(&cache, fd, tmp, ft_strlen(*line));
+    create_cache_line(&cache, fd, tmp, ft_strlen(*line), size);
+    return (size > 0);
+}
+
+int                get_next_line_t(const int fd, char **line)
+{
+    static char     *cache[256];
+    char            buffer[BUFF_SIZE + 1];
+    ssize_t         bytes;
+    char 			*tmp;
+
+    if (fd >= 0 && cache[fd])
+        tmp = cache[fd];
+    else
+        tmp = ft_strnew(1);
+    while (ft_strchr(tmp, '\n') == NULL && (bytes = read(fd, buffer, BUFF_SIZE)) > 0)
+    {
+        buffer[bytes] = '\0';
+        tmp = ft_strjoin(tmp, buffer);
+    }
+    if (bytes == -1 || !line)
+        return (-1);
+    if (ft_strchr(tmp, '\n'))
+        *line = ft_strsub(tmp, 0, ft_strchr(tmp, '\n') - tmp);
+    else
+        *line = ft_strdup(tmp);
+    cache[fd] = ft_strsub(tmp, (unsigned int)ft_strlen(*line) + 1, (size_t)(ft_strlen(tmp) - ft_strlen(*line) + 1));
     return (ft_strlen(tmp) > 0);
 }
