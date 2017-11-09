@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:54:13 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 14:37:10 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/09 14:41:50 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,14 @@ static t_cache	*find_fd_from_cache(t_cache *cache, const int fd)
 	return (NULL);
 }
 
-void			create_cache_line(t_cache **cache, const int fd, char *tmp)
+void			create_cache_line(t_cache **cache, const int fd, char *tmp, int size)
 {
 	t_cache	*ptr;
 	t_cache	*list;
-	int		pos;
 
 	if (!(list = (t_cache*)ft_memalloc(sizeof(t_cache))))
 		return ;
-	if (ft_strchr(tmp, '\n') || (pos = ft_strlen(tmp) < BUFF_SIZE))
-		list->content = ft_strsub(tmp, (pos) ? pos : ft_strchr(tmp, '\n') - tmp + 1, ft_strlen(tmp));
-	else 
-		list->content = ft_strdup(tmp);
+	list->content = ft_strsub(tmp, (unsigned int)size + 1, (size_t)(ft_strlen(tmp) - size + 1));
 	list->fd = fd;
 	list->next = NULL;
 	if (*cache)
@@ -52,35 +48,28 @@ void			create_cache_line(t_cache **cache, const int fd, char *tmp)
 		*cache = list;
 }
 
-int				get_next_line(const int fd, char **line)
+int                get_next_line(const int fd, char **line)
 {
-	static t_cache	*cache;
-	char			buffer[BUFF_SIZE];
-	char			*tmp;
-	ssize_t			bytes;
-	ssize_t			bytes_count;
+    static t_cache  *cache;
+    char            buffer[BUFF_SIZE];
+    ssize_t         bytes;
+    char 			*tmp;
 
-	bytes = 0;
-	bytes_count = 0;
-	while ((bytes = read(fd, buffer, BUFF_SIZE)) > 0)
+    if (find_fd_from_cache(cache, fd))
+        tmp = find_fd_from_cache(cache, fd)->content;
+    else
+        tmp = ft_strnew(1);
+    while ((bytes = read(fd, buffer, BUFF_SIZE)) > 0 && ft_strchr(tmp, '\n') == NULL)
 	{
-		tmp = ft_strjoin(ft_strnew(1), buffer);
-		bytes_count += bytes;
+		buffer[bytes] = '\0';
+		tmp = ft_strjoin(tmp, buffer);
 	}
-	if (bytes_count <= 0)
-	{
-		if (find_fd_from_cache(cache, fd) == NULL)
-			return (-1);
-		tmp = find_fd_from_cache(cache, fd)->content;
-	}
-	ft_strdel(line);
-	if (ft_strchr(tmp, '\n') || ft_strlen(tmp) < BUFF_SIZE)
-		*line = ft_strsub(tmp, 0, (ft_strlen(tmp) < BUFF_SIZE) ? ft_strlen(tmp) : ft_strchr(tmp, '\n') - tmp);
+	if (bytes == -1)
+		return (-1);
+    if (ft_strchr(tmp, '\n'))
+		*line = ft_strsub(tmp, 0, ft_strchr(tmp, '\n') - tmp);
 	else
 		*line = ft_strdup(tmp);
-	create_cache_line(&cache, fd, tmp);
-	if (ft_strlen(*line) > 0)
-		return (1);
-	else
-		return (bytes);
+    create_cache_line(&cache, fd, tmp, ft_strlen(*line));
+    return (ft_strlen(tmp) > 0);
 }

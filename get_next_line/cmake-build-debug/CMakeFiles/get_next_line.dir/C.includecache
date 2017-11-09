@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/vtouffet/Work/get_next_line/./libft/libft.h
+string.h
+-
+
+/Users/vtouffet/Work/get_next_line/get_next_line.c
+./libft/libft.h
+/Users/vtouffet/Work/get_next_line/./libft/libft.h
+get_next_line.h
+/Users/vtouffet/Work/get_next_line/get_next_line.h
+
+/Users/vtouffet/Work/get_next_line/get_next_line.h
+unistd.h
+-
+stdlib.h
+-
+
+/Users/vtouffet/Work/get_next_line/main_test.c
+get_next_line.h
+/Users/vtouffet/Work/get_next_line/get_next_line.h
+fcntl.h
+-
+stdlib.h
+-
+

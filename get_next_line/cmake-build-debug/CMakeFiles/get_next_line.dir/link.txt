@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/get_next_line.dir/get_next_line.c.o CMakeFiles/get_next_line.dir/main_test.c.o  -o get_next_line 

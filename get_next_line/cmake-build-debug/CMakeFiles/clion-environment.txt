@@ -1,0 +1,2 @@
+Options: 
+CMake: 3.8.2@/Users/vtouffet/Applications/CLion.app/Contents/bin/cmake/bin/cmake

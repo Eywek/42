@@ -31,5 +31,6 @@ int main(int argc, const char *argv[])
 	printf("read = %d\n", get_next_line(fd, &line));
 	printf("content = '%s'\n", line);
 	printf("read = %d\n", get_next_line(fd, &line));
+	printf("content = '%s'\n", line);
 	return 0;
 }
