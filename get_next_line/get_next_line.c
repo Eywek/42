@@ -5,98 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 10:55:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/08 18:29:18 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/09 11:54:13 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/09 14:37:10 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
+#include "./libft/libft.h"
 #include "get_next_line.h"
 
-static void		ft_reduce_buffer(char *buffer, size_t start, size_t stop)
+static t_cache	*find_fd_from_cache(t_cache *cache, const int fd)
 {
-	char	tmp[BUFF_SIZE];
-	size_t	i;
-	size_t	index;
+	t_cache	*ptr;
 
-	//printf("reduce buffer from %zu to %zu\n", start, stop);
-	i = -1;
-	index = 0;
-	while (++i < stop)
-		if (i >= start)
-		{
-			tmp[index] = buffer[start + index];
-			++index;
-		}
-	i = -1;
-	while (++i < stop)
-		buffer[i] = 0;
-	i = 0;
-	while (start++ < stop)
+	ptr = cache;
+	while (ptr)
 	{
-		buffer[i] = tmp[i];
-		++i;
+		if (ptr->fd == fd)
+			return (ptr);
+		ptr = ptr->next;
 	}
-	//printf("reduced buffer : '%s'\n", buffer);
+	return (NULL);
 }
 
-static size_t	ft_sfind(char *str, char c)
+void			create_cache_line(t_cache **cache, const int fd, char *tmp)
 {
-	size_t	i;
+	t_cache	*ptr;
+	t_cache	*list;
+	int		pos;
 
-	i = 0;
-	while (str[i])
+	if (!(list = (t_cache*)ft_memalloc(sizeof(t_cache))))
+		return ;
+	if (ft_strchr(tmp, '\n') || (pos = ft_strlen(tmp) < BUFF_SIZE))
+		list->content = ft_strsub(tmp, (pos) ? pos : ft_strchr(tmp, '\n') - tmp + 1, ft_strlen(tmp));
+	else 
+		list->content = ft_strdup(tmp);
+	list->fd = fd;
+	list->next = NULL;
+	if (*cache)
 	{
-		//printf("str[%zu] = %c\n", i, str[i]);
-		if (str[i] == c)
-			return (i);
-		++i;
+		ptr = *cache;
+		while (ptr && ptr->fd != fd)
+			ptr = ptr->next;
+		*ptr = *list;
 	}
-	return (0);
-}
-
-static size_t	ft_concat(char *buffer, char **line, size_t size)
-{
-	size_t		pos;
-
-	if ((pos = ft_sfind(buffer, '\n')) > 0 ||
-			(pos = ft_strlen(buffer)) != BUFF_SIZE)
-	{
-		*line = ft_strjoin(*line, ft_strsub(buffer, 0, pos));
-		ft_reduce_buffer(buffer, pos + 1, (size_t)size);
-		return (pos);
-	}
-	return (0);
+	else
+		*cache = list;
 }
 
 int				get_next_line(const int fd, char **line)
 {
-	ssize_t		bytes;
-	ssize_t		bytes_count;
-	int			size;
-	size_t		pos;
-	static char	buffer[BUFF_SIZE];
+	static t_cache	*cache;
+	char			buffer[BUFF_SIZE];
+	char			*tmp;
+	ssize_t			bytes;
+	ssize_t			bytes_count;
 
-	//printf("last buffer = '%s' (%d chars)\n", buffer, ft_strlen(buffer));
-	//if (line != NULL)
-	//	ft_strdel(line);
-	*line = ft_strnew(1);
 	bytes = 0;
 	bytes_count = 0;
-	if ((size = ft_strlen(buffer)) > 0)
+	while ((bytes = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
-		if ((pos = ft_concat(buffer, line, (size_t)size)))
-			bytes_count = (size_t)size - pos + 1;
+		tmp = ft_strjoin(ft_strnew(1), buffer);
+		bytes_count += bytes;
 	}
+	if (bytes_count <= 0)
+	{
+		if (find_fd_from_cache(cache, fd) == NULL)
+			return (-1);
+		tmp = find_fd_from_cache(cache, fd)->content;
+	}
+	ft_strdel(line);
+	if (ft_strchr(tmp, '\n') || ft_strlen(tmp) < BUFF_SIZE)
+		*line = ft_strsub(tmp, 0, (ft_strlen(tmp) < BUFF_SIZE) ? ft_strlen(tmp) : ft_strchr(tmp, '\n') - tmp);
 	else
-		while ((bytes = read(fd, buffer, BUFF_SIZE)) > 0)
-		{
-			//printf("buffer = '%s'\n", buffer);
-			if (ft_concat(buffer, line, (size_t)bytes) > 0)
-				break ;
-			bytes_count += bytes;
-		}
-	if (bytes_count > 0)
+		*line = ft_strdup(tmp);
+	create_cache_line(&cache, fd, tmp);
+	if (ft_strlen(*line) > 0)
 		return (1);
-	return (bytes);
+	else
+		return (bytes);
 }
