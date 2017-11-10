@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 16:59:15 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/10 17:00:02 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/10 17:07:04 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ int	ft_bufcheck(char *buf, int buflen)
 		if (buf[i] == '#')
 			fullcontact += ft_checkblock(buf, i);
 		i++;
-		while (buf[i++] == '\n' && i <= buflen)
+		while (buf[i] == '\n' && i < buflen)
+		{
+			i++;
 			newline++;
+		}
 	}
 	if (fullcontact != 6 && fullcontact != 8)
 		return (-1);
-	if (newline == 4)
-		return (0);
-	return (1);
+	return (newline == 4 ? 0 : 1);
 }

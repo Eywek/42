@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 14:19:43 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/10 17:00:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/10 17:04:54 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ t_list		*ft_create_tetriminos(char *buffer, char pos)
 
 	if (!(tetriminos = malloc(sizeof(t_tetri))))
 		ft_throw_error();
-	tetriminos->width = 0;
-	tetriminos->height = 0;
+	tetriminos->width = 4;
+	tetriminos->height = 4;
 	i = -1;
 	while (buffer[++i])
 	{
-		if (buffer[i] == '#')
+		// TODO
 	}
 	ft_putnbr(tetriminos->width);
 	ft_putnbr(tetriminos->height);
