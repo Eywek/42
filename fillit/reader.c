@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 14:19:43 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/10 17:04:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/10 17:55:57 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char		**ft_generate_tetri_tab(char *string, int height, int width)
 	x = 0;
 	if (!(tab[y] = malloc(sizeof(char) * (width + 1))))
 		ft_throw_error();
-	while (*string)
+	while (*string) // TODO: Ne pas aller trop loin
 	{
 		if (*string == '\n')
 		{
@@ -47,6 +47,37 @@ char		**ft_generate_tetri_tab(char *string, int height, int width)
 	return (tab);
 }
 
+t_size		*ft_get_size(char *buffer)
+{
+	int		i;
+	t_size	*size;
+	long	pos;
+	long	last_pos;
+
+	if (!(size = malloc(sizeof(t_size))))
+		ft_throw_error();
+	size->height = 0;
+	size->width = 0;
+	/*buffer = ft_strsub(buffer, ft_strchr(buffer, '#') - buffer,
+			ft_strlen(buffer));
+	buffer = ft_strrev(buffer);
+	buffer = ft_strsub(buffer, ft_strchr(buffer, '#') - buffer,
+			ft_strlen(buffer));
+	buffer = ft_strrev(buffer);*/
+	pos = ft_strchr(buffer, '#') - buffer;
+	last_pos = ft_strrchr(buffer, '#') - buffer;
+	buffer = ft_strsub(buffer, pos, last_pos - pos);
+	i = 0;
+	while (buffer[i])
+	{
+		if (buffer[i] == '\n')
+			size->height++;
+		++i;
+	}
+	size->height++;
+	return (size);
+}
+
 /*
  * Create new element in t_list struct
  * It set width, height, letter (for display) and content in char[y][x]
@@ -55,19 +86,17 @@ t_list		*ft_create_tetriminos(char *buffer, char pos)
 {
 	t_list	*element;
 	t_tetri	*tetriminos;
+	t_size	*size;
 	int		i;
 
 	if (!(tetriminos = malloc(sizeof(t_tetri))))
 		ft_throw_error();
-	tetriminos->width = 4;
-	tetriminos->height = 4;
-	i = -1;
-	while (buffer[++i])
-	{
-		// TODO
-	}
-	ft_putnbr(tetriminos->width);
+	size = ft_get_size(buffer);
+	tetriminos->width = size->width;
+	tetriminos->height = size->height;
+	//ft_putnbr(tetriminos->width);
 	ft_putnbr(tetriminos->height);
+	ft_putchar('\n');
 	tetriminos->letter = pos;
 	tetriminos->minos = ft_generate_tetri_tab(
 			buffer, tetriminos->height, tetriminos->width);

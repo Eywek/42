@@ -6,7 +6,7 @@
 /*   By: jechoque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 10:37:03 by jechoque          #+#    #+#             */
-/*   Updated: 2017/11/10 15:18:31 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/10 17:38:18 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef struct		s_tetri
 	int				height;
 	int				width;
 }					t_tetri;
+
+typedef struct		s_size
+{
+	int				height;
+	int				width;
+}					t_size;
 
 t_list	*ft_read_fd(int fd);
 
