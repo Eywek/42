@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 14:19:43 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/10 17:55:57 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/11 11:30:01 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,35 @@ t_size		*ft_get_size(char *buffer)
 	int		i;
 	t_size	*size;
 	long	pos;
-	long	last_pos;
+	int		tmp_width;
 
 	if (!(size = malloc(sizeof(t_size))))
 		ft_throw_error();
 	size->height = 0;
 	size->width = 0;
-	/*buffer = ft_strsub(buffer, ft_strchr(buffer, '#') - buffer,
-			ft_strlen(buffer));
-	buffer = ft_strrev(buffer);
-	buffer = ft_strsub(buffer, ft_strchr(buffer, '#') - buffer,
-			ft_strlen(buffer));
-	buffer = ft_strrev(buffer);*/
+	tmp_width = 0;
 	pos = ft_strchr(buffer, '#') - buffer;
-	last_pos = ft_strrchr(buffer, '#') - buffer;
-	buffer = ft_strsub(buffer, pos, last_pos - pos);
+	buffer = ft_strsub(buffer, pos, (ft_strrchr(buffer, '#') - buffer + 1) - pos);
 	i = 0;
 	while (buffer[i])
 	{
 		if (buffer[i] == '\n')
+		{
 			size->height++;
+			ft_putnbr(tmp_width);
+			ft_putchar('\n');
+			size->width = (tmp_width > size->width) ? tmp_width : size->width;
+			tmp_width = 0;
+		}
+		else if (buffer[i] == '#')
+			tmp_width++;
+		ft_putchar(buffer[i]);
 		++i;
 	}
+	size->width = (tmp_width > size->width) ? tmp_width : size->width;
+	ft_putnbr(tmp_width);
+	ft_putchar('\n');
+	ft_putstr("--\n");
 	size->height++;
 	return (size);
 }
@@ -94,9 +101,6 @@ t_list		*ft_create_tetriminos(char *buffer, char pos)
 	size = ft_get_size(buffer);
 	tetriminos->width = size->width;
 	tetriminos->height = size->height;
-	//ft_putnbr(tetriminos->width);
-	ft_putnbr(tetriminos->height);
-	ft_putchar('\n');
 	tetriminos->letter = pos;
 	tetriminos->minos = ft_generate_tetri_tab(
 			buffer, tetriminos->height, tetriminos->width);
