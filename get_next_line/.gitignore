@@ -1,0 +1,7 @@
+.idea
+test*
+*.c.*
+CMakeLists.txt
+cmake-build-debug
+a.out
+libft

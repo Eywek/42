@@ -10,7 +10,9 @@ t_list	*display(t_list *elem)
 	ft_putnbr(tetri->width);
 	ft_putchar('x');
 	ft_putnbr(tetri->height);
-	ft_putstr("\nElement: \n");
+	ft_putstr("\nElement ");
+	ft_putchar(tetri->letter);
+	ft_putstr(": \n");
 	while (*(tetri->minos))
 	{
 		ft_putstr(*((tetri->minos)++));
@@ -22,6 +24,7 @@ t_list	*display(t_list *elem)
 
 int main(int argc, const char *argv[])
 {
-	ft_lstmap(ft_read_fd(open("sample", O_RDONLY)), &display);
+	//ft_lstmap(ft_read_fd(open("sample.subject", O_RDONLY)), &display);
+	ft_display(ft_solve(ft_read_fd(open("sample4", O_RDONLY))));
 	return 0;
 }

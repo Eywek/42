@@ -192,6 +192,9 @@ ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
 //Value Computed by CMake
 get_next_line_BINARY_DIR:STATIC=/Users/vtouffet/Work/get_next_line/cmake-build-debug
 
+//Dependencies for target
+get_next_line_LIB_DEPENDS:STATIC=
+
 //Value Computed by CMake
 get_next_line_SOURCE_DIR:STATIC=/Users/vtouffet/Work/get_next_line
 

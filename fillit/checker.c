@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 16:59:15 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/10 17:07:04 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/11 22:21:03 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_checkblock(char *buffer, int i)
 		contact++;
 	if (i <= 19 && buffer[i + 1] == '#')
 		contact++;
-	if (contact != 1 && contact != 2)
+	if (contact != 1 && contact != 2 && contact != 3)
 		return (-56);
 	return (contact);
 }

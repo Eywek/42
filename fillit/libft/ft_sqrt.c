@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 17:00:35 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 12:21:15 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/11 23:00:59 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/11 23:10:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 32
-# include <unistd.h>
-# include <stdlib.h>
+#include "libft.h"
 
-typedef struct	s_cache
+int	ft_sqrt(int nb)
 {
-	int				fd;
-	char			*content;
-	struct s_cache	*next;
-}				t_cache;
+	int	sqrt;
 
-int	get_next_line(const int fd, char **line);
-
-#endif
+	if (nb < 0)
+		return (0);
+	sqrt = 1;
+	while (sqrt * sqrt < nb)
+		++sqrt;
+	return (sqrt);
+}

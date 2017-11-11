@@ -88,6 +88,210 @@
 		<Unit filename="/Users/vtouffet/Work/get_next_line/get_next_line.h">
 			<Option target="get_next_line"/>
 		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_atoi.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_atoi_base.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_bzero.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_dup.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_isalnum.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_isalpha.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_isascii.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_isdigit.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_islower.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_isprint.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_isupper.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_itoa.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_itoa_base.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_lstadd.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_lstaddend.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_lstdel.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_lstdelone.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_lstiter.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_lstmap.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_lstnew.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_memalloc.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_memccpy.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_memchr.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_memcmp.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_memcpy.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_memdel.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_memmove.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_memset.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_putchar.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_putchar_fd.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_putendl.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_putendl_fd.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_putnbr.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_putnbr_fd.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_putstr.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_putstr_fd.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strcat.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strchr.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strclr.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strcmp.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strcntfirstchar.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strcntlastchar.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strcpy.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strdel.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strdup.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strequ.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_striter.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_striteri.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strjoin.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strlcat.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strlen.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strmap.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strmapi.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strncat.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strncmp.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strncpy.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strnequ.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strnew.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strnstr.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strrchr.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strrev.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strsplit.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strsplitchrset.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strstr.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strsub.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_strtrim.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_tolower.c">
+			<Option target="get_next_line"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/get_next_line/libft/ft_toupper.c">
+			<Option target="get_next_line"/>
+		</Unit>
 		<Unit filename="/Users/vtouffet/Work/get_next_line/main_test.c">
 			<Option target="get_next_line"/>
 		</Unit>

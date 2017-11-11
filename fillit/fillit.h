@@ -6,7 +6,7 @@
 /*   By: jechoque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 10:37:03 by jechoque          #+#    #+#             */
-/*   Updated: 2017/11/10 17:38:18 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/11 21:04:31 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct		s_size
 t_list	*ft_read_fd(int fd);
 
 int		ft_bufcheck(char *buffer, int length);
+
+char	**ft_solve(t_list *tetriminos);
 
 void	ft_display(char **map);
 void	ft_throw_error();
