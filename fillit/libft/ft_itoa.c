@@ -3,52 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jechoque <jbchoquet@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/28 10:26:03 by exam              #+#    #+#             */
-/*   Updated: 2017/11/09 10:45:07 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/08/11 22:41:05 by jechoque          #+#    #+#             */
+/*   Updated: 2017/11/08 13:07:15 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <string.h>
+#include "libft.h"
 
-static int		get_nb_size(unsigned int nb)
+static int	ft_intlen(int nbr)
 {
-	unsigned int	size;
+	int len;
 
-	size = 0;
-	while (nb >= 10)
+	len = 0;
+	len = (nbr <= 0 ? 1 : 0);
+	while (nbr != 0)
 	{
-		nb /= 10;
-		++size;
+		nbr = nbr / 10;
+		len++;
 	}
-	return (size + 1);
+	return (len);
 }
 
-char			*ft_itoa(int nbr)
+char		*ft_itoa(int n)
 {
-	char			*str;
-	unsigned int	nb;
-	unsigned int	index;
-	unsigned int	size;
+	unsigned int	nbr;
+	int				sign;
+	int				len;
+	char			*alpha;
 
-	if (nbr < 0)
-		nb = (unsigned int)(nbr * -1);
-	else
-		nb = (unsigned int)nbr;
-	size = (unsigned int)get_nb_size(nb);
-	index = 0;
-	if (!(str = (char*)malloc(sizeof(char) * (size + 1 + (nbr < 0 ? 1 : 0)))))
-		return (0);
-	if (nbr < 0 && (str[index] = '-'))
-		size++;
-	index = size - 1;
-	while (nb >= 10)
+	sign = (n < 0 ? 1 : 0);
+	alpha = NULL;
+	len = ft_intlen(n);
+	nbr = (n < 0 ? -n : n);
+	if (!(alpha = (char *)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	alpha[len--] = '\0';
+	while (len >= 0)
 	{
-		str[index--] = (char)(nb % 10 + 48);
-		nb /= 10;
+		alpha[len] = nbr % 10 + '0';
+		nbr = nbr / 10;
+		len--;
 	}
-	str[index] = (char)(nb % 10 + 48);
-	str[size] = '\0';
-	return (str);
+	if (sign == 1)
+		alpha[0] = '-';
+	return (alpha);
 }

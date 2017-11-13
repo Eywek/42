@@ -3,29 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jechoque <jbchoquet@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/18 19:44:19 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 10:50:02 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/05 20:09:12 by jechoque          #+#    #+#             */
+/*   Updated: 2017/11/09 18:24:13 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t				i;
-	unsigned char		*ptr;
-	const unsigned char	*ptr2;
+	unsigned char	*s1;
+	unsigned char	*s2;
 
-	ptr = (unsigned char*)dst;
-	ptr2 = (unsigned char*)src;
-	i = 0;
-	if (ptr2 < ptr)
-		while (++i <= len)
-			ptr[len - i] = ptr2[len - i];
+	s1 = (unsigned char *)dest;
+	s2 = (unsigned char *)src;
+	if (s2 < s1)
+		while (n--)
+			s1[n] = s2[n];
 	else
-		while (len-- > 0)
-			*(ptr++) = *(ptr2++);
-	return (dst);
+		ft_memcpy(s1, s2, n);
+	return (dest);
 }

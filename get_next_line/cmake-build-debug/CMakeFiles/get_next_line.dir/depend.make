@@ -183,5 +183,6 @@ CMakeFiles/get_next_line.dir/libft/ft_toupper.c.o: ../libft/ft_toupper.c
 CMakeFiles/get_next_line.dir/libft/ft_toupper.c.o: ../libft/libft.h
 
 CMakeFiles/get_next_line.dir/main_test.c.o: ../get_next_line.h
+CMakeFiles/get_next_line.dir/main_test.c.o: ../libft/libft.h
 CMakeFiles/get_next_line.dir/main_test.c.o: ../main_test.c
 

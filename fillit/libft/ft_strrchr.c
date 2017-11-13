@@ -3,27 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jechoque <jbchoquet@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/18 19:06:22 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 10:54:12 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/05 16:19:33 by jechoque          #+#    #+#             */
+/*   Updated: 2017/11/08 02:18:05 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strrchr(char *s, int c)
-{
-	char	*last_pos;
+#include <stdlib.h>
+#include "libft.h"
 
-	last_pos = (0);
+char	*ft_strrchr(const char *s, int c)
+{
+	char	*occ;
+
+	occ = NULL;
+	if (c == '\0')
+		return ((char*)s + ft_strlen(s));
 	while (*s)
 	{
-		if (*s == c)
-			last_pos = s;
-		++s;
+		if (*s == (char)c)
+			occ = (char *)s;
+		s++;
 	}
-	if (last_pos)
-		return (last_pos);
-	if (c == '\0')
-		return (s);
-	return (0);
+	return (occ);
 }

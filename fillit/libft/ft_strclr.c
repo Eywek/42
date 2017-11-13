@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jechoque <jbchoquet@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/19 13:41:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 10:51:33 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/05 16:36:52 by jechoque          #+#    #+#             */
+/*   Updated: 2017/11/06 16:49:59 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_strclr(char *s)
 {
-	char	*ptr;
-
-	ptr = s;
-	while (ptr && *ptr)
-		*(ptr++) = '\0';
+	while (s && *s)
+		*s++ = '\0';
 }

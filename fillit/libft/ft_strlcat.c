@@ -3,38 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jechoque <jbchoquet@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/08 00:26:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/10 13:03:08 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/05 21:21:50 by jechoque          #+#    #+#             */
+/*   Updated: 2017/11/07 19:30:14 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+size_t		ft_strlcat(char *dest, const char *src, size_t size)
 {
 	size_t	i;
 	size_t	j;
-	size_t	res;
+	size_t	rsl;
 
-	i = 0;
-	while (dest[i] != '\0')
-		++i;
-	res = 0;
-	while (src[res] != '\0')
-		++res;
-	if (size <= i)
-		res += size;
-	else
-		res += i;
+	i = ft_strlen(dest);
+	rsl = ft_strlen(src);
 	j = 0;
-	while (src[j] != '\0' && i + 1 < size)
+	if (size == 0)
+		return (rsl);
+	if (size < i)
+		rsl += size;
+	else
+		rsl += i;
+	while (src[j] != '\0' && i < size - 1 && dest != src)
 	{
 		dest[i] = src[j];
-		i++;
 		j++;
+		i++;
 	}
 	dest[i] = '\0';
-	return (res);
+	return (rsl);
 }

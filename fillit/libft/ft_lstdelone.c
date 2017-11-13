@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jechoque <jbchoquet@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/21 15:33:45 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 10:48:40 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/08/07 13:09:51 by jechoque          #+#    #+#             */
+/*   Updated: 2017/08/12 14:53:17 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
 void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {

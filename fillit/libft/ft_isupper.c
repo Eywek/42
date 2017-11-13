@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jechoque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/06 13:42:11 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 10:45:03 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/08 13:34:01 by jechoque          #+#    #+#             */
+/*   Updated: 2017/11/08 13:34:45 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isupper(int c)
+int		ft_isupper(int c)
 {
-	return (c >= 65 && c <= 90);
+	if (c <= 'Z' && c >= 'A')
+		return (1);
+	return (0);
 }

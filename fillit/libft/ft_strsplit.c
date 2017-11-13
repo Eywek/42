@@ -3,24 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jechoque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/19 13:00:53 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/10 14:01:59 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/06 15:29:14 by jechoque          #+#    #+#             */
+/*   Updated: 2017/11/08 23:07:27 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	**ft_strsplit(char const *s, char c)
+static int		ft_nbw(const char *str, char c)
 {
-	char	*charset;
+	int word;
 
-	if (!s || !c)
+	word = 0;
+	if (*str != c && *str)
+	{
+		str++;
+		word++;
+	}
+	while (*str)
+	{
+		while (*str == c)
+		{
+			str++;
+			if (*str != c && *str)
+				word++;
+		}
+		str++;
+	}
+	return (word);
+}
+
+static int		ft_ln(const char *str, char c)
+{
+	int count;
+
+	count = 0;
+	while (*str != c && *str)
+	{
+		count++;
+		str++;
+	}
+	return (count);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	int		j;
+	int		i;
+	char	**spt;
+
+	j = 0;
+	i = 0;
+	if (!s || (!(spt = (char **)malloc(sizeof(char *) * (ft_nbw(s, c) + 1)))))
 		return (NULL);
-	if (!(charset = ft_strnew(2)))
-		return (NULL);
-	charset[0] = c;
-	return (ft_strsplitchrset((char*)s, charset));
+	while (*s)
+	{
+		while (*s == c && *s)
+			s++;
+		if (*s != c && *s)
+		{
+			if (!(spt[j] = (char *)malloc(sizeof(char) * (ft_ln(s, c) + 1))))
+				return (NULL);
+			while (*s && *s != c)
+				spt[j][i++] = (char)*s++;
+			spt[j][i] = '\0';
+			j++;
+			i = 0;
+		}
+	}
+	spt[j] = NULL;
+	return (spt);
 }

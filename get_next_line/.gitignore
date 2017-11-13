@@ -4,4 +4,3 @@ test*
 CMakeLists.txt
 cmake-build-debug
 a.out
-libft

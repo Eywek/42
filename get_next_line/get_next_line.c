@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 12:11:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/11 16:48:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/13 11:19:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,29 @@
 
 int	get_next_line(const int fd, char **line)
 {
-	static char	*cache[2147483647];
+	static char	*c[2147483647];
 	char		buffer[BUFF_SIZE + 1];
 	char		*tmp;
-	ssize_t		bytes;
+	ssize_t		b;
+	int			endl;
 
-	if ((!cache[fd] && !(cache[fd] = ft_strnew(1))) || !line)
+	if (fd < 0 || (!c[fd] && !(c[fd] = ft_strnew(1))) || !line)
 		return (-1);
-	while (!ft_strchr(cache[fd], '\n') && (bytes = read(fd, buffer, BUFF_SIZE)) > 0)
+	while (!ft_strchr(c[fd], '\n') && (b = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
-		buffer[bytes] = '\0';
-		tmp = cache[fd];
-		cache[fd] = ft_strjoin(cache[fd], buffer);
+		buffer[b] = '\0';
+		tmp = c[fd];
+		c[fd] = ft_strjoin(c[fd], buffer);
 		ft_strdel(&tmp);
 	}
-	if (bytes == -1)
-		return (-1);
-	if (*line && **line)
-		ft_strdel(line);
-	if (!*(tmp = cache[fd]))
-		return (0);
-	if (ft_strchr(cache[fd], '\n') > 0 && (*line = ft_strsub(cache[fd], 0, ft_strchr(cache[fd], '\n') - cache[fd])))
-		cache[fd] = ft_strsub(cache[fd], (unsigned int)(ft_strlen(*line) + 1), (size_t)ft_strlen(cache[fd]));
+	if (b == -1 || !*(tmp = c[fd]))
+		return (b == -1 ? -1 : 0);
+	if ((endl = (ft_strchr(c[fd], '\n') > 0)))
+		*line = ft_strsub(c[fd], 0, ft_strchr(c[fd], '\n') - c[fd]);
 	else
-		*line = ft_strdup(cache[fd]);
-	if (tmp && *tmp)
-		ft_strdel(&tmp);
-	return (ft_strlen(*line) > 0);
+		*line = ft_strdup(c[fd]);
+	c[fd] = ft_strsub(c[fd], (unsigned int)(ft_strlen(*line) + endl),
+			(size_t)(ft_strlen(c[fd]) - (ft_strlen(*line) + endl)));
+	ft_strdel(&tmp);
+	return (!(!c[fd] && !ft_strlen(*line)));
 }

@@ -187,6 +187,8 @@ libft.h
 /Users/vtouffet/Work/get_next_line/libft/ft_striteri.c
 
 /Users/vtouffet/Work/get_next_line/libft/ft_strjoin.c
+stdlib.h
+-
 libft.h
 /Users/vtouffet/Work/get_next_line/libft/libft.h
 
@@ -259,6 +261,8 @@ string.h
 -
 
 /Users/vtouffet/Work/get_next_line/main_test.c
+libft/libft.h
+/Users/vtouffet/Work/get_next_line/libft/libft.h
 get_next_line.h
 /Users/vtouffet/Work/get_next_line/get_next_line.h
 fcntl.h

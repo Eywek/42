@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 14:19:43 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/11 22:44:00 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/12 17:51:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 #include "fillit.h"
 
 /*
- * Remove useless colums
+ ** Remove useless colums
 */
+
 char		**ft_remove_columns(char **tab, int width, int height)
 {
 	int		i;
@@ -37,20 +38,19 @@ char		**ft_remove_columns(char **tab, int width, int height)
 	while (tab[++i])
 		tmp[y++] = ft_strsub(tab[i], pos, width);
 	tmp[y] = 0;
-	// TODO: Free tab
 	return (tmp);
 }
 
 /*
- * Generate tab[y][x] for tetriminos from string (buffer)
- */
+ ** Generate tab[y][x] for tetriminos from string (buffer)
+*/
+
 char		**ft_generate_tetri_tab(char *string, int height, int width)
 {
 	char	**tmp;
 	char	**tab;
 	int		y;
 	int		i;
-	int		pos;
 
 	if (!(tab = malloc(sizeof(char*) * (height + 1))))
 		ft_throw_error();
@@ -67,20 +67,19 @@ char		**ft_generate_tetri_tab(char *string, int height, int width)
 		}
 	}
 	tab[y] = 0;
-	// TODO: Free correctement
 	free(*tmp);
 	free(tmp);
 	return (ft_remove_columns(tab, width, height));
 }
 
 /*
- * Get width and height from buffer
+ ** Get width and height from buffer
 */
+
 t_size		*ft_get_size(char *buffer)
 {
 	int		i;
 	t_size	*size;
-	long	pos;
 	int		tmp_width;
 
 	if (!(size = malloc(sizeof(t_size))))
@@ -90,31 +89,31 @@ t_size		*ft_get_size(char *buffer)
 	tmp_width = 0;
 	i = -1;
 	while (buffer[++i])
-		if (buffer[i] == '\n' && ++size->height)
-		{
-			size->width = (tmp_width > size->width) ? tmp_width : size->width;
-			if ((buffer[i + 3] == '#' && (buffer[i + 4] == '#' ||
-							buffer[i + 2] == '#')) || (buffer[i + 6] == '#' &&
-							(buffer[i + 7] == '#' || buffer[i + 5])))
-				size->width++;
+	{
+		if (buffer[i] == '\n' && ++size->height &&
+			(size->width = (tmp_width > size->width) ? tmp_width : size->width))
 			tmp_width = 0;
-		}
 		else if (buffer[i] == '#')
 			tmp_width++;
+		if ((buffer[i] == '\n' || buffer[i] == '.') && ((buffer[i + 3] == '#'
+			&& (buffer[i + 4] == '#' || buffer[i + 2] == '#')) ||
+			(buffer[i + 6] == '#' && (buffer[i + 7] == '#' || buffer[i + 5]))))
+			tmp_width++;
+	}
 	size->width = (tmp_width > size->width) ? tmp_width : size->width;
 	return (size->height++ ? size : size);
 }
 
 /*
- * Create new element in t_list struct
- * It set width, height, letter (for display) and content in char[y][x]
- */
+ ** Create new element in t_list struct
+ ** It set width, height, letter (for display) and content in char[y][x]
+*/
+
 t_list		*ft_create_tetriminos(char *buffer, char letter)
 {
 	t_list	*element;
 	t_tetri	*tetriminos;
 	t_size	*size;
-	int		i;
 	long	pos;
 
 	if (!(tetriminos = malloc(sizeof(t_tetri))))
@@ -132,9 +131,10 @@ t_list		*ft_create_tetriminos(char *buffer, char letter)
 }
 
 /*
- * Read in file descriptor, check if tetriminos is valid and create element
- * or throw error if is invalid
- */
+ ** Read in file descriptor, check if tetriminos is valid and create element
+ ** or throw error if is invalid
+*/
+
 t_list		*ft_read_fd(int fd)
 {
 	t_list	*list;
@@ -144,16 +144,21 @@ t_list		*ft_read_fd(int fd)
 	int		state;
 
 	list = NULL;
+	state = 1;
 	current_letter = 'A';
-	while ((len = read(fd, buf, 21)) >= 20)
+	while ((len = read(fd, buf, 21)))
 	{
+		if ((state == 1 && (len != 20 && len != 21)) ||
+				(state == 0 && len != 20))
+			ft_throw_error();
 		if ((state = ft_bufcheck(buf, len)) == -1)
 			ft_throw_error();
 		if (list == NULL)
 			ft_lstadd(&list, ft_create_tetriminos(buf, current_letter++));
 		else
-			ft_lstaddend(&list, ft_create_tetriminos(buf, current_letter++));
+			ft_lstadd_back(&list, ft_create_tetriminos(buf, current_letter++));
 	}
-	// TODO: if state == 0
+	if (state != 0 || ft_lst_count(list) > 26)
+		ft_throw_error();
 	return (list);
 }

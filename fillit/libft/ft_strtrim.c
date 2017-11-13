@@ -3,32 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jechoque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/19 15:49:42 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 10:54:55 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/06 15:07:56 by jechoque          #+#    #+#             */
+/*   Updated: 2017/11/08 23:03:56 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "libft.h"
 
 char	*ft_strtrim(char const *s)
 {
-	char			*result;
-	unsigned int	start;
-	unsigned int	size;
-	unsigned int	spaces_count;
+	size_t	space;
+	size_t	len;
 
+	space = 0;
 	if (!s)
 		return (NULL);
-	size = (unsigned int)ft_strlen((char*)s);
-	spaces_count = ft_strcntfirstchar((char*)s, " \n\t");
-	start = spaces_count;
-	if (size > spaces_count)
-		spaces_count += ft_strcntlastchar((char*)s, " \n\t");
-	size -= spaces_count;
-	if (!(result = ft_memalloc((size_t)size + 1)))
-		return (NULL);
-	result = ft_strncpy(result, (char*)s + start, size);
-	return (result);
+	while ((s[space] == '\n' || s[space] == '\t' || s[space] == ' '))
+		space++;
+	if (!s[space])
+		return (ft_strdup(s + space));
+	len = ft_strlen(s) - 1;
+	while ((s[len] == '\n' || s[len] == '\t' || s[len] == ' ') && len > 0)
+		len--;
+	return (ft_strsub(s, space, len - space + 1));
 }

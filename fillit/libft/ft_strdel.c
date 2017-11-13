@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jechoque <jbchoquet@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/19 13:37:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 10:52:00 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/05 23:49:27 by jechoque          #+#    #+#             */
+/*   Updated: 2017/11/08 22:46:19 by jechoque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_strdel(char **as)
 {
-	ft_memdel((void**)as);
+	if (as && *as)
+		ft_memdel((void **)as);
 }
