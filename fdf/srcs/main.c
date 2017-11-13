@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/13 12:17:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/13 13:55:36 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/13 13:04:17 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/13 13:06:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include "../includes/fdf.h"
 
-t_list	*ft_read(char *filename)
+int main(int argc, const char *argv[])
 {
-	t_list		*lines;
-	char		*line;
-	int			fd;
-	t_list		*tmp;
-
-	fd = open(filename, O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
-	{
-		tmp = ft_lstnew(ft_strsplit(line, ' '), sizeof(char**));
-		if (*line)
-			ft_lstaddend(&lines, tmp);
-		else
-			lines = tmp;
-	}
-	return (lines);
+	if (argc != 2)
+		ft_putstr("Usage : ./fdf <filename>\n");
+	else
+		ft_display(ft_read(argv[1]));
+	return 0;
 }
