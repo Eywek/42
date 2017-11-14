@@ -6,7 +6,7 @@
 /*   By: jechoque <jbchoquet@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 10:16:39 by jechoque          #+#    #+#             */
-/*   Updated: 2017/11/14 13:21:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/14 13:56:21 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ int		main(int ac, char **av)
 {
 	int		fd;
 
-	fd = open(av[1], O_RDONLY);
-	if (ac != 2 || fd == -1)
+	if (ac != 2)
+	{
 		ft_putstr("usage: fillit source_file\n");
-	else
-		ft_display(ft_solve(ft_read_fd(fd)));
+		return (0);
+	}
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+		ft_throw_error();
+	ft_display(ft_solve(ft_read_fd(fd)));
 	close(fd);
 	return (0);
 }
