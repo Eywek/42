@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 14:19:43 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/12 17:51:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/14 20:07:59 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char		**ft_remove_columns(char **tab, int width, int height)
 	int		pos;
 	char	**tmp;
 
-	if (!(tmp = malloc(sizeof(char*) * (height + 1))))
+	if (!(tmp = (char**)malloc(sizeof(char*) * (height + 1))))
 		ft_throw_error();
 	y = 0;
 	i = -1;
@@ -52,7 +52,7 @@ char		**ft_generate_tetri_tab(char *string, int height, int width)
 	int		y;
 	int		i;
 
-	if (!(tab = malloc(sizeof(char*) * (height + 1))))
+	if (!(tab = (char**)malloc(sizeof(char*) * (height + 1))))
 		ft_throw_error();
 	tmp = ft_strsplit(string, '\n');
 	y = 0;
@@ -61,7 +61,7 @@ char		**ft_generate_tetri_tab(char *string, int height, int width)
 	{
 		if (ft_strchr(tmp[i], '#'))
 		{
-			if (!(tab[y] = malloc(sizeof(char) * 5)))
+			if (!(tab[y] = (char*)malloc(sizeof(char) * 5)))
 				ft_throw_error();
 			tab[y++] = ft_strdup(tmp[i]);
 		}
@@ -116,7 +116,7 @@ t_list		*ft_create_tetriminos(char *buffer, char letter)
 	t_size	*size;
 	long	pos;
 
-	if (!(tetriminos = malloc(sizeof(t_tetri))))
+	if (!(tetriminos = (t_tetri*)malloc(sizeof(t_tetri))))
 		ft_throw_error();
 	pos = ft_strchr(buffer, '#') - buffer;
 	size = ft_get_size(ft_strsub(buffer, pos,

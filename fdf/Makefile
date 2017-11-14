@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/14 14:52:55 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/14 15:49:49 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJECTS_PATH=./objs/
 OBJECTS_FILES=$(SRCS_FILES:.c=.o)
 OBJECTS=$(addprefix $(OBJECTS_PATH), $(OBJECTS_FILES))
 
-COMPILE=gcc -Wall -Werror -Wextra
+COMPILE=gcc
 
 INCLUDES=-I./includes -I./libs/libft
 
