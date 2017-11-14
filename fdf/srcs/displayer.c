@@ -6,12 +6,11 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/14 15:24:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/14 18:29:53 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "stdio.h"
 #include "../includes/fdf.h"
 
 void	ft_throw_error(void)
@@ -20,17 +19,22 @@ void	ft_throw_error(void)
 	exit(0);
 }
 
-t_list	*ft_display_line(t_list *line)
+void	ft_display_line(t_list *line, int y, t_mlx mlx_data, int padding)
 {
-	int i = 0;
-	char **content = ((t_line*)(line->content))->content;
-	while (content[i])
-		ft_putstr(content[i++]);
-	ft_putchar('\n');
-	return (line);
+	int x;
+	char **content;
+
+	content = ((t_line*)(line->content))->content;
+	x = 1;
+	while (content[x] != 0)
+	{
+		mlx_pixel_put(mlx_data.mlx_id, mlx_data.window_id, x * padding,
+					  y * padding, 0x00FFFFFF);
+		++x;
+	}
 }
 
-void	ft_display(t_list *lines,  t_options options)
+t_mlx	ft_generate_window(t_options options)
 {
 	t_mlx	mlx_data;
 
@@ -39,8 +43,23 @@ void	ft_display(t_list *lines,  t_options options)
 										options.window_size, WINDOW_TITLE);
 	mlx_data.options = options;
 	mlx_key_hook(mlx_data.window_id, ft_listen_key, &mlx_data);
+	return (mlx_data);
+}
+
+
+void	ft_display(t_list *lines,  t_options options)
+{
+	t_mlx	mlx_data;
+	int 	y;
+	int 	padding;
+
+	mlx_data = ft_generate_window(options);
+	y = 1;
+	padding = mlx_data.options.window_size / (ft_lstcount(lines) + 1);
+	while (lines)
+	{
+		ft_display_line(lines, y++, mlx_data, padding);
+		lines = lines->next;
+	}
 	mlx_loop(mlx_data.mlx_id);
-
-
-	ft_lstmap(lines, &ft_display_line);
 }

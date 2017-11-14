@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/14 15:17:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/14 15:25:18 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "../libs/libft/libft.h"
 # include "../libs/get_next_line/get_next_line.h"
 
-# define WINDOW_TITLE "fdf"
+# define WINDOW_TITLE "FdF"
 
 # define KEYCODE_ESC 53
 
