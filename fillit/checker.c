@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 16:59:15 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/11 22:21:03 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/14 13:29:03 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ int	ft_checkblock(char *buffer, int i)
 	if (contact != 1 && contact != 2 && contact != 3)
 		return (-56);
 	return (contact);
+}
+
+int	ft_count_points(char *str)
+{
+	int	points;
+
+	points = 0;
+	while (*str)
+	{
+		if (*str == '.')
+			++points;
+		str++;
+	}
+	return (points == 12);
 }
 
 int	ft_bufcheck(char *buf, int buflen)
@@ -51,7 +65,7 @@ int	ft_bufcheck(char *buf, int buflen)
 			newline++;
 		}
 	}
-	if (fullcontact != 6 && fullcontact != 8)
+	if (!ft_count_points(buf) || (fullcontact != 6 && fullcontact != 8))
 		return (-1);
 	return (newline == 4 ? 0 : 1);
 }
