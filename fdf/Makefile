@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/13 16:10:53 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/14 13:17:32 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJECTS=$(addprefix $(OBJECTS_PATH), $(OBJECTS_FILES))
 
 COMPILE=gcc -Wall -Werror -Wextra
 
-INCLUDES=-I./includes
+INCLUDES=-I./includes -I./libs/libft
 
 LIB_NAME=libft.a
 LIB_PATH=./libs/libft/
