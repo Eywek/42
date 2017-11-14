@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/14 14:04:48 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/14 15:17:38 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,30 @@
 # include "../libs/libft/libft.h"
 # include "../libs/get_next_line/get_next_line.h"
 
+# define WINDOW_TITLE "fdf"
+
+# define KEYCODE_ESC 53
+
 typedef	struct	s_line
 {
 	char 		**content;
 }				t_line;
 
+typedef	struct	s_options
+{
+	int 		window_size;
+}				t_options;
+
+typedef	struct	s_mlx
+{
+	void 		*mlx_id;
+	void		*window_id;
+	t_options 	options;
+}				t_mlx;
+
 t_list	*ft_read(const char *filename);
 void	ft_throw_error(void);
-void	ft_display(t_list *lines);
+int		ft_listen_key(int keycode, void *param);
+void	ft_display(t_list *lines, t_options options);
 
 #endif

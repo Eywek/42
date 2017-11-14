@@ -6,14 +6,14 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/14 13:17:32 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/14 14:52:55 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=fdf
 
 SRCS_PATH=./srcs/
-SRCS_FILES=displayer.c reader.c main.c
+SRCS_FILES=displayer.c reader.c main.c listener.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 OBJECTS_PATH=./objs/
@@ -23,6 +23,8 @@ OBJECTS=$(addprefix $(OBJECTS_PATH), $(OBJECTS_FILES))
 COMPILE=gcc -Wall -Werror -Wextra
 
 INCLUDES=-I./includes -I./libs/libft
+
+MLX=-L/usr/local/lib -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
 
 LIB_NAME=libft.a
 LIB_PATH=./libs/libft/
@@ -40,7 +42,7 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	@make -C $(LIB_PATH) > /dev/null
 	@echo "$(LIB_NAME) [$(COLOR_SUCCESS)OK$(COLOR_RESET)]"
-	@$(COMPILE) $(OBJECTS) $(LIB) $(GNL) -o $(NAME) > /dev/null
+	@$(COMPILE) $(OBJECTS) $(MLX) $(LIB) $(GNL) -o $(NAME) > /dev/null
 	@echo "$(NAME)     [$(COLOR_SUCCESS)OK$(COLOR_RESET)]"
 	@echo "        [$(COLOR_SUCCESS)FINISHED$(COLOR_RESET)]"
 
