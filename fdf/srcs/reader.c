@@ -6,21 +6,21 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:17:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/15 14:55:49 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/15 16:16:46 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "../includes/fdf.h"
 
-t_point	*ft_new_point(int x, int y, int h)
+t_point	*ft_new_point(int x, int y, int h, t_options options)
 {
 	t_point	*point;
 
 	if (!(point = malloc(sizeof(t_point))))
 		ft_throw_error();
-	point->x = x * 10;
-	point->y = y * 10 - h;
+	point->x = x * options.zoom;
+	point->y = y * options.zoom - h;
 	point->h = h;
 	point->index = y;
 	return (point);
@@ -34,7 +34,7 @@ int 	ft_open_file(const char *filename)
 	return (fd);
 }
 
-t_list	*ft_read(int fd)
+t_list	*ft_read(int fd, t_options options)
 {
 	t_list	*points;
 	char	*line;
@@ -51,7 +51,7 @@ t_list	*ft_read(int fd)
 		tab = ft_strsplit(line, ' ');
 		while (*tab)
 		{
-			if (!(tmp = ft_lstnew(ft_new_point(x, y, ft_atoi(*tab)), sizeof(t_point))))
+			if (!(tmp = ft_lstnew(ft_new_point(x, y, ft_atoi(*tab), options), sizeof(t_point))))
 				ft_throw_error();
 			if (points)
 				ft_lstaddend(&points, tmp);

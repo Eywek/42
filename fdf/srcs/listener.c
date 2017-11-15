@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:58:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/15 12:14:10 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/15 16:27:17 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,8 @@
 
 int ft_listen_key(int keycode, void *param)
 {
-	t_mlx	*mlx_data;
-
-	mlx_data = param;
+	(void)param;
 	if (keycode == KEYCODE_ESC)
-	{
-		mlx_destroy_window(mlx_data->mlx_id, mlx_data->window_id);
 		exit(0);
-	}
 	return (0);
 }
