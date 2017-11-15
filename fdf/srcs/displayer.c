@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/15 14:52:23 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/15 16:47:28 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,103 +22,53 @@ void	ft_throw_error(void)
 
 void	ft_display_point(int x, int y, t_mlx mlx_data, t_options options, int color)
 {
-	mlx_pixel_put(mlx_data.mlx_id, mlx_data.window_id, x + options.window_size / 2,
-				  (y + (options.window_size / 2)) / sqrt(3), color);
+	mlx_pixel_put(mlx_data.mlx_id, mlx_data.window_id,
+				  x + options.window_size / 4,
+				  y + options.window_size / 4,
+				  color);
 }
 
 void	ft_display_line(t_point *point1, t_point *point2, t_mlx mlx_data,
 						t_options options)
 {
-	/*double a;
-	double b;
-	int x;
-	int y;
+	t_point	diff;
+	t_point	inc;
+	t_point	pos;
+	int 	i;
+	//int diff.x, diff.y, i, xinc, yinc, cumul, x, y;
+	int color;
 
-	a = (point2->y - point1->y) / (point2->x - point1->x);
-	b = point1->y - a * point1->x;
-	x = point1->x;
-	while (x <= point2->x)
-	{
-		y = (int)(a * x + b);
-		ft_display_point(x, y, mlx_data);
-		++x;
-	}*/
+	color = 0x00F7F3ED;
+	pos.x = point1->x;
+	pos.y = point1->y;
+	diff.x = abs(point2->x - point1->x);
+	diff.y = abs(point2->y - point1->y);
+	inc.x = (diff.x > 0) ? 1 : -1;
+	inc.y = (diff.y > 0) ? 1 : -1;
+	ft_display_point(pos.x, pos.y, mlx_data, options, color);
 
-	int dx, dy, i, xinc, yinc, cumul, x, y;
-	x = point1->x;
-	y = point1->y;
-	dx = point2->x - point1->x;
-	dy = point2->y - point1->y;
-	xinc = (dx > 0) ? 1 : -1;
-	yinc = (dy > 0) ? 1 : -1;
-	dx = abs(dx);
-	dy = abs(dy);
-	ft_display_point(x, y, mlx_data, options, 0x002ECC71);
-	if (dx > dy)
+
+
+	cumul = ((diff.x > diff.y) ? diff.x : diff.y) / 2;
+	i = 1;
+	while (i <= (diff.x > diff.y ? diff.x : diff.y))
 	{
-		cumul = dx / 2;
-		i = 1;
-		while (i <= dx)
+		++i;
+		if (diff.x > diff.y)
+			pos.x += xinc;
+		else
+			pos.y += yinc;
+		cumul += (diff.x > diff.y) ? diff.y : diff.x;
+		if (cumul >= (diff.x > diff.y ? diff.x : diff.y))
 		{
-			x += xinc;
-			cumul += dy;
-			if (cumul >= dx)
-			{
-				cumul -= dx;
-				y += yinc;
-			}
-			ft_display_point(x, y, mlx_data, options, 0x003498DB);
-			++i;
+			cumul -= (diff.x > diff.y) ? diff.x : diff.y;
+			if (diff.x > diff.y)
+				pos.y += yinc;
+			else
+				pos.x += xinc;
 		}
+		ft_display_point(pos.x, pos.y, mlx_data, options, color);
 	}
-	else
-	{
-		cumul = dy / 2;
-		i = 1;
-		while (i < dy)
-		{
-			y += yinc;
-			cumul += dx;
-			if (cumul >= dy)
-			{
-				cumul -= dy;
-				x += xinc;
-			}
-			ft_display_point(x, y, mlx_data, options, 0x00E67E22);
-			++i;
-		}
-	}
-
-
-/*
-	t_point p = *point1;
-	t_point p1 = *point2;
-	t_point		d;
-	t_point		s;
-	int			err;
-	int			e2;
-
-	d.x = abs((p1.x - p.x));
-	d.y = abs((p1.y - p.y));
-	s.x = (p.x < p1.x ? 1 : -1);
-	s.y = (p.y < p1.y ? 1 : -1);
-	err = d.x - d.y;
-	while (p.x != p1.x || p.y != p1.y)
-	{
-		ft_display_point(p.x, p.y, mlx_data, options);
-		e2 = 2 * err;
-		if (e2 > -d.y)
-		{
-			err -= d.y;
-			p.x += s.x;
-		}
-		if (e2 < d.x)
-		{
-			err += d.x;
-			p.y += s.y;
-		}
-	}
-*/
 }
 
 t_mlx	ft_generate_window(t_options options)

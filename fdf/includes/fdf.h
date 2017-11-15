@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/15 12:07:19 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/15 16:16:23 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef	struct	s_point
 typedef	struct	s_options
 {
 	int 		window_size;
+	int 		zoom;
 }				t_options;
 
 typedef	struct	s_mlx
@@ -40,7 +41,7 @@ typedef	struct	s_mlx
 }				t_mlx;
 
 int 	ft_open_file(const char *filename);
-t_list	*ft_read(int fd);
+t_list	*ft_read(int fd, t_options options);
 void	ft_throw_error(void);
 int		ft_listen_key(int keycode, void *param);
 void	ft_display(t_list *lines, t_options options);
