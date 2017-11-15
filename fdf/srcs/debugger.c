@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   listener.c                                         :+:      :+:    :+:   */
+/*   debugger.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:58:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/15 12:14:10 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/15 12:04:29 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/15 12:09:35 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "../includes/fdf.h"
 
-int ft_listen_key(int keycode, void *param)
+t_list	*ft_debug_points(t_list *element)
 {
-	t_mlx	*mlx_data;
+	t_point	*point;
 
-	mlx_data = param;
-	if (keycode == KEYCODE_ESC)
-	{
-		mlx_destroy_window(mlx_data->mlx_id, mlx_data->window_id);
-		exit(0);
-	}
-	return (0);
+	point = (t_point*)(element->content);
+	ft_putstr("[DEBUG] Point at x=");
+	ft_putnbr(point->x);
+	ft_putstr("; y=");
+	ft_putnbr(point->y);
+	ft_putstr("; h=");
+	ft_putnbr(point->h);
+	ft_putstr("; index=");
+	ft_putnbr(point->index);
+	ft_putstr("\n");
+	return (element);
 }
