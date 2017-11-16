@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:58:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 19:40:22 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 20:00:52 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,25 @@ void	ft_handle_arrows(int keycode, t_env *env)
 		move.y = -ARROW_AMPLIFIER;
 	else if (keycode == KEYCODE_DOWN_ARROW)
 		move.y = ARROW_AMPLIFIER;
-	ft_move_points(env->points, env->options, move, env->options.zoom);
-	ft_display(env->points, env->options, *env);
+	if (move.x != 0 || move.y != 0)
+	{
+		ft_move_points(env->points, env->options, move, env->options.zoom);
+		ft_display(env->points, env->options, *env);
+	}
 }
 
-int		ft_listen_key(int keycode, void *param)
+void	ft_handle_zoom(int keycode, t_env *env)
 {
-	t_env	*env;
 	int		tmp;
 	t_point	move;
 
 	move.x = 0;
 	move.y = 0;
-	env = (t_env*)param;
-	if (keycode == KEYCODE_ESC)
-		exit(0);
 	if (keycode == KEYCODE_ZOOM_IN)
 	{
 		tmp = env->options.zoom;
 		if (tmp + ZOOM > 100)
-			return (0);
+			return ;
 		env->options.zoom += ZOOM;
 		ft_move_points(env->points, env->options, move, tmp);
 		ft_display(env->points, env->options, *env);
@@ -54,12 +53,21 @@ int		ft_listen_key(int keycode, void *param)
 	{
 		tmp = env->options.zoom;
 		if (tmp - ZOOM <= 0)
-			return (0);
+			return ;
 		env->options.zoom -= ZOOM;
 		ft_move_points(env->points, env->options, move, tmp);
 		ft_display(env->points, env->options, *env);
 	}
-	else
-		ft_handle_arrows(keycode, env);
+}
+
+int		ft_listen_key(int keycode, void *param)
+{
+	t_env	*env;
+
+	env = (t_env*)param;
+	if (keycode == KEYCODE_ESC)
+		exit(0);
+	ft_handle_arrows(keycode, env);
+	ft_handle_zoom(keycode, env);
 	return (0);
 }
