@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 18:58:08 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 19:53:32 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 
 void	ft_display_point(int x, int y, t_env env, int color)
 {
-	/*int tmp;
-
-	tmp = y;
-	y += x;
-	x -= tmp;*/
 	mlx_pixel_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
 				x + env.options.window_size / 2,
 				(y + env.options.window_size / 2) / env.options.inclination,
