@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:58:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 12:06:31 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 13:58:04 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ t_list	*ft_rewrite_points(t_env *env, int old_zoom)
 		point = ptr->content;
 		point->x = point->x / old_zoom;
 		point->y = (point->y + point->h) / old_zoom;
+		point->h /= env->options.amplifier;
 		ptr->content = ft_new_point(point->x, point->y, point->h, env->options);
+		free(point);
 		ptr = ptr->next;
 	}
 	return (points);

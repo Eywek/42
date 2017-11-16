@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 12:31:24 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 13:51:32 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define WINDOW_TITLE "FdF"
 # define ZOOM 5
 # define INCLINATION 1.7
+# define HEIGHT_AMPLIFIER 3
 
 # define KEYCODE_ESC 53
 # define KEYCODE_PLUS 69
@@ -38,6 +39,7 @@ typedef	struct	s_options
 	int 		window_size;
 	int 		zoom;
 	float 		inclination;
+	int			amplifier;
 }				t_options;
 
 typedef	struct	s_mlx

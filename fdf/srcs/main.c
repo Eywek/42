@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:04:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 12:31:47 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 13:51:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_options	ft_generate_options(int argc, const char *argv[])
 	options.window_size = 400;
 	options.zoom = 10;
 	options.inclination = INCLINATION;
+	options.amplifier = HEIGHT_AMPLIFIER;
 	if (argc > 2)
 	{
 		index = 2;
@@ -33,6 +34,11 @@ t_options	ft_generate_options(int argc, const char *argv[])
 			if (ft_strcmp(argv[index], "-zoom") == 0)
 			{
 				options.zoom = ft_atoi(argv[index + 1]);
+				++index;
+			}
+			if (ft_strcmp(argv[index], "-amplifier") == 0)
+			{
+				options.amplifier = ft_atoi(argv[index + 1]);
 				++index;
 			}
 			++index;
