@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 18:57:58 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 18:58:08 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_point	*ft_get_next_line(t_list *points)
 		previous = ((t_point*)(points->content));
 		points = points->next;
 	}
-	return (NULL);
+	return (previous);
 }
 
 void	ft_display(t_list *points, t_options options, t_env env)
