@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 15:27:22 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 16:01:31 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # define INCLINATION 1.7
 # define HEIGHT_AMPLIFIER 2
 # define ARROW_AMPLIFIER 5
+# define DEFAULT_COLOR 0x00e8f7ff
+# define MID_COLOR 0x0082c1e0
+# define MAX_COLOR 0x0003547c
 
 # define KEYCODE_ESC 53
 # define KEYCODE_PLUS 69
