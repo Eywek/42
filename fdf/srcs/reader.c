@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:17:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 19:58:14 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 20:04:04 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../includes/fdf.h"
 
 t_list	*ft_move_points(t_list *points, t_options options, t_point move,
-						  int old_zoom)
+						int old_zoom)
 {
 	t_list	*ptr;
 	t_point	*point;
@@ -26,7 +26,8 @@ t_list	*ft_move_points(t_list *points, t_options options, t_point move,
 		if (move.x > 0 || move.y > 0 || old_zoom > 1)
 			point->h /= options.amplifier;
 		point->x = ((point->x / old_zoom) + move.x) * options.zoom;
-		point->y = (((point->y + point->h) / old_zoom) + move.y) * options.zoom - point->h;
+		point->y = (((point->y + point->h) / old_zoom) + move.y) * options.zoom
+				- point->h;
 		point->h *= options.amplifier;
 		ptr = ptr->next;
 	}
