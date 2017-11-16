@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 13:32:16 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 14:54:56 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ void	ft_throw_error(void)
 
 void	ft_display_point(int x, int y, t_env env, int color)
 {
-	y += x * .5;
-	x -= y * .3;
+	int tmp;
+
+	tmp = y;
+	y += x;
+	x -= tmp;
 	mlx_pixel_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
 				  x + env.options.window_size / 2,
 				  (y + env.options.window_size / 2) / env.options.inclination,
@@ -89,11 +92,11 @@ t_point	*ft_get_next_line(t_list *points)
 	tmp_index = ((t_point*)(points->content))->index;
 	tmp_x = ((t_point*)(points->content))->x;
 
-	ft_putstr("SEARCH FOR index = ");
-	ft_putnbr(tmp_index + 1);
-	ft_putstr(" AND x = ");
-	ft_putnbr(tmp_x);
-	ft_putstr("\n");
+	//ft_putstr("SEARCH FOR index = ");
+	//ft_putnbr(tmp_index + 1);
+	//ft_putstr(" AND x = ");
+	//ft_putnbr(tmp_x);
+	//ft_putstr("\n");
 
 	while (points)
 	{
@@ -111,10 +114,11 @@ void	ft_display(t_list *points,  t_options options, t_env env)
 	t_point	*point2;
 	t_point	*next_line;
 
-	ft_putstr("DEBUG OF ");
+	ft_putstr("Start drawing ");
 	ft_putnbr(ft_lstcount(points));
-	ft_putstr(" POINTS:\n");
-	ft_lstmap(points, &ft_debug_points);
+	ft_putstr(" points...\n");
+	//ft_putstr(" POINTS:\n");
+	//ft_lstmap(points, &ft_debug_points);
 
 
 	env.options = options;
@@ -140,5 +144,6 @@ void	ft_display(t_list *points,  t_options options, t_env env)
 	if (points)
 		ft_display_point(((t_point*)(points->content))->x,
 						 ((t_point*)(points->content))->y, env, 0x00F7F3ED);
+	ft_putstr("Window displayed!\n");
 	mlx_loop(env.mlx_data.mlx_id);
 }
