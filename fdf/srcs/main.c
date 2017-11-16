@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:04:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 12:00:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 12:31:47 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_options	ft_generate_options(int argc, const char *argv[])
 
 	options.window_size = 400;
 	options.zoom = 10;
+	options.inclination = INCLINATION;
 	if (argc > 2)
 	{
 		index = 2;

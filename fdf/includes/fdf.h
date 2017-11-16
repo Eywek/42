@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 11:50:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 12:31:24 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../libs/get_next_line/get_next_line.h"
 
 # define WINDOW_TITLE "FdF"
+# define ZOOM 5
+# define INCLINATION 1.7
 
 # define KEYCODE_ESC 53
 # define KEYCODE_PLUS 69
@@ -35,6 +37,7 @@ typedef	struct	s_options
 {
 	int 		window_size;
 	int 		zoom;
+	float 		inclination;
 }				t_options;
 
 typedef	struct	s_mlx

@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 11:51:20 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 12:30:51 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_display_point(int x, int y, t_env env)
 {
 	mlx_pixel_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
 				  x + env.options.window_size / 4,
-				  y + env.options.window_size / 4,
+				  (y + env.options.window_size / 4) / env.options.inclination,
 				  0x00F7F3ED);
 }
 

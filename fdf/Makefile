@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/15 11:57:23 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/16 12:33:17 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,13 @@ COLOR_DEFAULT=\033[1;34m
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
+	@echo "$(LIB_NAME)     [$(COLOR_PENDING)Compiling...$(COLOR_RESET)]"
 	@make -C $(LIB_PATH) > /dev/null
+	@echo "\033[A\033[K\033[A"
 	@echo "$(LIB_NAME) [$(COLOR_SUCCESS)OK$(COLOR_RESET)]"
+	@echo "$(NAME)     [$(COLOR_PENDING)Compiling...$(COLOR_RESET)]"
 	@$(COMPILE) $(OBJECTS) $(MLX) $(LIB) $(GNL) -o $(NAME) > /dev/null
+	@echo "\033[A\033[K\033[A"
 	@echo "$(NAME)     [$(COLOR_SUCCESS)OK$(COLOR_RESET)]"
 	@echo "        [$(COLOR_SUCCESS)FINISHED$(COLOR_RESET)]"
 
