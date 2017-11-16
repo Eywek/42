@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:58:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 15:42:16 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 16:32:21 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,34 @@ t_list	*ft_rewrite_points(t_env *env, int x, int y)
 		point->x = point->x / env->options.zoom;
 		point->y = (point->y + point->h) / env->options.zoom;
 		point->h /= env->options.amplifier;
-		ptr->content = ft_new_point(point->x + x, point->y + y, point->h, env->options);
+		ptr->content = ft_new_point(point->x + x, point->y + y, point->h,
+									env->options);
 		free(point);
 		ptr = ptr->next;
 	}
 	return (points);
 }
 
-int 	ft_listen_key(int keycode, void *param)
+void	ft_handle_arrows(int keycode, t_env *env)
 {
-	t_env		*env;
-	int 		tmp;
+	if (keycode == KEYCODE_RIGHT_ARROW)
+		ft_display(ft_rewrite_points(env, ARROW_AMPLIFIER, 0),
+					env->options, *env);
+	else if (keycode == KEYCODE_LEFT_ARROW)
+		ft_display(ft_rewrite_points(env, -ARROW_AMPLIFIER, 0),
+					env->options, *env);
+	else if (keycode == KEYCODE_UP_ARROW)
+		ft_display(ft_rewrite_points(env, 0, -ARROW_AMPLIFIER),
+					env->options, *env);
+	else if (keycode == KEYCODE_DOWN_ARROW)
+		ft_display(ft_rewrite_points(env, 0, ARROW_AMPLIFIER),
+					env->options, *env);
+}
+
+int		ft_listen_key(int keycode, void *param)
+{
+	t_env	*env;
+	int		tmp;
 
 	env = (t_env*)param;
 	if (keycode == KEYCODE_ESC)
@@ -78,17 +95,7 @@ int 	ft_listen_key(int keycode, void *param)
 		env->options.zoom -= ZOOM;
 		ft_display(ft_zoom(env, tmp), env->options, *env);
 	}
-	else if (keycode == KEYCODE_RIGHT_ARROW)
-		ft_display(ft_rewrite_points(env, ARROW_AMPLIFIER, 0),
-				   env->options, *env);
-	else if (keycode == KEYCODE_LEFT_ARROW)
-		ft_display(ft_rewrite_points(env, -ARROW_AMPLIFIER, 0),
-				   env->options, *env);
-	else if (keycode == KEYCODE_UP_ARROW)
-		ft_display(ft_rewrite_points(env, 0, -ARROW_AMPLIFIER),
-				   env->options, *env);
-	else if (keycode == KEYCODE_DOWN_ARROW)
-		ft_display(ft_rewrite_points(env, 0, ARROW_AMPLIFIER),
-				   env->options, *env);
+	else
+		ft_handle_arrows(keycode, env);
 	return (0);
 }
