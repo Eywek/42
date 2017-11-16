@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:58:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 16:32:21 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 18:26:40 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list	*ft_zoom(t_env *env, int old_zoom)
 		point->x = point->x / old_zoom;
 		point->y = (point->y + point->h) / old_zoom;
 		point->h /= env->options.amplifier;
-		ptr->content = ft_new_point(point->x, point->y, point->h, env->options);
+		ptr->content = ft_new_point(point->x, point->y, point->h, env->options, 0);
 		free(point);
 		ptr = ptr->next;
 	}
@@ -48,7 +48,7 @@ t_list	*ft_rewrite_points(t_env *env, int x, int y)
 		point->y = (point->y + point->h) / env->options.zoom;
 		point->h /= env->options.amplifier;
 		ptr->content = ft_new_point(point->x + x, point->y + y, point->h,
-									env->options);
+									env->options, 0);
 		free(point);
 		ptr = ptr->next;
 	}
