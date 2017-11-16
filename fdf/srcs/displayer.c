@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 16:00:11 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 16:10:38 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 			else
 				pos.x += inc.x;
 		}
-		if (pos.y + point1->h != point1->y && diff.x > diff.y)
+		if (point1->h > 0 && point2->h > 0)
 			ft_display_point(pos.x, pos.y, env, MAX_COLOR);
-		else if (point2->h > 0 || point1->h)
+		else if (point2->h > 0 || point1->h > 0)
 			ft_display_point(pos.x, pos.y, env, MID_COLOR);
 		else
 			ft_display_point(pos.x, pos.y, env, DEFAULT_COLOR);
