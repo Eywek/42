@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 12:30:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 13:32:16 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void	ft_throw_error(void)
 	exit(0);
 }
 
-void	ft_display_point(int x, int y, t_env env)
+void	ft_display_point(int x, int y, t_env env, int color)
 {
+	y += x * .5;
+	x -= y * .3;
 	mlx_pixel_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
-				  x + env.options.window_size / 4,
-				  (y + env.options.window_size / 4) / env.options.inclination,
-				  0x00F7F3ED);
+				  x + env.options.window_size / 2,
+				  (y + env.options.window_size / 2) / env.options.inclination,
+				  color);
 }
 
 void	ft_display_line(t_point *point1, t_point *point2, t_env env)
@@ -42,7 +44,7 @@ void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 	diff.y = abs(point2->y - point1->y);
 	inc.x = (point2->x - point1->x > 0) ? 1 : -1;
 	inc.y = (point2->y - point1->y > 0) ? 1 : -1;
-	ft_display_point(pos.x, pos.y, env);
+	ft_display_point(pos.x, pos.y, env, 0x00F7F3ED);
 	cumul = ((diff.x > diff.y) ? diff.x : diff.y) / 2;
 	i = 1;
 	while (i <= (diff.x > diff.y ? diff.x : diff.y))
@@ -61,7 +63,10 @@ void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 			else
 				pos.x += inc.x;
 		}
-		ft_display_point(pos.x, pos.y, env);
+		//if (pos.y + point1->h != point1->y && diff.x > diff.y)
+		//	ft_display_point(pos.x, pos.y, env, 0x00E01F11);
+		//else
+			ft_display_point(pos.x, pos.y, env, 0x00F7F3ED);
 	}
 }
 
@@ -133,6 +138,7 @@ void	ft_display(t_list *points,  t_options options, t_env env)
 		points = points->next;
 	}
 	if (points)
-		ft_display_point(((t_point*)(points->content))->x, ((t_point*)(points->content))->y, env);
+		ft_display_point(((t_point*)(points->content))->x,
+						 ((t_point*)(points->content))->y, env, 0x00F7F3ED);
 	mlx_loop(env.mlx_data.mlx_id);
 }
