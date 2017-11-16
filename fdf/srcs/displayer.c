@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 14:54:56 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 16:00:11 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 	diff.y = abs(point2->y - point1->y);
 	inc.x = (point2->x - point1->x > 0) ? 1 : -1;
 	inc.y = (point2->y - point1->y > 0) ? 1 : -1;
-	ft_display_point(pos.x, pos.y, env, 0x00F7F3ED);
+	if (point1->h > 0)
+		ft_display_point(pos.x, pos.y, env, MAX_COLOR);
+	else
+		ft_display_point(pos.x, pos.y, env, DEFAULT_COLOR);
 	cumul = ((diff.x > diff.y) ? diff.x : diff.y) / 2;
 	i = 1;
 	while (i <= (diff.x > diff.y ? diff.x : diff.y))
@@ -66,10 +69,12 @@ void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 			else
 				pos.x += inc.x;
 		}
-		//if (pos.y + point1->h != point1->y && diff.x > diff.y)
-		//	ft_display_point(pos.x, pos.y, env, 0x00E01F11);
-		//else
-			ft_display_point(pos.x, pos.y, env, 0x00F7F3ED);
+		if (pos.y + point1->h != point1->y && diff.x > diff.y)
+			ft_display_point(pos.x, pos.y, env, MAX_COLOR);
+		else if (point2->h > 0 || point1->h)
+			ft_display_point(pos.x, pos.y, env, MID_COLOR);
+		else
+			ft_display_point(pos.x, pos.y, env, DEFAULT_COLOR);
 	}
 }
 
