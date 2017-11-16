@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:58:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 11:55:18 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 12:06:31 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ int 	ft_listen_key(int keycode, void *param)
 	if (keycode == KEYCODE_ZOOM_IN)
 	{
 		tmp = env->options.zoom;
-		if (tmp + 10 > 100)
+		if (tmp + ZOOM > 100)
 			return (0);
-		env->options.zoom += 10;
+		env->options.zoom += ZOOM;
 		ft_display(ft_rewrite_points(env, tmp), env->options, *env);
 	}
 	else if (keycode == KEYCODE_ZOOM_OUT)
 	{
 		tmp = env->options.zoom;
-		if (tmp - 10 <= 0)
+		if (tmp - ZOOM <= 0)
 			return (0);
-		env->options.zoom -= 10;
+		env->options.zoom -= ZOOM;
 		ft_display(ft_rewrite_points(env, tmp), env->options, *env);
 	}
 	return (0);
