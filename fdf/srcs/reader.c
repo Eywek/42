@@ -6,24 +6,23 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:17:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 16:46:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 18:26:30 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "../includes/fdf.h"
 
-t_point	*ft_new_point(int x, int y, int h, t_options options)
+t_point	*ft_new_point(int x, int y, int h, t_options options, int index)
 {
 	t_point	*point;
 
-	h *= options.amplifier;
 	if (!(point = malloc(sizeof(t_point))))
 		ft_throw_error();
 	point->x = x * options.zoom;
 	point->y = y * options.zoom - h;
-	point->h = h;
-	point->index = y;
+	point->h = h * options.amplifier;
+	point->index = index;
 	return (point);
 }
 
@@ -48,7 +47,7 @@ void	ft_generate_points_from_line(t_list **points, char *line, int y,
 	rm = tab;
 	while (*tab)
 	{
-		if (!(tmp = ft_lstnew(ft_new_point(x, y, ft_atoi(*tab), options),
+		if (!(tmp = ft_lstnew(ft_new_point(x - y, y + x, ft_atoi(*tab), options, y),
 							sizeof(t_point))))
 			ft_throw_error();
 		if (*points)

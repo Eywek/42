@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 16:01:31 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 17:57:59 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct	s_env
 
 int 	ft_open_file(const char *filename);
 t_list	*ft_read(int fd, t_options options);
-t_point	*ft_new_point(int x, int y, int h, t_options options);
+t_point	*ft_new_point(int x, int y, int h, t_options options, int index);
 void	ft_throw_error(void);
 int		ft_listen_key(int keycode, void *param);
 void	ft_display(t_list *points, t_options options, t_env env);

@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 16:49:45 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 18:57:58 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 void	ft_display_point(int x, int y, t_env env, int color)
 {
-	int tmp;
+	/*int tmp;
 
 	tmp = y;
 	y += x;
-	x -= tmp;
+	x -= tmp;*/
 	mlx_pixel_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
 				x + env.options.window_size / 2,
 				(y + env.options.window_size / 2) / env.options.inclination,
@@ -87,14 +87,17 @@ t_point	*ft_get_next_line(t_list *points)
 	t_point	*point;
 	int		tmp_index;
 	int		tmp_x;
+	t_point	*previous;
 
 	tmp_index = ((t_point*)(points->content))->index;
 	tmp_x = ((t_point*)(points->content))->x;
+	previous = ((t_point*)(points->content));
 	while (points)
 	{
 		point = (t_point*)(points->content);
 		if (point->index == tmp_index + 1 && point->x == tmp_x)
-			return (point);
+			return (previous);
+		previous = ((t_point*)(points->content));
 		points = points->next;
 	}
 	return (NULL);
