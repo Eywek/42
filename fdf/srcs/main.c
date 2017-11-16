@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:04:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/15 16:17:24 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 12:00:27 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ t_options	ft_generate_options(int argc, const char *argv[])
 
 int 		main(int argc, const char *argv[])
 {
-	t_options options;
+	t_options	options;
+	t_env		env;
 
+	env.init = 1;
 	options = ft_generate_options(argc, argv);
 	if (argc < 2)
 		ft_putstr("Usage : ./fdf <filename> [-size size]\n");
 	else
-		ft_display(ft_read(ft_open_file(argv[1]), options), options);
+		ft_display(ft_read(ft_open_file(argv[1]), options), options, env);
 	return 0;
 }
