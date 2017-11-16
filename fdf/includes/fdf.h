@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 13:51:32 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/16 15:27:22 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@
 # define WINDOW_TITLE "FdF"
 # define ZOOM 5
 # define INCLINATION 1.7
-# define HEIGHT_AMPLIFIER 3
+# define HEIGHT_AMPLIFIER 2
+# define ARROW_AMPLIFIER 5
 
 # define KEYCODE_ESC 53
 # define KEYCODE_PLUS 69
 # define KEYCODE_MINUS 78
+# define KEYCODE_RIGHT_ARROW 124
+# define KEYCODE_LEFT_ARROW 123
+# define KEYCODE_UP_ARROW 126
+# define KEYCODE_DOWN_ARROW 125
 # define KEYCODE_ZOOM_IN KEYCODE_PLUS
 # define KEYCODE_ZOOM_OUT KEYCODE_MINUS
 
