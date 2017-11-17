@@ -6,14 +6,14 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/17 10:39:25 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/17 10:39:26 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=fdf
 
 SRCS_PATH=./srcs/
-SRCS_FILES=displayer.c reader.c main.c listener.c debugger.c error.c
+SRCS_FILES=displayer.c reader.c main.c listener.c debugger.c error.c window.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 OBJECTS_PATH=./objs/
