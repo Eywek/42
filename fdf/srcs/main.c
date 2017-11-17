@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:04:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 11:30:48 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 12:00:54 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_options	ft_generate_options(int argc, const char *argv[])
 	int			index;
 	t_options	options;
 
-	options.window_size = 400;
+	options.width = WINDOW_WIDTH;
+	options.height = WINDOW_HEIGHT;
 	options.zoom = 10;
 	options.inclination = INCLINATION;
 	options.amplifier = HEIGHT_AMPLIFIER;
@@ -26,8 +27,10 @@ t_options	ft_generate_options(int argc, const char *argv[])
 		index = 2;
 		while (index < argc)
 		{
-			if (ft_strcmp(argv[index], "-size") == 0 && index + 1 < argc)
-				options.window_size = ft_atoi(argv[++index]);
+			if (ft_strcmp(argv[index], "-width") == 0 && index + 1 < argc)
+				options.width = ft_atoi(argv[++index]);
+			if (ft_strcmp(argv[index], "-height") == 0 && index + 1 < argc)
+				options.height = ft_atoi(argv[++index]);
 			if (ft_strcmp(argv[index], "-zoom") == 0 && index + 1 < argc)
 				options.zoom = ft_atoi(argv[++index]);
 			if (ft_strcmp(argv[index], "-amplifier") == 0 && index + 1 < argc)

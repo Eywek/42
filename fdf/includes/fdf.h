@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 11:29:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 12:00:25 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 # include "../libs/libft/libft.h"
 # include "../libs/get_next_line/get_next_line.h"
 
+# define WINDOW_WIDTH 500
+# define WINDOW_HEIGHT 500
 # define WINDOW_TITLE "FdF"
-# define ZOOM 5
+# define ZOOM 2
 # define INCLINATION 1.7
 # define HEIGHT_AMPLIFIER 3
-# define ARROW_AMPLIFIER 3
+# define ARROW_AMPLIFIER 2
 # define DEFAULT_COLOR 0x00e8f7ff
 # define MID_COLOR 0x0082c1e0
 # define MAX_COLOR 0x0003547c
@@ -44,7 +46,8 @@ typedef	struct	s_point
 
 typedef	struct	s_options
 {
-	int 		window_size;
+	int 		width;
+	int 		height;
 	int 		zoom;
 	float 		inclination;
 	int			amplifier;
