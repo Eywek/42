@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/cc -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/ft_printf.dir/main_test.c.o CMakeFiles/ft_printf.dir/srcs/core.c.o CMakeFiles/ft_printf.dir/srcs/registerer.c.o  -o ft_printf 
