@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/16 19:35:48 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 11:29:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define WINDOW_TITLE "FdF"
 # define ZOOM 5
 # define INCLINATION 1.7
-# define HEIGHT_AMPLIFIER 2
+# define HEIGHT_AMPLIFIER 3
 # define ARROW_AMPLIFIER 3
 # define DEFAULT_COLOR 0x00e8f7ff
 # define MID_COLOR 0x0082c1e0

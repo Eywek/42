@@ -6,7 +6,7 @@
 #    By: jechoque <jbchoquet@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/12 10:02:36 by jechoque          #+#    #+#              #
-#    Updated: 2017/11/12 16:57:33 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/17 11:03:53 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,17 +22,16 @@ SRC=checker.c \
 	reader.c \
 	solver.c \
 
-OBJ=checker.o \
-	displayer.o \
-	main.o \
-	reader.o \
-	solver.o \
+OBJ=$(SRC:.c=.o)
 
 LIB=./libft/libft.a
 
-$(NAME): ./fillit.h
+$(NAME): $(OBJ)
 	make -C ./libft
-	gcc $(FLAG) $(SRC) $(HDR) $(LIB) -o $(NAME)
+	gcc $(FLAG) $(OBJ) $(HDR) $(LIB) -o $(NAME)
+
+%.o:%.c
+	gcc $(FLAG) $(HDR) -c $< -o $@
 
 all: $(NAME)
 
