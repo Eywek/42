@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 16:47:41 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 17:08:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_point	*ft_get_next_line(t_list *points)
 		point = points->next->content;
 		if (point->x == x_searched || current_index + 1 < point->index)
 			return (points->content);
-		if (points->next->next == NULL)
+		if (points->next->next == NULL && current_index + 1 == point->index)
 			return (points->next->content);
 		points = points->next;
 	}
