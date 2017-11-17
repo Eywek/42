@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 14:19:43 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/14 20:07:59 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 11:01:34 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ t_list		*ft_read_fd(int fd)
 {
 	t_list	*list;
 	int		len;
-	char	buf[21];
+	char	buf[21 + 1];
 	char	current_letter;
 	int		state;
 
@@ -148,6 +148,7 @@ t_list		*ft_read_fd(int fd)
 	current_letter = 'A';
 	while ((len = read(fd, buf, 21)))
 	{
+		buf[len] = '\0';
 		if ((state == 1 && (len != 20 && len != 21)) ||
 				(state == 0 && len != 20))
 			ft_throw_error();
