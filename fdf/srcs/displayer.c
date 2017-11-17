@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 12:28:00 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 14:15:32 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,33 @@ void	ft_display_point(int x, int y, t_env env, int color)
 
 void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 {
-	t_point	diff;
+	t_point	diff; // difference entre les deux points
 	t_point	inc;
-	t_point	pos;
+	t_point	pos; // position du point a placer
 	int		i;
 	int		cumul;
 
 	pos.x = point1->x;
 	pos.y = point1->y;
-	diff.x = abs(point2->x - point1->x);
-	diff.y = abs(point2->y - point1->y);
-	inc.x = (point2->x - point1->x > 0) ? 1 : -1;
-	inc.y = (point2->y - point1->y > 0) ? 1 : -1;
-	if (point1->h > 0)
+	diff.x = abs(point2->x - point1->x); // diff entre les x
+	diff.y = abs(point2->y - point1->y); // diff entre les y
+	inc.x = (point2->x - point1->x > 0) ? 1 : -1; // si point 2 plus haut que point 1 en x --> inc.x = 1 sinon - 1
+	inc.y = (point2->y - point1->y > 0) ? 1 : -1; // si point 2 plus bas en ligne que point 1 --> inc.y = 1 sinon -1
+	if (point1->h > 0) // selon la couleur
 		ft_display_point(pos.x, pos.y, env, MAX_COLOR);
 	else
 		ft_display_point(pos.x, pos.y, env, DEFAULT_COLOR);
-	cumul = ((diff.x > diff.y) ? diff.x : diff.y) / 2;
+	cumul = ((diff.x > diff.y) ? diff.x : diff.y) / 2; // si le point est trace en x ou en y, cumul = diff / 2
 	i = 1;
-	while (i <= (diff.x > diff.y ? diff.x : diff.y))
+	while (i <= (diff.x > diff.y ? diff.x : diff.y)) // tracer le nb de points manquant selon la diff
 	{
 		++i;
-		if (diff.x > diff.y)
+		if (diff.x > diff.y) // on increment la pos selon si c'est en x ou en y
 			pos.x += inc.x;
 		else
 			pos.y += inc.y;
-		cumul += (diff.x > diff.y) ? diff.y : diff.x;
-		if (cumul >= (diff.x > diff.y ? diff.x : diff.y))
+		cumul += (diff.x > diff.y) ? diff.y : diff.x; // on ajoute la diff
+		if (cumul >= (diff.x > diff.y ? diff.x : diff.y)) // si c'est superieur a la diff on remove une fois la diff et on incremente la pos
 		{
 			cumul -= (diff.x > diff.y) ? diff.x : diff.y;
 			if (diff.x > diff.y)
@@ -57,7 +57,7 @@ void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 			else
 				pos.x += inc.x;
 		}
-		if (point1->h > 0 && point2->h > 0)
+		if (point1->h > 0 && point2->h > 0) // on affiche
 			ft_display_point(pos.x, pos.y, env, MAX_COLOR);
 		else if (point2->h > 0 || point1->h > 0)
 			ft_display_point(pos.x, pos.y, env, MID_COLOR);
@@ -84,7 +84,7 @@ t_point	*ft_get_next_line(t_list *points)
 		previous = ((t_point*)(points->content));
 		points = points->next;
 	}
-	return (previous);
+	return (NULL);
 }
 
 void	ft_display(t_list *points, t_options options, t_env env)
