@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 12:00:25 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 12:31:50 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_throw_error(void);
 int		ft_listen_key(int keycode, void *param);
 t_list	*ft_move_points(t_list *points, t_options options, t_point move,
 						  int old_zoom);
+void	ft_start_window(t_env env);
+void	ft_generate_window(t_env *env);
 void	ft_display(t_list *points, t_options options, t_env env);
 
 t_list	*ft_debug_points(t_list *point);

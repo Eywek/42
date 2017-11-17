@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 12:26:52 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 12:28:00 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,40 +64,6 @@ void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 		else
 			ft_display_point(pos.x, pos.y, env, DEFAULT_COLOR);
 	}
-}
-
-void	ft_start_window(t_env env)
-{
-	mlx_string_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
-				   env.options.width - 130, env.options.height - 40,
-				   0x00FFFFFF, "+ = Zoom in");
-	mlx_string_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
-				   env.options.width - 130, env.options.height - 25,
-				   0x00FFFFFF, "- = Zoom out");
-	mlx_string_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
-				   env.options.width - (env.options.width - 15), env.options.height - 70,
-				   0x00FFFFFF, "RIGHT = Move right");
-	mlx_string_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
-				   env.options.width - (env.options.width - 15), env.options.height - 55,
-				   0x00FFFFFF, "LEFT  = Move left");
-	mlx_string_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
-				   env.options.width - (env.options.width - 15), env.options.height - 40,
-				   0x00FFFFFF, "UP    = Move up");
-	mlx_string_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
-				   env.options.width - (env.options.width - 15), env.options.height - 25,
-				   0x00FFFFFF, "DOWN  = Move down");
-	mlx_loop(env.mlx_data.mlx_id);
-}
-
-void	ft_generate_window(t_env *env)
-{
-	env->mlx_data.mlx_id = mlx_init();
-	env->mlx_data.window_id = mlx_new_window(env->mlx_data.mlx_id,
-											env->options.width,
-											env->options.height,
-										WINDOW_TITLE);
-	mlx_key_hook(env->mlx_data.window_id, ft_listen_key, env);
-	env->init = 1;
 }
 
 t_point	*ft_get_next_line(t_list *points)
