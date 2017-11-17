@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 17:08:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 17:26:41 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,28 @@ void	ft_display_point(int x, int y, t_env env, int color)
 
 void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 {
+	/*t_point pos; --> https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_segment_de_Bresenham
+	t_point	diff;
+	double	e;
+	t_point	inc;
+	int 	i;
+
+	diff.y = point2->y - point1->y;
+	diff.x = point2->x - point1->x;
+	pos.y = point1->y;
+	e = -0.5;
+	inc.x = diff.y / diff.x;
+	inc.y = -1;
+	i = point1->x;
+	while (i < point2->x)
+	{
+		ft_display_point(pos.x, pos.y, env, DEFAULT_COLOR);
+		if ((e += inc.x) > 0)
+		{
+			pos.y++;
+			e += inc.y;
+		}
+	}*/
 	t_point	diff; // difference entre les deux points
 	t_point	inc;
 	t_point	pos; // position du point a placer
