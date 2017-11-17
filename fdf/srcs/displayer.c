@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 14:15:32 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/17 16:47:41 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,19 @@ void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 
 t_point	*ft_get_next_line(t_list *points)
 {
-	t_point	*point;
-	int		tmp_index;
-	int		tmp_x;
-	t_point	*previous;
+	t_point		*point;
+	int 		x_searched;
+	int 		current_index;
 
-	tmp_index = ((t_point*)(points->content))->index;
-	tmp_x = ((t_point*)(points->content))->x;
-	previous = ((t_point*)(points->content));
-	while (points)
+	x_searched = ((t_point*)(points->content))->x;
+	current_index = ((t_point*)(points->content))->index;
+	while (points && points->next)
 	{
-		point = (t_point*)(points->content);
-		if (point->index == tmp_index + 1 && point->x == tmp_x)
-			return (previous);
-		previous = ((t_point*)(points->content));
+		point = points->next->content;
+		if (point->x == x_searched || current_index + 1 < point->index)
+			return (points->content);
+		if (points->next->next == NULL)
+			return (points->next->content);
 		points = points->next;
 	}
 	return (NULL);
