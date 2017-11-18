@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 17:26:41 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/18 21:23:51 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,71 +21,51 @@ void	ft_display_point(int x, int y, t_env env, int color)
 				color);
 }
 
+void	ft_start_display_line(t_point *point1, t_point *point2, t_display inf,
+								t_env env)
+{
+    inf.error = ((inf.diff.x > inf.diff.y) ? inf.diff.x : inf.diff.y) / 2;
+    inf.i = 1;
+    while (inf.i <= (inf.diff.x > inf.diff.y ? inf.diff.x : inf.diff.y))
+    {
+        ++inf.i;
+        if (inf.diff.x > inf.diff.y)
+            inf.pos.x += inf.inc.x;
+        else
+            inf.pos.y += inf.inc.y;
+        inf.error += (inf.diff.x > inf.diff.y) ? inf.diff.y : inf.diff.x;
+        if (inf.error >= (inf.diff.x > inf.diff.y ? inf.diff.x : inf.diff.y))
+        {
+            inf.error -= (inf.diff.x > inf.diff.y) ? inf.diff.x : inf.diff.y;
+            if (inf.diff.x > inf.diff.y)
+                inf.pos.y += inf.inc.y;
+            else
+                inf.pos.x += inf.inc.x;
+        }
+        if (point1->h > 0 && point2->h > 0)
+            ft_display_point(inf.pos.x, inf.pos.y, env, MAX_COLOR);
+        else if (point2->h > 0 || point1->h > 0)
+            ft_display_point(inf.pos.x, inf.pos.y, env, MID_COLOR);
+        else
+            ft_display_point(inf.pos.x, inf.pos.y, env, DEFAULT_COLOR);
+    }
+}
+
 void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 {
-	/*t_point pos; --> https://fr.wikipedia.org/wiki/Algorithme_de_trac%C3%A9_de_segment_de_Bresenham
-	t_point	diff;
-	double	e;
-	t_point	inc;
-	int 	i;
+    t_display infos;
 
-	diff.y = point2->y - point1->y;
-	diff.x = point2->x - point1->x;
-	pos.y = point1->y;
-	e = -0.5;
-	inc.x = diff.y / diff.x;
-	inc.y = -1;
-	i = point1->x;
-	while (i < point2->x)
-	{
-		ft_display_point(pos.x, pos.y, env, DEFAULT_COLOR);
-		if ((e += inc.x) > 0)
-		{
-			pos.y++;
-			e += inc.y;
-		}
-	}*/
-	t_point	diff; // difference entre les deux points
-	t_point	inc;
-	t_point	pos; // position du point a placer
-	int		i;
-	int		cumul;
-
-	pos.x = point1->x;
-	pos.y = point1->y;
-	diff.x = abs(point2->x - point1->x); // diff entre les x
-	diff.y = abs(point2->y - point1->y); // diff entre les y
-	inc.x = (point2->x - point1->x > 0) ? 1 : -1; // si point 2 plus haut que point 1 en x --> inc.x = 1 sinon - 1
-	inc.y = (point2->y - point1->y > 0) ? 1 : -1; // si point 2 plus bas en ligne que point 1 --> inc.y = 1 sinon -1
-	if (point1->h > 0) // selon la couleur
-		ft_display_point(pos.x, pos.y, env, MAX_COLOR);
+	infos.pos.x = point1->x;
+	infos.pos.y = point1->y;
+	infos.diff.x = abs(point2->x - point1->x);
+	infos.diff.y = abs(point2->y - point1->y);
+	infos.inc.x = (point2->x - point1->x > 0) ? 1 : -1;
+	infos.inc.y = (point2->y - point1->y > 0) ? 1 : -1;
+	if (point1->h > 0)
+		ft_display_point(infos.pos.x, infos.pos.y, env, MAX_COLOR);
 	else
-		ft_display_point(pos.x, pos.y, env, DEFAULT_COLOR);
-	cumul = ((diff.x > diff.y) ? diff.x : diff.y) / 2; // si le point est trace en x ou en y, cumul = diff / 2
-	i = 1;
-	while (i <= (diff.x > diff.y ? diff.x : diff.y)) // tracer le nb de points manquant selon la diff
-	{
-		++i;
-		if (diff.x > diff.y) // on increment la pos selon si c'est en x ou en y
-			pos.x += inc.x;
-		else
-			pos.y += inc.y;
-		cumul += (diff.x > diff.y) ? diff.y : diff.x; // on ajoute la diff
-		if (cumul >= (diff.x > diff.y ? diff.x : diff.y)) // si c'est superieur a la diff on remove une fois la diff et on incremente la pos
-		{
-			cumul -= (diff.x > diff.y) ? diff.x : diff.y;
-			if (diff.x > diff.y)
-				pos.y += inc.y;
-			else
-				pos.x += inc.x;
-		}
-		if (point1->h > 0 && point2->h > 0) // on affiche
-			ft_display_point(pos.x, pos.y, env, MAX_COLOR);
-		else if (point2->h > 0 || point1->h > 0)
-			ft_display_point(pos.x, pos.y, env, MID_COLOR);
-		else
-			ft_display_point(pos.x, pos.y, env, DEFAULT_COLOR);
-	}
+		ft_display_point(infos.pos.x, infos.pos.y, env, DEFAULT_COLOR);
+    ft_start_display_line(point1, point2, infos, env);
 }
 
 t_point	*ft_get_next_line(t_list *points)

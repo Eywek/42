@@ -67,6 +67,15 @@ typedef struct	s_env
 	t_list		*points;
 }				t_env;
 
+typedef	struct	s_display
+{
+	int 		i;
+	int 		error;
+	t_point		pos;
+	t_point		diff;
+	t_point		inc;
+}				t_display;
+
 int 	ft_open_file(const char *filename);
 t_list	*ft_read(int fd, t_options options);
 t_point	*ft_new_point(int x, int y, int h, int index);
