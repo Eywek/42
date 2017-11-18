@@ -22,9 +22,10 @@ OBJECTS=$(addprefix $(OBJECTS_PATH), $(OBJECTS_FILES))
 
 COMPILE=gcc
 
-INCLUDES=-I./includes -I./libs/libft
+INCLUDES=-I./includes -I./libs/libft -I/Users/valentin/Downloads/minilibx_macos
 
-MLX=-L/usr/local/lib -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
+#MLX=-L/usr/local/lib -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
+MLX=-I~/Downloads/minilibx_macos ~/Downloads/minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
 
 LIB_NAME=libft.a
 LIB_PATH=./libs/libft/
