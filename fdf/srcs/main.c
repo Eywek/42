@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:04:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 11:44:56 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:15:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ t_options	ft_generate_options(int argc, const char *argv[])
 			++index;
 		}
 	}
+	if (options.amplifier == 0)
+		options.amplifier = 1;
+	if (options.zoom == 0)
+		options.zoom = 1;
 	return (options);
 }
 
@@ -58,7 +62,8 @@ int			main(int argc, const char *argv[])
 	env.init = 0;
 	options = ft_generate_options(argc, argv);
 	if (argc < 2)
-		ft_putstr("Usage : ./fdf <filename> [-size size]\n");
+		ft_putstr("Usage : ./fdf <filename> [-width width] [-height height] "
+						"[-zoom zoom] [-amplifier amplifier]\n");
 	else
 		ft_display(ft_read(ft_open_file(argv[1]), options, options), options,
 				env);

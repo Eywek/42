@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 12:30:32 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 11:04:36 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 18:33:04 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	ft_start_window(t_env env)
 
 void	ft_generate_window(t_env *env)
 {
+	if (env->options.width <= 0 || env->options.height <= 0 ||
+			env->options.width >= 1920 || env->options.height >= 1080)
+		ft_throw_error();
 	env->mlx_data.mlx_id = mlx_init();
 	env->mlx_data.window_id = mlx_new_window(env->mlx_data.mlx_id,
 											env->options.width,

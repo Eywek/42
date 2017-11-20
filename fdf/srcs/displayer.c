@@ -6,11 +6,12 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 10:23:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 10:23:45 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include <stdlib.h>
 #include "../includes/fdf.h"
 
 void	ft_display_point(int x, int y, t_env env, int color)

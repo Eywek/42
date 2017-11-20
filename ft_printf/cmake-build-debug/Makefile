@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/bin/cmake
+CMAKE_COMMAND = /Users/vtouffet/Applications/CLion.app/Contents/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
+RM = /Users/vtouffet/Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/valentin/Work/42/ft_printf
+CMAKE_SOURCE_DIR = /Users/vtouffet/Work/ft_printf
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/valentin/Work/42/ft_printf/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/vtouffet/Work/ft_printf/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/valentin/Work/42/ft_printf/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Users/vtouffet/Applications/CLion.app/Contents/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Users/vtouffet/Applications/CLion.app/Contents/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/valentin/Work/42/ft_printf/cmake-build-debug/CMakeFiles /Users/valentin/Work/42/ft_printf/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles /Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/valentin/Work/42/ft_printf/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,141 @@ ft_printf: cmake_check_build_system
 ft_printf/fast:
 	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/build
 .PHONY : ft_printf/fast
+
+libs/libft/ft_putchar_fd.o: libs/libft/ft_putchar_fd.c.o
+
+.PHONY : libs/libft/ft_putchar_fd.o
+
+# target to build an object file
+libs/libft/ft_putchar_fd.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_putchar_fd.c.o
+.PHONY : libs/libft/ft_putchar_fd.c.o
+
+libs/libft/ft_putchar_fd.i: libs/libft/ft_putchar_fd.c.i
+
+.PHONY : libs/libft/ft_putchar_fd.i
+
+# target to preprocess a source file
+libs/libft/ft_putchar_fd.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_putchar_fd.c.i
+.PHONY : libs/libft/ft_putchar_fd.c.i
+
+libs/libft/ft_putchar_fd.s: libs/libft/ft_putchar_fd.c.s
+
+.PHONY : libs/libft/ft_putchar_fd.s
+
+# target to generate assembly for a file
+libs/libft/ft_putchar_fd.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_putchar_fd.c.s
+.PHONY : libs/libft/ft_putchar_fd.c.s
+
+libs/libft/ft_putnbr_fd.o: libs/libft/ft_putnbr_fd.c.o
+
+.PHONY : libs/libft/ft_putnbr_fd.o
+
+# target to build an object file
+libs/libft/ft_putnbr_fd.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_putnbr_fd.c.o
+.PHONY : libs/libft/ft_putnbr_fd.c.o
+
+libs/libft/ft_putnbr_fd.i: libs/libft/ft_putnbr_fd.c.i
+
+.PHONY : libs/libft/ft_putnbr_fd.i
+
+# target to preprocess a source file
+libs/libft/ft_putnbr_fd.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_putnbr_fd.c.i
+.PHONY : libs/libft/ft_putnbr_fd.c.i
+
+libs/libft/ft_putnbr_fd.s: libs/libft/ft_putnbr_fd.c.s
+
+.PHONY : libs/libft/ft_putnbr_fd.s
+
+# target to generate assembly for a file
+libs/libft/ft_putnbr_fd.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_putnbr_fd.c.s
+.PHONY : libs/libft/ft_putnbr_fd.c.s
+
+libs/libft/ft_strcmp.o: libs/libft/ft_strcmp.c.o
+
+.PHONY : libs/libft/ft_strcmp.o
+
+# target to build an object file
+libs/libft/ft_strcmp.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_strcmp.c.o
+.PHONY : libs/libft/ft_strcmp.c.o
+
+libs/libft/ft_strcmp.i: libs/libft/ft_strcmp.c.i
+
+.PHONY : libs/libft/ft_strcmp.i
+
+# target to preprocess a source file
+libs/libft/ft_strcmp.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_strcmp.c.i
+.PHONY : libs/libft/ft_strcmp.c.i
+
+libs/libft/ft_strcmp.s: libs/libft/ft_strcmp.c.s
+
+.PHONY : libs/libft/ft_strcmp.s
+
+# target to generate assembly for a file
+libs/libft/ft_strcmp.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_strcmp.c.s
+.PHONY : libs/libft/ft_strcmp.c.s
+
+libs/libft/ft_strlen.o: libs/libft/ft_strlen.c.o
+
+.PHONY : libs/libft/ft_strlen.o
+
+# target to build an object file
+libs/libft/ft_strlen.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_strlen.c.o
+.PHONY : libs/libft/ft_strlen.c.o
+
+libs/libft/ft_strlen.i: libs/libft/ft_strlen.c.i
+
+.PHONY : libs/libft/ft_strlen.i
+
+# target to preprocess a source file
+libs/libft/ft_strlen.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_strlen.c.i
+.PHONY : libs/libft/ft_strlen.c.i
+
+libs/libft/ft_strlen.s: libs/libft/ft_strlen.c.s
+
+.PHONY : libs/libft/ft_strlen.s
+
+# target to generate assembly for a file
+libs/libft/ft_strlen.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_strlen.c.s
+.PHONY : libs/libft/ft_strlen.c.s
+
+libs/libft/ft_strnstr.o: libs/libft/ft_strnstr.c.o
+
+.PHONY : libs/libft/ft_strnstr.o
+
+# target to build an object file
+libs/libft/ft_strnstr.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_strnstr.c.o
+.PHONY : libs/libft/ft_strnstr.c.o
+
+libs/libft/ft_strnstr.i: libs/libft/ft_strnstr.c.i
+
+.PHONY : libs/libft/ft_strnstr.i
+
+# target to preprocess a source file
+libs/libft/ft_strnstr.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_strnstr.c.i
+.PHONY : libs/libft/ft_strnstr.c.i
+
+libs/libft/ft_strnstr.s: libs/libft/ft_strnstr.c.s
+
+.PHONY : libs/libft/ft_strnstr.s
+
+# target to generate assembly for a file
+libs/libft/ft_strnstr.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_strnstr.c.s
+.PHONY : libs/libft/ft_strnstr.c.s
 
 main_test.o: main_test.c.o
 
@@ -177,33 +312,6 @@ srcs/core.c.s:
 	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/core.c.s
 .PHONY : srcs/core.c.s
 
-srcs/registerer.o: srcs/registerer.c.o
-
-.PHONY : srcs/registerer.o
-
-# target to build an object file
-srcs/registerer.c.o:
-	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/registerer.c.o
-.PHONY : srcs/registerer.c.o
-
-srcs/registerer.i: srcs/registerer.c.i
-
-.PHONY : srcs/registerer.i
-
-# target to preprocess a source file
-srcs/registerer.c.i:
-	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/registerer.c.i
-.PHONY : srcs/registerer.c.i
-
-srcs/registerer.s: srcs/registerer.c.s
-
-.PHONY : srcs/registerer.s
-
-# target to generate assembly for a file
-srcs/registerer.c.s:
-	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/registerer.c.s
-.PHONY : srcs/registerer.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +321,27 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ft_printf"
+	@echo "... libs/libft/ft_putchar_fd.o"
+	@echo "... libs/libft/ft_putchar_fd.i"
+	@echo "... libs/libft/ft_putchar_fd.s"
+	@echo "... libs/libft/ft_putnbr_fd.o"
+	@echo "... libs/libft/ft_putnbr_fd.i"
+	@echo "... libs/libft/ft_putnbr_fd.s"
+	@echo "... libs/libft/ft_strcmp.o"
+	@echo "... libs/libft/ft_strcmp.i"
+	@echo "... libs/libft/ft_strcmp.s"
+	@echo "... libs/libft/ft_strlen.o"
+	@echo "... libs/libft/ft_strlen.i"
+	@echo "... libs/libft/ft_strlen.s"
+	@echo "... libs/libft/ft_strnstr.o"
+	@echo "... libs/libft/ft_strnstr.i"
+	@echo "... libs/libft/ft_strnstr.s"
 	@echo "... main_test.o"
 	@echo "... main_test.i"
 	@echo "... main_test.s"
 	@echo "... srcs/core.o"
 	@echo "... srcs/core.i"
 	@echo "... srcs/core.s"
-	@echo "... srcs/registerer.o"
-	@echo "... srcs/registerer.i"
-	@echo "... srcs/registerer.s"
 .PHONY : help
 
 

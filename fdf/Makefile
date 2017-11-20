@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/20 11:10:17 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/20 15:45:51 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ OBJECTS=$(addprefix $(OBJECTS_PATH), $(OBJECTS_FILES))
 COMPILE=gcc -Wall -Wextra -Werror
 
 INCLUDES=-I./includes -I./libs/libft
+HEADER=./includes/fdf.h
 
 MLX=-L/usr/local/lib -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
 
@@ -39,7 +40,7 @@ COLOR_DEFAULT=\033[1;34m
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
+$(NAME): $(OBJECTS) $(HEADER)
 	@echo "$(LIB_NAME)     [$(COLOR_PENDING)Compiling...$(COLOR_RESET)]"
 	@make -C $(LIB_PATH) > /dev/null
 	@echo "\033[A\033[K\033[A"
@@ -57,7 +58,7 @@ $(OBJECTS_PATH)%.o: $(SRCS_PATH)%.c
 
 clean:
 	@make -C $(LIB_PATH) clean > /dev/null
-	@rm $(OBJECTS) > /dev/null
+	@rm -fv $(OBJECTS) > /dev/null
 
 fclean: clean
 	@make -C $(LIB_PATH) fclean > /dev/null
