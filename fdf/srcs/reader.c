@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:17:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 10:27:12 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 10:44:05 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../includes/fdf.h"
 
 t_list	*ft_move_points(t_list *points, t_options options, t_point move,
-						int old_zoom)
+						t_options old_options)
 {
 	t_list	*ptr;
 	t_point	*point;
@@ -24,11 +24,11 @@ t_list	*ft_move_points(t_list *points, t_options options, t_point move,
 	{
 		point = ptr->content;
 		point->y = (point->y + point->h);
-		if (move.x > 0 || move.y > 0 || old_zoom > 1)
-			point->h /= options.amplifier;
-		point->x = ((point->x / old_zoom) + move.x) * options.zoom;
+		if (move.x > 0 || move.y > 0 || old_options.zoom > 1)
+			point->h /= old_options.amplifier;
+		point->x = ((point->x / old_options.zoom) + move.x) * options.zoom;
 		point->h *= options.amplifier;
-		point->y = ((point->y / old_zoom) + move.y) * options.zoom
+		point->y = ((point->y / old_options.zoom) + move.y) * options.zoom
 				- point->h;
 		ptr = ptr->next;
 	}
@@ -56,8 +56,7 @@ int		ft_open_file(const char *filename)
 	return (fd);
 }
 
-void	ft_generate_points_from_line(t_list **points, char *line, int y,
-									t_options options)
+void	ft_generate_points_from_line(t_list **points, char *line, int y)
 {
 	int		x;
 	char	**rm;
@@ -86,7 +85,7 @@ void	ft_generate_points_from_line(t_list **points, char *line, int y,
 	free(rm);
 }
 
-t_list	*ft_read(int fd, t_options options)
+t_list	*ft_read(int fd, t_options options, t_options old_options)
 {
 	t_list	*points;
 	t_point	move;
@@ -98,13 +97,14 @@ t_list	*ft_read(int fd, t_options options)
 	y = 0;
 	while ((state = get_next_line(fd, &line)) > 0)
 	{
-		ft_generate_points_from_line(&points, line, y, options);
+		ft_generate_points_from_line(&points, line, y);
 		++y;
 	}
 	if (state == -1)
 		ft_throw_error();
 	move.x = 0;
 	move.y = 0;
-	ft_move_points(points, options, move, 1);
+	old_options.zoom = 1;
+	ft_move_points(points, options, move, old_options);
 	return (points);
 }

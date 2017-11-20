@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 12:30:32 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 13:38:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 11:03:35 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 void	ft_start_window(t_env env)
 {
+	mlx_string_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
+					env.options.width - 130, env.options.height - 80,
+					0x00FFFFFF, "> = Increase");
+	mlx_string_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
+					env.options.width - 130, env.options.height - 65,
+					0x00FFFFFF, "< = Decrease");
 	mlx_string_put(env.mlx_data.mlx_id, env.mlx_data.window_id,
 					env.options.width - 130, env.options.height - 40,
 					0x00FFFFFF, "+ = Zoom in");

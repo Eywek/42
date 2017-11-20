@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:04:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 12:00:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 10:43:33 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			main(int argc, const char *argv[])
 	if (argc < 2)
 		ft_putstr("Usage : ./fdf <filename> [-size size]\n");
 	else
-		ft_display(ft_read(ft_open_file(argv[1]), options), options, env);
+		ft_display(ft_read(ft_open_file(argv[1]), options, options), options,
+				env);
 	return (0);
 }
