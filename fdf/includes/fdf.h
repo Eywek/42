@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 10:27:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 10:59:47 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define INCLINATION 1.7
 # define HEIGHT_AMPLIFIER 3
 # define ARROW_AMPLIFIER 2
+# define AMPLIFIER 2
 # define DEFAULT_COLOR 0x00e8f7ff
 # define MID_COLOR 0x0082c1e0
 # define MAX_COLOR 0x0003547c
@@ -35,6 +36,8 @@
 # define KEYCODE_DOWN_ARROW 125
 # define KEYCODE_ZOOM_IN KEYCODE_PLUS
 # define KEYCODE_ZOOM_OUT KEYCODE_MINUS
+# define KEYCODE_AMPLIFY 47
+# define KEYCODE_UNAMPLIFY 43
 
 typedef	struct	s_point
 {
@@ -78,12 +81,12 @@ typedef	struct	s_display
 
 int		ft_is_valid(char *str);
 int 	ft_open_file(const char *filename);
-t_list	*ft_read(int fd, t_options options);
+t_list	*ft_read(int fd, t_options options, t_options old_options);
 t_point	*ft_new_point(int x, int y, int h, int index);
 void	ft_throw_error(void);
 int		ft_listen_key(int keycode, void *param);
 t_list	*ft_move_points(t_list *points, t_options options, t_point move,
-						  int old_zoom);
+						  t_options old_options);
 void	ft_start_window(t_env env);
 void	ft_generate_window(t_env *env);
 void	ft_display(t_list *points, t_options options, t_env env);
