@@ -15,6 +15,7 @@
 
 char	**ft_strsplit(char const *s, char c)
 {
+	char 	**result;
 	char	*charset;
 
 	if (!s || !c)
@@ -22,5 +23,7 @@ char	**ft_strsplit(char const *s, char c)
 	if (!(charset = ft_strnew(2)))
 		return (NULL);
 	charset[0] = c;
-	return (ft_strsplitchrset((char*)s, charset));
+	result = ft_strsplitchrset((char*)s, charset);
+	free(charset);
+	return (result);
 }
