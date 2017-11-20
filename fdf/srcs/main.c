@@ -6,10 +6,11 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:04:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 10:43:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 11:44:56 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
 #include "../includes/fdf.h"
 
 t_options	ft_generate_options(int argc, const char *argv[])
@@ -39,6 +40,14 @@ t_options	ft_generate_options(int argc, const char *argv[])
 		}
 	}
 	return (options);
+}
+
+int			ft_open_file(const char *filename)
+{
+	int fd;
+
+	fd = open(filename, O_RDONLY);
+	return (fd);
 }
 
 int			main(int argc, const char *argv[])

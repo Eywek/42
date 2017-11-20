@@ -6,11 +6,10 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:17:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 10:44:05 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 11:45:43 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include "../includes/fdf.h"
 
 t_list	*ft_move_points(t_list *points, t_options options, t_point move,
@@ -48,39 +47,31 @@ t_point	*ft_new_point(int x, int y, int h, int index)
 	return (point);
 }
 
-int		ft_open_file(const char *filename)
-{
-	int fd;
-
-	fd = open(filename, O_RDONLY);
-	return (fd);
-}
-
 void	ft_generate_points_from_line(t_list **points, char *line, int y)
 {
 	int		x;
 	char	**rm;
 	t_list	*tmp;
 	char	**tab;
+	t_point	*point;
 
-	x = 0;
+	x = -1;
 	if (!(tab = ft_strsplit(line, ' ')))
 		ft_throw_error();
 	rm = tab;
-	while (*tab)
+	while (*tab && ++x >= 0)
 	{
 		if (!ft_is_valid(*tab))
 			ft_throw_error();
-		if (!(tmp = ft_lstnew(ft_new_point(x - y, y + x, ft_atoi(*tab), y),
-							sizeof(t_point))))
+		point = ft_new_point(x - y, y + x, ft_atoi(*tab), y);
+		if (!(tmp = ft_lstnew(point, sizeof(t_point))))
 			ft_throw_error();
+		free(point);
 		if (*points)
 			ft_lstaddend(points, tmp);
 		else
 			ft_lstadd(points, tmp);
-		free(*tab);
-		++tab;
-		++x;
+		free(*(tab++));
 	}
 	free(rm);
 }
@@ -98,6 +89,7 @@ t_list	*ft_read(int fd, t_options options, t_options old_options)
 	while ((state = get_next_line(fd, &line)) > 0)
 	{
 		ft_generate_points_from_line(&points, line, y);
+		free(line);
 		++y;
 	}
 	if (state == -1)
