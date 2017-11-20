@@ -6,13 +6,13 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 16:03:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/14 16:03:30 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 12:55:41 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_lstcount(t_list *lst)
+int	ft_lstcount(t_list *lst)
 {
 	int i;
 

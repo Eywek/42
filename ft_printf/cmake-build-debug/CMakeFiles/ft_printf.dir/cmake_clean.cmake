@@ -1,7 +1,11 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ft_printf.dir/main_test.c.o"
   "CMakeFiles/ft_printf.dir/srcs/core.c.o"
-  "CMakeFiles/ft_printf.dir/srcs/registerer.c.o"
+  "CMakeFiles/ft_printf.dir/libs/libft/ft_strlen.c.o"
+  "CMakeFiles/ft_printf.dir/libs/libft/ft_strcmp.c.o"
+  "CMakeFiles/ft_printf.dir/libs/libft/ft_strnstr.c.o"
+  "CMakeFiles/ft_printf.dir/libs/libft/ft_putchar_fd.c.o"
+  "CMakeFiles/ft_printf.dir/libs/libft/ft_putnbr_fd.c.o"
   "ft_printf.pdb"
   "ft_printf"
 )

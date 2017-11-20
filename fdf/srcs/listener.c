@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 14:58:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 11:04:36 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:10:16 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,18 @@ void	ft_handle_amplifier(int keycode, t_env *env)
 		tmp = env->options;
 		if (tmp.amplifier + AMPLIFIER > 100)
 			return ;
-		env->options.amplifier += AMPLIFIER;
+		if ((env->options.amplifier += AMPLIFIER) == 0)
+			env->options.amplifier = 1;
 		ft_move_points(env->points, env->options, move, tmp);
 		ft_display(env->points, env->options, *env);
 	}
 	else if (keycode == KEYCODE_UNAMPLIFY)
 	{
 		tmp = env->options;
-		if (tmp.amplifier - AMPLIFIER <= 0)
+		if (tmp.amplifier - AMPLIFIER <= -100)
 			return ;
-		env->options.amplifier -= AMPLIFIER;
+		if ((env->options.amplifier -= AMPLIFIER) == 0)
+			env->options.amplifier = 1;
 		ft_move_points(env->points, env->options, move, tmp);
 		ft_display(env->points, env->options, *env);
 	}

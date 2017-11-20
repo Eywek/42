@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/17 20:50:34 by valentin          #+#    #+#             */
-/*   Updated: 2017/11/17 20:58:32 by valentin         ###   ########.fr       */
+/*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/20 19:03:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,9 @@
 # include <stdarg.h>
 # include "structs.h"
 # include "prototypes.h"
+# include "../libs/libft/libft.h"
+
+# define STDOUT 1
+# define ARGS_COUNT 4
 
 #endif

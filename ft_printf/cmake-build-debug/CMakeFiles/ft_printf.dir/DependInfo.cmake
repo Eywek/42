@@ -4,9 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/valentin/Work/42/ft_printf/main_test.c" "/Users/valentin/Work/42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/main_test.c.o"
-  "/Users/valentin/Work/42/ft_printf/srcs/core.c" "/Users/valentin/Work/42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/srcs/core.c.o"
-  "/Users/valentin/Work/42/ft_printf/srcs/registerer.c" "/Users/valentin/Work/42/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/srcs/registerer.c.o"
+  "/Users/vtouffet/Work/ft_printf/libs/libft/ft_putchar_fd.c" "/Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libs/libft/ft_putchar_fd.c.o"
+  "/Users/vtouffet/Work/ft_printf/libs/libft/ft_putnbr_fd.c" "/Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libs/libft/ft_putnbr_fd.c.o"
+  "/Users/vtouffet/Work/ft_printf/libs/libft/ft_strcmp.c" "/Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libs/libft/ft_strcmp.c.o"
+  "/Users/vtouffet/Work/ft_printf/libs/libft/ft_strlen.c" "/Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libs/libft/ft_strlen.c.o"
+  "/Users/vtouffet/Work/ft_printf/libs/libft/ft_strnstr.c" "/Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/libs/libft/ft_strnstr.c.o"
+  "/Users/vtouffet/Work/ft_printf/main_test.c" "/Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/main_test.c.o"
+  "/Users/vtouffet/Work/ft_printf/srcs/core.c" "/Users/vtouffet/Work/ft_printf/cmake-build-debug/CMakeFiles/ft_printf.dir/srcs/core.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

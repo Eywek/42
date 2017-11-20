@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 10:59:47 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 15:49:50 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 # include "../libs/libft/libft.h"
 # include "../libs/get_next_line/get_next_line.h"
+# include <stdlib.h>
 
 # define WINDOW_WIDTH 500
 # define WINDOW_HEIGHT 500
@@ -41,30 +42,30 @@
 
 typedef	struct	s_point
 {
-	int 		x;
-	int 		y;
-	int 		h;
-	int 		index;
+	int			x;
+	int			y;
+	int			h;
+	int			index;
 }				t_point;
 
 typedef	struct	s_options
 {
-	int 		width;
-	int 		height;
-	int 		zoom;
-	float 		inclination;
+	int			width;
+	int			height;
+	int			zoom;
+	float		inclination;
 	int			amplifier;
 }				t_options;
 
 typedef	struct	s_mlx
 {
-	void 		*mlx_id;
+	void		*mlx_id;
 	void		*window_id;
 }				t_mlx;
 
 typedef struct	s_env
 {
-	int 		init;
+	int			init;
 	t_options	options;
 	t_mlx		mlx_data;
 	t_list		*points;
@@ -72,25 +73,25 @@ typedef struct	s_env
 
 typedef	struct	s_display
 {
-	int 		i;
-	int 		error;
+	int			i;
+	int			error;
 	t_point		pos;
 	t_point		diff;
 	t_point		inc;
 }				t_display;
 
-int		ft_is_valid(char *str);
-int 	ft_open_file(const char *filename);
-t_list	*ft_read(int fd, t_options options, t_options old_options);
-t_point	*ft_new_point(int x, int y, int h, int index);
-void	ft_throw_error(void);
-int		ft_listen_key(int keycode, void *param);
-t_list	*ft_move_points(t_list *points, t_options options, t_point move,
-						  t_options old_options);
-void	ft_start_window(t_env env);
-void	ft_generate_window(t_env *env);
-void	ft_display(t_list *points, t_options options, t_env env);
+int				ft_is_valid(char *str);
+int				ft_open_file(const char *filename);
+t_list			*ft_read(int fd, t_options options, t_options old_options);
+t_point			*ft_new_point(int x, int y, int h, int index);
+void			ft_throw_error(void);
+int				ft_listen_key(int keycode, void *param);
+t_list			*ft_move_points(t_list *points, t_options options, t_point move,
+						t_options old_options);
+void			ft_start_window(t_env env);
+void			ft_generate_window(t_env *env);
+void			ft_display(t_list *points, t_options options, t_env env);
 
-t_list	*ft_debug_points(t_list *point);
+t_list			*ft_debug_points(t_list *point);
 
 #endif
