@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:17:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 11:27:29 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 10:27:12 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,13 @@ void	ft_generate_points_from_line(t_list **points, char *line, int y,
 	char	**tab;
 
 	x = 0;
-	tab = ft_strsplit(line, ' ');
+	if (!(tab = ft_strsplit(line, ' ')))
+		ft_throw_error();
 	rm = tab;
 	while (*tab)
 	{
+		if (!ft_is_valid(*tab))
+			ft_throw_error();
 		if (!(tmp = ft_lstnew(ft_new_point(x - y, y + x, ft_atoi(*tab), y),
 							sizeof(t_point))))
 			ft_throw_error();
@@ -89,14 +92,17 @@ t_list	*ft_read(int fd, t_options options)
 	t_point	move;
 	char	*line;
 	int		y;
+	int		state;
 
 	points = NULL;
 	y = 0;
-	while (get_next_line(fd, &line) > 0)
+	while ((state = get_next_line(fd, &line)) > 0)
 	{
 		ft_generate_points_from_line(&points, line, y, options);
 		++y;
 	}
+	if (state == -1)
+		ft_throw_error();
 	move.x = 0;
 	move.y = 0;
 	ft_move_points(points, options, move, 1);

@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/18 21:10:48 by valentin         ###   ########.fr        #
+#    Updated: 2017/11/20 10:17:06 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,9 @@ OBJECTS=$(addprefix $(OBJECTS_PATH), $(OBJECTS_FILES))
 
 COMPILE=gcc
 
-INCLUDES=-I./includes -I./libs/libft -I/Users/valentin/Downloads/minilibx_macos
+INCLUDES=-I./includes -I./libs/libft
 
-#MLX=-L/usr/local/lib -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
-MLX=-I~/Downloads/minilibx_macos ~/Downloads/minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+MLX=-L/usr/local/lib -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
 
 LIB_NAME=libft.a
 LIB_PATH=./libs/libft/

@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:18:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/17 12:31:50 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/20 10:27:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef	struct	s_display
 	t_point		inc;
 }				t_display;
 
+int		ft_is_valid(char *str);
 int 	ft_open_file(const char *filename);
 t_list	*ft_read(int fd, t_options options);
 t_point	*ft_new_point(int x, int y, int h, int index);

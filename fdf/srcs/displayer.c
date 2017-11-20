@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 13:55:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/18 21:23:51 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/20 10:23:27 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,36 @@ void	ft_display_point(int x, int y, t_env env, int color)
 void	ft_start_display_line(t_point *point1, t_point *point2, t_display inf,
 								t_env env)
 {
-    inf.error = ((inf.diff.x > inf.diff.y) ? inf.diff.x : inf.diff.y) / 2;
-    inf.i = 1;
-    while (inf.i <= (inf.diff.x > inf.diff.y ? inf.diff.x : inf.diff.y))
-    {
-        ++inf.i;
-        if (inf.diff.x > inf.diff.y)
-            inf.pos.x += inf.inc.x;
-        else
-            inf.pos.y += inf.inc.y;
-        inf.error += (inf.diff.x > inf.diff.y) ? inf.diff.y : inf.diff.x;
-        if (inf.error >= (inf.diff.x > inf.diff.y ? inf.diff.x : inf.diff.y))
-        {
-            inf.error -= (inf.diff.x > inf.diff.y) ? inf.diff.x : inf.diff.y;
-            if (inf.diff.x > inf.diff.y)
-                inf.pos.y += inf.inc.y;
-            else
-                inf.pos.x += inf.inc.x;
-        }
-        if (point1->h > 0 && point2->h > 0)
-            ft_display_point(inf.pos.x, inf.pos.y, env, MAX_COLOR);
-        else if (point2->h > 0 || point1->h > 0)
-            ft_display_point(inf.pos.x, inf.pos.y, env, MID_COLOR);
-        else
-            ft_display_point(inf.pos.x, inf.pos.y, env, DEFAULT_COLOR);
-    }
+	inf.error = ((inf.diff.x > inf.diff.y) ? inf.diff.x : inf.diff.y) / 2;
+	inf.i = 1;
+	while (inf.i <= (inf.diff.x > inf.diff.y ? inf.diff.x : inf.diff.y))
+	{
+		++inf.i;
+		if (inf.diff.x > inf.diff.y)
+			inf.pos.x += inf.inc.x;
+		else
+			inf.pos.y += inf.inc.y;
+		inf.error += (inf.diff.x > inf.diff.y) ? inf.diff.y : inf.diff.x;
+		if (inf.error >= (inf.diff.x > inf.diff.y ? inf.diff.x : inf.diff.y))
+		{
+			inf.error -= (inf.diff.x > inf.diff.y) ? inf.diff.x : inf.diff.y;
+			if (inf.diff.x > inf.diff.y)
+				inf.pos.y += inf.inc.y;
+			else
+				inf.pos.x += inf.inc.x;
+		}
+		if (point1->h > 0 && point2->h > 0)
+			ft_display_point(inf.pos.x, inf.pos.y, env, MAX_COLOR);
+		else if (point2->h > 0 || point1->h > 0)
+			ft_display_point(inf.pos.x, inf.pos.y, env, MID_COLOR);
+		else
+			ft_display_point(inf.pos.x, inf.pos.y, env, DEFAULT_COLOR);
+	}
 }
 
 void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 {
-    t_display infos;
+	t_display infos;
 
 	infos.pos.x = point1->x;
 	infos.pos.y = point1->y;
@@ -65,14 +65,14 @@ void	ft_display_line(t_point *point1, t_point *point2, t_env env)
 		ft_display_point(infos.pos.x, infos.pos.y, env, MAX_COLOR);
 	else
 		ft_display_point(infos.pos.x, infos.pos.y, env, DEFAULT_COLOR);
-    ft_start_display_line(point1, point2, infos, env);
+	ft_start_display_line(point1, point2, infos, env);
 }
 
 t_point	*ft_get_next_line(t_list *points)
 {
 	t_point		*point;
-	int 		x_searched;
-	int 		current_index;
+	int			x_searched;
+	int			current_index;
 
 	x_searched = ((t_point*)(points->content))->x;
 	current_index = ((t_point*)(points->content))->index;
