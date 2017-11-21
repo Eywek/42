@@ -12,13 +12,13 @@
 
 #include "../../includes/core.h"
 
-int	flag_d(va_list args, int flag)
+int	flag_d(va_list args, t_modifiers modifiers)
 {
 	int				size;
 	int 			nb;
 	unsigned int	tmp;
 
-	(void)flag;
+	(void)modifiers;
 	nb = va_arg(args, int);
 	ft_putnbr_fd(nb, STDOUT);
 	size = 0;
