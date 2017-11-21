@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 18:36:25 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:46:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	flag_s(va_list args, t_flags flags)
 	if (flags.width)
 	{
 		width = 0;
-		while (width++ < flags.width - (int)size) // TODO: edit return value with precision / width
+		while (width++ < flags.width - (int)size)
 			write(1, " ", 1);
 	}
 	write(STDOUT, s, size);
-	return ((int)ft_strlen(s));
+	return ((int)size + (flags.width - (int)size > 0 ? flags.width - (int)size : 0));
 }
