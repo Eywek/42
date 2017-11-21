@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 17:34:25 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 17:40:38 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,43 +44,8 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 }
 
 /*
- ** Handle flags
- ** Fill t_flags structure and increment the string
-**/
-void	ft_handle_flags(char **str, t_flags *flags)
-{
-	if (*(*str) == '-')
-	{
-		flags->minus = 1;
-		(*str)++;
-	}
-	if (*(*str) == '+')
-	{
-		flags->plus = 1;
-		(*str)++;
-	}
-	if (*(*str) == ' ')
-	{
-		flags->space = 1;
-		(*str)++;
-	}
-	if (*(*str) == '0')
-	{
-		flags->zero = 1;
-		(*str)++;
-	}
-	if (*(*str) == '#')
-	{
-		flags->hash_key = 1;
-		(*str)++;
-	}
-}
-
-/*
- ** Retrieve and call function for each flag found with
- ** ft_call_function_from_name()
- **
- ** **str == the string from the % found to the end of the string
+ ** Call all subfonctions to init t_flags struct
+ ** Format: %[parameter][flags][width][.precision][length]type
 */
 
 int	ft_handle(char **str, va_list args)
@@ -96,6 +61,8 @@ int	ft_handle(char **str, va_list args)
 	flags.minus = 0;
 	ft_handle_flags(str, &flags);
 	ft_handle_width(str, &flags);
+	ft_handle_precision(str, &flags); // TODO
+	ft_handle_length(str, &flags); // TODO
 	if ((bytes = ft_call_function_from_name(str, args, flags)) > 0)
 		return (bytes);
 	return (0);
@@ -104,8 +71,7 @@ int	ft_handle(char **str, va_list args)
 /*
  ** First function :
  ** start stdarg,
- ** process format with ft_handle_types if it's a % or display char
- ** Format: %[parameter][flags][width][.precision][length]type
+ ** process format with ft_handle if it's a % or display char
 */
 
 int	ft_printf(const char *restrict format, ...)
