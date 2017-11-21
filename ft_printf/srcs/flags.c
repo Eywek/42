@@ -6,11 +6,27 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 18:22:09 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:37:04 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/core.h"
+
+/*
+ ** Set everything to 0
+*/
+
+void	ft_init_flags(t_flags *flags)
+{
+	flags->precision = 0;
+	flags->minus = 0;
+	flags->plus = 0;
+	flags->hash_key = 0;
+	flags->zero = 0;
+	flags->space = 0;
+	flags->width = 0;
+	flags->length_type = 0;
+}
 
 /*
  ** Handle flags
@@ -84,6 +100,34 @@ void ft_handle_precision(char **str, t_flags *flags)
 */
 void ft_handle_length(char **str, t_flags *flags)
 {
-	(void)str;
-	(void)flags;
+	if (**str == 'h' && *(*str + 1) == 'h')
+	{
+		*str += 2;
+		flags->precision = LENGHT_HH;
+	}
+	else if (**str == 'h')
+	{
+		*str += 1;
+		flags->precision = LENGHT_HH;
+	}
+	else if (**str == 'l' && *(*str + 1) == 'l')
+	{
+		*str += 2;
+		flags->precision = LENGHT_LL;
+	}
+	else if (**str == 'l')
+	{
+		*str += 1;
+		flags->precision = LENGHT_L;
+	}
+	else if (**str == 'j')
+	{
+		*str += 1;
+		flags->precision = LENGHT_J;
+	}
+	else if (**str == 'z')
+	{
+		*str += 1;
+		flags->precision = LENGHT_Z;
+	}
 }
