@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 15:57:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 17:02:50 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRUCTS_H
 
 
-typedef	struct 	s_modifiers
+typedef	struct 	s_flags
 {
 	int 		hash_key;
 	int 		zero;
@@ -23,12 +23,12 @@ typedef	struct 	s_modifiers
 	int 		space;
 	int 		width;
 	int 		width_char;
-}				t_modifiers;
+}				t_flags;
 
-typedef struct	s_flags
+typedef struct	s_types
 {
 	char		*name;
-	int			(*f)(va_list, t_modifiers);
-}				t_flags;
+	int			(*f)(va_list, t_flags);
+}				t_types;
 
 #endif
