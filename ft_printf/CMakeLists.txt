@@ -12,6 +12,6 @@ set(SOURCE_FILES
         libs/libft/ft_putchar_fd.c
         libs/libft/ft_putnbr_fd.c
         includes/structs.h
-        includes/core.h includes/prototypes.h)
+        includes/core.h includes/prototypes.h srcs/flags/chars.c srcs/flags/strings.c srcs/flags/numbers.c srcs/flags/others.c)
 
 add_executable(ft_printf ${SOURCE_FILES})

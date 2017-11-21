@@ -26,3 +26,27 @@ CMakeFiles/ft_printf.dir/srcs/core.c.o
  /Users/vtouffet/Work/ft_printf/includes/structs.h
  /Users/vtouffet/Work/ft_printf/libs/libft/libft.h
  /Users/vtouffet/Work/ft_printf/srcs/core.c
+CMakeFiles/ft_printf.dir/srcs/flags/chars.c.o
+ /Users/vtouffet/Work/ft_printf/includes/core.h
+ /Users/vtouffet/Work/ft_printf/includes/prototypes.h
+ /Users/vtouffet/Work/ft_printf/includes/structs.h
+ /Users/vtouffet/Work/ft_printf/libs/libft/libft.h
+ /Users/vtouffet/Work/ft_printf/srcs/flags/chars.c
+CMakeFiles/ft_printf.dir/srcs/flags/numbers.c.o
+ /Users/vtouffet/Work/ft_printf/includes/core.h
+ /Users/vtouffet/Work/ft_printf/includes/prototypes.h
+ /Users/vtouffet/Work/ft_printf/includes/structs.h
+ /Users/vtouffet/Work/ft_printf/libs/libft/libft.h
+ /Users/vtouffet/Work/ft_printf/srcs/flags/numbers.c
+CMakeFiles/ft_printf.dir/srcs/flags/others.c.o
+ /Users/vtouffet/Work/ft_printf/includes/core.h
+ /Users/vtouffet/Work/ft_printf/includes/prototypes.h
+ /Users/vtouffet/Work/ft_printf/includes/structs.h
+ /Users/vtouffet/Work/ft_printf/libs/libft/libft.h
+ /Users/vtouffet/Work/ft_printf/srcs/flags/others.c
+CMakeFiles/ft_printf.dir/srcs/flags/strings.c.o
+ /Users/vtouffet/Work/ft_printf/includes/core.h
+ /Users/vtouffet/Work/ft_printf/includes/prototypes.h
+ /Users/vtouffet/Work/ft_printf/includes/structs.h
+ /Users/vtouffet/Work/ft_printf/libs/libft/libft.h
+ /Users/vtouffet/Work/ft_printf/srcs/flags/strings.c

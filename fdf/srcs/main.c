@@ -39,9 +39,9 @@ t_options	ft_generate_options(int argc, const char *argv[])
 			++index;
 		}
 	}
-	if (options.amplifier == 0)
+	if (options.amplifier <= 0)
 		options.amplifier = 1;
-	if (options.zoom == 0)
+	if (options.zoom <= 0)
 		options.zoom = 1;
 	return (options);
 }

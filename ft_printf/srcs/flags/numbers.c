@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   numbers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/16 16:34:45 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 11:43:19 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/21 13:25:54 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "../includes/fdf.h"
+#include "../../includes/core.h"
 
-int		ft_is_valid(char *str)
+int	flag_d(va_list args, int flag)
 {
-	while (*str)
+	int				size;
+	int 			nb;
+	unsigned int	tmp;
+
+	(void)flag;
+	nb = va_arg(args, int);
+	ft_putnbr_fd(nb, STDOUT);
+	size = 0;
+	tmp = (nb >= 0) ? nb : -nb;
+	while (tmp > 0)
 	{
-		if (*str != '-' && *str != '+' && !ft_isdigit(*str))
-			return (0);
-		if ((*str == '-' || *str == '+') && (!*(str + 1) ||
-				!ft_isdigit(*(str + 1))))
-			return (0);
-		++str;
+		++size;
+		tmp /= 10;
 	}
-	return (1);
-}
-
-void	ft_throw_error(void)
-{
-	write(1, "Error\n", 6);
-	exit(0);
+	return (size);
 }

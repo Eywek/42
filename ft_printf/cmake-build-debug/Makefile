@@ -312,6 +312,114 @@ srcs/core.c.s:
 	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/core.c.s
 .PHONY : srcs/core.c.s
 
+srcs/flags/chars.o: srcs/flags/chars.c.o
+
+.PHONY : srcs/flags/chars.o
+
+# target to build an object file
+srcs/flags/chars.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/chars.c.o
+.PHONY : srcs/flags/chars.c.o
+
+srcs/flags/chars.i: srcs/flags/chars.c.i
+
+.PHONY : srcs/flags/chars.i
+
+# target to preprocess a source file
+srcs/flags/chars.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/chars.c.i
+.PHONY : srcs/flags/chars.c.i
+
+srcs/flags/chars.s: srcs/flags/chars.c.s
+
+.PHONY : srcs/flags/chars.s
+
+# target to generate assembly for a file
+srcs/flags/chars.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/chars.c.s
+.PHONY : srcs/flags/chars.c.s
+
+srcs/flags/numbers.o: srcs/flags/numbers.c.o
+
+.PHONY : srcs/flags/numbers.o
+
+# target to build an object file
+srcs/flags/numbers.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/numbers.c.o
+.PHONY : srcs/flags/numbers.c.o
+
+srcs/flags/numbers.i: srcs/flags/numbers.c.i
+
+.PHONY : srcs/flags/numbers.i
+
+# target to preprocess a source file
+srcs/flags/numbers.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/numbers.c.i
+.PHONY : srcs/flags/numbers.c.i
+
+srcs/flags/numbers.s: srcs/flags/numbers.c.s
+
+.PHONY : srcs/flags/numbers.s
+
+# target to generate assembly for a file
+srcs/flags/numbers.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/numbers.c.s
+.PHONY : srcs/flags/numbers.c.s
+
+srcs/flags/others.o: srcs/flags/others.c.o
+
+.PHONY : srcs/flags/others.o
+
+# target to build an object file
+srcs/flags/others.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/others.c.o
+.PHONY : srcs/flags/others.c.o
+
+srcs/flags/others.i: srcs/flags/others.c.i
+
+.PHONY : srcs/flags/others.i
+
+# target to preprocess a source file
+srcs/flags/others.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/others.c.i
+.PHONY : srcs/flags/others.c.i
+
+srcs/flags/others.s: srcs/flags/others.c.s
+
+.PHONY : srcs/flags/others.s
+
+# target to generate assembly for a file
+srcs/flags/others.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/others.c.s
+.PHONY : srcs/flags/others.c.s
+
+srcs/flags/strings.o: srcs/flags/strings.c.o
+
+.PHONY : srcs/flags/strings.o
+
+# target to build an object file
+srcs/flags/strings.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/strings.c.o
+.PHONY : srcs/flags/strings.c.o
+
+srcs/flags/strings.i: srcs/flags/strings.c.i
+
+.PHONY : srcs/flags/strings.i
+
+# target to preprocess a source file
+srcs/flags/strings.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/strings.c.i
+.PHONY : srcs/flags/strings.c.i
+
+srcs/flags/strings.s: srcs/flags/strings.c.s
+
+.PHONY : srcs/flags/strings.s
+
+# target to generate assembly for a file
+srcs/flags/strings.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/srcs/flags/strings.c.s
+.PHONY : srcs/flags/strings.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -342,6 +450,18 @@ help:
 	@echo "... srcs/core.o"
 	@echo "... srcs/core.i"
 	@echo "... srcs/core.s"
+	@echo "... srcs/flags/chars.o"
+	@echo "... srcs/flags/chars.i"
+	@echo "... srcs/flags/chars.s"
+	@echo "... srcs/flags/numbers.o"
+	@echo "... srcs/flags/numbers.i"
+	@echo "... srcs/flags/numbers.s"
+	@echo "... srcs/flags/others.o"
+	@echo "... srcs/flags/others.i"
+	@echo "... srcs/flags/others.s"
+	@echo "... srcs/flags/strings.o"
+	@echo "... srcs/flags/strings.i"
+	@echo "... srcs/flags/strings.s"
 .PHONY : help
 
 
