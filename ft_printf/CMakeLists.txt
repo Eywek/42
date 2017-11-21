@@ -18,6 +18,6 @@ set(SOURCE_FILES
         libs/libft/ft_isalpha.c
         libs/libft/ft_islower.c
         libs/libft/ft_isupper.c
-        includes/core.h includes/prototypes.h srcs/flags/chars.c srcs/flags/strings.c srcs/flags/numbers.c srcs/flags/others.c srcs/modifiers.c)
+        includes/core.h includes/prototypes.h srcs/types/chars.c srcs/types/strings.c srcs/types/numbers.c srcs/types/others.c srcs/flags.c)
 
 add_executable(ft_printf ${SOURCE_FILES})
