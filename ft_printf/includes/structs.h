@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 18:13:34 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:27:57 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef	struct 	s_flags
 	int 		space;
 	int 		width;
 	int 		precision;
+	int 		length_type;
 }				t_flags;
 
 typedef struct	s_types
