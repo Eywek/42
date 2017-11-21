@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 16:28:20 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 16:55:01 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	ft_handle_flags(char **str, va_list args)
 	add = 0;
 	modifiers.hash_key = 0;
 	modifiers.minus = 0;
-	modifiers.plus = 0;
-	modifiers.space = 0;
 	modifiers.zero = 0;
+	modifiers.plus = (*(*str + 1) == '+' && (add += 1));
+	modifiers.space = (*(*str + 1) == ' ' && (add += 1));
 	add += ft_modifier_width(*str, &modifiers);
 	if ((bytes = ft_call_function_from_name(str, add, args, modifiers)) > 0)
 		return (bytes);

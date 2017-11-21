@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 16:03:36 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 16:57:05 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ int	flag_d(va_list args, t_modifiers modifiers)
 		while (width++ < modifiers.width - size)
 			write(1, &modifiers.width_char, 1);
 	}
+	if (modifiers.plus && nb >= 0)
+		ft_putchar_fd('+', STDOUT);
+	else if (modifiers.space && nb >= 0)
+		ft_putchar_fd(' ', STDOUT);
 	ft_putnbr_fd(nb, STDOUT);
 	return (size);
 }
