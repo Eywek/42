@@ -13,11 +13,11 @@
 #include <unistd.h>
 #include "../../includes/core.h"
 
-int	flag_s(va_list args, int flag)
+int	flag_s(va_list args, t_modifiers modifiers)
 {
 	char *s;
 
-	(void)flag;
+	(void)modifiers;
 	s = va_arg(args, char*);
 	write(STDOUT, s, ft_strlen(s));
 	return ((int)ft_strlen(s));

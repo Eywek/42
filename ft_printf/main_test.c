@@ -14,6 +14,6 @@
 
 int main(int argc, char *argv[])
 {
-	printf("Result = %d\n", ft_printf("Coucou %s %% ca va ?\nTu as %d ans\n", "Valentin", 18));
+	printf("Result = %d chars\n", ft_printf("Coucou %s %% ca va ?\nTu as %d ans\n", "Valentin", 18));
 	return (0);
 }

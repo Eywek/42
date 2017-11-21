@@ -13,9 +13,9 @@
 #include <unistd.h>
 #include "../../includes/core.h"
 
-int	flag_percentage(va_list args, int flag)
+int	flag_percentage(va_list args, t_modifiers modifiers)
 {
-	(void)flag;
+	(void)modifiers;
 	(void)args;
 	write(STDOUT, "%", 1);
 	return (1);
