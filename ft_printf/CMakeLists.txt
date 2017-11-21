@@ -18,6 +18,7 @@ set(SOURCE_FILES
         libs/libft/ft_isalpha.c
         libs/libft/ft_islower.c
         libs/libft/ft_isupper.c
-        includes/core.h includes/prototypes.h srcs/types/chars.c srcs/types/strings.c srcs/types/numbers.c srcs/types/others.c srcs/flags.c)
+        libs/libft/ft_itoa_base.c
+        includes/core.h includes/prototypes.h srcs/types/chars.c srcs/types/strings.c srcs/types/numbers.c srcs/types/others.c srcs/flags.c srcs/types/pointers.c)
 
 add_executable(ft_printf ${SOURCE_FILES})

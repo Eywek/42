@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 18:37:04 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:37:11 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void ft_handle_length(char **str, t_flags *flags)
 	else if (**str == 'h')
 	{
 		*str += 1;
-		flags->precision = LENGHT_HH;
+		flags->precision = LENGHT_H;
 	}
 	else if (**str == 'l' && *(*str + 1) == 'l')
 	{
