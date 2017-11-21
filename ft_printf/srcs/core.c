@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 18:13:30 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:14:46 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ int	ft_handle(char **str, va_list args)
  ** First function :
  ** start stdarg,
  ** process format with ft_handle if it's a % or display char
+ ** Sources:
+ **  https://cdn.intra.42.fr/pdf/pdf/20/ft_printf.pdf
+ **  https://en.wikipedia.org/wiki/Printf_format_string
+ **  https://msdn.microsoft.com/fr-fr/library/hf4y5e3w.aspx
 */
 
 int	ft_printf(const char *restrict format, ...)
