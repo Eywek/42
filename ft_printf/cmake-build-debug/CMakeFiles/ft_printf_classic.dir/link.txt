@@ -1,1 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/ft_printf_classic.dir/main_test.c.o CMakeFiles/ft_printf_classic.dir/srcs/core.c.o  -o ft_printf_classic 
