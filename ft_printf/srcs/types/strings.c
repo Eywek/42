@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 17:20:13 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 17:37:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	flag_s(va_list args, t_flags flags)
 	(void)flags;
 	s = va_arg(args, char*);
 	size = ft_strlen(s);
+	size = size - (size - flags.precision);
 	if (flags.width)
 	{
 		width = 0;

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 17:39:35 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:22:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,16 @@ void ft_handle_width(char **str, t_flags *flags)
 */
 void ft_handle_precision(char **str, t_flags *flags)
 {
-	(void)str;
-	(void)flags;
+	int precision;
+
+	if (**str == '.')
+	{
+		*str += 1;
+		precision = ft_atoi(*str);
+		flags->precision = precision;
+		while (precision > 0 && (*str = *str + 1))
+			precision /= 10;
+	}
 }
 
 /*
