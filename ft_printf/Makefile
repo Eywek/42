@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/20 19:02:09 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/21 16:05:04 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ SRCS_FILES=core.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 LIB_SRCS_PATH=./libs/libft/
-LIB_SRCS_FILES=ft_strcmp.c ft_strlen.c ft_strnstr.c ft_putnbr_fd.c ft_putchar_fd.c
+LIB_SRCS_FILES=ft_strcmp.c ft_strlen.c ft_strnstr.c ft_putnbr_fd.c \
+				ft_putchar_fd.c ft_atoi.c ft_isalnum.c ft_isdigit.c \
+				ft_isalpha.c ft_islower.c ft_isupper.c
+
 LIB_SRCS=$(addprefix $(LIB_SRCS_PATH), $(LIB_SRCS_FILES))
 
 LIB_OBJECTS_PATH=./objs/

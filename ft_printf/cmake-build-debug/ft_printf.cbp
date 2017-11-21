@@ -91,6 +91,24 @@
 		<Unit filename="/Users/vtouffet/Work/ft_printf/includes/structs.h">
 			<Option target="ft_printf"/>
 		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/libs/libft/ft_atoi.c">
+			<Option target="ft_printf"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/libs/libft/ft_isalnum.c">
+			<Option target="ft_printf"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/libs/libft/ft_isalpha.c">
+			<Option target="ft_printf"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/libs/libft/ft_isdigit.c">
+			<Option target="ft_printf"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/libs/libft/ft_islower.c">
+			<Option target="ft_printf"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/libs/libft/ft_isupper.c">
+			<Option target="ft_printf"/>
+		</Unit>
 		<Unit filename="/Users/vtouffet/Work/ft_printf/libs/libft/ft_putchar_fd.c">
 			<Option target="ft_printf"/>
 		</Unit>

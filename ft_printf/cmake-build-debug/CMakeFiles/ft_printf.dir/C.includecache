@@ -20,6 +20,22 @@ prototypes.h
 
 /Users/vtouffet/Work/ft_printf/includes/structs.h
 
+/Users/vtouffet/Work/ft_printf/libs/libft/ft_atoi.c
+
+/Users/vtouffet/Work/ft_printf/libs/libft/ft_isalnum.c
+libft.h
+/Users/vtouffet/Work/ft_printf/libs/libft/libft.h
+
+/Users/vtouffet/Work/ft_printf/libs/libft/ft_isalpha.c
+libft.h
+/Users/vtouffet/Work/ft_printf/libs/libft/libft.h
+
+/Users/vtouffet/Work/ft_printf/libs/libft/ft_isdigit.c
+
+/Users/vtouffet/Work/ft_printf/libs/libft/ft_islower.c
+
+/Users/vtouffet/Work/ft_printf/libs/libft/ft_isupper.c
+
 /Users/vtouffet/Work/ft_printf/libs/libft/ft_putchar_fd.c
 unistd.h
 -
@@ -59,6 +75,8 @@ unistd.h
 /Users/vtouffet/Work/ft_printf/includes/core.h
 
 /Users/vtouffet/Work/ft_printf/srcs/flags/numbers.c
+unistd.h
+-
 ../../includes/core.h
 /Users/vtouffet/Work/ft_printf/includes/core.h
 
