@@ -52,3 +52,25 @@ unistd.h
 ../includes/core.h
 /Users/vtouffet/Work/ft_printf/includes/core.h
 
+/Users/vtouffet/Work/ft_printf/srcs/flags/chars.c
+unistd.h
+-
+../../includes/core.h
+/Users/vtouffet/Work/ft_printf/includes/core.h
+
+/Users/vtouffet/Work/ft_printf/srcs/flags/numbers.c
+../../includes/core.h
+/Users/vtouffet/Work/ft_printf/includes/core.h
+
+/Users/vtouffet/Work/ft_printf/srcs/flags/others.c
+unistd.h
+-
+../../includes/core.h
+/Users/vtouffet/Work/ft_printf/includes/core.h
+
+/Users/vtouffet/Work/ft_printf/srcs/flags/strings.c
+unistd.h
+-
+../../includes/core.h
+/Users/vtouffet/Work/ft_printf/includes/core.h
+

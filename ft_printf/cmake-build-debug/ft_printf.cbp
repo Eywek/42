@@ -112,6 +112,18 @@
 		<Unit filename="/Users/vtouffet/Work/ft_printf/srcs/core.c">
 			<Option target="ft_printf"/>
 		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/srcs/flags/chars.c">
+			<Option target="ft_printf"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/srcs/flags/numbers.c">
+			<Option target="ft_printf"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/srcs/flags/others.c">
+			<Option target="ft_printf"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/ft_printf/srcs/flags/strings.c">
+			<Option target="ft_printf"/>
+		</Unit>
 		<Unit filename="/Users/vtouffet/Work/ft_printf/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

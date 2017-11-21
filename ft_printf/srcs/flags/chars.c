@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   chars.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/16 16:34:45 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 11:43:19 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/21 13:16:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "../includes/fdf.h"
+#include "../../includes/core.h"
 
-int		ft_is_valid(char *str)
+int	flag_c(va_list args, int flag)
 {
-	while (*str)
-	{
-		if (*str != '-' && *str != '+' && !ft_isdigit(*str))
-			return (0);
-		if ((*str == '-' || *str == '+') && (!*(str + 1) ||
-				!ft_isdigit(*(str + 1))))
-			return (0);
-		++str;
-	}
+	int c;
+
+	(void)flag;
+	c = va_arg(args, int);
+	write(STDOUT, &c, 1);
 	return (1);
-}
-
-void	ft_throw_error(void)
-{
-	write(1, "Error\n", 6);
-	exit(0);
 }

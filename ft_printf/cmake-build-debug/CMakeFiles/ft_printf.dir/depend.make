@@ -26,3 +26,27 @@ CMakeFiles/ft_printf.dir/srcs/core.c.o: ../includes/structs.h
 CMakeFiles/ft_printf.dir/srcs/core.c.o: ../libs/libft/libft.h
 CMakeFiles/ft_printf.dir/srcs/core.c.o: ../srcs/core.c
 
+CMakeFiles/ft_printf.dir/srcs/flags/chars.c.o: ../includes/core.h
+CMakeFiles/ft_printf.dir/srcs/flags/chars.c.o: ../includes/prototypes.h
+CMakeFiles/ft_printf.dir/srcs/flags/chars.c.o: ../includes/structs.h
+CMakeFiles/ft_printf.dir/srcs/flags/chars.c.o: ../libs/libft/libft.h
+CMakeFiles/ft_printf.dir/srcs/flags/chars.c.o: ../srcs/flags/chars.c
+
+CMakeFiles/ft_printf.dir/srcs/flags/numbers.c.o: ../includes/core.h
+CMakeFiles/ft_printf.dir/srcs/flags/numbers.c.o: ../includes/prototypes.h
+CMakeFiles/ft_printf.dir/srcs/flags/numbers.c.o: ../includes/structs.h
+CMakeFiles/ft_printf.dir/srcs/flags/numbers.c.o: ../libs/libft/libft.h
+CMakeFiles/ft_printf.dir/srcs/flags/numbers.c.o: ../srcs/flags/numbers.c
+
+CMakeFiles/ft_printf.dir/srcs/flags/others.c.o: ../includes/core.h
+CMakeFiles/ft_printf.dir/srcs/flags/others.c.o: ../includes/prototypes.h
+CMakeFiles/ft_printf.dir/srcs/flags/others.c.o: ../includes/structs.h
+CMakeFiles/ft_printf.dir/srcs/flags/others.c.o: ../libs/libft/libft.h
+CMakeFiles/ft_printf.dir/srcs/flags/others.c.o: ../srcs/flags/others.c
+
+CMakeFiles/ft_printf.dir/srcs/flags/strings.c.o: ../includes/core.h
+CMakeFiles/ft_printf.dir/srcs/flags/strings.c.o: ../includes/prototypes.h
+CMakeFiles/ft_printf.dir/srcs/flags/strings.c.o: ../includes/structs.h
+CMakeFiles/ft_printf.dir/srcs/flags/strings.c.o: ../libs/libft/libft.h
+CMakeFiles/ft_printf.dir/srcs/flags/strings.c.o: ../srcs/flags/strings.c
+

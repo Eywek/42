@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/20 19:02:57 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 12:34:54 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int main(int argc, char *argv[])
 {
-	ft_printf("Coucou %s %% ca va ?\nTu as %d ans\n", "Valentin", 18);
+	printf("Result = %d\n", ft_printf("Coucou %s %% ca va ?\nTu as %d ans\n", "Valentin", 18));
 	return (0);
 }
