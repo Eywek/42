@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 18:44:24 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:44:37 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	flag_d(va_list args, t_flags flags)
 	{
 		width = 0;
 		while (width++ < flags.width - size)
-			write(1, (flags.zero) ? "0" : " ", 1);
+			write(STDOUT, (flags.zero) ? "0" : " ", 1);
 	}
 	if (flags.plus && nb >= 0)
 		ft_putchar_fd('+', STDOUT);

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 18:29:13 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:29:31 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../libs/libft/libft.h"
 
 # define STDOUT 1
-# define ARGS_COUNT 4
+# define ARGS_COUNT 5
 
 # define LENGHT_HH 1
 # define LENGHT_H 2
