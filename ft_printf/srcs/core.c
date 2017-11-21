@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 17:40:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 18:13:30 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 /*
  ** List of all types and callbacks
+ ** s S p d D i o O u U x X c C %
 */
 
 t_types	g_types[ARGS_COUNT] = {
-		{"c", flag_c}, {"s", flag_s}, {"d", flag_d}, {"%", flag_percentage},
+		{'c', flag_c}, {'s', flag_s}, {'d', flag_d}, {'%', flag_percentage},
 };
 
 /*
@@ -33,9 +34,9 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 	i = 0;
 	while (i < ARGS_COUNT)
 	{
-		if (ft_strnstr(*str, g_types[i].name, ft_strlen(g_types[i].name)))
+		if (**str == g_types[i].name)
 		{
-			*str += ft_strlen(g_types[i].name);
+			*str += 1;
 			return (g_types[i].f(args, flags));
 		}
 		++i;

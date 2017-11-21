@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 17:05:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 17:13:11 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef	struct 	s_flags
 
 typedef struct	s_types
 {
-	char		*name;
+	char		name;
 	int			(*f)(va_list, t_flags);
 }				t_types;
 
