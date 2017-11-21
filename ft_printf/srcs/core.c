@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 16:26:05 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 16:28:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,6 @@ int	ft_call_function_from_name(char **str, int add, va_list args,
 }
 
 /*
- ** Handle width
- ** (eg. %3d ->   1 || %03d -> 001)
-*/
-int ft_modifier_width(char *str, t_modifiers *modifiers)
-{
-	if (ft_isalnum(*(str + 1))) // width
-	{
-		if (ft_isdigit(*(str + 2)))
-		{
-			modifiers->width = ft_atoi(str + 2);
-			modifiers->width_char = (*(str + 1));
-			return (2);
-		}
-		else if (ft_isdigit(*str + 1))
-		{
-			modifiers->width = ft_atoi(str + 1);
-			modifiers->width_char = ' ';
-			return (1);
-		}
-	}
-	return (0);
-}
-
-/*
  ** Handle modifiers, set bool into t_modifiers
  ** Retrieve and call function for each flag found with
  ** ft_call_function_from_name()
@@ -88,7 +64,6 @@ int	ft_handle_flags(char **str, va_list args)
 	modifiers.plus = 0;
 	modifiers.space = 0;
 	modifiers.zero = 0;
-	modifiers.width_char = 0;
 	add += ft_modifier_width(*str, &modifiers);
 	if ((bytes = ft_call_function_from_name(str, add, args, modifiers)) > 0)
 		return (bytes);

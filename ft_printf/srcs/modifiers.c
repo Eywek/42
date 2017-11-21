@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prototypes.c                                       :+:      :+:    :+:   */
+/*   modifiers.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 15:39:00 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 16:40:21 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROTOTYPES_H
-#define PROTOTYPES_H
+#include "../includes/core.h"
 
-int		flag_c(va_list args, t_modifiers modifiers);
-int		flag_s(va_list args, t_modifiers modifiers);
-int		flag_d(va_list args, t_modifiers modifiers);
-int		flag_percentage(va_list args, t_modifiers modifiers);
+/*
+ ** Handle width
+ ** (eg. %3d ->   1 || %03d -> 001)
+*/
+int ft_modifier_width(char *str, t_modifiers *modifiers)
+{
+	int i;
 
-int		ft_modifier_width(char *str, t_modifiers *modifiers);
-
-int		ft_printf(const char * restrict format, ...);
-
-#endif
+	modifiers->width_char = 0;
+	//if (ft_isalnum(*(str + 1))) // width
+	//{
+		if (ft_isdigit(*(str + 2)))
+		{
+			i = 2;
+			while (ft_isdigit(*(str + i)))
+				modifiers->width += ft_atoi(str + i++);
+			modifiers->width_char = (*(str + 1));
+			return (i - 1);
+		}
+		else if (ft_isdigit(*(str + 1)))
+		{
+			modifiers->width = ft_atoi(str + 1);
+			modifiers->width_char = ' ';
+			return (1);
+		}
+	//}
+	return (0);
+}
