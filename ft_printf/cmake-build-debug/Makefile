@@ -123,6 +123,168 @@ ft_printf/fast:
 	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/build
 .PHONY : ft_printf/fast
 
+libs/libft/ft_atoi.o: libs/libft/ft_atoi.c.o
+
+.PHONY : libs/libft/ft_atoi.o
+
+# target to build an object file
+libs/libft/ft_atoi.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_atoi.c.o
+.PHONY : libs/libft/ft_atoi.c.o
+
+libs/libft/ft_atoi.i: libs/libft/ft_atoi.c.i
+
+.PHONY : libs/libft/ft_atoi.i
+
+# target to preprocess a source file
+libs/libft/ft_atoi.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_atoi.c.i
+.PHONY : libs/libft/ft_atoi.c.i
+
+libs/libft/ft_atoi.s: libs/libft/ft_atoi.c.s
+
+.PHONY : libs/libft/ft_atoi.s
+
+# target to generate assembly for a file
+libs/libft/ft_atoi.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_atoi.c.s
+.PHONY : libs/libft/ft_atoi.c.s
+
+libs/libft/ft_isalnum.o: libs/libft/ft_isalnum.c.o
+
+.PHONY : libs/libft/ft_isalnum.o
+
+# target to build an object file
+libs/libft/ft_isalnum.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isalnum.c.o
+.PHONY : libs/libft/ft_isalnum.c.o
+
+libs/libft/ft_isalnum.i: libs/libft/ft_isalnum.c.i
+
+.PHONY : libs/libft/ft_isalnum.i
+
+# target to preprocess a source file
+libs/libft/ft_isalnum.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isalnum.c.i
+.PHONY : libs/libft/ft_isalnum.c.i
+
+libs/libft/ft_isalnum.s: libs/libft/ft_isalnum.c.s
+
+.PHONY : libs/libft/ft_isalnum.s
+
+# target to generate assembly for a file
+libs/libft/ft_isalnum.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isalnum.c.s
+.PHONY : libs/libft/ft_isalnum.c.s
+
+libs/libft/ft_isalpha.o: libs/libft/ft_isalpha.c.o
+
+.PHONY : libs/libft/ft_isalpha.o
+
+# target to build an object file
+libs/libft/ft_isalpha.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isalpha.c.o
+.PHONY : libs/libft/ft_isalpha.c.o
+
+libs/libft/ft_isalpha.i: libs/libft/ft_isalpha.c.i
+
+.PHONY : libs/libft/ft_isalpha.i
+
+# target to preprocess a source file
+libs/libft/ft_isalpha.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isalpha.c.i
+.PHONY : libs/libft/ft_isalpha.c.i
+
+libs/libft/ft_isalpha.s: libs/libft/ft_isalpha.c.s
+
+.PHONY : libs/libft/ft_isalpha.s
+
+# target to generate assembly for a file
+libs/libft/ft_isalpha.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isalpha.c.s
+.PHONY : libs/libft/ft_isalpha.c.s
+
+libs/libft/ft_isdigit.o: libs/libft/ft_isdigit.c.o
+
+.PHONY : libs/libft/ft_isdigit.o
+
+# target to build an object file
+libs/libft/ft_isdigit.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isdigit.c.o
+.PHONY : libs/libft/ft_isdigit.c.o
+
+libs/libft/ft_isdigit.i: libs/libft/ft_isdigit.c.i
+
+.PHONY : libs/libft/ft_isdigit.i
+
+# target to preprocess a source file
+libs/libft/ft_isdigit.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isdigit.c.i
+.PHONY : libs/libft/ft_isdigit.c.i
+
+libs/libft/ft_isdigit.s: libs/libft/ft_isdigit.c.s
+
+.PHONY : libs/libft/ft_isdigit.s
+
+# target to generate assembly for a file
+libs/libft/ft_isdigit.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isdigit.c.s
+.PHONY : libs/libft/ft_isdigit.c.s
+
+libs/libft/ft_islower.o: libs/libft/ft_islower.c.o
+
+.PHONY : libs/libft/ft_islower.o
+
+# target to build an object file
+libs/libft/ft_islower.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_islower.c.o
+.PHONY : libs/libft/ft_islower.c.o
+
+libs/libft/ft_islower.i: libs/libft/ft_islower.c.i
+
+.PHONY : libs/libft/ft_islower.i
+
+# target to preprocess a source file
+libs/libft/ft_islower.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_islower.c.i
+.PHONY : libs/libft/ft_islower.c.i
+
+libs/libft/ft_islower.s: libs/libft/ft_islower.c.s
+
+.PHONY : libs/libft/ft_islower.s
+
+# target to generate assembly for a file
+libs/libft/ft_islower.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_islower.c.s
+.PHONY : libs/libft/ft_islower.c.s
+
+libs/libft/ft_isupper.o: libs/libft/ft_isupper.c.o
+
+.PHONY : libs/libft/ft_isupper.o
+
+# target to build an object file
+libs/libft/ft_isupper.c.o:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isupper.c.o
+.PHONY : libs/libft/ft_isupper.c.o
+
+libs/libft/ft_isupper.i: libs/libft/ft_isupper.c.i
+
+.PHONY : libs/libft/ft_isupper.i
+
+# target to preprocess a source file
+libs/libft/ft_isupper.c.i:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isupper.c.i
+.PHONY : libs/libft/ft_isupper.c.i
+
+libs/libft/ft_isupper.s: libs/libft/ft_isupper.c.s
+
+.PHONY : libs/libft/ft_isupper.s
+
+# target to generate assembly for a file
+libs/libft/ft_isupper.c.s:
+	$(MAKE) -f CMakeFiles/ft_printf.dir/build.make CMakeFiles/ft_printf.dir/libs/libft/ft_isupper.c.s
+.PHONY : libs/libft/ft_isupper.c.s
+
 libs/libft/ft_putchar_fd.o: libs/libft/ft_putchar_fd.c.o
 
 .PHONY : libs/libft/ft_putchar_fd.o
@@ -429,6 +591,24 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ft_printf"
+	@echo "... libs/libft/ft_atoi.o"
+	@echo "... libs/libft/ft_atoi.i"
+	@echo "... libs/libft/ft_atoi.s"
+	@echo "... libs/libft/ft_isalnum.o"
+	@echo "... libs/libft/ft_isalnum.i"
+	@echo "... libs/libft/ft_isalnum.s"
+	@echo "... libs/libft/ft_isalpha.o"
+	@echo "... libs/libft/ft_isalpha.i"
+	@echo "... libs/libft/ft_isalpha.s"
+	@echo "... libs/libft/ft_isdigit.o"
+	@echo "... libs/libft/ft_isdigit.i"
+	@echo "... libs/libft/ft_isdigit.s"
+	@echo "... libs/libft/ft_islower.o"
+	@echo "... libs/libft/ft_islower.i"
+	@echo "... libs/libft/ft_islower.s"
+	@echo "... libs/libft/ft_isupper.o"
+	@echo "... libs/libft/ft_isupper.i"
+	@echo "... libs/libft/ft_isupper.s"
 	@echo "... libs/libft/ft_putchar_fd.o"
 	@echo "... libs/libft/ft_putchar_fd.i"
 	@echo "... libs/libft/ft_putchar_fd.s"

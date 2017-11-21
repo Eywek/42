@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 15:38:05 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/21 15:57:27 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef	struct 	s_modifiers
 	int 		minus;
 	int 		plus;
 	int 		space;
+	int 		width;
+	int 		width_char;
 }				t_modifiers;
 
 typedef struct	s_flags
