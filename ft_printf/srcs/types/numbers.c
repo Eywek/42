@@ -6,11 +6,12 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 15:07:22 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 17:09:26 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdint.h>
 #include "../../includes/core.h"
 
 int	flag_d(va_list args, t_flags flags)
@@ -63,6 +64,21 @@ int flag_x(va_list args, t_flags flags)
 	if (flags.length_type == LENGTH_L)
 		ft_putnbr_base_unsigned_long(va_arg(args, unsigned long int),
 									 "0123456789abcdef", 16, &size);
+	else if (flags.length_type == LENGTH_LL)
+		ft_putnbr_base_unsigned_long_long(va_arg(args, unsigned long long int),
+									 "0123456789abcdef", 16, &size);
+	else if (flags.length_type == LENGTH_H)
+		ft_putnbr_base_short_int(va_arg(args, short int),
+										  "0123456789abcdef", 16, &size);
+	else if (flags.length_type == LENGTH_HH)
+		ft_putnbr_base_unsigned_char(va_arg(args, unsigned char),
+										  "0123456789abcdef", 16, &size);
+	else if (flags.length_type == LENGTH_J)
+		ft_putnbr_base_uintmax_t(va_arg(args, uintmax_t),
+										  "0123456789abcdef", 16, &size);
+	else if (flags.length_type == LENGTH_Z)
+		ft_putnbr_base_size_t(va_arg(args, size_t),
+								 "0123456789abcdef", 16, &size);
 	else
 		ft_putnbr_base_unsigned(va_arg(args, unsigned int), "0123456789abcdef",
 								16, &size);
@@ -79,6 +95,21 @@ int flag_X(va_list args, t_flags flags)
 	if (flags.length_type == LENGTH_L)
 		ft_putnbr_base_unsigned_long(va_arg(args, unsigned long int),
 									 "0123456789ABCDEF", 16, &size);
+	else if (flags.length_type == LENGTH_LL)
+		ft_putnbr_base_unsigned_long_long(va_arg(args, unsigned long long int),
+										  "0123456789ABCDEF", 16, &size);
+	else if (flags.length_type == LENGTH_H)
+		ft_putnbr_base_short_int(va_arg(args, short int),
+								 "0123456789ABCDEF", 16, &size);
+	else if (flags.length_type == LENGTH_HH)
+		ft_putnbr_base_unsigned_char(va_arg(args, unsigned char),
+									 "0123456789ABCDEF", 16, &size);
+	else if (flags.length_type == LENGTH_J)
+		ft_putnbr_base_uintmax_t(va_arg(args, uintmax_t),
+								 "0123456789ABCDEF", 16, &size);
+	else if (flags.length_type == LENGTH_Z)
+		ft_putnbr_base_size_t(va_arg(args, size_t),
+							  "0123456789ABCDEF", 16, &size);
 	else
 		ft_putnbr_base_unsigned(va_arg(args, unsigned int), "0123456789ABCDEF",
 								16, &size);
