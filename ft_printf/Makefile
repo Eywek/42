@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/22 13:54:31 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/22 14:01:31 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ $(NAME): $(OBJECTS) $(LIB_OBJECTS) $(HEADERS)
 $(OBJECTS_PATH)%.o: $(SRCS_PATH)%.c
 	@mkdir $(OBJECTS_PATH) 2>/dev/null || echo "" > /dev/null
 	@mkdir $(OBJECTS_PATH)types 2>/dev/null || echo "" > /dev/null
+	@mkdir $(OBJECTS_PATH)utils 2>/dev/null || echo "" > /dev/null
 	@$(COMPILE) $(INCLUDES) -c $< -o $@
 
 $(LIB_OBJECTS_PATH)%.o: $(LIB_SRCS_PATH)%.c
