@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   numbers_l.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 11:13:56 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/22 11:18:26 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/22 11:18:37 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CORE_H
-# define CORE_H
+#include "../../includes/core.h"
 
-# include <stdarg.h>
-# include "structs.h"
-# include "prototypes.h"
-# include "../libs/libft/libft.h"
+// TODO
+int flag_D(va_list args, t_flags flags)
+{
+	(void)flags;
+	(void)args;
+	return (0);
+}
 
-# define STDOUT 1
-# define ARGS_COUNT 15
+int flag_O(va_list args, t_flags flags)
+{
+	(void)flags;
+	(void)args;
+	return (0);
+}
 
-# define LENGHT_HH 1
-# define LENGHT_H 2
-# define LENGHT_LL 3
-# define LENGHT_L 4
-# define LENGHT_J 5
-# define LENGHT_Z 6
-
-#endif
+int flag_U(va_list args, t_flags flags)
+{
+	(void)flags;
+	(void)args;
+	return (0);
+}
