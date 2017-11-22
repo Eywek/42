@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/21 18:33:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 11:16:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 /*
  ** List of all types and callbacks
- ** s S p d D i o O u U x X c C %
+ ** /s /S /p /d /D /i /o /O /u /U /x /X /c /C /%
+ ** flag to display tabs
 */
 
 t_types	g_types[ARGS_COUNT] = {
-		{'c', flag_c}, {'s', flag_s}, {'d', flag_d}, {'%', flag_percentage},
-		{'p', flag_p}
+		{'c', flag_c}, {'C', flag_C}, {'s', flag_s}, {'S', flag_S},
+		{'d', flag_d}, {'i', flag_d}, {'%', flag_percentage}, {'p', flag_p},
+		{'o', flag_o}, {'x', flag_x}, {'X', flag_X}, {'u', flag_u},
+		{'D', flag_D}, {'O', flag_O}, {'U', flag_U}
 };
 
 /*
@@ -73,6 +76,9 @@ int	ft_handle(char **str, va_list args) // Todo: Handle dynamic value for precis
  **  https://cdn.intra.42.fr/pdf/pdf/20/ft_printf.pdf
  **  https://en.wikipedia.org/wiki/Printf_format_string
  **  https://msdn.microsoft.com/fr-fr/library/hf4y5e3w.aspx
+ **  https://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/FUNCTIONS/format.html
+ **  http://www.cplusplus.com/reference/cstdio/printf/
+ **  http://manpagesfr.free.fr/man/man3/printf.3.html
 */
 
 int	ft_printf(const char *restrict format, ...)
