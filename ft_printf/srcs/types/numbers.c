@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 13:55:09 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 14:26:53 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int flag_o(va_list args, t_flags flags)
 {
 	int size;
 
+	size = 0;
 	if (flags.length_type == LENGTH_L)
 		return (flag_O(args, flags));
 	ft_putnbr_base_unsigned(va_arg(args, unsigned int), "01234567", 8, &size);
@@ -62,8 +63,9 @@ int flag_x(va_list args, t_flags flags)
 {
 	int size;
 
+	size = 0;
 	if (flags.hash_key)
-		write(STDOUT, "0x", 2);
+		write(STDOUT, "0x", (size_t)(size = 2));
 	if (flags.length_type == LENGTH_L)
 		ft_putnbr_base_unsigned_long(va_arg(args, unsigned long int),
 									 "0123456789abcdef", 16, &size);
@@ -77,8 +79,9 @@ int flag_X(va_list args, t_flags flags)
 {
 	int size;
 
+	size = 0;
 	if (flags.hash_key)
-		write(STDOUT, "0X", 2);
+		write(STDOUT, "0X", (size_t)(size = 2));
 	if (flags.length_type == LENGTH_L)
 		ft_putnbr_base_unsigned_long(va_arg(args, unsigned long int),
 									 "0123456789ABCDEF", 16, &size);
@@ -90,10 +93,11 @@ int flag_X(va_list args, t_flags flags)
 
 int flag_u(va_list args, t_flags flags)
 {
-	char				*nbr;
+	int size;
 
 	if (flags.length_type == LENGTH_L)
 		return (flag_U(args, flags));
-	ft_putnbr_fd_unsigned(va_arg(args, unsigned int), STDOUT);
-	return (0);
+	size = 0;
+	ft_putnbr_fd_unsigned(va_arg(args, unsigned int), STDOUT, &size);
+	return (size);
 }
