@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 17:09:26 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 17:53:12 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,24 @@ int flag_o(va_list args, t_flags flags)
 	size = 0;
 	if (flags.length_type == LENGTH_L)
 		return (flag_O(args, flags));
-	ft_putnbr_base_unsigned(va_arg(args, unsigned int), "01234567", 8, &size);
+	else if (flags.length_type == LENGTH_LL)
+		ft_putnbr_base_unsigned_long_long(va_arg(args, unsigned long long int),
+										  "01234567", 8, &size);
+	else if (flags.length_type == LENGTH_H)
+		ft_putnbr_base_short_int(va_arg(args, short int),
+								 "01234567", 8, &size);
+	else if (flags.length_type == LENGTH_HH)
+		ft_putnbr_base_unsigned_char(va_arg(args, unsigned char),
+									 "01234567", 8, &size);
+	else if (flags.length_type == LENGTH_J)
+		ft_putnbr_base_uintmax_t(va_arg(args, uintmax_t),
+								 "01234567", 8, &size);
+	else if (flags.length_type == LENGTH_Z)
+		ft_putnbr_base_size_t(va_arg(args, size_t),
+							  "01234567", 8, &size);
+	else
+		ft_putnbr_base_unsigned(va_arg(args, unsigned int), "01234567",
+								8, &size);
 	return (size);
 }
 
