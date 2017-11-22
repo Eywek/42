@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 11:31:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 11:31:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_handle(char **str, va_list args) // Todo: Handle dynamic value for precis
  **  http://manpagesfr.free.fr/man/man3/printf.3.html
 */
 
-int	ft_printf(const char *restrict format, ...)
+int	ft_printf(const char *restrict format, ...) // TODO: unicode
 {
 	char	*str;
 	int		bytes;
