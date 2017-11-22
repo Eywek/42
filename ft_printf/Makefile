@@ -6,15 +6,15 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/21 18:53:16 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/22 11:53:22 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libftprintf.a
 
 SRCS_PATH=./srcs/
-SRCS_FILES=core.c flags.c types/charcs. types/numbers.c types/others.c \
-			types/pointers.c types/strings.c
+SRCS_FILES=core.c flags.c types/chars.c types/numbers.c types/others.c \
+			types/pointers.c types/strings.c types/numbers_l.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 LIB_SRCS_PATH=./libs/libft/
@@ -56,6 +56,7 @@ $(NAME): $(OBJECTS) $(LIB_OBJECTS) $(HEADERS)
 
 $(OBJECTS_PATH)%.o: $(SRCS_PATH)%.c
 	@mkdir $(OBJECTS_PATH) 2>/dev/null || echo "" > /dev/null
+	@mkdir $(OBJECTS_PATH)types 2>/dev/null || echo "" > /dev/null
 	@$(COMPILE) $(INCLUDES) -c $< -o $@
 
 $(LIB_OBJECTS_PATH)%.o: $(LIB_SRCS_PATH)%.c
@@ -63,11 +64,9 @@ $(LIB_OBJECTS_PATH)%.o: $(LIB_SRCS_PATH)%.c
 	@$(COMPILE) $(INCLUDES) -c $< -o $@
 
 clean:
-	@make -C $(LIB_PATH) clean > /dev/null
 	@rm -fv $(OBJECTS) > /dev/null
 
 fclean: clean
-	@make -C $(LIB_PATH) fclean > /dev/null
 	@rm $(NAME) > /dev/null
 
 re: fclean all

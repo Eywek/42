@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 11:17:16 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 11:50:27 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int flag_x(va_list args, t_flags flags)
 {
 	char				*nbr;
 
-	(void)flags;
+	if (flags.hash_key)
+		write(STDOUT, "0x", 2);
 	nbr = ft_itoa_base(va_arg(args, unsigned int), "0123456789abcdef");
 	write(STDOUT, nbr, ft_strlen(nbr));
 	return (0);
@@ -72,7 +73,8 @@ int flag_X(va_list args, t_flags flags)
 {
 	char				*nbr;
 
-	(void)flags;
+	if (flags.hash_key)
+		write(STDOUT, "0X", 2);
 	nbr = ft_itoa_base(va_arg(args, unsigned int), "01234567ABCDEF");
 	write(STDOUT, nbr, ft_strlen(nbr));
 	return (0);
