@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   write.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 11:13:56 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/22 14:01:07 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/22 14:02:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CORE_H
-# define CORE_H
+#include "../../includes/core.h"
 
-# include <stdarg.h>
-# include "structs.h"
-# include "prototypes.h"
-# include "../libs/libft/libft.h"
 
-# define STDOUT 1
-# define ARGS_COUNT 15
-
-# define LENGTH_HH 1
-# define LENGTH_H 2
-# define LENGTH_LL 3
-# define LENGTH_L 4
-# define LENGTH_J 5
-# define LENGTH_Z 6
-
-#endif
+void	ft_putnbr_fd_unsigned(unsigned int nbr, int fd)
+{
+	if (nbr >= 10)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd((char)(nbr % 10 + 48), fd);
+}

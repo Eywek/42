@@ -17,7 +17,7 @@ int	flag_c(va_list args, t_flags flags)
 {
 	int c;
 
-	if (flags.length_type == LENGHT_L)
+	if (flags.length_type == LENGTH_L)
 		return (flag_C(args, flags));
 	c = va_arg(args, int);
 	write(STDOUT, &c, 1);

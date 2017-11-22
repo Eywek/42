@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 11:50:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 13:55:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	flag_d(va_list args, t_flags flags)
 	unsigned int	tmp;
 	int 			width;
 
-	if (flags.length_type == LENGHT_L)
+	if (flags.length_type == LENGTH_L)
 		return (flag_D(args, flags));
 	nb = va_arg(args, int);
 	size = 0;
@@ -47,45 +47,53 @@ int	flag_d(va_list args, t_flags flags)
 }
 
 // TODO: Precision / Width / Flags
+
 int flag_o(va_list args, t_flags flags)
 {
-	char				*nbr;
+	int size;
 
-	if (flags.length_type == LENGHT_L)
+	if (flags.length_type == LENGTH_L)
 		return (flag_O(args, flags));
-	nbr = ft_itoa_base(va_arg(args, unsigned int), "01234567");
-	write(STDOUT, nbr, ft_strlen(nbr));
-	return (0);
+	ft_putnbr_base_unsigned(va_arg(args, unsigned int), "01234567", 8, &size);
+	return (size);
 }
 
 int flag_x(va_list args, t_flags flags)
 {
-	char				*nbr;
+	int size;
 
 	if (flags.hash_key)
 		write(STDOUT, "0x", 2);
-	nbr = ft_itoa_base(va_arg(args, unsigned int), "0123456789abcdef");
-	write(STDOUT, nbr, ft_strlen(nbr));
-	return (0);
+	if (flags.length_type == LENGTH_L)
+		ft_putnbr_base_unsigned_long(va_arg(args, unsigned long int),
+									 "0123456789abcdef", 16, &size);
+	else
+		ft_putnbr_base_unsigned(va_arg(args, unsigned int), "0123456789abcdef",
+								16, &size);
+	return (size);
 }
 
 int flag_X(va_list args, t_flags flags)
 {
-	char				*nbr;
+	int size;
 
 	if (flags.hash_key)
 		write(STDOUT, "0X", 2);
-	nbr = ft_itoa_base(va_arg(args, unsigned int), "01234567ABCDEF");
-	write(STDOUT, nbr, ft_strlen(nbr));
-	return (0);
+	if (flags.length_type == LENGTH_L)
+		ft_putnbr_base_unsigned_long(va_arg(args, unsigned long int),
+									 "0123456789ABCDEF", 16, &size);
+	else
+		ft_putnbr_base_unsigned(va_arg(args, unsigned int), "0123456789ABCDEF",
+								16, &size);
+	return (size);
 }
 
 int flag_u(va_list args, t_flags flags)
 {
 	char				*nbr;
 
-	if (flags.length_type == LENGHT_L)
+	if (flags.length_type == LENGTH_L)
 		return (flag_U(args, flags));
-	ft_putnbr_fd(va_arg(args, unsigned int), STDOUT);
+	ft_putnbr_fd_unsigned(va_arg(args, unsigned int), STDOUT);
 	return (0);
 }
