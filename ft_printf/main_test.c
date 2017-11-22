@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 10:57:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 11:27:34 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@ int main(int argc, char *argv[])
 	ft_printf("ft_printf: %u\n", 10);
 	printf("printf: %u\n", -10);
 	ft_printf("ft_printf: %u\n", -10);
+	printf("------- %%-s -----\n");
+	printf("printf: %s %-8s %s\n", "coucou", "ca", "va");
+	ft_printf("ft_printf: %s %-8s %s\n", "coucou", "ca", "va");
 	return (0);
 }
