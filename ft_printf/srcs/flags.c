@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 13:50:02 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 13:54:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void ft_handle_precision(char **str, t_flags *flags)
 		*str += 1;
 		precision = ft_atoi(*str);
 		flags->precision = precision;
+		if (precision == 0)
+			*str += 1;
 		while (precision > 0 && (*str = *str + 1))
 			precision /= 10;
 	}
