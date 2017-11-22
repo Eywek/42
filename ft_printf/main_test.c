@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 11:46:35 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 11:47:12 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	printf("------- %%#lx -----\n");
 	printf("printf: %#lx\n", &s);
 	ft_printf("ft_printf: %#lx\n", &s);
-	printf("------- %%#x -----\n");
+	printf("------- %%p -----\n");
 	printf("printf: %p\n", &s);
 	ft_printf("ft_printf: %p\n", &s);
 	return (0);

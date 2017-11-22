@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 11:16:52 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/22 13:49:01 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ void	ft_handle_flags(char **str, t_flags *flags);
 void 	ft_handle_width(char **str, t_flags *flags);
 void 	ft_handle_precision(char **str, t_flags *flags);
 void 	ft_handle_length(char **str, t_flags *flags);
+
+void	ft_putnbr_base_unsigned(unsigned int nbr, char *str,
+								unsigned int str_length, int *size);
+void	ft_putnbr_base_unsigned_long(unsigned long int nbr, char *str,
+									 unsigned long int str_length, int *size);
+void	ft_putnbr_fd_unsigned(unsigned int nbr, int fd);
 
 int		ft_printf(const char * restrict format, ...);
 

@@ -19,7 +19,7 @@ int	flag_s(va_list args, t_flags flags)
 	int		width;
 	size_t 	size;
 
-	if (flags.length_type == LENGHT_L)
+	if (flags.length_type == LENGTH_L)
 		return (flag_S(args, flags));
 	s = va_arg(args, char*);
 	size = ft_strlen(s);
