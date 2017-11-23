@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 13:54:55 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:17:19 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,39 @@ void	ft_init_flags(t_flags *flags)
  ** Handle flags
  ** Fill t_flags structure and increment the string
 **/
-void	ft_handle_flags(char **str, t_flags *flags)
+int		ft_handle_flags(char **str, t_flags *flags)
 {
 	if (*(*str) == '-')
 	{
 		flags->minus = 1;
 		(*str)++;
+		return (1);
 	}
 	if (*(*str) == '+')
 	{
 		flags->plus = 1;
 		(*str)++;
+		return (1);
 	}
 	if (*(*str) == ' ')
 	{
 		flags->space = 1;
 		(*str)++;
+		return (1);
 	}
 	if (*(*str) == '0')
 	{
 		flags->zero = 1;
 		(*str)++;
+		return (1);
 	}
 	if (*(*str) == '#')
 	{
 		flags->hash_key = 1;
 		(*str)++;
+		return (1);
 	}
+	return (0);
 }
 
 /*

@@ -6,11 +6,12 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 11:36:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/23 16:57:49 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <wchar.h>
 #include "../../includes/core.h"
 
 int	flag_s(va_list args, t_flags flags)
@@ -40,20 +41,10 @@ int	flag_s(va_list args, t_flags flags)
 
 int	flag_S(va_list args, t_flags flags) // TODO
 {
-	char	*s;
-	int		width;
-	size_t 	size;
+	wint_t	*s;
 
+	s = va_arg(args, wint_t*);
+	(void)s;
 	(void)flags;
-	s = va_arg(args, char*);
-	size = ft_strlen(s);
-	size = size - (size - flags.precision);
-	if (flags.width)
-	{
-		width = 0;
-		while (width++ < flags.width - (int)size)
-			write(STDOUT, " ", 1);
-	}
-	write(STDOUT, s, size);
-	return ((int)size + (flags.width - (int)size > 0 ? flags.width - (int)size : 0));
+	return (0);
 }

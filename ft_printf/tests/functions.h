@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write.c                                            :+:      :+:    :+:   */
+/*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/22 14:01:07 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 14:05:56 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/23 18:37:29 by valentin          #+#    #+#             */
+/*   Updated: 2017/11/23 18:37:39 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/core.h"
+#ifndef FT_PRINTF_FUNCTIONS_H
+#define FT_PRINTF_FUNCTIONS_H
 
+void launch_tests(void);
 
-void	ft_putnbr_fd_unsigned(unsigned int nbr, int fd, int *size)
-{
-	*size += 1;
-	if (nbr >= 10)
-		ft_putnbr_fd_unsigned(nbr / 10, fd, size);
-	ft_putchar_fd((char)(nbr % 10 + 48), fd);
-}
+#endif //FT_PRINTF_FUNCTIONS_H

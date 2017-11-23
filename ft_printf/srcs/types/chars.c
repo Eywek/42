@@ -6,11 +6,12 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 14:32:13 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/23 17:22:34 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <wchar.h>
 #include "../../includes/core.h"
 
 int	flag_c(va_list args, t_flags flags)
@@ -31,15 +32,15 @@ int	flag_c(va_list args, t_flags flags)
 	}
 	if (!flags.width || !flags.minus)
 		write(STDOUT, &c, 1);
-	return (1 + width);
+	return ((flags.width) ? width : 1);
 }
 
 int	flag_C(va_list args, t_flags flags) // TODO
 {
-	int c;
+	wchar_t c;
 
 	(void)flags;
-	c = va_arg(args, int);
+	c = va_arg(args, wchar_t);
 	write(STDOUT, &c, 1);
 	return (1);
 }
