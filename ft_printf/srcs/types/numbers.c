@@ -6,13 +6,15 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 20:29:38 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:52:24 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdint.h>
 #include "../../includes/core.h"
+
+// TODO: Precision
 
 int	flag_d(va_list args, t_flags flags)
 {
@@ -33,10 +35,8 @@ int	flag_d(va_list args, t_flags flags)
 	else if (flags.space && nb >= 0)
 		ft_putchar_fd(' ', STDOUT);
 	ft_putnbr_base_intmax_t(nb, "01234566789", 10);
-	return (size + (flags.width - size > 0 ? flags.width - size : 0));
+	return (flags.width ? flags.width : size);
 }
-
-// TODO: Precision / Types
 
 int flag_o(va_list args, t_flags flags)
 {

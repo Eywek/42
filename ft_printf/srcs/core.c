@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 20:16:09 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:17:51 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	ft_handle(char **str, va_list args) // Todo: Handle dynamic value for precis
 	int 		bytes;
 
 	ft_init_flags(&flags);
+	ft_handle_length(str, &flags);
 	while (ft_handle_flags(str, &flags));
 	ft_handle_width(str, &flags);
 	ft_handle_precision(str, &flags);
