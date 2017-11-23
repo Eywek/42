@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 20:52:24 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/23 21:17:02 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	flag_d(va_list args, t_flags flags)
 	intmax_t		nb;
 	int 			width;
 
-	if (flags.length_type == LENGTH_L)
-		return (flag_D(args, flags));
 	nb = ft_get_nb(args, flags);
 	size = 0;
 	ft_get_number_size(nb, 10, &size);
@@ -40,8 +38,6 @@ int	flag_d(va_list args, t_flags flags)
 
 int flag_o(va_list args, t_flags flags)
 {
-	if (flags.length_type == LENGTH_L)
-		return (flag_O(args, flags));
 	return (ft_pad_nb(args, flags, "01234567", NULL));
 }
 
@@ -57,7 +53,5 @@ int flag_X(va_list args, t_flags flags)
 
 int flag_u(va_list args, t_flags flags)
 {
-	if (flags.length_type == LENGTH_L)
-		return (flag_U(args, flags));
 	return (ft_pad_nb(args, flags, "0123456789", NULL));
 }
