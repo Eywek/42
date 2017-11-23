@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 16:57:49 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/23 21:00:18 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <wchar.h>
 #include "../../includes/core.h"
 
-int	flag_s(va_list args, t_flags flags)
+int	flag_s(va_list args, t_flags flags) // TODO: precision / unicode
 {
 	char	*s;
 	int		width;
@@ -32,7 +32,7 @@ int	flag_s(va_list args, t_flags flags)
 			write(STDOUT, s, size);
 		width = 0;
 		while (width++ < flags.width - (int)size)
-			write(STDOUT, " ", 1);
+			write(STDOUT, (flags.zero && !flags.minus) ? "0" : " ", 1);
 	}
 	if (!flags.width || !flags.minus)
 		write(STDOUT, s, size);

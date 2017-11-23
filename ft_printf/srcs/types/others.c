@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 19:41:35 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/23 19:41:37 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	flag_percentage(va_list args, t_flags flags)
 			write(STDOUT, "%", 1);
 		width = 0;
 		while (width++ < flags.width - 1)
-			write(STDOUT, (flags.zero) ? "0" : " ", 1);
+			write(STDOUT, (flags.zero && !flags.minus) ? "0" : " ", 1);
 	}
 	if (!flags.width || !flags.minus)
 		write(STDOUT, "%", 1);
