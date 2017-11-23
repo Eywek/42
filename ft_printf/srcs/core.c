@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 11:31:13 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:16:09 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 	i = 0;
 	while (i < ARGS_COUNT)
 	{
-		if (**str == g_types[i].name)
+		if (**str == ' ')
+			(*str)++;
+		else if (**str == g_types[i].name)
 		{
-			*str += 1;
+			(*str)++;
 			return (g_types[i].f(args, flags));
 		}
 		++i;
@@ -59,7 +61,7 @@ int	ft_handle(char **str, va_list args) // Todo: Handle dynamic value for precis
 	int 		bytes;
 
 	ft_init_flags(&flags);
-	ft_handle_flags(str, &flags);
+	while (ft_handle_flags(str, &flags));
 	ft_handle_width(str, &flags);
 	ft_handle_precision(str, &flags);
 	ft_handle_length(str, &flags);

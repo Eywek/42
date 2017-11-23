@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/22 14:01:31 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/23 18:26:56 by valentin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME=libftprintf.a
 SRCS_PATH=./srcs/
 SRCS_FILES=core.c flags.c types/chars.c types/numbers.c types/others.c \
 			types/pointers.c types/strings.c types/numbers_l.c utils/bases.c \
-			utils/write.c
+			utils/numbers.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 LIB_SRCS_PATH=./libs/libft/
@@ -70,7 +70,7 @@ clean:
 	@rm -rf $(OBJECTS_PATH) > /dev/null
 
 fclean: clean
-	@rm $(NAME) > /dev/null
+	@rm -fv $(NAME) > /dev/null
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/22 17:53:12 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:18:49 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,14 @@
 int	flag_d(va_list args, t_flags flags)
 {
 	int				size;
-	int 			nb;
-	unsigned int	tmp;
+	intmax_t		nb;
 	int 			width;
 
 	if (flags.length_type == LENGTH_L)
 		return (flag_D(args, flags));
-	nb = va_arg(args, int);
+	nb = ft_get_nb(args, flags);
 	size = 0;
-	tmp = (unsigned int)((nb >= 0) ? nb : -nb);
-	while (tmp > 0 && ++size)
-		tmp /= 10;
-	if (nb < 0)
-		++size;
+	ft_get_number_size(nb, 10, &size);
 	if (flags.width > 0 && (width = 0) == 0)
 		while (width++ < flags.width - size)
 			write(STDOUT, (flags.zero) ? "0" : " ", 1);
@@ -37,109 +32,59 @@ int	flag_d(va_list args, t_flags flags)
 		ft_putchar_fd('+', STDOUT);
 	else if (flags.space && nb >= 0)
 		ft_putchar_fd(' ', STDOUT);
-	ft_putnbr_fd(nb, STDOUT);
+	ft_putnbr_base_intmax_t(nb, "01234566789", 10);
 	return (size + (flags.width - size > 0 ? flags.width - size : 0));
 }
 
 // TODO: Precision / Width / Flags
 
-int flag_o(va_list args, t_flags flags)
+int	ft_pad_nb(va_list args, t_flags flags, char *base, char *hash_key_content)
 {
 	int size;
+	int width;
 
 	size = 0;
+	intmax_t nb = ft_get_nb(args, flags);
+	ft_get_number_size(nb, ft_strlen(base), &size);
+	if (nb == 0)
+		flags.hash_key = 0;
+	if (flags.hash_key && (size += 2) && (!flags.width || flags.minus || flags.zero))
+		write(STDOUT, hash_key_content, 2);
+	if (flags.width > 0 && (width = 0) == 0)
+	{
+		if (flags.minus)
+			ft_putnbr_base_intmax_t(nb, base, ft_strlen(base));
+		while (width++ < flags.width - size)
+			write(STDOUT, (flags.zero && !flags.minus) ? "0" : " ", 1);
+	}
+	if (flags.hash_key && flags.width && !flags.minus && !flags.zero)
+		write(STDOUT, hash_key_content, 2);
+	if (!flags.width || !flags.minus)
+		ft_putnbr_base_intmax_t(nb, base, ft_strlen(base));
+	return (flags.width - size > 0 ? flags.width : size);
+}
+
+
+int flag_o(va_list args, t_flags flags)
+{
 	if (flags.length_type == LENGTH_L)
 		return (flag_O(args, flags));
-	else if (flags.length_type == LENGTH_LL)
-		ft_putnbr_base_unsigned_long_long(va_arg(args, unsigned long long int),
-										  "01234567", 8, &size);
-	else if (flags.length_type == LENGTH_H)
-		ft_putnbr_base_short_int(va_arg(args, short int),
-								 "01234567", 8, &size);
-	else if (flags.length_type == LENGTH_HH)
-		ft_putnbr_base_unsigned_char(va_arg(args, unsigned char),
-									 "01234567", 8, &size);
-	else if (flags.length_type == LENGTH_J)
-		ft_putnbr_base_uintmax_t(va_arg(args, uintmax_t),
-								 "01234567", 8, &size);
-	else if (flags.length_type == LENGTH_Z)
-		ft_putnbr_base_size_t(va_arg(args, size_t),
-							  "01234567", 8, &size);
-	else
-		ft_putnbr_base_unsigned(va_arg(args, unsigned int), "01234567",
-								8, &size);
-	return (size);
+	return (ft_pad_nb(args, flags, "01234567", NULL));
 }
 
 int flag_x(va_list args, t_flags flags)
 {
-	int size;
-
-	size = 0;
-	if (flags.hash_key)
-		write(STDOUT, "0x", (size_t)(size = 2));
-	if (flags.length_type == LENGTH_L)
-		ft_putnbr_base_unsigned_long(va_arg(args, unsigned long int),
-									 "0123456789abcdef", 16, &size);
-	else if (flags.length_type == LENGTH_LL)
-		ft_putnbr_base_unsigned_long_long(va_arg(args, unsigned long long int),
-									 "0123456789abcdef", 16, &size);
-	else if (flags.length_type == LENGTH_H)
-		ft_putnbr_base_short_int(va_arg(args, short int),
-										  "0123456789abcdef", 16, &size);
-	else if (flags.length_type == LENGTH_HH)
-		ft_putnbr_base_unsigned_char(va_arg(args, unsigned char),
-										  "0123456789abcdef", 16, &size);
-	else if (flags.length_type == LENGTH_J)
-		ft_putnbr_base_uintmax_t(va_arg(args, uintmax_t),
-										  "0123456789abcdef", 16, &size);
-	else if (flags.length_type == LENGTH_Z)
-		ft_putnbr_base_size_t(va_arg(args, size_t),
-								 "0123456789abcdef", 16, &size);
-	else
-		ft_putnbr_base_unsigned(va_arg(args, unsigned int), "0123456789abcdef",
-								16, &size);
-	return (size);
+	return (ft_pad_nb(args, flags, "0123456789abcdef", "0x"));
 }
 
 int flag_X(va_list args, t_flags flags)
 {
-	int size;
-
-	size = 0;
-	if (flags.hash_key)
-		write(STDOUT, "0X", (size_t)(size = 2));
-	if (flags.length_type == LENGTH_L)
-		ft_putnbr_base_unsigned_long(va_arg(args, unsigned long int),
-									 "0123456789ABCDEF", 16, &size);
-	else if (flags.length_type == LENGTH_LL)
-		ft_putnbr_base_unsigned_long_long(va_arg(args, unsigned long long int),
-										  "0123456789ABCDEF", 16, &size);
-	else if (flags.length_type == LENGTH_H)
-		ft_putnbr_base_short_int(va_arg(args, short int),
-								 "0123456789ABCDEF", 16, &size);
-	else if (flags.length_type == LENGTH_HH)
-		ft_putnbr_base_unsigned_char(va_arg(args, unsigned char),
-									 "0123456789ABCDEF", 16, &size);
-	else if (flags.length_type == LENGTH_J)
-		ft_putnbr_base_uintmax_t(va_arg(args, uintmax_t),
-								 "0123456789ABCDEF", 16, &size);
-	else if (flags.length_type == LENGTH_Z)
-		ft_putnbr_base_size_t(va_arg(args, size_t),
-							  "0123456789ABCDEF", 16, &size);
-	else
-		ft_putnbr_base_unsigned(va_arg(args, unsigned int), "0123456789ABCDEF",
-								16, &size);
-	return (size);
+	return (ft_pad_nb(args, flags, "0123456789ABCDEF", "0X"));
 }
 
 int flag_u(va_list args, t_flags flags)
 {
-	int size;
-
 	if (flags.length_type == LENGTH_L)
 		return (flag_U(args, flags));
-	size = 0;
-	ft_putnbr_fd_unsigned(va_arg(args, unsigned int), STDOUT, &size);
-	return (size);
+	return (ft_pad_nb(args, flags, "0123456789", NULL));
 }
