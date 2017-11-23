@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 20:17:51 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/23 21:37:25 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	ft_printf(const char *restrict format, ...) // TODO: unicode
 		{
 			write(STDOUT, str, 1);
 			bytes += 1;
-			str++;
+			str += 1;
 		}
 	}
 	va_end(args);
