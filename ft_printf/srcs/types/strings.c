@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 21:00:18 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/23 21:06:10 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	flag_s(va_list args, t_flags flags) // TODO: precision / unicode
 	if (flags.length_type == LENGTH_L)
 		return (flag_S(args, flags));
 	s = va_arg(args, char*);
+	if (!s)
+		return ((int)write(STDOUT, "(null)", 6));
 	size = ft_strlen(s);
 	if (flags.precision)
 		size = size - (size - flags.precision);
