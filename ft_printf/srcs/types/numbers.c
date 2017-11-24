@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/24 17:34:32 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/24 18:19:58 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	flag_d(va_list args, t_flags flags)
 	ft_get_number_size((nb < 0 ? -nb : nb), 10, &size);
 	if (nb < 0)
 		size += 1;
+	if (flags.precision == -1)
+		size = 0;
 	if (flags.width && flags.zero)
 		ft_display_sign(nb, &size, flags);
 	if (flags.width > 0 && (width = 0) == 0 && !flags.minus)
@@ -34,7 +36,8 @@ int	flag_d(va_list args, t_flags flags)
 			write(STDOUT, (flags.zero) ? "0" : " ", 1);
 	if (!flags.width || !flags.zero)
 		ft_display_sign(nb, &size, flags);
-	ft_putnbr_base_intmax_t((nb < 0 ? -nb : nb), "01234566789", 10);
+	if (flags.precision != -1)
+		ft_putnbr_base_intmax_t((nb < 0 ? -nb : nb), "0123456789", 10);
 	if (flags.width > 0 && (width = 0) == 0 && flags.minus)
 		while (width++ < flags.width - size)
 			write(STDOUT, " ", 1);

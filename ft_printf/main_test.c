@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	char *s = "Coucou";
 	printf("Result = %d chars\n", ft_printf("Coucoy %5.2s %-2% ca va ?\nTu as %03d ans\nLol %d c\nPointer: %p\n", "Valentin", 18, 5, &s));
 
-	printf("------ %%o ------\n");
+	/*printf("------ %%o ------\n");
 	printf("\nsize= %d\n", printf("printf: %o\n", 10));
 	printf("\nsize= %d\n", ft_printf("ft_printf: %o\n", 10));
 	printf("\nsize= %d\n", printf("printf: %o\n", -10));
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 	printf("\nsize= %d", printf("printf: %zx\n", (size_t)30482));
 	printf("\nsize= %d", ft_printf("ft_printf: %zx\n", (size_t)30482));
 	printf("\nsize= %d", printf("printf: %zx\n", (size_t)-30482));
-	printf("\nsize= %d", ft_printf("ft_printf: %zx\n", (size_t)-30482));
+	printf("\nsize= %d", ft_printf("ft_printf: %zx\n", (size_t)-30482));*/
 
 	return (0);
 }
