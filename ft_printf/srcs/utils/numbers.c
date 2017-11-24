@@ -6,7 +6,7 @@
 /*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:20:18 by valentin          #+#    #+#             */
-/*   Updated: 2017/11/24 17:04:07 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/24 17:37:17 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ intmax_t	ft_get_nb(va_list args, t_flags flags)
 	else if (flags.length_type == LENGTH_LL)
 		nbr = (long long int)nbr;
 	else if (flags.length_type == LENGTH_J)
-		nbr = (uintmax_t)nbr;
+		nbr = (intmax_t)nbr;
 	else if (flags.length_type == LENGTH_Z)
 		nbr = (size_t)nbr;
 	else
@@ -98,15 +98,29 @@ int			ft_pad_nb(va_list args, t_flags flags, char *base,
 	ft_get_number_size_u(nb, ft_strlen(base), &size);
 	if (nb == 0)
 		flags.hash_key = 0;
-	if (flags.hash_key && (size += 2) && (!flags.width || flags.minus ||
-			flags.zero))
-		write(STDOUT, hash_key_content, 2);
+	if (flags.hash_key && (size += ft_strlen(hash_key_content)) &&
+			(!flags.width || flags.minus || flags.zero))
+		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
 	if (flags.precision == -1)
 		size = 0;
 	ft_display_padding(&flags, nb, size, base);
 	if (flags.hash_key && flags.width && !flags.minus && !flags.zero)
-		write(STDOUT, hash_key_content, 2);
+		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
 	if ((!flags.width || !flags.minus) && flags.precision != -1)
 		ft_putnbr_base_intmax_t_u(nb, base, ft_strlen(base));
 	return (flags.width - size > 0 ? flags.width : size);
+}
+
+/*
+ ** Display -, + or space for %d
+*/
+
+void ft_display_sign(intmax_t nb, int *size, t_flags flags)
+{
+	if (nb < 0)
+		ft_putchar_fd('-', STDOUT);
+	if (flags.plus && nb >= 0 && (*size += 1))
+		ft_putchar_fd('+', STDOUT);
+	else if (flags.space && nb >= 0 && (*size += 1))
+		ft_putchar_fd(' ', STDOUT);
 }
