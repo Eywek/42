@@ -46,6 +46,7 @@ void		ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str,
 void		ft_get_number_size_u(uintmax_t nbr, uintmax_t str_length, int *size);
 int			ft_pad_nb(va_list args, t_flags flags, char *base,
 						 char *hash_key_content);
+void		ft_display_sign(intmax_t nb, int *size, t_flags flags);
 
 int			ft_printf(const char * restrict format, ...);
 

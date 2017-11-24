@@ -26,7 +26,7 @@ int	flag_s(va_list args, t_flags flags) // TODO: precision / unicode
 	if (!s)
 		return ((int)write(STDOUT, "(null)", 6));
 	size = ft_strlen(s);
-	if (flags.precision)
+	if (flags.precision && size > 0)
 		size = size - (size - flags.precision);
 	if (flags.width)
 	{

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 21:38:41 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/24 17:54:42 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,24 @@ t_types	g_types[ARGS_COUNT] = {
 
 int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 {
+	char *ptr;
 	int i;
+	int size;
 
 	i = 0;
-	while (i < ARGS_COUNT)
+	size = 1;
+	ptr = *str;
+	while (*ptr)
 	{
-		if (**str == ' ')
-			(*str)++;
-		else if (**str == g_types[i].name)
+		if (i > ARGS_COUNT)
 		{
-			(*str)++;
+			++size;
+			ptr++;
+			i = 0;
+		}
+		if (*ptr == g_types[i].name)
+		{
+			*str += size;
 			return (g_types[i].f(args, flags));
 		}
 		++i;
@@ -65,6 +73,7 @@ int	ft_handle(char **str, va_list args) // Todo: Handle dynamic value for precis
 	while (ft_handle_flags(str, &flags));
 	ft_handle_width(str, &flags);
 	ft_handle_precision(str, &flags);
+	while (ft_handle_flags(str, &flags));
 	ft_handle_length(str, &flags);
 	if ((bytes = ft_call_function_from_name(str, args, flags)) > 0)
 		return (bytes);
