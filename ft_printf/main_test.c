@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 20:11:20 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 16:49:01 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,32 @@ int main(int argc, char *argv[])
 	//launch_tests();
 	//return (0);
 
-	char *s = "Coucou";
-	printf("Result = %d chars\n", ft_printf("Coucoy %5.2s %-2% ca va ?\nTu as %03d ans\nLol %d c\nPointer: %p\n", "Valentin", 18, 5, &s));
+	//char *s = "Coucou";
+	//printf("Result = %d chars\n", ft_printf("Coucoy %5.2s %-2% ca va ?\nTu as %03d ans\nLol %d c\nPointer: %p\n", "Valentin", 18, 5, &s));
+
+	/*printf("\nsize= %d\n", printf("printf: %x\n", 10));
+	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %x\n", 10) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %.3x\n", 10));
+	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %.3x\n", 10) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %3x\n", 10));
+	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %3x\n", 10) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %4.3x\n", 10));
+	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %4.3x\n", 10) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %-4.3x\n", 10));
+	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %-4.3x\n", 10) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %4.2x\n", 10));
+	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %4.2x\n", 10) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %4.0x\n", 10));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %4.0x\n", 10) - 3);*/
+
+	printf("\nsize= %d\n", printf("printf: %lld\n", (long long)-9223372036854775808));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %lld\n", (long long)-9223372036854775808) - 3);
 
 	/*printf("------ %%o ------\n");
 	printf("\nsize= %d\n", printf("printf: %o\n", 10));
