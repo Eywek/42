@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/24 17:54:42 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:22:58 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 	{
 		if (i > ARGS_COUNT)
 		{
+			if (ft_isalpha(*ptr) && *ptr != 'h' && *ptr != 'l' && *ptr != 'j' && *ptr != 'z')
+				break;
 			++size;
 			ptr++;
 			i = 0;
@@ -55,6 +57,7 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 		}
 		++i;
 	}
+	*str = ptr;
 	return (0);
 }
 

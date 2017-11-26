@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 16:49:01 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:26:52 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ int main(int argc, char *argv[])
 	printf("\nsize= %d\n", printf("printf: %4.0x\n", 10));
 	printf("\nsize= %d\n", ft_printf("ft_printf: %4.0x\n", 10) - 3);*/
 
-	printf("\nsize= %d\n", printf("printf: %lld\n", (long long)-9223372036854775808));
-	printf("\nsize= %d\n", ft_printf("ft_printf: %lld\n", (long long)-9223372036854775808) - 3);
+	printf("\nsize= %d\n", printf("printf: %hhld\n", (unsigned long)128));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %hhld\n", (unsigned long)128) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %lhhd\n", (unsigned long)128));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %lhhd\n", (unsigned long)128) - 3);
 
 	/*printf("------ %%o ------\n");
 	printf("\nsize= %d\n", printf("printf: %o\n", 10));

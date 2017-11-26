@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/24 17:01:21 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:39:47 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,32 +113,32 @@ void ft_handle_precision(char **str, t_flags *flags)
 */
 void ft_handle_length(char **str, t_flags *flags)
 {
-	if (**str == 'h' && *(*str + 1) == 'h')
+	if (**str == 'h' && *(*str + 1) == 'h' && flags->length_type < LENGTH_HH)
 	{
 		*str += 2;
 		flags->length_type = LENGTH_HH;
 	}
-	else if (**str == 'h')
+	else if (**str == 'h' && flags->length_type < LENGTH_H)
 	{
 		*str += 1;
 		flags->length_type = LENGTH_H;
 	}
-	else if (**str == 'l' && *(*str + 1) == 'l')
+	else if (**str == 'l' && *(*str + 1) == 'l' && flags->length_type < LENGTH_LL)
 	{
 		*str += 2;
 		flags->length_type = LENGTH_LL;
 	}
-	else if (**str == 'l')
+	else if (**str == 'l' && flags->length_type < LENGTH_L)
 	{
 		*str += 1;
 		flags->length_type = LENGTH_L;
 	}
-	else if (**str == 'j')
+	else if (**str == 'j' && flags->length_type < LENGTH_J)
 	{
 		*str += 1;
 		flags->length_type = LENGTH_J;
 	}
-	else if (**str == 'z')
+	else if (**str == 'z' && flags->length_type < LENGTH_Z)
 	{
 		*str += 1;
 		flags->length_type = LENGTH_Z;
