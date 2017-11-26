@@ -6,12 +6,13 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 18:34:39 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 19:05:00 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include "includes/core.h"
 #include "tests/functions.h"
 
@@ -53,8 +54,54 @@ int main(int argc, char *argv[])
 	printf("\nsize= %d\n", printf("printf: %#.0x, %#.x\n", 0, 0));
 	printf("\nsize= %d\n", ft_printf("ft_printf: %#.0x, %#.x\n", 0, 0) - 3);*/
 
-	printf("\nsize= %d\n", printf("printf: {%-15Z}\n", 123));
-	printf("\nsize= %d\n", ft_printf("ft_printf: {%-15Z}\n", 123) - 3);
+	//printf("\nsize= %d\n", printf("printf: {%-15Z}\n", 123));
+	//printf("\nsize= %d\n", ft_printf("ft_printf: {%-15Z}\n", 123) - 3);
+
+	int tab[10];
+	tab[0] = 1;
+	tab[1] = 2;
+	tab[2] = 3;
+	tab[3] = 4;
+	tab[4] = 5;
+	tab[5] = 6;
+	tab[6] = 7;
+	tab[7] = 8;
+	tab[8] = 10;
+	tab[9] = 0;
+	printf("\nsize= %d\n", ft_printf("%a\n", tab));
+
+	tab[0] = 'a';
+	tab[1] = 'b';
+	tab[2] = 'c';
+	tab[3] = 'd';
+	tab[4] = 'e';
+	tab[5] = 'f';
+	tab[6] = 'g';
+	tab[7] = 'h';
+	tab[8] = 'i';
+	tab[9] = 0;
+	printf("\nsize= %d\n", ft_printf("%a\n", tab));
+
+	char **array;
+	array = malloc(sizeof(char*) * 4);
+	array[0] = malloc(sizeof(char) * 4);
+	array[0][0] = 'L';
+	array[0][1] = 'o';
+	array[0][2] = 'L';
+	array[0][3] = '\0';
+	array[1] = malloc(sizeof(char) * 4);
+	array[1][0] = 'X';
+	array[1][1] = 'd';
+	array[1][2] = 'X';
+	array[1][3] = '\0';
+	array[2] = malloc(sizeof(char) * 4);
+	array[2][0] = 'y';
+	array[2][1] = 'p';
+	array[2][2] = 'y';
+	array[2][3] = '\0';
+	array[3] = malloc(1);
+	array[3] = 0;
+	printf("\nsize= %d\n", ft_printf("%A\n", array));
 
 
 	/*printf("------ %%o ------\n");

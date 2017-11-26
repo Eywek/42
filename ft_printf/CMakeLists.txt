@@ -20,6 +20,7 @@ set(SOURCE_FILES
         libs/libft/ft_isupper.c
         libs/libft/ft_itoa_base.c
         libs/libft/ft_strchr.c
-        includes/core.h includes/prototypes.h srcs/types/chars.c srcs/types/strings.c srcs/types/numbers.c srcs/types/others.c srcs/flags.c srcs/types/pointers.c srcs/types/numbers_l.c srcs/utils/bases.c srcs/utils/numbers.c tests/assert_x.c tests/functions.h)
+        libs/libft/ft_isprint.c
+        includes/core.h includes/prototypes.h srcs/types/chars.c srcs/types/strings.c srcs/types/numbers.c srcs/types/others.c srcs/flags.c srcs/types/pointers.c srcs/types/numbers_l.c srcs/utils/bases.c srcs/utils/numbers.c tests/assert_x.c tests/functions.h srcs/types/arrays.c)
 
 add_executable(ft_printf ${SOURCE_FILES})

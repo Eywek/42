@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 18:29:02 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 18:47:57 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_types	g_types[ARGS_COUNT] = {
 		{'c', flag_c}, {'C', flag_C}, {'s', flag_s}, {'S', flag_s},
 		{'d', flag_d}, {'i', flag_d}, {'%', flag_percentage}, {'p', flag_p},
 		{'o', flag_o}, {'x', flag_x}, {'X', flag_X}, {'u', flag_u},
-		{'D', flag_D}, {'O', flag_O}, {'U', flag_U}
+		{'D', flag_D}, {'O', flag_O}, {'U', flag_U}, {'a', flag_a},
+		{'A', flag_A}
 };
 
 /*
