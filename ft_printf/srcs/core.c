@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 17:22:58 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:52:57 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	ft_printf(const char *restrict format, ...) // TODO: unicode
 	char	*str;
 	int		bytes;
 	va_list args;
+	size_t 	next;
 
 	bytes = 0;
 	va_start(args, format);
@@ -114,9 +115,13 @@ int	ft_printf(const char *restrict format, ...) // TODO: unicode
 		}
 		else
 		{
-			write(STDOUT, str, 1);
-			bytes += 1;
-			str += 1;
+			if (ft_strchr(str, '%'))
+				next = ft_strchr(str, '%') - str;
+			else
+				next = ft_strlen(str);
+			write(STDOUT, str, next);
+			bytes += next;
+			str += next;
 		}
 	}
 	va_end(args);
