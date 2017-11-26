@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 17:52:57 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 18:29:02 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 */
 
 t_types	g_types[ARGS_COUNT] = {
-		{'c', flag_c}, {'C', flag_C}, {'s', flag_s}, {'S', flag_S},
+		{'c', flag_c}, {'C', flag_C}, {'s', flag_s}, {'S', flag_s},
 		{'d', flag_d}, {'i', flag_d}, {'%', flag_percentage}, {'p', flag_p},
 		{'o', flag_o}, {'x', flag_x}, {'X', flag_X}, {'u', flag_u},
 		{'D', flag_D}, {'O', flag_O}, {'U', flag_U}
@@ -44,7 +44,7 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 	{
 		if (i > ARGS_COUNT)
 		{
-			if (ft_isalpha(*ptr) && *ptr != 'h' && *ptr != 'l' && *ptr != 'j' && *ptr != 'z')
+			if ((ft_isalpha(*ptr) && *ptr != 'h' && *ptr != 'l' && *ptr != 'j' && *ptr != 'z') || (*ptr == '}' || *ptr == '{'))
 				break;
 			++size;
 			ptr++;
@@ -74,8 +74,8 @@ int	ft_handle(char **str, va_list args) // Todo: Handle dynamic value for precis
 	ft_init_flags(&flags);
 	ft_handle_length(str, &flags);
 	while (ft_handle_flags(str, &flags));
-	ft_handle_width(str, &flags);
-	ft_handle_precision(str, &flags);
+	ft_handle_width(str, &flags, args);
+	ft_handle_precision(str, &flags, args);
 	while (ft_handle_flags(str, &flags));
 	ft_handle_length(str, &flags);
 	if ((bytes = ft_call_function_from_name(str, args, flags)) > 0)

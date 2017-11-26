@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 17:39:47 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 18:24:08 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,22 @@ int		ft_handle_flags(char **str, t_flags *flags)
  ** Handle width
  ** (eg. %3d ->   1 || %03d -> 001)
 */
-void ft_handle_width(char **str, t_flags *flags)
+void ft_handle_width(char **str, t_flags *flags, va_list args)
 {
 	int width;
 
-	if ((width = ft_atoi(*str)) > 0)
+	if ((width = ft_atoi(*str)) > 0 || **str == '*')
 	{
-		flags->width = width;
+		if (**str == '*')
+		{
+			width = va_arg(args, int);
+			if (width < 0)
+				flags->minus = 1;
+			flags->width = (width < 0 ? width * -1 : width);
+			width = 1;
+		}
+		else
+			flags->width = width;
 		while (width > 0 && (*str = *str + 1))
 			width /= 10;
 	}
@@ -87,21 +96,26 @@ void ft_handle_width(char **str, t_flags *flags)
  ** Handle precision
  ** [.precision]
 */
-void ft_handle_precision(char **str, t_flags *flags)
+void ft_handle_precision(char **str, t_flags *flags, va_list args)
 {
 	int precision;
 
 	if (**str == '.')
 	{
 		*str += 1;
-		if (!ft_isdigit(**str))
+		if (!ft_isdigit(**str) && **str != '*')
 		{
 			flags->precision = -1;
 			return;
 		}
-		precision = ft_atoi(*str);
+		if (**str == '*')
+			precision = va_arg(args, int);
+		else
+			precision = ft_atoi(*str);
 		flags->precision = (precision == 0 ? -1 : precision);
-		if (precision == 0)
+		if (**str == '*')
+			precision = 1;
+		else if (precision == 0)
 			*str += 1;
 		while (precision > 0 && (*str = *str + 1))
 			precision /= 10;
