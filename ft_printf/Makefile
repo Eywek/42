@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/23 21:30:01 by valentin         ###   ########.fr        #
+#    Updated: 2017/11/26 19:13:49 by valentin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,14 @@ NAME=libftprintf.a
 SRCS_PATH=./srcs/
 SRCS_FILES=core.c flags.c types/chars.c types/numbers.c types/others.c \
 			types/pointers.c types/strings.c types/numbers_l.c utils/bases.c \
-			utils/numbers.c
+			utils/numbers.c types/arrays.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 LIB_SRCS_PATH=./libs/libft/
 LIB_SRCS_FILES=ft_strcmp.c ft_strlen.c ft_strnstr.c ft_putnbr_fd.c \
 				ft_putchar_fd.c ft_atoi.c ft_isalnum.c ft_isdigit.c \
 				ft_isalpha.c ft_islower.c ft_isupper.c ft_itoa_base.c \
-				ft_strchr.c
+				ft_strchr.c ft_isprint.c
 
 LIB_SRCS=$(addprefix $(LIB_SRCS_PATH), $(LIB_SRCS_FILES))
 
@@ -34,7 +34,7 @@ OBJECTS_PATH=./objs/
 OBJECTS_FILES=$(SRCS_FILES:.c=.o)
 OBJECTS=$(addprefix $(OBJECTS_PATH), $(OBJECTS_FILES))
 
-COMPILE=gcc #-Wall -Wextra -Werror
+COMPILE=gcc -Wall -Wextra -Werror
 
 INCLUDES=-I./includes -I./libs/libft
 HEADERS_PATH=./includes/

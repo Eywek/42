@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 18:32:14 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 18:34:14 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	flag_s(va_list args, t_flags flags) // TODO: precision / unicode
 	size = ft_strlen(s);
 	if (flags.precision == -1)
 		size = 0;
-	if (flags.precision > 0 && flags.precision < size && size > 0)
+	if (flags.precision > 0 && flags.precision < (int)size && size > 0)
 		size = size - (size - flags.precision);
 	if (flags.width)
 	{
