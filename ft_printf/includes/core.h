@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 16:45:26 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:38:43 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 # define LENGTH_HH 1
 # define LENGTH_H 2
-# define LENGTH_LL 3
-# define LENGTH_L 4
-# define LENGTH_J 5
-# define LENGTH_Z 6
+# define LENGTH_LL 4
+# define LENGTH_L 3
+# define LENGTH_J 6
+# define LENGTH_Z 5
 
 #endif
