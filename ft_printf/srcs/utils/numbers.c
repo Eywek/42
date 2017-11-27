@@ -6,7 +6,7 @@
 /*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:20:18 by valentin          #+#    #+#             */
-/*   Updated: 2017/11/26 18:02:45 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 15:14:20 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,22 +95,28 @@ int			ft_pad_nb(va_list args, t_flags flags, char *base,
 {
 	int			size;
 	uintmax_t	nb;
+	int 		precision;
 
 	size = 0;
+	precision = 0;
 	nb = ft_get_nb_u(args, flags);
 	ft_get_number_size_u(nb, ft_strlen(base), &size);
-	if (nb == 0)
+	if (nb == 0 && flags.type != 'p')
 		flags.hash_key = 0;
-	if (flags.hash_key && (size += ft_strlen(hash_key_content)) &&
-			(!flags.width || flags.minus || flags.zero))
+	if (flags.hash_key && (!flags.width || flags.minus || flags.zero || (precision = flags.precision > size)))
 		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
+	if (flags.hash_key && ((flags.width && !flags.minus) && !precision))
+		size += (int)ft_strlen(hash_key_content);
 	if (flags.precision == -1  && nb == 0)
 		size = 0;
 	ft_display_padding(&flags, nb, &size, base);
-	if (flags.hash_key && flags.width && !flags.minus && !flags.zero)
+	if (flags.hash_key && flags.width && !flags.minus && !flags.zero && !precision)
 		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
 	if ((!flags.width || !flags.minus) && size > 0)
 		ft_putnbr_base_intmax_t_u(nb, base, ft_strlen(base));
+	if (flags.hash_key && (size > 0 || flags.type == 'p') && (
+			(!flags.width || flags.minus) || precision))
+		size += (int)ft_strlen(hash_key_content);
 	return (flags.width - size > 0 ? flags.width : size);
 }
 

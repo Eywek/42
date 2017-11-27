@@ -54,6 +54,7 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 		if (*ptr == g_types[i].name)
 		{
 			*str += size;
+			flags.type = g_types[i].name;
 			return (g_types[i].f(args, flags));
 		}
 		++i;

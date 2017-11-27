@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 19:05:00 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 15:06:22 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,31 @@ int main(int argc, char *argv[])
 	printf("\nsize= %d\n", printf("printf: %4.0x\n", 10));
 	printf("\nsize= %d\n", ft_printf("ft_printf: %4.0x\n", 10) - 3);*/
 
-	/*printf("\nsize= %d\n", printf("printf: %.0p, %.p\n", 0, 0));
-	printf("\nsize= %d\n", ft_printf("ft_printf: %.0p, %.p\n", 0, 0) - 3);
+	printf("\nsize= %d\n", printf("printf: %.p\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %.p\n", 0) - 3);
 
-	printf("\nsize= %d\n", printf("printf: %.0x, %.x\n", 0, 0));
-	printf("\nsize= %d\n", ft_printf("ft_printf: %.0x, %.x\n", 0, 0) - 3);
+	printf("\nsize= %d\n", printf("printf: %.p\n", 1));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %.p\n", 1) - 3);
 
-	printf("\nsize= %d\n", printf("printf: %#.0x, %#.x\n", 0, 0));
-	printf("\nsize= %d\n", ft_printf("ft_printf: %#.0x, %#.x\n", 0, 0) - 3);*/
+	printf("\nsize= %d\n", printf("printf: %9.2p\n", 1234));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %9.2p\n", 1234) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %.5p\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %.5p\n", 0) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#.5lx\n", 1));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#.5lx\n", 1) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %9.2p\n", 1234567));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %9.2p\n", 1234567) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %2.9p\n", 1234));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %2.9p\n", 1234) - 3);
 
 	//printf("\nsize= %d\n", printf("printf: {%-15Z}\n", 123));
 	//printf("\nsize= %d\n", ft_printf("ft_printf: {%-15Z}\n", 123) - 3);
 
-	int tab[10];
+	/*int tab[10];
 	tab[0] = 1;
 	tab[1] = 2;
 	tab[2] = 3;
@@ -101,7 +113,7 @@ int main(int argc, char *argv[])
 	array[2][3] = '\0';
 	array[3] = malloc(1);
 	array[3] = 0;
-	printf("\nsize= %d\n", ft_printf("%A\n", array));
+	printf("\nsize= %d\n", ft_printf("%A\n", array));*/
 
 
 	/*printf("------ %%o ------\n");
