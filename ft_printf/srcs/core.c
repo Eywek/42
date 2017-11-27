@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 18:47:57 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 15:43:19 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
  ** Format: %[parameter][flags][width][.precision][length]type
 */
 
-int	ft_handle(char **str, va_list args) // Todo: Handle dynamic value for precision/width with *
+int	ft_handle(char **str, va_list args)
 {
 	t_flags		flags;
 	int 		bytes;
@@ -76,7 +76,7 @@ int	ft_handle(char **str, va_list args) // Todo: Handle dynamic value for precis
 	ft_init_flags(&flags);
 	ft_handle_length(str, &flags);
 	while (ft_handle_flags(str, &flags));
-	ft_handle_width(str, &flags, args);
+	while (ft_handle_width(str, &flags, args));
 	ft_handle_precision(str, &flags, args);
 	while (ft_handle_flags(str, &flags));
 	ft_handle_length(str, &flags);

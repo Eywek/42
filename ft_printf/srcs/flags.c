@@ -71,7 +71,7 @@ int		ft_handle_flags(char **str, t_flags *flags)
  ** Handle width
  ** (eg. %3d ->   1 || %03d -> 001)
 */
-void ft_handle_width(char **str, t_flags *flags, va_list args)
+int ft_handle_width(char **str, t_flags *flags, va_list args)
 {
 	int width;
 
@@ -89,7 +89,9 @@ void ft_handle_width(char **str, t_flags *flags, va_list args)
 			flags->width = width;
 		while (width > 0 && (*str = *str + 1))
 			width /= 10;
+		return (1);
 	}
+	return (0);
 }
 
 /*
