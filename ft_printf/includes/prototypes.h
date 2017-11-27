@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 18:48:44 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 15:45:09 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int			ft_handle_flags(char **str, t_flags *flags);
 int 		ft_handle_width(char **str, t_flags *flags, va_list args);
 void 		ft_handle_precision(char **str, t_flags *flags, va_list args);
 void 		ft_handle_length(char **str, t_flags *flags);
+
+int			ft_pad(t_flags flags, int size);
 
 intmax_t	ft_get_nb(va_list args, t_flags flags);
 uintmax_t	ft_get_nb_u(va_list args, t_flags flags);

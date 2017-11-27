@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 18:24:08 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 17:50:38 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void ft_handle_precision(char **str, t_flags *flags, va_list args)
 		*str += 1;
 		if (!ft_isdigit(**str) && **str != '*')
 		{
+			//flags->zero = 0;
 			flags->precision = -1;
 			return;
 		}

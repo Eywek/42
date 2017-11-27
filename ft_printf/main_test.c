@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/27 15:48:34 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 17:47:35 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,92 @@ int main(int argc, char *argv[])
 	//printf("\nsize= %d\n", printf("printf: {%3*p}\n", 10, 0));
 	//printf("\nsize= %d\n", ft_printf("ft_printf: {%3*p}\n", 10, 0) - 3);
 
-	printf("\nsize= %d\n", printf("printf: %#-08x\n", 42));
-	printf("\nsize= %d\n", ft_printf("ft_printf: %#-08x\n", 42) - 3);
+	/*printf("\nsize= %d\n", printf("printf: %#-08x\n", 42));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#-08x\n", 42) - 3);*/
+
+	/*printf("\nsize= %d\n", printf("printf: {%10R}\n"));
+	printf("\nsize= %d\n", ft_printf("ft_printf: {%10R}\n") - 3);
+
+	printf("\nsize= %d\n", printf("printf: %10R\n"));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %10R\n") - 3);
+
+	printf("\nsize= %d\n", printf("printf: %.10R\n"));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %.10R\n") - 3);
+
+	printf("\nsize= %d\n", printf("printf: %5s, %.5s\n", "Coucou", "Coucou"));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %5s, %.5s\n", "Coucou", "Coucou") - 3);*/
+
+	/*printf("\nsize= %d\n", printf("printf: {%05.s}\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: {%05.s}\n", 0) - 3);
+
+	printf("\nsize= %d\n", printf("printf: {%07s}\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: {%07s}\n", 0) - 3);
+
+	printf("\nsize= %d\n", printf("printf: {%05s}\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: {%05s}\n", 0) - 3);
+
+	printf("\nsize= %d\n", printf("printf: {%.5s}\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: {%.5s}\n", 0) - 3);*/
+
+	/*printf("\nsize= %d\n", printf("printf: %#.3o\n", 1));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#.3o\n", 1) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#.1o\n", 1));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#.1o\n", 1) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#3o\n", 1));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#3o\n", 1) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#.3o\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#.3o\n", 0) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#.o\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#.o\n", 0) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#.3o\n", 1));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#.3o\n", 1) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#.o\n", 1));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#.o\n", 1) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#o\n", 40));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#o\n", 40) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %o\n", 40));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %o\n", 40) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %o\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %o\n", 0) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#.o %#.0o\n", 0, 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#.o %#.0o\n", 0, 0) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %.o %.0o\n", 0, 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %.o %.0o\n", 0, 0) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %#o\n", 0));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %#o\n", 0) - 3);*/
+
+//	printf("\nsize= %d\n", printf("printf: %####0000 33..1d\n", 256));
+//	printf("\nsize= %d\n", ft_printf("ft_printf: %####0000 33..1d\n", 256) - 3);
+//
+//	printf("\nsize= %d\n", printf("printf: %#033.d\n", 256));
+//	printf("\nsize= %d\n", ft_printf("ft_printf: %#033.d\n", 256) - 3);
+//
+//	printf("\nsize= %d\n", printf("printf: %####0000 33..1x\n", 256));
+//	printf("\nsize= %d\n", ft_printf("ft_printf: %####0000 33..1x\n", 256) - 3);
+//
+//	printf("\nsize= %d\n", printf("printf: %#033.x\n", 256));
+//	printf("\nsize= %d\n", ft_printf("ft_printf: %#033.x\n", 256) - 3);
+
+	printf("\nsize= %d\n", printf("printf: %###-#0000 33...12..#0+0d\n", 256));
+	printf("\nsize= %d\n", ft_printf("ft_printf: %###-#0000 33...12..#0+0d\n", 256) - 3);
+
+//	printf("\nsize= %d\n", printf("printf: %###+#0000 33...12..#0-0d\n", 256));
+//	printf("\nsize= %d\n", ft_printf("ft_printf: %###+#0000 33...12..#0-0d\n", 256) - 3);
+//
+//	printf("\nsize= %d\n", printf("printf: %###-#0000 33...12..#00d\n", 256));
+//	printf("\nsize= %d\n", ft_printf("ft_printf: %###-#0000 33...12..#00d\n", 256) - 3);
 
 	//printf("\nsize= %d\n", printf("printf: {%-15Z}\n", 123));
 	//printf("\nsize= %d\n", ft_printf("ft_printf: {%-15Z}\n", 123) - 3);

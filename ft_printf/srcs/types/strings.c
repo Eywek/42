@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 18:34:14 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 16:36:46 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	flag_s(va_list args, t_flags flags) // TODO: precision / unicode
 		return (flag_S(args, flags));
 	s = va_arg(args, char*);
 	if (!s)
-		return ((int)write(STDOUT, "(null)", 6));
-	size = ft_strlen(s);
+		size = 6;
+	else
+		size = ft_strlen(s);
 	if (flags.precision == -1)
 		size = 0;
 	if (flags.precision > 0 && flags.precision < (int)size && size > 0)
@@ -39,7 +40,7 @@ int	flag_s(va_list args, t_flags flags) // TODO: precision / unicode
 			write(STDOUT, (flags.zero && !flags.minus) ? "0" : " ", 1);
 	}
 	if (!flags.width || !flags.minus)
-		write(STDOUT, s, size);
+		write(STDOUT, (s) ? s : "(null)", size);
 	return ((int)size + (flags.width - (int)size > 0 ? flags.width - (int)size : 0));
 }
 
