@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 17:16:30 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 17:38:38 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,29 @@ int	flag_d(va_list args, t_flags flags)
 
 int flag_o(va_list args, t_flags flags)
 {
-	if (flags.hash_key && flags.precision == -1)
-		flags.precision = 0;
-	return (ft_pad_nb(args, flags, "01234567", "0"));
+	int			size;
+	int 		nb_size;
+	uintmax_t	nb;
+
+	size = 0;
+	nb = ft_get_nb_u(args, flags);
+	if (flags.precision >= 0 || nb > 0)
+		ft_get_number_size_u(nb, 8, &size);
+	if (flags.hash_key && (nb > 0 || flags.precision < 0))
+		size += 1;
+	nb_size = size;
+	size = (flags.precision > size) ? flags.precision : size;
+	if (flags.width && !flags.minus)
+		size = ft_pad(flags, size);
+	if (flags.hash_key && (nb > 0 || flags.precision < 0))
+		write(STDOUT, "0", 1);
+	while (nb_size++ < flags.precision)
+		write(STDOUT, "0", 1);
+	if (flags.precision >= 0 || nb > 0)
+		ft_putnbr_base_intmax_t_u(nb, "01234567", 8);
+	if (flags.width && flags.minus)
+		size = ft_pad(flags, size);
+	return (size);
 }
 
 int flag_x(va_list args, t_flags flags)

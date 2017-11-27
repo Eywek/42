@@ -15,7 +15,7 @@ NAME=libftprintf.a
 SRCS_PATH=./srcs/
 SRCS_FILES=core.c flags.c types/chars.c types/numbers.c types/others.c \
 			types/pointers.c types/strings.c types/numbers_l.c utils/bases.c \
-			utils/numbers.c types/arrays.c
+			utils/numbers.c types/arrays.c utils/pad.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 LIB_SRCS_PATH=./libs/libft/

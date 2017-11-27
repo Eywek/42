@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/27 15:43:19 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 16:26:36 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,16 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 		if (i > ARGS_COUNT)
 		{
 			if ((ft_isalpha(*ptr) && *ptr != 'h' && *ptr != 'l' && *ptr != 'j' && *ptr != 'z') || (*ptr == '}' || *ptr == '{'))
-				break;
+			{
+				size = 1;
+				if (!flags.minus)
+					size = ft_pad(flags, size);
+				write(STDOUT, &(*ptr), 1);
+				if (flags.minus)
+					size = ft_pad(flags, size);
+				*str += 1;
+				return (size);
+			}
 			++size;
 			ptr++;
 			i = 0;
