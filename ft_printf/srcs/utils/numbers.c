@@ -6,7 +6,7 @@
 /*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:20:18 by valentin          #+#    #+#             */
-/*   Updated: 2017/11/27 15:14:20 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/27 15:53:12 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
 	int 		precision;
 
 	if (flags->precision <= 0 && flags->width <= 0)
+	{
+		if (flags->type == 'p' && *size > 0)
+			*size += 2;
 		return ;
+	}
 	width = 0;
 	precision = flags->precision - *size;
 	*size = (flags->precision > *size) ? flags->precision : *size;
@@ -78,11 +82,13 @@ void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
 	if (flags->minus && flags->precision != -1)
 		ft_putnbr_base_intmax_t_u(nb, base, ft_strlen(base));
 	width = 0;
-	while (width++ < flags->width - *size)
+	while (width++ < flags->width - (*size + (flags->type == 'p' ? 2 : 0)))
 		write(STDOUT, (flags->zero && !flags->minus) ? "0" : " ", 1);
 	width = 0;
 	while (!flags->minus && width++ < precision)
 		write(STDOUT, "0", 1);
+	if (*size > 0 && flags->type == 'p')
+		*size += 2;
 }
 
 /*
@@ -105,7 +111,7 @@ int			ft_pad_nb(va_list args, t_flags flags, char *base,
 		flags.hash_key = 0;
 	if (flags.hash_key && (!flags.width || flags.minus || flags.zero || (precision = flags.precision > size)))
 		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
-	if (flags.hash_key && ((flags.width && !flags.minus) && !precision))
+	if (flags.hash_key && ((flags.width/* && !flags.minus*/) && !precision) && flags.type != 'p')
 		size += (int)ft_strlen(hash_key_content);
 	if (flags.precision == -1  && nb == 0)
 		size = 0;
@@ -114,9 +120,10 @@ int			ft_pad_nb(va_list args, t_flags flags, char *base,
 		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
 	if ((!flags.width || !flags.minus) && size > 0)
 		ft_putnbr_base_intmax_t_u(nb, base, ft_strlen(base));
-	if (flags.hash_key && (size > 0 || flags.type == 'p') && (
-			(!flags.width || flags.minus) || precision))
+	if (flags.hash_key && size > 0 && ((!flags.width || flags.minus) || precision) && flags.type != 'p')
 		size += (int)ft_strlen(hash_key_content);
+	if (size == 0 && flags.type == 'p')
+		size = 2;
 	return (flags.width - size > 0 ? flags.width : size);
 }
 
