@@ -32,6 +32,7 @@ int			type_U(va_list args, t_flags flags);
 int			type_a(va_list args, t_flags flags);
 int			type_A(va_list args, t_flags flags);
 
+void	ft_edit_length_type(char **str, t_flags *flags, int flag_type, int size);
 void		ft_init_flags(t_flags *flags);
 int			ft_handle_flags(char **str, t_flags *flags);
 int 		ft_handle_width(char **str, t_flags *flags, va_list args);
