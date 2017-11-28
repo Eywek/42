@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/27 16:26:36 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/28 12:59:23 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
 		++i;
 	}
 	*str = ptr;
-	return (0);
+	return (-1);
 }
 
 /*
  ** Call all subfonctions to init t_flags struct
  ** Format: %[parameter][flags][width][.precision][length]type
 */
-
+/*
 int	ft_handle(char **str, va_list args)
 {
 	t_flags		flags;
@@ -91,6 +91,61 @@ int	ft_handle(char **str, va_list args)
 	ft_handle_length(str, &flags);
 	if ((bytes = ft_call_function_from_name(str, args, flags)) > 0)
 		return (bytes);
+	return (0);
+}
+*/
+
+int	ft_call_type(char **str, va_list args, t_flags flags)
+{
+	int arg;
+	int size;
+
+	arg = 0;
+	while (arg < ARGS_COUNT)
+	{
+		if (**str == g_types[arg].name)
+		{
+			*str += 1;
+			flags.type = g_types[arg].name;
+			return (g_types[arg].f(args, flags));
+		}
+		arg++;
+	}
+	size = 1;
+	if (!flags.minus)
+		size = ft_pad(flags, size);
+	write(STDOUT, *str, 1);
+	if (flags.minus)
+		size = ft_pad(flags, size);
+	*str += 1;
+	return (size);
+}
+
+int	ft_handle(char **str, va_list args)
+{
+	t_flags		flags;
+	int 		bytes;
+	int 		flags_found;
+
+	ft_init_flags(&flags);
+	while (**str)
+	{
+		flags_found = 0;
+		while (ft_handle_length(str, &flags) ||
+				ft_handle_flags(str, &flags) ||
+				ft_handle_width(str, &flags, args) ||
+				ft_handle_precision(str, &flags, args))
+			flags_found = 1;
+		if (flags.precision > 0 || flags.precision == -1)
+			flags.zero = 0;
+		if (ft_isalpha(**str) || **str == '%')
+		{
+			if ((bytes = ft_call_type(str, args, flags)) > -1)
+				return (bytes);
+		}
+		else if (!*(*str + 1) || !flags_found)
+			return (0);
+	}
 	return (0);
 }
 
