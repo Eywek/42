@@ -35,8 +35,8 @@ int			flag_A(va_list args, t_flags flags);
 void		ft_init_flags(t_flags *flags);
 int			ft_handle_flags(char **str, t_flags *flags);
 int 		ft_handle_width(char **str, t_flags *flags, va_list args);
-void 		ft_handle_precision(char **str, t_flags *flags, va_list args);
-void 		ft_handle_length(char **str, t_flags *flags);
+int 		ft_handle_precision(char **str, t_flags *flags, va_list args);
+int 		ft_handle_length(char **str, t_flags *flags);
 
 int			ft_pad(t_flags flags, int size);
 

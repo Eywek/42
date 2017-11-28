@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/27 17:50:38 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/28 12:53:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		ft_handle_flags(char **str, t_flags *flags)
  ** Handle width
  ** (eg. %3d ->   1 || %03d -> 001)
 */
-int ft_handle_width(char **str, t_flags *flags, va_list args)
+int 	ft_handle_width(char **str, t_flags *flags, va_list args)
 {
 	int width;
 
@@ -87,7 +87,7 @@ int ft_handle_width(char **str, t_flags *flags, va_list args)
 		}
 		else
 			flags->width = width;
-		while (width > 0 && (*str = *str + 1))
+		while (width > 0 && (*str += 1))
 			width /= 10;
 		return (1);
 	}
@@ -98,7 +98,7 @@ int ft_handle_width(char **str, t_flags *flags, va_list args)
  ** Handle precision
  ** [.precision]
 */
-void ft_handle_precision(char **str, t_flags *flags, va_list args)
+int 	ft_handle_precision(char **str, t_flags *flags, va_list args)
 {
 	int precision;
 
@@ -107,9 +107,8 @@ void ft_handle_precision(char **str, t_flags *flags, va_list args)
 		*str += 1;
 		if (!ft_isdigit(**str) && **str != '*')
 		{
-			//flags->zero = 0;
 			flags->precision = -1;
-			return;
+			return (1);
 		}
 		if (**str == '*')
 			precision = va_arg(args, int);
@@ -122,42 +121,53 @@ void ft_handle_precision(char **str, t_flags *flags, va_list args)
 			*str += 1;
 		while (precision > 0 && (*str = *str + 1))
 			precision /= 10;
+		return (1);
 	}
+	return (0);
 }
 
 /*
  ** Handle length
 */
-void ft_handle_length(char **str, t_flags *flags)
+int 	ft_handle_length(char **str, t_flags *flags)
 {
-	if (**str == 'h' && *(*str + 1) == 'h' && flags->length_type < LENGTH_HH)
+	if (**str == 'h' && *(*str + 1) == 'h')
 	{
 		*str += 2;
-		flags->length_type = LENGTH_HH;
+		if (flags->length_type < LENGTH_HH)
+			flags->length_type = LENGTH_HH;
 	}
-	else if (**str == 'h' && flags->length_type < LENGTH_H)
+	else if (**str == 'h')
 	{
 		*str += 1;
-		flags->length_type = LENGTH_H;
+		if (flags->length_type < LENGTH_H)
+			flags->length_type = LENGTH_H;
 	}
-	else if (**str == 'l' && *(*str + 1) == 'l' && flags->length_type < LENGTH_LL)
+	else if (**str == 'l' && *(*str + 1) == 'l')
 	{
 		*str += 2;
-		flags->length_type = LENGTH_LL;
+		if (flags->length_type < LENGTH_LL)
+			flags->length_type = LENGTH_LL;
 	}
-	else if (**str == 'l' && flags->length_type < LENGTH_L)
+	else if (**str == 'l')
 	{
 		*str += 1;
-		flags->length_type = LENGTH_L;
+		if (flags->length_type < LENGTH_L)
+			flags->length_type = LENGTH_L;
 	}
-	else if (**str == 'j' && flags->length_type < LENGTH_J)
+	else if (**str == 'j')
 	{
 		*str += 1;
-		flags->length_type = LENGTH_J;
+		if (flags->length_type < LENGTH_J)
+			flags->length_type = LENGTH_J;
 	}
-	else if (**str == 'z' && flags->length_type < LENGTH_Z)
+	else if (**str == 'z')
 	{
 		*str += 1;
-		flags->length_type = LENGTH_Z;
+		if (flags->length_type < LENGTH_Z)
+			flags->length_type = LENGTH_Z;
 	}
+	else
+		return (0);
+	return (1);
 }
