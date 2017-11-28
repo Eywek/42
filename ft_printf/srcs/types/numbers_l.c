@@ -12,20 +12,20 @@
 
 #include "../../includes/core.h"
 
-int flag_D(va_list args, t_flags flags)
+int type_D(va_list args, t_flags flags)
 {
 	flags.length_type = LENGTH_L;
-	return (flag_d(args, flags));
+	return (type_d(args, flags));
 }
 
-int flag_O(va_list args, t_flags flags)
+int type_O(va_list args, t_flags flags)
 {
 	flags.length_type = LENGTH_L;
-	return (flag_o(args, flags));
+	return (type_o(args, flags));
 }
 
-int flag_U(va_list args, t_flags flags)
+int type_U(va_list args, t_flags flags)
 {
 	flags.length_type = LENGTH_L;
-	return (flag_u(args, flags));
+	return (type_u(args, flags));
 }

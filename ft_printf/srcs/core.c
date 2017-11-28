@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 12:59:23 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 13:05:27 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,79 +20,16 @@
 */
 
 t_types	g_types[ARGS_COUNT] = {
-		{'c', flag_c}, {'C', flag_C}, {'s', flag_s}, {'S', flag_s},
-		{'d', flag_d}, {'i', flag_d}, {'%', flag_percentage}, {'p', flag_p},
-		{'o', flag_o}, {'x', flag_x}, {'X', flag_X}, {'u', flag_u},
-		{'D', flag_D}, {'O', flag_O}, {'U', flag_U}, {'a', flag_a},
-		{'A', flag_A}
+		{'c', type_c}, {'C', type_C}, {'s', type_s}, {'S', type_s},
+		{'d', type_d}, {'i', type_d}, {'%', type_percentage}, {'p', type_p},
+		{'o', type_o}, {'x', type_x}, {'X', type_X}, {'u', type_u},
+		{'D', type_D}, {'O', type_O}, {'U', type_U}, {'a', type_a},
+		{'A', type_A}
 };
 
 /*
- ** Retrieve and call the function from the name
- ** Use the t_types struct to get callback from name
-*/
-
-int	ft_call_function_from_name(char **str, va_list args, t_flags flags)
-{
-	char *ptr;
-	int i;
-	int size;
-
-	i = 0;
-	size = 1;
-	ptr = *str;
-	while (*ptr)
-	{
-		if (i > ARGS_COUNT)
-		{
-			if ((ft_isalpha(*ptr) && *ptr != 'h' && *ptr != 'l' && *ptr != 'j' && *ptr != 'z') || (*ptr == '}' || *ptr == '{'))
-			{
-				size = 1;
-				if (!flags.minus)
-					size = ft_pad(flags, size);
-				write(STDOUT, &(*ptr), 1);
-				if (flags.minus)
-					size = ft_pad(flags, size);
-				*str += 1;
-				return (size);
-			}
-			++size;
-			ptr++;
-			i = 0;
-		}
-		if (*ptr == g_types[i].name)
-		{
-			*str += size;
-			flags.type = g_types[i].name;
-			return (g_types[i].f(args, flags));
-		}
-		++i;
-	}
-	*str = ptr;
-	return (-1);
-}
-
-/*
- ** Call all subfonctions to init t_flags struct
- ** Format: %[parameter][flags][width][.precision][length]type
-*/
-/*
-int	ft_handle(char **str, va_list args)
-{
-	t_flags		flags;
-	int 		bytes;
-
-	ft_init_flags(&flags);
-	ft_handle_length(str, &flags);
-	while (ft_handle_flags(str, &flags));
-	while (ft_handle_width(str, &flags, args));
-	ft_handle_precision(str, &flags, args);
-	while (ft_handle_flags(str, &flags));
-	ft_handle_length(str, &flags);
-	if ((bytes = ft_call_function_from_name(str, args, flags)) > 0)
-		return (bytes);
-	return (0);
-}
+ ** Call the type with the current char, using the g_types array
+ ** Display some padding if the char isn't a valid type
 */
 
 int	ft_call_type(char **str, va_list args, t_flags flags)
@@ -120,6 +57,13 @@ int	ft_call_type(char **str, va_list args, t_flags flags)
 	*str += 1;
 	return (size);
 }
+
+/*
+ ** Try to apply all length modifiers / flags / width / precision
+ ** Then, try to call a type
+ ** Stop the process if the next char is the end of the string or if we found
+ ** a stranger char
+*/
 
 int	ft_handle(char **str, va_list args)
 {

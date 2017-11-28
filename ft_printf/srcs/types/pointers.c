@@ -12,9 +12,9 @@
 
 #include "../../includes/core.h"
 
-int	flag_p(va_list args, t_flags flags)
+int	type_p(va_list args, t_flags flags)
 {
 	flags.length_type = LENGTH_L;
 	flags.hash_key = 1;
-	return (flag_x(args, flags));
+	return (type_x(args, flags));
 }

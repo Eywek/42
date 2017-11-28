@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include "../../includes/core.h"
 
-int flag_a(va_list args, t_flags flags)
+int type_a(va_list args, t_flags flags)
 {
 	int	*tab;
 	int	index;
@@ -46,7 +46,7 @@ int flag_a(va_list args, t_flags flags)
 	return (size);
 }
 
-int flag_A(va_list args, t_flags flags)
+int type_A(va_list args, t_flags flags)
 {
 	char	**tab;
 	int		index;
