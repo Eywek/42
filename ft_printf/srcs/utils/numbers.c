@@ -1,72 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers.c.c                                        :+:      :+:    :+:   */
+/*   numbers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <null>                            +#+  +:+       +#+        */
+/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 18:20:18 by valentin          #+#    #+#             */
-/*   Updated: 2017/11/28 13:36:29 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/23 18:20:18 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/28 14:37:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "../../includes/core.h"
 
-intmax_t	ft_get_nb(va_list args, t_flags flags)
-{
-	intmax_t	nbr;
-
-	nbr = va_arg(args, intmax_t);
-	if (flags.length_type == LENGTH_HH)
-		nbr = (char)nbr;
-	else if (flags.length_type == LENGTH_H)
-		nbr = (short int)nbr;
-	else if (flags.length_type == LENGTH_L)
-		nbr = (long int)nbr;
-	else if (flags.length_type == LENGTH_LL)
-		nbr = (long long int)nbr;
-	else if (flags.length_type == LENGTH_J)
-		nbr = (intmax_t)nbr;
-	else if (flags.length_type == LENGTH_Z)
-		nbr = (size_t)nbr;
-	else
-		nbr = (int)nbr;
-	return (nbr);
-}
-
-uintmax_t	ft_get_nb_u(va_list args, t_flags flags)
-{
-	uintmax_t	nbr;
-
-	nbr = va_arg(args, uintmax_t);
-	if (flags.length_type == LENGTH_HH)
-		nbr = (unsigned char)nbr;
-	else if (flags.length_type == LENGTH_H)
-		nbr = (unsigned short int)nbr;
-	else if (flags.length_type == LENGTH_L)
-		nbr = (unsigned long int)nbr;
-	else if (flags.length_type == LENGTH_LL)
-		nbr = (unsigned long long int)nbr;
-	else if (flags.length_type == LENGTH_J)
-		nbr = (uintmax_t)nbr;
-	else if (flags.length_type == LENGTH_Z)
-		nbr = (size_t)nbr;
-	else
-		nbr = (unsigned int)nbr;
-	return (nbr);
-}
-
 /*
  ** Display spaces or zeros if needed
- **
 */
 
 void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
-							   char *base)
+								char *base)
 {
 	int			width;
-	int 		precision;
+	int			precision;
 
 	if (flags->precision <= 0 && flags->width <= 0)
 	{
@@ -92,37 +47,54 @@ void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
 }
 
 /*
+ ** Display if needed, the hash_key_content
+ ** and add the length to the global size
+*/
+
+int			ft_handle_hash_key(uintmax_t nb, t_flags *flags, int *size,
+							char *hash_key_content)
+{
+	int precision;
+
+	precision = 0;
+	if (nb == 0 && flags->type != 'p')
+		flags->hash_key = 0;
+	if (flags->hash_key && (!flags->width || flags->minus || flags->zero ||
+			(precision = flags->precision > *size)))
+		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
+	if (flags->hash_key && ((flags->width) && !precision) && flags->type != 'p')
+		*size += (int)ft_strlen(hash_key_content);
+	return (precision);
+}
+
+/*
  ** Display hash_key_content, add some width, handle precision
  ** Return the correct size
 */
 
 int			ft_pad_nb(va_list args, t_flags flags, char *base,
-						 char *hash_key_content)
+							char *hash_key_content)
 {
 	int			size;
 	uintmax_t	nb;
-	int 		precision;
+	int			precision;
 
 	if (flags.precision != 0)
 		flags.zero = 0;
 	size = 0;
-	precision = 0;
 	nb = ft_get_nb_u(args, flags);
 	ft_get_number_size_u(nb, ft_strlen(base), &size);
-	if (nb == 0 && flags.type != 'p')
-		flags.hash_key = 0;
-	if (flags.hash_key && (!flags.width || flags.minus || flags.zero || (precision = flags.precision > size)))
-		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
-	if (flags.hash_key && ((flags.width) && !precision) && flags.type != 'p')
-		size += (int)ft_strlen(hash_key_content);
-	if (flags.precision == -1  && nb == 0)
+	precision = ft_handle_hash_key(nb, &flags, &size, hash_key_content);
+	if (flags.precision == -1 && nb == 0)
 		size = 0;
 	ft_display_padding(&flags, nb, &size, base);
-	if (flags.hash_key && flags.width && !flags.minus && !flags.zero && !precision)
+	if (flags.hash_key && flags.width && !flags.minus && !flags.zero &&
+			!precision)
 		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
 	if ((!flags.width || !flags.minus) && size > 0)
 		ft_putnbr_base_intmax_t_u(nb, base, ft_strlen(base));
-	if (flags.hash_key && size > 0 && ((!flags.width || flags.minus) || precision) && flags.type != 'p')
+	if (flags.hash_key && size > 0 && ((!flags.width || flags.minus) ||
+			precision) && flags.type != 'p')
 		size += (int)ft_strlen(hash_key_content);
 	if (size == 0 && flags.type == 'p')
 		size = 2;
@@ -133,7 +105,7 @@ int			ft_pad_nb(va_list args, t_flags flags, char *base,
  ** Display -, + or space for %d
 */
 
-void ft_display_sign(intmax_t nb, t_flags flags)
+void		ft_display_sign(intmax_t nb, t_flags flags)
 {
 	if (nb < 0)
 		ft_putchar_fd('-', STDOUT);

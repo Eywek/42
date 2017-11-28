@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/26 19:13:49 by valentin         ###   ########.fr        #
+#    Updated: 2017/11/28 14:28:06 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME=libftprintf.a
 SRCS_PATH=./srcs/
 SRCS_FILES=core.c flags.c types/chars.c types/numbers.c types/others.c \
 			types/pointers.c types/strings.c types/numbers_l.c utils/bases.c \
-			utils/numbers.c types/arrays.c utils/pad.c utils/flags.c
+			utils/numbers.c types/arrays.c utils/pad.c utils/flags.c \
+			utils/get_numbers.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 LIB_SRCS_PATH=./libs/libft/

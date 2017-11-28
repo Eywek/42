@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pad.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <null>                            +#+  +:+       +#+        */
+/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/27 16:09:15 by valentin          #+#    #+#             */
-/*   Updated: 2017/11/27 16:12:27 by valentin         ###   ########.fr       */
+/*   Created: 2017/11/28 14:18:31 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/28 14:18:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "../../includes/core.h"
 
 /*
- * Add some padding to previous result
+ ** Add some padding to previous result
 */
 
-int ft_pad(t_flags flags, int size)
+int	ft_pad(t_flags flags, int size)
 {
 	int width;
 

@@ -6,14 +6,15 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 13:40:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 16:50:47 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/28 14:18:25 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include "../../includes/core.h"
 
-void	ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str, uintmax_t str_length)
+void	ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str,
+								uintmax_t str_length)
 {
 	if (nbr >= str_length)
 		ft_putnbr_base_intmax_t_u(nbr / str_length, str, str_length);

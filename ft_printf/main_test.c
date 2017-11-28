@@ -24,20 +24,20 @@ int main(int argc, char *argv[])
 	//char *s = "Coucou";
 	//printf("Result = %d chars\n", ft_printf("Coucoy %5.2s %-2% ca va ?\nTu as %03d ans\nLol %d c\nPointer: %p\n", "Valentin", 18, 5, &s));
 
-	printf("\nsize= %d\n", printf("---printf: %####0000 33.#00d\n", 256));
-	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %####0000 33.#00d\n", 256));
-
-	printf("\nsize= %d\n", printf("---printf: %####0000 33.0#00d\n", 256));
-	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %####0000 33.0#00d\n", 256));
-
-	printf("\nsize= %d\n", printf("---printf: %####0000 33.#00x\n", 256));
-	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %####0000 33.#00x\n", 256));
-
-	printf("\nsize= %d\n", printf("---printf: %####0000 33.#00o\n", 256));
-	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %####0000 33.#00o\n", 256));
-
-	printf("\nsize= %d\n", printf("---printf: {%05.*d}\n", -15, 42));
-	printf("\nsize= %d\n---\n", ft_printf("ft_printf: {%05.*d}\n", -15, 42));
+//	printf("\nsize= %d\n", printf("---printf: %####0000 33.#00d\n", 256));
+//	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %####0000 33.#00d\n", 256));
+//
+//	printf("\nsize= %d\n", printf("---printf: %####0000 33.0#00d\n", 256));
+//	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %####0000 33.0#00d\n", 256));
+//
+//	printf("\nsize= %d\n", printf("---printf: %####0000 33.#00x\n", 256));
+//	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %####0000 33.#00x\n", 256));
+//
+//	printf("\nsize= %d\n", printf("---printf: %####0000 33.#00o\n", 256));
+//	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %####0000 33.#00o\n", 256));
+//
+//	printf("\nsize= %d\n", printf("---printf: {%05.*d}\n", -15, 42));
+//	printf("\nsize= %d\n---\n", ft_printf("ft_printf: {%05.*d}\n", -15, 42));
 
 //	printf("\nsize= %d\n", printf("---printf: %S\n", L"Á±≥"));
 //	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %S\n", L"Á±≥"));
@@ -45,8 +45,8 @@ int main(int argc, char *argv[])
 //	printf("\nsize= %d\n", printf("---printf: %C\n", L'Á'));
 //	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %C\n", L'Á'));
 
-	printf("\nsize= %d\n", printf("---printf: {%05.c}\n", 49));
-	printf("\nsize= %d\n---\n", ft_printf("ft_printf: {%05.c}\n", 49));
+	printf("\nsize= %d\n", printf("---printf: %#x\n", 0));
+	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %#x\n", 0));
 
 	/*printf("\nsize= %d\n", printf("printf: %x\n", 10));
 	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %x\n", 10) - 3);

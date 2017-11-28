@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 11:10:36 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 14:49:26 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ int			type_percentage(va_list args, t_flags flags);
 int			type_p(va_list args, t_flags flags);
 int			type_o(va_list args, t_flags flags);
 int			type_x(va_list args, t_flags flags);
-int			type_X(va_list args, t_flags flags);
+int			type_x_upper(va_list args, t_flags flags);
 int			type_u(va_list args, t_flags flags);
-int			type_S(va_list args, t_flags flags);
-int			type_C(va_list args, t_flags flags);
-int			type_D(va_list args, t_flags flags);
-int			type_O(va_list args, t_flags flags);
-int			type_U(va_list args, t_flags flags);
+int			type_s_upper(va_list args, t_flags flags);
+int			type_c_upper(va_list args, t_flags flags);
+int			type_d_upper(va_list args, t_flags flags);
+int			type_o_upper(va_list args, t_flags flags);
+int			type_u_upper(va_list args, t_flags flags);
 int			type_a(va_list args, t_flags flags);
-int			type_A(va_list args, t_flags flags);
+int			type_a_upper(va_list args, t_flags flags);
 
 void	ft_edit_length_type(char **str, t_flags *flags, int flag_type, int size);
 void		ft_init_flags(t_flags *flags);

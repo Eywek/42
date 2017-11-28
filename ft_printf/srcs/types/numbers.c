@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 13:37:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 13:37:48 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int type_x(va_list args, t_flags flags)
 	return (ft_pad_nb(args, flags, "0123456789abcdef", "0x"));
 }
 
-int type_X(va_list args, t_flags flags)
+int type_x_upper(va_list args, t_flags flags)
 {
 	return (ft_pad_nb(args, flags, "0123456789ABCDEF", "0X"));
 }
