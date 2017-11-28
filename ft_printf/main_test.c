@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 18:14:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 20:20:52 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <ntsid.h>
 #include <time.h>
 #include <sys/time.h>
+#include <unistd.h>
 
 void	speed(void)
 {
@@ -85,8 +86,42 @@ int		main(int argc, char *argv[])
 	//launch_tests();
 	//return (0);
 
-	char *s = "Coucou";
-	printf("Result = %d chars\n", ft_printf("Coucoy %5.2s %-2% ca va ?\nTu as %03d ans\nLol %d c\nPointer: %p\n", "Valentin", 18, 5, &s));
+	//char *s = "Coucou";
+	//printf("Result = %d chars\n", ft_printf("Coucoy %5.2s %-2% ca va ?\nTu as %03d ans\nLol %d c\nPointer: %p\n", "Valentin", 18, 5, &s));
+
+//		ft_printf("\n");
+//		ft_printf("%%\n");
+//		ft_printf("%d\n", 42);
+//		ft_printf("%d%d\n", 42, 41);
+//		ft_printf("%d%d%d\n", 42, 43, 44);
+//		ft_printf("%ld\n", 2147483647);
+//		ft_printf("%lld\n", 9223372036854775807);
+//		ft_printf("%x\n", 505);
+//		ft_printf("%X\n", 505);
+//		ft_printf("%p\n", &ft_printf);
+//		ft_printf("%20.15d\n", 54321);
+//		ft_printf("%-10d\n", 3);
+//		ft_printf("% d\n", 3);
+//		ft_printf("%+d\n", 3);
+//		ft_printf("%010d\n", 1);
+//		ft_printf("%hhd\n", 0);
+//		ft_printf("%jd\n", 9223372036854775807);
+//		ft_printf("%zd\n", 4294967295);
+//		ft_printf("%\n");
+//		ft_printf("%U\n", 4294967295);
+//		ft_printf("%u\n", 4294967295);
+//		ft_printf("%o\n", 40);
+//		ft_printf("%%#08x\n", 42);
+//		ft_printf("%x\n", 1000);
+//		ft_printf("%#X\n", 1000);
+//		ft_printf("%s\n", NULL);
+//		ft_printf("%S\n", L"ݗݜशব");
+//		ft_printf("%s%s\n", "test", "test");
+//		ft_printf("%s%s%s\n", "test", "test", "test");
+		ft_printf("%C\n", 15000);
+
+//	int size = ft_printf("%5d", -42);
+//	printf("size = %d\n", size);
 
 	//printf("\nsize= %d\n", printf("---printf: %lc\n", L'Á±≥'));
 	//printf("\nsize= %d\n---\n", ft_printf("ft_printf: %C\n", L'Á±≥'));

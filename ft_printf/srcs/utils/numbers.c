@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:20:18 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 18:39:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 19:07:00 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ int			ft_pad_nb(va_list args, t_flags flags, char *base,
 void		ft_display_sign(intmax_t nb, t_flags flags)
 {
 	if (nb < 0)
-		ft_putchar_fd('-', STDOUT);
+		ft_write("-", 1, flags);
 	if (flags.plus && nb >= 0)
-		ft_putchar_fd('+', STDOUT);
+		ft_write("+", 1, flags);
 	else if (flags.space && nb >= 0)
-		ft_putchar_fd(' ', STDOUT);
+		ft_write(" ", 1, flags);
 }
 
 /*

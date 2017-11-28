@@ -55,7 +55,7 @@ void		ft_display_sign(intmax_t nb, t_flags flags);
 void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
 							char *base);
 
-int			ft_write(char *str, int size, t_flags flags);
+int			ft_write(void *str, int size, t_flags flags);
 int			ft_printf(const char *restrict format, ...);
 
 #endif
