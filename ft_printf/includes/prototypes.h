@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 18:37:50 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 20:42:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		ft_display_sign(intmax_t nb, t_flags flags);
 void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
 							char *base);
 
+void		ft_write_until_percentage(char **format, int *bytes, char **string);
 int			ft_write(void *str, int size, t_flags flags);
 int			ft_printf(const char *restrict format, ...);
 

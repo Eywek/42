@@ -6,11 +6,10 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 20:21:29 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 20:21:33 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <wchar.h>
 #include "../../includes/core.h"
 

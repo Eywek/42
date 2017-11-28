@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 20:09:52 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 20:48:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,37 +93,24 @@ int	ft_handle(char **str, va_list args, char **string, int *bytes)
 
 int	ft_printf(const char *restrict format, ...)
 {
-	char	*str;
 	int		bytes;
-	va_list args;
-	size_t	next;
-	int 	tmp;
-	char 	*string;
-	t_flags	flags;
+	va_list	args;
+	char	*string;
+	char	*str;
 
 	bytes = 0;
 	string = ft_strnew(1);
 	va_start(args, format);
 	str = (char*)format;
 	while (*str)
-	{
 		if (*str == '%')
 		{
 			str++;
-			if ((tmp = ft_handle(&str, args, &string, &bytes)) == -1)
+			if (ft_handle(&str, args, &string, &bytes) == -1)
 				return (-1);
-			//bytes += tmp;
 		}
 		else
-		{
-			flags.string = &string;
-			flags.bytes = &bytes;
-			ft_write(str, (int)(next = (ft_strchr(str, '%')) ?
-								ft_strchr(str, '%') - str : ft_strlen(str)), flags);
-			//bytes += next;
-			str += next;
-		}
-	}
+			ft_write_until_percentage(&str, &bytes, &string);
 	write(STDOUT, string, (size_t)bytes);
 	free(string);
 	va_end(args);

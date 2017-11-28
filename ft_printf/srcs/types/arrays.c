@@ -20,7 +20,6 @@ int	type_a(va_list args, t_flags flags)
 	int		size;
 	char	c;
 
-	(void)flags;
 	size = 0;
 	tab = va_arg(args, int*);
 	index = -1;
