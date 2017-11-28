@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 13:40:34 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 15:31:59 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,17 @@ int main(int argc, char *argv[])
 //	printf("\nsize= %d\n", printf("---printf: %C\n", L'Á'));
 //	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %C\n", L'Á'));
 
-	printf("\nsize= %d\n", printf("---printf: %#x\n", 0));
-	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %#x\n", 0));
+//	printf("\nsize= %d\n", printf("---printf: %04d\n", -10));
+//	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %04d\n", -10));
+//
+//	printf("\nsize= %d\n", printf("---printf: %4d\n", -10));
+//	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %4d\n", -10));
+//
+//	printf("\nsize= %d\n", printf("---printf: %5.d %5.0d\n", 0, 0));
+//	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %5.d %5.0d\n", 0, 0));
+
+	printf("\nsize= %d\n", printf("---printf: %+ d\n", 42));
+	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %+ d\n", 42));
 
 	/*printf("\nsize= %d\n", printf("printf: %x\n", 10));
 	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %x\n", 10) - 3);
