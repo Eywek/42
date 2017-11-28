@@ -14,14 +14,14 @@
 #include <wchar.h>
 #include "../../includes/core.h"
 
-int	flag_s(va_list args, t_flags flags) // TODO: precision / unicode
+int	type_s(va_list args, t_flags flags) // TODO: precision / unicode
 {
 	char	*s;
 	int		width;
 	size_t 	size;
 
 	if (flags.length_type == LENGTH_L)
-		return (flag_S(args, flags));
+		return (type_S(args, flags));
 	s = va_arg(args, char*);
 	if (!s)
 		size = 6;
@@ -44,7 +44,7 @@ int	flag_s(va_list args, t_flags flags) // TODO: precision / unicode
 	return ((int)size + (flags.width - (int)size > 0 ? flags.width - (int)size : 0));
 }
 
-int	flag_S(va_list args, t_flags flags) // TODO
+int	type_S(va_list args, t_flags flags) // TODO
 {
 	wint_t	*s;
 

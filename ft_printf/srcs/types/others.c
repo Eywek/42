@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include "../../includes/core.h"
 
-int	flag_percentage(va_list args, t_flags flags)
+int	type_percentage(va_list args, t_flags flags)
 {
 	int		width;
 

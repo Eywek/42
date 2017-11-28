@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/27 15:45:09 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/28 11:10:36 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 # include <stdint.h>
 #include <stddef.h>
 
-int			flag_c(va_list args, t_flags flags);
-int			flag_s(va_list args, t_flags flags);
-int			flag_d(va_list args, t_flags flags);
-int			flag_percentage(va_list args, t_flags flags);
-int			flag_p(va_list args, t_flags flags);
-int			flag_o(va_list args, t_flags flags);
-int			flag_x(va_list args, t_flags flags);
-int			flag_X(va_list args, t_flags flags);
-int			flag_u(va_list args, t_flags flags);
-int			flag_S(va_list args, t_flags flags);
-int			flag_C(va_list args, t_flags flags);
-int			flag_D(va_list args, t_flags flags);
-int			flag_O(va_list args, t_flags flags);
-int			flag_U(va_list args, t_flags flags);
-int			flag_a(va_list args, t_flags flags);
-int			flag_A(va_list args, t_flags flags);
+int			type_c(va_list args, t_flags flags);
+int			type_s(va_list args, t_flags flags);
+int			type_d(va_list args, t_flags flags);
+int			type_percentage(va_list args, t_flags flags);
+int			type_p(va_list args, t_flags flags);
+int			type_o(va_list args, t_flags flags);
+int			type_x(va_list args, t_flags flags);
+int			type_X(va_list args, t_flags flags);
+int			type_u(va_list args, t_flags flags);
+int			type_S(va_list args, t_flags flags);
+int			type_C(va_list args, t_flags flags);
+int			type_D(va_list args, t_flags flags);
+int			type_O(va_list args, t_flags flags);
+int			type_U(va_list args, t_flags flags);
+int			type_a(va_list args, t_flags flags);
+int			type_A(va_list args, t_flags flags);
 
 void		ft_init_flags(t_flags *flags);
 int			ft_handle_flags(char **str, t_flags *flags);

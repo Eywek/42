@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include "../../includes/core.h"
 
-int	flag_d(va_list args, t_flags flags)
+int	type_d(va_list args, t_flags flags)
 {
 	int				size;
 	intmax_t		nb;
@@ -52,7 +52,7 @@ int	flag_d(va_list args, t_flags flags)
 	return (flags.width > size ? flags.width : size);
 }
 
-int flag_o(va_list args, t_flags flags)
+int type_o(va_list args, t_flags flags)
 {
 	int			size;
 	int 		nb_size;
@@ -79,17 +79,17 @@ int flag_o(va_list args, t_flags flags)
 	return (size);
 }
 
-int flag_x(va_list args, t_flags flags)
+int type_x(va_list args, t_flags flags)
 {
 	return (ft_pad_nb(args, flags, "0123456789abcdef", "0x"));
 }
 
-int flag_X(va_list args, t_flags flags)
+int type_X(va_list args, t_flags flags)
 {
 	return (ft_pad_nb(args, flags, "0123456789ABCDEF", "0X"));
 }
 
-int flag_u(va_list args, t_flags flags)
+int type_u(va_list args, t_flags flags)
 {
 	return (ft_pad_nb(args, flags, "0123456789", NULL));
 }
