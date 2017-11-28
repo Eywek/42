@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 13:42:26 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 14:12:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,47 +31,32 @@ void	ft_init_flags(t_flags *flags)
 /*
  ** Handle flags
  ** Fill t_flags structure and increment the string
-**/
+*/
+
 int		ft_handle_flags(char **str, t_flags *flags)
 {
 	if (*(*str) == '-')
-	{
 		flags->minus = 1;
-		(*str)++;
-		return (1);
-	}
-	if (*(*str) == '+')
-	{
+	else if (*(*str) == '+')
 		flags->plus = 1;
-		(*str)++;
-		return (1);
-	}
-	if (*(*str) == ' ')
-	{
+	else if (*(*str) == ' ')
 		flags->space = 1;
-		(*str)++;
-		return (1);
-	}
-	if (*(*str) == '0')
-	{
+	else if (*(*str) == '0')
 		flags->zero = 1;
-		(*str)++;
-		return (1);
-	}
-	if (*(*str) == '#')
-	{
+	else if (*(*str) == '#')
 		flags->hash_key = 1;
-		(*str)++;
-		return (1);
-	}
-	return (0);
+	else
+		return (0);
+	(*str)++;
+	return (1);
 }
 
 /*
  ** Handle width
  ** (eg. %3d ->   1 || %03d -> 001)
 */
-int 	ft_handle_width(char **str, t_flags *flags, va_list args)
+
+int		ft_handle_width(char **str, t_flags *flags, va_list args)
 {
 	int width;
 
@@ -98,7 +83,8 @@ int 	ft_handle_width(char **str, t_flags *flags, va_list args)
  ** Handle precision
  ** [.precision]
 */
-int 	ft_handle_precision(char **str, t_flags *flags, va_list args)
+
+int		ft_handle_precision(char **str, t_flags *flags, va_list args)
 {
 	int precision;
 
@@ -110,10 +96,7 @@ int 	ft_handle_precision(char **str, t_flags *flags, va_list args)
 			flags->precision = -1;
 			return (1);
 		}
-		if (**str == '*')
-			precision = va_arg(args, int);
-		else
-			precision = ft_atoi(*str);
+		precision = (**str == '*') ? va_arg(args, int) : ft_atoi(*str);
 		flags->precision = (precision == 0 ? -1 : precision);
 		if (flags->precision < 0 && flags->precision != -1)
 			flags->precision = 0;
@@ -131,44 +114,21 @@ int 	ft_handle_precision(char **str, t_flags *flags, va_list args)
 /*
  ** Handle length
 */
-int 	ft_handle_length(char **str, t_flags *flags)
+
+int		ft_handle_length(char **str, t_flags *flags)
 {
 	if (**str == 'h' && *(*str + 1) == 'h')
-	{
-		*str += 2;
-		if (flags->length_type < LENGTH_HH)
-			flags->length_type = LENGTH_HH;
-	}
+		ft_edit_length_type(str, flags, LENGTH_HH, 2);
 	else if (**str == 'h')
-	{
-		*str += 1;
-		if (flags->length_type < LENGTH_H)
-			flags->length_type = LENGTH_H;
-	}
+		ft_edit_length_type(str, flags, LENGTH_H, 1);
 	else if (**str == 'l' && *(*str + 1) == 'l')
-	{
-		*str += 2;
-		if (flags->length_type < LENGTH_LL)
-			flags->length_type = LENGTH_LL;
-	}
+		ft_edit_length_type(str, flags, LENGTH_LL, 2);
 	else if (**str == 'l')
-	{
-		*str += 1;
-		if (flags->length_type < LENGTH_L)
-			flags->length_type = LENGTH_L;
-	}
+		ft_edit_length_type(str, flags, LENGTH_L, 1);
 	else if (**str == 'j')
-	{
-		*str += 1;
-		if (flags->length_type < LENGTH_J)
-			flags->length_type = LENGTH_J;
-	}
+		ft_edit_length_type(str, flags, LENGTH_J, 1);
 	else if (**str == 'z')
-	{
-		*str += 1;
-		if (flags->length_type < LENGTH_Z)
-			flags->length_type = LENGTH_Z;
-	}
+		ft_edit_length_type(str, flags, LENGTH_Z, 1);
 	else
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 13:25:59 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 14:00:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 
 /*
  ** List of all types and callbacks
- ** /s /S /p /d /D /i /o /O /u /U /x /X /c /C /%
- ** flag to display tabs
 */
 
 t_types	g_types[ARGS_COUNT] = {
-		{'c', type_c}, {'C', type_C}, {'s', type_s}, {'S', type_s},
-		{'d', type_d}, {'i', type_d}, {'%', type_percentage}, {'p', type_p},
-		{'o', type_o}, {'x', type_x}, {'X', type_X}, {'u', type_u},
-		{'D', type_D}, {'O', type_O}, {'U', type_U}, {'a', type_a},
-		{'A', type_A}
+	{'c', type_c}, {'C', type_C}, {'s', type_s}, {'S', type_s},
+	{'d', type_d}, {'i', type_d}, {'%', type_percentage}, {'p', type_p},
+	{'o', type_o}, {'x', type_x}, {'X', type_X}, {'u', type_u},
+	{'D', type_D}, {'O', type_O}, {'U', type_U}, {'a', type_a},
+	{'A', type_A}
 };
 
 /*
@@ -59,20 +57,16 @@ int	ft_call_type(char **str, va_list args, t_flags flags)
 }
 
 /*
- ** Try to apply all length modifiers / flags / width / precision
- ** Then, try to call a type
- ** Stop the process if the next char is the end of the string or if we found
- ** a stranger char
+ ** Apply all length / flags / width / precision. Then, try to call a type.
+ ** Stop the process if the n+1 char is EndOf str or if we found a stranger char
 */
 
 int	ft_handle(char **str, va_list args)
 {
 	t_flags		flags;
-	int 		bytes;
-	int 		flags_found;
-	//int 		precision;
+	int			bytes;
+	int			flags_found;
 
-	//precision = 0;
 	ft_init_flags(&flags);
 	while (**str)
 	{
@@ -82,10 +76,6 @@ int	ft_handle(char **str, va_list args)
 				ft_handle_width(str, &flags, args) ||
 				ft_handle_precision(str, &flags, args))
 			flags_found = 1;
-		/*if (precision != flags.precision && flags.precision != 0)
-			precision = flags.precision;
-		if (precision != 0)
-			flags.zero = 0;*/
 		if (ft_isalpha(**str) || **str == '%')
 		{
 			if ((bytes = ft_call_type(str, args, flags)) > -1)
@@ -99,23 +89,15 @@ int	ft_handle(char **str, va_list args)
 
 /*
  ** First function :
- ** start stdarg,
- ** process format with ft_handle if it's a % or display char
- ** Sources:
- **  https://cdn.intra.42.fr/pdf/pdf/20/ft_printf.pdf
- **  https://en.wikipedia.org/wiki/Printf_format_string
- **  https://msdn.microsoft.com/fr-fr/library/hf4y5e3w.aspx
- **  https://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/FUNCTIONS/format.html
- **  http://www.cplusplus.com/reference/cstdio/printf/
- **  http://manpagesfr.free.fr/man/man3/printf.3.html
+ ** start stdarg and process format with ft_handle if it's a % or display char
 */
 
-int	ft_printf(const char *restrict format, ...) // TODO: unicode
+int	ft_printf(const char *restrict format, ...)
 {
 	char	*str;
 	int		bytes;
 	va_list args;
-	size_t 	next;
+	size_t	next;
 
 	bytes = 0;
 	va_start(args, format);
@@ -129,11 +111,8 @@ int	ft_printf(const char *restrict format, ...) // TODO: unicode
 		}
 		else
 		{
-			if (ft_strchr(str, '%'))
-				next = ft_strchr(str, '%') - str;
-			else
-				next = ft_strlen(str);
-			write(STDOUT, str, next);
+			write(STDOUT, str, (next = (ft_strchr(str, '%')) ?
+								ft_strchr(str, '%') - str : ft_strlen(str)));
 			bytes += next;
 			str += next;
 		}
