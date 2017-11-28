@@ -6,7 +6,7 @@
 /*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:20:18 by valentin          #+#    #+#             */
-/*   Updated: 2017/11/27 17:13:35 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/28 13:36:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int			ft_pad_nb(va_list args, t_flags flags, char *base,
 	uintmax_t	nb;
 	int 		precision;
 
+	if (flags.precision != 0)
+		flags.zero = 0;
 	size = 0;
 	precision = 0;
 	nb = ft_get_nb_u(args, flags);
@@ -111,7 +113,7 @@ int			ft_pad_nb(va_list args, t_flags flags, char *base,
 		flags.hash_key = 0;
 	if (flags.hash_key && (!flags.width || flags.minus || flags.zero || (precision = flags.precision > size)))
 		write(STDOUT, hash_key_content, ft_strlen(hash_key_content));
-	if (flags.hash_key && ((flags.width/* && !flags.minus*/) && !precision) && flags.type != 'p')
+	if (flags.hash_key && ((flags.width) && !precision) && flags.type != 'p')
 		size += (int)ft_strlen(hash_key_content);
 	if (flags.precision == -1  && nb == 0)
 		size = 0;

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 13:05:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 13:25:59 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ int	ft_handle(char **str, va_list args)
 	t_flags		flags;
 	int 		bytes;
 	int 		flags_found;
+	//int 		precision;
 
+	//precision = 0;
 	ft_init_flags(&flags);
 	while (**str)
 	{
@@ -80,8 +82,10 @@ int	ft_handle(char **str, va_list args)
 				ft_handle_width(str, &flags, args) ||
 				ft_handle_precision(str, &flags, args))
 			flags_found = 1;
-		if (flags.precision > 0 || flags.precision == -1)
-			flags.zero = 0;
+		/*if (precision != flags.precision && flags.precision != 0)
+			precision = flags.precision;
+		if (precision != 0)
+			flags.zero = 0;*/
 		if (ft_isalpha(**str) || **str == '%')
 		{
 			if ((bytes = ft_call_type(str, args, flags)) > -1)
