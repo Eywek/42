@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 13:37:48 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 14:54:59 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	type_d(va_list args, t_flags flags)
 {
 	int				size;
 	intmax_t		nb;
-	int 			width;
-	int 			precision;
+	int				width;
+	int				precision;
 
 	if (flags.precision != 0)
 		flags.zero = 0;
@@ -54,10 +54,10 @@ int	type_d(va_list args, t_flags flags)
 	return (flags.width > size ? flags.width : size);
 }
 
-int type_o(va_list args, t_flags flags)
+int	type_o(va_list args, t_flags flags)
 {
 	int			size;
-	int 		nb_size;
+	int			nb_size;
 	uintmax_t	nb;
 
 	if (flags.precision != 0)
@@ -83,17 +83,17 @@ int type_o(va_list args, t_flags flags)
 	return (size);
 }
 
-int type_x(va_list args, t_flags flags)
+int	type_x(va_list args, t_flags flags)
 {
 	return (ft_pad_nb(args, flags, "0123456789abcdef", "0x"));
 }
 
-int type_x_upper(va_list args, t_flags flags)
+int	type_x_upper(va_list args, t_flags flags)
 {
 	return (ft_pad_nb(args, flags, "0123456789ABCDEF", "0X"));
 }
 
-int type_u(va_list args, t_flags flags)
+int	type_u(va_list args, t_flags flags)
 {
 	return (ft_pad_nb(args, flags, "0123456789", NULL));
 }
