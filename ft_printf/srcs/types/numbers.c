@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/27 17:38:38 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/28 13:37:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	type_d(va_list args, t_flags flags)
 	int 			width;
 	int 			precision;
 
+	if (flags.precision != 0)
+		flags.zero = 0;
 	nb = ft_get_nb(args, flags);
 	size = 0;
 	ft_get_number_size_u((uintmax_t)(nb < 0 ? -nb : nb), 10, &size);
@@ -58,6 +60,8 @@ int type_o(va_list args, t_flags flags)
 	int 		nb_size;
 	uintmax_t	nb;
 
+	if (flags.precision != 0)
+		flags.zero = 0;
 	size = 0;
 	nb = ft_get_nb_u(args, flags);
 	if (flags.precision >= 0 || nb > 0)
