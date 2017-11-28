@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 18:29:07 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 20:21:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 int	type_c(va_list args, t_flags flags)
 {
-	char	c;
-	int		width;
+	int	c;
+	int	width;
 
 	if (flags.length_type == LENGTH_L)
 		return (type_c_upper(args, flags));
-	c = (char)va_arg(args, int);
+	c = va_arg(args, int);
 	width = 0;
 	if (flags.width)
 	{
@@ -37,10 +37,7 @@ int	type_c(va_list args, t_flags flags)
 
 int	type_c_upper(va_list args, t_flags flags)
 {
-	wchar_t	c;
-
 	(void)flags;
-	c = (wchar_t)va_arg(args, wint_t);
-	(void)c;
-	return (-1);
+	(void)args;
+	return (0);
 }

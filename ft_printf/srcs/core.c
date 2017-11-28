@@ -6,11 +6,12 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 18:36:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 20:09:52 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 #include "../includes/core.h"
 
 /*
@@ -61,13 +62,14 @@ int	ft_call_type(char **str, va_list args, t_flags flags)
  ** Stop the process if the n+1 char is EndOf str or if we found a stranger char
 */
 
-int	ft_handle(char **str, va_list args, char **string)
+int	ft_handle(char **str, va_list args, char **string, int *bytes)
 {
 	t_flags		flags;
 	int			flags_found;
 
 	ft_init_flags(&flags);
 	flags.string = string;
+	flags.bytes = bytes;
 	while (**str)
 	{
 		flags_found = 0;
@@ -108,20 +110,22 @@ int	ft_printf(const char *restrict format, ...)
 		if (*str == '%')
 		{
 			str++;
-			if ((tmp = ft_handle(&str, args, &string)) == -1)
+			if ((tmp = ft_handle(&str, args, &string, &bytes)) == -1)
 				return (-1);
-			bytes += tmp;
+			//bytes += tmp;
 		}
 		else
 		{
 			flags.string = &string;
+			flags.bytes = &bytes;
 			ft_write(str, (int)(next = (ft_strchr(str, '%')) ?
 								ft_strchr(str, '%') - str : ft_strlen(str)), flags);
-			bytes += next;
+			//bytes += next;
 			str += next;
 		}
 	}
-	write(STDOUT, string, ft_strlen(string));
+	write(STDOUT, string, (size_t)bytes);
+	free(string);
 	va_end(args);
 	return (bytes);
 }

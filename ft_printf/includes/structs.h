@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 18:24:32 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 19:51:45 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef	struct 	s_flags
 	int 		length_type;
 	char 		type;
 	char 		**string;
+	int 		*bytes;
 }				t_flags;
 
 typedef struct	s_types
