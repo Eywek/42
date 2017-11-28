@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 14:18:31 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 14:18:39 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 18:29:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	ft_pad(t_flags flags, int size)
 		return (size);
 	width = 0;
 	while (width++ < flags.width - size)
-		write(STDOUT, (flags.zero && !flags.minus) ? "0" : " ", 1);
+		ft_write((flags.zero && !flags.minus) ? "0" : " ", 1, flags);
 	return (size + width - 1);
 }

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 18:17:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 18:36:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_call_type(char **str, va_list args, t_flags flags)
 	size = 1;
 	if (!flags.minus)
 		size = ft_pad(flags, size);
-	write(STDOUT, *str, 1);
+	ft_write(*str, 1, flags);
 	if (flags.minus)
 		size = ft_pad(flags, size);
 	*str += 1;
@@ -61,12 +61,13 @@ int	ft_call_type(char **str, va_list args, t_flags flags)
  ** Stop the process if the n+1 char is EndOf str or if we found a stranger char
 */
 
-int	ft_handle(char **str, va_list args)
+int	ft_handle(char **str, va_list args, char **string)
 {
 	t_flags		flags;
 	int			flags_found;
 
 	ft_init_flags(&flags);
+	flags.string = string;
 	while (**str)
 	{
 		flags_found = 0;
@@ -95,8 +96,11 @@ int	ft_printf(const char *restrict format, ...)
 	va_list args;
 	size_t	next;
 	int 	tmp;
+	char 	*string;
+	t_flags	flags;
 
 	bytes = 0;
+	string = ft_strnew(1);
 	va_start(args, format);
 	str = (char*)format;
 	while (*str)
@@ -104,18 +108,20 @@ int	ft_printf(const char *restrict format, ...)
 		if (*str == '%')
 		{
 			str++;
-			if ((tmp = ft_handle(&str, args)) == -1)
+			if ((tmp = ft_handle(&str, args, &string)) == -1)
 				return (-1);
 			bytes += tmp;
 		}
 		else
 		{
-			write(STDOUT, str, (next = (ft_strchr(str, '%')) ?
-								ft_strchr(str, '%') - str : ft_strlen(str)));
+			flags.string = &string;
+			ft_write(str, (int)(next = (ft_strchr(str, '%')) ?
+								ft_strchr(str, '%') - str : ft_strlen(str)), flags);
 			bytes += next;
 			str += next;
 		}
 	}
+	write(STDOUT, string, ft_strlen(string));
 	va_end(args);
 	return (bytes);
 }

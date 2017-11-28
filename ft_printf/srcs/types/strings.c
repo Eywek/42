@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 17:42:32 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 18:38:35 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	type_s(va_list args, t_flags flags)
 	if (flags.width)
 	{
 		if (flags.minus)
-			write(STDOUT, s, (size_t)size);
+			ft_write(s, size, flags);
 		width = 0;
 		while (width++ < flags.width - size)
-			write(STDOUT, (flags.zero && !flags.minus) ? "0" : " ", 1);
+			ft_write((flags.zero && !flags.minus) ? "0" : " ", 1, flags);
 	}
 	if (!flags.width || !flags.minus)
-		write(STDOUT, (s) ? s : "(null)", (size_t)size);
+		ft_write((s) ? s : "(null)", size, flags);
 	return (size + (flags.width - size > 0 ? flags.width - size : 0));
 }
 
@@ -49,7 +49,7 @@ int	type_s_upper(va_list args, t_flags flags)
 
 	s = va_arg(args, wint_t*);
 	if (!s)
-		return ((int)write(STDOUT, "(null)", 6));
+		return (ft_write("(null)", 6, flags));
 	(void)flags;
 	return (0);
 }

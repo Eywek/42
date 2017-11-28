@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 16:26:31 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 18:37:50 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			ft_pad(t_flags flags, int size);
 intmax_t	ft_get_nb(va_list args, t_flags flags);
 uintmax_t	ft_get_nb_u(va_list args, t_flags flags);
 void		ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str,
-									uintmax_t str_length);
+									uintmax_t str_length, t_flags flags);
 void		ft_get_number_size_u(uintmax_t nbr, uintmax_t str_length,
 								int *size);
 int			ft_pad_nb(va_list args, t_flags flags, char *base,
@@ -55,6 +55,7 @@ void		ft_display_sign(intmax_t nb, t_flags flags);
 void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
 							char *base);
 
+int			ft_write(char *str, int size, t_flags flags);
 int			ft_printf(const char *restrict format, ...);
 
 #endif

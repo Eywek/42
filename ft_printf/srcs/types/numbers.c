@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 16:21:14 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 18:29:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ int	type_o(va_list args, t_flags flags)
 	if (flags.width && !flags.minus)
 		size = ft_pad(flags, size);
 	if (flags.hash_key && (nb > 0 || flags.precision < 0))
-		write(STDOUT, "0", 1);
+		ft_write("0", 1, flags);
 	while (nb_size++ < flags.precision)
-		write(STDOUT, "0", 1);
+		ft_write("0", 1, flags);
 	if (flags.precision >= 0 || nb > 0)
-		ft_putnbr_base_intmax_t_u(nb, "01234567", 8);
+		ft_putnbr_base_intmax_t_u(nb, "01234567", 8, flags);
 	if (flags.width && flags.minus)
 		size = ft_pad(flags, size);
 	return (size);
