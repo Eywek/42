@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 15:31:59 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 17:35:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,73 @@
 #include <stdlib.h>
 #include "includes/core.h"
 #include "tests/functions.h"
+#include <limits.h>
+#include <ntsid.h>
+#include <time.h>
+#include <sys/time.h>
 
-int main(int argc, char *argv[])
+void	speed(void)
 {
+	int size;
+	int i = 2147483647;
+	long l = 2147483647;
+	long long ll = 9223372036854775807;
+	char c = 0;
+	intmax_t im = 9223372036854775807;
+
+	struct timeval stop, start;
+	gettimeofday(&start, NULL);
+	size = ft_printf("\n");
+	size += ft_printf("%%\n");
+	//size += ft_printf("%d\n", 42);
+	//size += ft_printf("%d%d\n", 42, 41);
+	//size += ft_printf("%d%d%d\n", 42, 43, 44);
+	//size += ft_printf("%ld\n", l);
+	//size += ft_printf("%lld\n", ll);
+	//size += ft_printf("%x %X %p %20.15d\n", 505, 505, &ll, 54321); <-- HERE
+	//size += ft_printf("%-10d % d %+d %010d %hhd\n", 3, 3, 3, 1, c); <-- HERE
+	//size += ft_printf("%jd %zd %u %o %#08x\n", im, (size_t)i, i, 40, 42); <-- HERE
+//	size += ft_printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
+	//size += ft_printf("%s%s%s\n", "test", "test", "test");
+//	size += ft_printf("%C\n", 15000);
+	gettimeofday(&stop, NULL);
+	printf("size     = %d in %lu microseconds\n", size, stop.tv_usec - start.tv_usec);
+}
+
+void	speed_cmp(void)
+{
+	int size;
+	int i = 2147483647;
+	long l = 2147483647;
+	long long ll = 9223372036854775807;
+	char c = 0;
+	intmax_t im = 9223372036854775807;
+
+	struct timeval stop, start;
+	gettimeofday(&start, NULL);
+	size = printf("\n");
+	size += printf("%%\n");
+	size += printf("%d\n", 42);
+	size += printf("%d%d\n", 42, 41);
+	size += printf("%d%d%d\n", 42, 43, 44);
+	//size += printf("%ld\n", l);
+	//size += printf("%lld\n", ll);
+	//size += printf("%x %X %p %20.15d\n", 505, 505, &ll, 54321);
+	//size += printf("%-10d % d %+d %010d %hhd\n", 3, 3, 3, 1, c);
+	//size += printf("%jd %zd %u %o %#08x\n", im, (size_t)i, i, 40, 42);
+//	size += printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
+	size += printf("%s%s%s\n", "test", "test", "test");
+//	size += printf("%C\n", 15000);
+	gettimeofday(&stop, NULL);
+	printf("size cmp = %d in %lu microseconds\n", size, stop.tv_usec - start.tv_usec);
+}
+
+int		main(int argc, char *argv[])
+{
+	speed();
+	speed_cmp();
+	//ft_printf("%llu\n", ULLONG_MAX);
+
 	//launch_tests();
 	//return (0);
 
@@ -54,8 +118,8 @@ int main(int argc, char *argv[])
 //	printf("\nsize= %d\n", printf("---printf: %5.d %5.0d\n", 0, 0));
 //	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %5.d %5.0d\n", 0, 0));
 
-	printf("\nsize= %d\n", printf("---printf: %+ d\n", 42));
-	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %+ d\n", 42));
+	//printf("\nsize= %d\n", printf("---printf: %+ d\n", 42));
+	//printf("\nsize= %d\n---\n", ft_printf("ft_printf: %+ d\n", 42));
 
 	/*printf("\nsize= %d\n", printf("printf: %x\n", 10));
 	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %x\n", 10) - 3);
