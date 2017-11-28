@@ -6,13 +6,12 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 19:51:45 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 19:52:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
 
 typedef	struct 	s_flags
 {
