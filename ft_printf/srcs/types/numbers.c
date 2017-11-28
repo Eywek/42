@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 15:05:11 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 16:09:24 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,68 +17,41 @@
 int	type_d(va_list args, t_flags flags)
 {
 	int				size;
+	int				width_size;
 	intmax_t		nb;
 	int				width;
 	int				precision;
 
-	// Handle precision
 	if (flags.precision != 0)
 		flags.zero = 0;
-
-	// Get nb and size
 	nb = ft_get_nb(args, flags);
 	size = 0;
 	ft_get_number_size_u((uintmax_t)(nb < 0 ? -nb : nb), 10, &size);
-
-	// Setup width / precision
 	width = 0;
+	width_size = 0;
 	precision = flags.precision - size;
 	size = (flags.precision > size) ? flags.precision : size;
-
-	// Don't display nb if no precision and nb = 0
 	if (flags.precision == -1 && nb == 0)
 		size = 0;
-
-	// Add to size + or space
 	if (nb >= 0)
-		size += (flags.plus) ? 1 : 0 + (flags.space) ? 1 : 0;
-
-	// Add to size minus
+		size += (flags.plus || flags.space);
 	if (nb < 0)
 		size += 1;
-
-	// Display + / - or space
-	if (flags.width && (flags.zero || flags.minus || flags.space))
+	if (!flags.minus)
+	{
+		if (flags.width && flags.zero)
+			ft_display_sign(nb, flags);
+		width_size = ft_pad(flags, size) - size;
+	}
+	if ((flags.width && (flags.minus || !flags.zero)) || !flags.width)
 		ft_display_sign(nb, flags);
-
-	// Display precision
-	while (flags.minus && width++ < precision)
+	while (width++ < precision)
 		write(STDOUT, "0", 1);
-
-	// Display number if no width or minus
-	if (flags.minus && size > 0)
+	if (size > 0)
 		ft_putnbr_base_intmax_t_u((uintmax_t)(nb < 0 ? -nb : nb), "0123456789", 10);
-
-	// Display width
-	width = 0;
-	while (width++ < flags.width - size)
-		write(STDOUT, (flags.zero && !flags.minus && precision <= 0) ? "0" : " ", 1);
-
-	// Display + / - or space if we have displayed some width
-	if (!flags.width || (!flags.zero && !flags.minus && !flags.space))
-		ft_display_sign(nb, flags);
-
-	// Display precision
-	width = 0;
-	while (!flags.minus && width++ < precision)
-		write(STDOUT, "0", 1);
-
-	// Display number after width / precision
-	if ((!flags.width || !flags.minus) && size > 0)
-		ft_putnbr_base_intmax_t_u((uintmax_t)(nb < 0 ? -nb : nb), "0123456789", 10);
-
-	// Return min width or size
-	return (flags.width > size ? flags.width : size);
+	if (flags.minus)
+		size = ft_pad(flags, size);
+	return (size + width_size);
 }
 
 int	type_o(va_list args, t_flags flags)
