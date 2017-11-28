@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 14:47:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 18:15:57 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	type_c_upper(va_list args, t_flags flags)
 	wchar_t c;
 
 	(void)flags;
-	c = va_arg(args, wchar_t);
-	write(STDOUT, &c, 1);
-	return (1);
+	c = (wchar_t)va_arg(args, wint_t);
+	(void)c;
+	return (-1);
 }

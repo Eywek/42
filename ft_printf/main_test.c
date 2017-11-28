@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 17:35:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 18:12:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	speed_cmp(void)
 
 int		main(int argc, char *argv[])
 {
-	speed();
-	speed_cmp();
+//	speed();
+//	speed_cmp();
 	//ft_printf("%llu\n", ULLONG_MAX);
 
 	//launch_tests();
@@ -87,6 +87,9 @@ int		main(int argc, char *argv[])
 
 	//char *s = "Coucou";
 	//printf("Result = %d chars\n", ft_printf("Coucoy %5.2s %-2% ca va ?\nTu as %03d ans\nLol %d c\nPointer: %p\n", "Valentin", 18, 5, &s));
+
+	printf("\nsize= %d\n", printf("---printf: %lc\n", L'Á±≥'));
+	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %C\n", L'Á±≥'));
 
 //	printf("\nsize= %d\n", printf("---printf: %####0000 33.#00d\n", 256));
 //	printf("\nsize= %d\n---\n", ft_printf("ft_printf: %####0000 33.#00d\n", 256));

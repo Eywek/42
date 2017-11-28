@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 14:49:26 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 18:17:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	ft_call_type(char **str, va_list args, t_flags flags)
 int	ft_handle(char **str, va_list args)
 {
 	t_flags		flags;
-	int			bytes;
 	int			flags_found;
 
 	ft_init_flags(&flags);
@@ -77,10 +76,7 @@ int	ft_handle(char **str, va_list args)
 				ft_handle_precision(str, &flags, args))
 			flags_found = 1;
 		if (ft_isalpha(**str) || **str == '%')
-		{
-			if ((bytes = ft_call_type(str, args, flags)) > -1)
-				return (bytes);
-		}
+			return (ft_call_type(str, args, flags));
 		else if (!*(*str + 1) || !flags_found)
 			return (0);
 	}
@@ -98,6 +94,7 @@ int	ft_printf(const char *restrict format, ...)
 	int		bytes;
 	va_list args;
 	size_t	next;
+	int 	tmp;
 
 	bytes = 0;
 	va_start(args, format);
@@ -107,7 +104,9 @@ int	ft_printf(const char *restrict format, ...)
 		if (*str == '%')
 		{
 			str++;
-			bytes += ft_handle(&str, args);
+			if ((tmp = ft_handle(&str, args)) == -1)
+				return (-1);
+			bytes += tmp;
 		}
 		else
 		{
