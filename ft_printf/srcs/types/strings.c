@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 14:13:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 14:51:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,32 @@ int	type_s(va_list args, t_flags flags)
 {
 	char	*s;
 	int		width;
-	size_t 	size;
+	int		size;
 
 	if (flags.length_type == LENGTH_L)
-		return (type_S(args, flags));
+		return (type_s_upper(args, flags));
 	s = va_arg(args, char*);
 	if (!s)
 		size = 6;
 	else
-		size = ft_strlen(s);
-	if (flags.precision == -1)
-		size = 0;
-	if (flags.precision > 0 && flags.precision < (int)size && size > 0)
+		size = (int)ft_strlen(s);
+	size = (flags.precision == -1) ? 0 : size;
+	if (flags.precision > 0 && flags.precision < size && size > 0)
 		size = size - (size - flags.precision);
 	if (flags.width)
 	{
 		if (flags.minus)
-			write(STDOUT, s, size);
+			write(STDOUT, s, (size_t)size);
 		width = 0;
-		while (width++ < flags.width - (int)size)
+		while (width++ < flags.width - size)
 			write(STDOUT, (flags.zero && !flags.minus) ? "0" : " ", 1);
 	}
 	if (!flags.width || !flags.minus)
-		write(STDOUT, (s) ? s : "(null)", size);
-	return ((int)size + (flags.width - (int)size > 0 ? flags.width - (int)size : 0));
+		write(STDOUT, (s) ? s : "(null)", (size_t)size);
+	return (size + (flags.width - size > 0 ? flags.width - size : 0));
 }
 
-int	type_S(va_list args, t_flags flags)
+int	type_s_upper(va_list args, t_flags flags)
 {
 	wint_t	*s;
 

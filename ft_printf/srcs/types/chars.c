@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/23 20:53:22 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/28 14:47:38 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include <wchar.h>
 #include "../../includes/core.h"
 
-int	type_c(va_list args, t_flags flags) // TODO: unicode
+int	type_c(va_list args, t_flags flags)
 {
 	int c;
 	int width;
 
 	if (flags.length_type == LENGTH_L)
-		return (type_C(args, flags));
+		return (type_c_upper(args, flags));
 	c = va_arg(args, int);
 	width = 0;
 	if (flags.width)
@@ -35,7 +35,7 @@ int	type_c(va_list args, t_flags flags) // TODO: unicode
 	return ((flags.width) ? width : 1);
 }
 
-int	type_C(va_list args, t_flags flags) // TODO
+int	type_c_upper(va_list args, t_flags flags)
 {
 	wchar_t c;
 

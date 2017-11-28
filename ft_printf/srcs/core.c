@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 14:00:55 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 14:49:26 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 */
 
 t_types	g_types[ARGS_COUNT] = {
-	{'c', type_c}, {'C', type_C}, {'s', type_s}, {'S', type_s},
+	{'c', type_c}, {'C', type_c_upper}, {'s', type_s}, {'S', type_s},
 	{'d', type_d}, {'i', type_d}, {'%', type_percentage}, {'p', type_p},
-	{'o', type_o}, {'x', type_x}, {'X', type_X}, {'u', type_u},
-	{'D', type_D}, {'O', type_O}, {'U', type_U}, {'a', type_a},
-	{'A', type_A}
+	{'o', type_o}, {'x', type_x}, {'X', type_x_upper}, {'u', type_u},
+	{'D', type_d_upper}, {'O', type_o_upper}, {'U', type_u_upper}, {'a', type_a},
+	{'A', type_a_upper}
 };
 
 /*
