@@ -6,14 +6,14 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 14:49:26 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 16:26:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROTOTYPES_H
 # define PROTOTYPES_H
 # include <stdint.h>
-#include <stddef.h>
+# include <stddef.h>
 
 int			type_c(va_list args, t_flags flags);
 int			type_s(va_list args, t_flags flags);
@@ -32,12 +32,13 @@ int			type_u_upper(va_list args, t_flags flags);
 int			type_a(va_list args, t_flags flags);
 int			type_a_upper(va_list args, t_flags flags);
 
-void	ft_edit_length_type(char **str, t_flags *flags, int flag_type, int size);
+void		ft_edit_length_type(char **str, t_flags *flags, int flag_type,
+								int size);
 void		ft_init_flags(t_flags *flags);
 int			ft_handle_flags(char **str, t_flags *flags);
-int 		ft_handle_width(char **str, t_flags *flags, va_list args);
-int 		ft_handle_precision(char **str, t_flags *flags, va_list args);
-int 		ft_handle_length(char **str, t_flags *flags);
+int			ft_handle_width(char **str, t_flags *flags, va_list args);
+int			ft_handle_precision(char **str, t_flags *flags, va_list args);
+int			ft_handle_length(char **str, t_flags *flags);
 
 int			ft_pad(t_flags flags, int size);
 
@@ -45,13 +46,15 @@ intmax_t	ft_get_nb(va_list args, t_flags flags);
 uintmax_t	ft_get_nb_u(va_list args, t_flags flags);
 void		ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str,
 									uintmax_t str_length);
-void		ft_get_number_size_u(uintmax_t nbr, uintmax_t str_length, int *size);
+void		ft_get_number_size_u(uintmax_t nbr, uintmax_t str_length,
+								int *size);
 int			ft_pad_nb(va_list args, t_flags flags, char *base,
-						 char *hash_key_content);
+						char *hash_key_content);
+int			ft_display_d(t_flags flags, int size, int precision, intmax_t nb);
 void		ft_display_sign(intmax_t nb, t_flags flags);
 void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
-							   char *base);
+							char *base);
 
-int			ft_printf(const char * restrict format, ...);
+int			ft_printf(const char *restrict format, ...);
 
 #endif

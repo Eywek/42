@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:20:18 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 14:37:13 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 16:24:48 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,31 @@ void		ft_display_sign(intmax_t nb, t_flags flags)
 		ft_putchar_fd('+', STDOUT);
 	else if (flags.space && nb >= 0)
 		ft_putchar_fd(' ', STDOUT);
+}
+
+/*
+ ** Used into %d to display number / padding / precision
+*/
+
+int			ft_display_d(t_flags flags, int size, int precision, intmax_t nb)
+{
+	int width_size;
+	int width;
+
+	width = 0;
+	width_size = 0;
+	if (!flags.minus)
+	{
+		if (flags.width && flags.zero)
+			ft_display_sign(nb, flags);
+		width_size = ft_pad(flags, size) - size;
+	}
+	if ((flags.width && (flags.minus || !flags.zero)) || !flags.width)
+		ft_display_sign(nb, flags);
+	while (width++ < precision)
+		write(STDOUT, "0", 1);
+	if (size > 0)
+		ft_putnbr_base_intmax_t_u((uintmax_t)(nb < 0 ? -nb : nb), "0123456789",
+								10);
+	return (size + width_size);
 }
