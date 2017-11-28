@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bases.c                                            :+:      :+:    :+:   */
+/*   write.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/22 13:40:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 18:38:57 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/11/28 18:27:12 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/11/28 18:45:46 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
+#include <unistd.h>
 #include "../../includes/core.h"
 
-void	ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str,
-								uintmax_t str_length, t_flags flags)
+int	ft_write(char *str, int size, t_flags flags)
 {
-	if (nbr >= str_length)
-		ft_putnbr_base_intmax_t_u(nbr / str_length, str, str_length, flags);
-	ft_write(&(str[nbr % str_length]), 1, flags);
-}
-
-void	ft_get_number_size_u(uintmax_t nbr, uintmax_t str_length, int *size)
-{
-	*size += 1;
-	if (nbr >= str_length)
-		ft_get_number_size_u(nbr / str_length, str_length, size);
+	*(flags.string) = ft_strcat(*(flags.string), ft_strsub(str, 0, (size_t)size));
+	return (size);
+	//return (int)write(STDOUT, str, (size_t)size);
 }

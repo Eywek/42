@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/28 17:39:43 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/28 18:44:36 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,15 @@ SRCS_PATH=./srcs/
 SRCS_FILES=core.c flags.c types/chars.c types/numbers.c types/others.c \
 			types/pointers.c types/strings.c types/numbers_l.c utils/bases.c \
 			utils/numbers.c types/arrays.c utils/pad.c utils/flags.c \
-			utils/get_numbers.c
+			utils/get_numbers.c utils/write.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 LIB_SRCS_PATH=./libs/libft/
 LIB_SRCS_FILES=ft_strcmp.c ft_strlen.c ft_strnstr.c ft_putnbr_fd.c \
 				ft_putchar_fd.c ft_atoi.c ft_isalnum.c ft_isdigit.c \
 				ft_isalpha.c ft_islower.c ft_isupper.c ft_itoa_base.c \
-				ft_strchr.c ft_isprint.c
+				ft_strchr.c ft_isprint.c ft_strnew.c ft_memalloc.c ft_bzero.c \
+				ft_strcat.c ft_strsub.c ft_strncpy.c
 
 LIB_SRCS=$(addprefix $(LIB_SRCS_PATH), $(LIB_SRCS_FILES))
 
