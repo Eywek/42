@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 16:09:24 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/28 16:21:14 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 int	type_d(va_list args, t_flags flags)
 {
 	int				size;
-	int				width_size;
 	intmax_t		nb;
-	int				width;
 	int				precision;
 
 	if (flags.precision != 0)
@@ -27,31 +25,15 @@ int	type_d(va_list args, t_flags flags)
 	nb = ft_get_nb(args, flags);
 	size = 0;
 	ft_get_number_size_u((uintmax_t)(nb < 0 ? -nb : nb), 10, &size);
-	width = 0;
-	width_size = 0;
 	precision = flags.precision - size;
 	size = (flags.precision > size) ? flags.precision : size;
-	if (flags.precision == -1 && nb == 0)
-		size = 0;
-	if (nb >= 0)
-		size += (flags.plus || flags.space);
+	size = (flags.precision == -1 && nb == 0) ? 0 : size;
+	size += (nb >= 0 && (flags.plus || flags.space));
 	if (nb < 0)
 		size += 1;
-	if (!flags.minus)
-	{
-		if (flags.width && flags.zero)
-			ft_display_sign(nb, flags);
-		width_size = ft_pad(flags, size) - size;
-	}
-	if ((flags.width && (flags.minus || !flags.zero)) || !flags.width)
-		ft_display_sign(nb, flags);
-	while (width++ < precision)
-		write(STDOUT, "0", 1);
-	if (size > 0)
-		ft_putnbr_base_intmax_t_u((uintmax_t)(nb < 0 ? -nb : nb), "0123456789", 10);
-	if (flags.minus)
-		size = ft_pad(flags, size);
-	return (size + width_size);
+	size = ft_display_d(flags, size, precision, nb);
+	size = (flags.minus) ? ft_pad(flags, size) : size;
+	return (size);
 }
 
 int	type_o(va_list args, t_flags flags)

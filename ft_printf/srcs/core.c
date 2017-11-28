@@ -21,8 +21,8 @@ t_types	g_types[ARGS_COUNT] = {
 	{'c', type_c}, {'C', type_c_upper}, {'s', type_s}, {'S', type_s},
 	{'d', type_d}, {'i', type_d}, {'%', type_percentage}, {'p', type_p},
 	{'o', type_o}, {'x', type_x}, {'X', type_x_upper}, {'u', type_u},
-	{'D', type_d_upper}, {'O', type_o_upper}, {'U', type_u_upper}, {'a', type_a},
-	{'A', type_a_upper}
+	{'D', type_d_upper}, {'O', type_o_upper}, {'U', type_u_upper},
+	{'a', type_a}, {'A', type_a_upper}
 };
 
 /*
