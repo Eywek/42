@@ -19,7 +19,7 @@
 # include "../libs/libft/libft.h"
 
 # define STDOUT 1
-# define ARGS_COUNT 17
+# define ARGS_COUNT 19
 
 # define LENGTH_HH 1
 # define LENGTH_H 2
