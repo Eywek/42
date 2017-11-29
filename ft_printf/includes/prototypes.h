@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 20:42:20 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/29 16:39:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PROTOTYPES_H
 # include <stdint.h>
 # include <stddef.h>
+# include <wchar.h>
 
 int			type_c(va_list args, t_flags flags);
 int			type_s(va_list args, t_flags flags);
@@ -54,7 +55,11 @@ int			ft_display_d(t_flags flags, int size, int precision, intmax_t nb);
 void		ft_display_sign(intmax_t nb, t_flags flags);
 void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
 							char *base);
+int			ft_get_wchar_size(wint_t c);
+int			ft_get_wstr_size(wchar_t *s, int max);
 
+int			ft_write_wchar(wint_t c, t_flags flags);
+int			ft_write_char(char c, t_flags flags);
 void		ft_write_until_percentage(char **format, int *bytes, char **string);
 int			ft_write(void *str, int size, t_flags flags);
 int			ft_printf(const char *restrict format, ...);
