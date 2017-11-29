@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/29 16:33:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:10:31 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,28 @@ int	type_s(va_list args, t_flags flags)
 int	type_s_upper(va_list args, t_flags flags)
 {
 	int		size;
-	int 	width;
+	int		width;
 	int		tmp;
 	wchar_t	*s;
 
 	s = va_arg(args, wchar_t*);
-	// Get size
 	size = ft_get_wstr_size(s, (flags.precision <= 0) ? 0 : flags.precision);
 	if (!s)
 		size = 6;
-	// Resize with precision
 	size = (flags.precision == -1) ? 0 : size;
 	if (flags.precision > 0 && flags.precision < size && size > 0)
 		size = size - (size - flags.precision);
-	// Apply width
-	width = 0;
-	if (flags.width && !flags.minus)
+	if ((width = 0) == 0 && flags.width && !flags.minus)
 		while (width++ < flags.width - size)
 			ft_write((flags.zero && !flags.minus) ? "0" : " ", 1, flags);
-	// Display string
 	if (!s)
-		ft_write("(null)", (flags.precision > 0 && flags.precision < 6) ? flags.precision : 6, flags);
+		ft_write("(null)", (flags.precision > 0 && flags.precision < 6) ?
+						flags.precision : 6, flags);
 	tmp = 0;
-	while (s && *s && tmp < size)
-	{
-		if (tmp + ft_get_wchar_size(*s) > size)
-			break ;
+	while (s && *s && tmp + ft_get_wchar_size(*s) <= size)
 		tmp += ft_write_wchar(*s++, flags);
-	}
-	// Apply width
 	if (flags.width && flags.minus)
 		while (width++ < flags.width - size)
 			ft_write(" ", 1, flags);
-	// Return size
 	return (size);
 }
