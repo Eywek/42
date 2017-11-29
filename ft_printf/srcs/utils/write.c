@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 18:27:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/29 15:13:52 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/29 15:24:53 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "../../includes/core.h"
 
-int ft_write_wchar(wint_t c, t_flags flags)
+int		ft_write_wchar(wint_t c, t_flags flags)
 {
 	int size;
 

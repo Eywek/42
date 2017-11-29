@@ -6,13 +6,13 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 15:28:08 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/29 16:55:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:00:57 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/core.h"
 
-int ft_get_wstr_size(wchar_t *s, int max)
+int	ft_get_wstr_size(wchar_t *s, int max)
 {
 	int	size;
 	int	tmp;
@@ -21,7 +21,7 @@ int ft_get_wstr_size(wchar_t *s, int max)
 	while (s && *s)
 	{
 		if ((tmp = ft_get_wchar_size(*s++)) + size > max && max != 0)
-			break;
+			break ;
 		size += tmp;
 	}
 	return (size);
