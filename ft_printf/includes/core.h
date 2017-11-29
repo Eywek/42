@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/26 18:50:49 by valentin         ###   ########.fr       */
+/*   Updated: 2017/11/29 20:36:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "structs.h"
 # include "prototypes.h"
 # include "../libs/libft/libft.h"
+
+# define BUFF_SIZE 50
 
 # define STDOUT 1
 # define ARGS_COUNT 19

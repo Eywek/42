@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/29 17:16:12 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/29 20:09:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,10 @@ int	ft_printf(const char *restrict format, ...) // TODO: colors, buffer???
 	char	*str;
 
 	bytes = 0;
-	string = ft_strnew(1);
 	va_start(args, format);
 	str = (char*)format;
+	string = ft_strnew(BUFF_SIZE);
+	ft_memset(string, 0, BUFF_SIZE);
 	while (*str)
 		if (*str == '%')
 		{

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 18:27:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/29 15:24:53 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/29 20:06:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_write_char(char c, t_flags flags)
 
 int		ft_write(void *s, int size, t_flags flags)
 {
-	char	*src;
+	/*char	*src;
 	char	*str;
 	int		previous_size;
 	int		i;
@@ -78,6 +78,28 @@ int		ft_write(void *s, int size, t_flags flags)
 	str[previous_size] = '\0';
 	free(*(flags.string));
 	*(flags.string) = str;
+	*(flags.bytes) += size;*/
+
+
+	int		previous_size;
+	char	*str;
+	int		i;
+	char	*src;
+
+	str = *(flags.string);
+	previous_size = *(flags.bytes);
+	src = s;
+	if (previous_size + size > BUFF_SIZE)
+	{
+		write(STDOUT, str, (size_t)previous_size);
+		*(flags.bytes) = 0;
+		ft_memset(str, 0, BUFF_SIZE);
+	}
+	i = 0;
+	while (i < size)
+		str[previous_size++] = src[i++];
+
 	*(flags.bytes) += size;
+	*(flags.string) = str;
 	return (size);
 }

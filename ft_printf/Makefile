@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/28 19:29:02 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/11/29 19:54:33 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ LIB_SRCS_FILES=ft_strcmp.c ft_strlen.c ft_strnstr.c ft_putnbr_fd.c \
 				ft_putchar_fd.c ft_atoi.c ft_isalnum.c ft_isdigit.c \
 				ft_isalpha.c ft_islower.c ft_isupper.c ft_itoa_base.c \
 				ft_strchr.c ft_isprint.c ft_strnew.c ft_memalloc.c ft_bzero.c \
-				ft_strcat.c ft_strsub.c ft_strncpy.c ft_strjoin.c ft_strcpy.c
+				ft_strcat.c ft_strsub.c ft_strncpy.c ft_strjoin.c ft_strcpy.c \
+				ft_memset.c
 
 LIB_SRCS=$(addprefix $(LIB_SRCS_PATH), $(LIB_SRCS_FILES))
 
