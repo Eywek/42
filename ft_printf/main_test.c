@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 13:28:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 14:01:34 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int		main(int argc, char *argv[])
 //		size = printf("{%f}", INFINITY);
 //		printf("\nsize = %d\n", size);
 
-	int size = ft_printf("{%30S}", L"我"); // 是一只猫。
-	printf("\nsize = %d\n\n", size);
+//	int size = ft_printf("{%30S}", L"我"); // 是一只猫。
+//	printf("\nsize = %d\n\n", size);
 
 //
 //
