@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 15:03:20 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 17:02:00 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_types	g_types[ARGS_COUNT] = {
 	{'d', type_d}, {'i', type_d}, {'%', type_percentage}, {'p', type_p},
 	{'o', type_o}, {'x', type_x}, {'X', type_x_upper}, {'u', type_u},
 	{'D', type_d_upper}, {'O', type_o_upper}, {'U', type_u_upper},
-	{'a', type_a}, {'A', type_a_upper}, {'f', type_f}, {'F', type_f_upper}
+	{'a', type_a}, {'A', type_a_upper}, {'f', type_f}, {'F', type_f_upper},
+	{'b', type_b}
 };
 
 /*
@@ -88,7 +89,7 @@ int	ft_handle(char **str, va_list args, t_flags *flags)
  ** start stdarg and process format with ft_handle if it's a % or display char
 */
 
-int	ft_printf(const char *restrict format, ...) // TODO: colors / %n / %b
+int	ft_printf(const char *restrict format, ...) // TODO: %n / %b
 {
 	t_flags	flags;
 	int		bytes;

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 16:45:37 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 17:06:49 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int		main(int argc, char *argv[])
 {
 	//printf("Le fichier {cyan}%s{eoc} contient : {red}%s{eoc}\n", "yolo.txt", "'contenu'");
 	//ft_printf("Le fichier {cyan}%s{eoc} contient : {red}%s{eoc}", "yolo.txt", "'contenu'");
-	ft_printf("{blue}[{cyan}IMPORTANT{blue}] {eoc}Voici un message {red}important{eoc}, en voici la raison '{yellow}test{eoc}'");
+	ft_printf("{blue}[{cyan}IMPORTANT{blue}] {eoc}Voici un message {red}important{eoc}, en voici la raison '{yellow}test{eoc}'\n");
+	ft_printf("Binary : %-5b\n", 10);
 	//ft_printf("{green}[{red}IMPORTANT");
 //	speed();
 //	speed_cmp();

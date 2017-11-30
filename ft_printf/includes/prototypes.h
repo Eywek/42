@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 15:44:25 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:44:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int			type_a(va_list args, t_flags *flags);
 int			type_a_upper(va_list args, t_flags *flags);
 int			type_f(va_list args, t_flags *flags);
 int			type_f_upper(va_list args, t_flags *flags);
+int			type_b(va_list args, t_flags *flags);
 
 void		ft_edit_length_type(char **str, t_flags *flags, int flag_type,
 								int size);
