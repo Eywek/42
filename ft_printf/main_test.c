@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 11:08:43 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:28:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,18 @@ int		main(int argc, char *argv[])
 	//printf("Result = %d chars\n", ft_printf("Coucoy %5.2s %-2% ca va ?\nTu as %03d ans\nLol %d c\nPointer: %p\n", "Valentin", 18, 5, &s));
 
 		//int size = ft_printf("%C", L'米');
-		int size = ft_printf("{%f}", 1444565444646.6465424242242); // 8.49 - 12.10
-		printf("\nsize = %d\n\n", size);
-		size = printf("{%f}", 1444565444646.6465424242242);
-		printf("\nsize = %d\n\n--\n\n", size);
+//		int size = ft_printf("{%f}", 1444565444646.6465424242242); // 8.49 - 12.10
+//		printf("\nsize = %d\n\n", size);
+//		size = printf("{%f}", 1444565444646.6465424242242);
+//		printf("\nsize = %d\n\n--\n\n", size);
+//
+//		size = ft_printf("{%f}", INFINITY);
+//		printf("\nsize = %d\n\n", size);
+//		size = printf("{%f}", INFINITY);
+//		printf("\nsize = %d\n", size);
 
-		size = ft_printf("{%f}", INFINITY);
-		printf("\nsize = %d\n\n", size);
-		size = printf("{%f}", INFINITY);
-		printf("\nsize = %d\n", size);
-
-
+	int size = ft_printf("{%30S}", L"我"); // 是一只猫。
+	printf("\nsize = %d\n\n", size);
 
 //
 //
