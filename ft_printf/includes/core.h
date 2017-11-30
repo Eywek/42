@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 15:08:14 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 16:10:32 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define STDOUT 1
 # define ARGS_COUNT 19
+# define COLOR_COUNT 17
 
 # define LENGTH_HH 1
 # define LENGTH_H 2
