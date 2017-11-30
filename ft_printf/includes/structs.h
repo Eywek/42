@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 14:01:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:47:10 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,11 @@ typedef struct	s_types
 	char		name;
 	int			(*f)(va_list, t_flags*);
 }				t_types;
+
+typedef struct	s_color
+{
+	char		*name;
+	char		*format;
+}				t_color;
 
 #endif
