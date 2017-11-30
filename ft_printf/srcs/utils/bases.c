@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 13:40:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/29 12:53:55 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:57:54 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 void	ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str,
 								uintmax_t str_length, t_flags *flags)
 {
-	char	*res;
+	if (nbr >= str_length)
+		ft_putnbr_base_intmax_t_u(nbr / str_length, str, str_length, flags);
+	ft_write_char(str[nbr % str_length], flags);
+/*	char	*res;
 	int		size;
 	int		i;
 
@@ -32,7 +35,7 @@ void	ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str,
 		nbr /= str_length;
 	}
 	ft_write(res, size, flags);
-	free(res);
+	free(res);*/
 }
 
 void	ft_get_number_size_u(uintmax_t nbr, uintmax_t str_length, int *size)
