@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:13:52 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 11:12:07 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 11:12:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	type_f(va_list args, t_flags flags)
 	return (size);
 }
 
-int	type_f_upper(va_list args, t_flags flags) // todo: infinity...
+int	type_f_upper(va_list args, t_flags flags)
 {
 	return (type_f(args, flags));
 }
