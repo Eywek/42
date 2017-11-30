@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 18:27:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 13:32:12 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:49:17 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,29 @@ int		ft_write_char(char c, t_flags *flags)
 
 int		ft_write(void *s, int size, t_flags *flags)
 {
-	(void)flags;
-	//printf("-> '%s' = %d\n", s, size);
+	/*(void)flags;
 	write(STDOUT, s, (size_t)size);
+	return (size);*/
+	int		i;
+	char	*str;
+
+	if (flags->bytes + size > BUFF_SIZE)
+	{
+		write(STDOUT, flags->buffer, (size_t)flags->bytes);
+		flags->bytes = 0;
+		if (size > BUFF_SIZE)
+		{
+			write(STDOUT, s, (size_t)size);
+			return (size);
+		}
+	}
+	i = 0;
+	str = s;
+	while (i < size)
+		flags->buffer[flags->bytes++] = str[i++];
 	return (size);
+
+
 //	char	*src;
 //	char	*str;
 //	int		previous_size;

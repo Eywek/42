@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 13:41:08 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:50:32 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,7 @@ int	ft_printf(const char *restrict format, ...) // TODO: colors
 		else
 			bytes += ft_write_until_percentage(&str, &flags);
 	va_end(args);
+	if (flags.bytes > 0)
+		write(STDOUT, flags.buffer, (size_t)flags.bytes);
 	return (bytes);
 }
