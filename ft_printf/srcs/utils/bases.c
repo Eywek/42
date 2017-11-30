@@ -15,7 +15,7 @@
 #include "../../includes/core.h"
 
 void	ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str,
-								uintmax_t str_length, t_flags flags)
+								uintmax_t str_length, t_flags *flags)
 {
 	char	*res;
 	int		size;

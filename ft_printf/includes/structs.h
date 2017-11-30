@@ -6,12 +6,14 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 11:54:52 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:20:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# define BUFF_SIZE 1000
 
 typedef	struct 	s_flags
 {
@@ -24,14 +26,14 @@ typedef	struct 	s_flags
 	int 		precision;
 	int 		length_type;
 	char 		type;
-	char 		**string;
-	int 		*bytes;
+	char 		string[BUFF_SIZE];
+	int 		bytes;
 }				t_flags;
 
 typedef struct	s_types
 {
 	char		name;
-	int			(*f)(va_list, t_flags);
+	int			(*f)(va_list, t_flags*);
 }				t_types;
 
 #endif
