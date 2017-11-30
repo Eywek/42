@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 18:27:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 14:01:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:25:35 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ int		ft_write_wchar(wint_t c, t_flags *flags)
 
 int		ft_write_until_percentage(char **format, t_flags *flags)
 {
-	size_t	next;
+	int	next;
 
-	ft_write(*format, (int)(next = (ft_strchr(*format, '%')) ?
-			ft_strchr(*format, '%') - *format : ft_strlen(*format)), flags);
+	if (ft_strchr(*format, '%'))
+		next = (int)(ft_strchr(*format, '%') - *format);
+	else
+		next = (int)ft_strlen(*format);
+	next = ft_handle_colors(format, next, flags, next);
+	ft_write(*format, next, flags);
 	*format += next;
-	return ((int)next);
+	return (next);
 }
 
 int		ft_write_char(char c, t_flags *flags)

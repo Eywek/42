@@ -13,7 +13,7 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# define BUFF_SIZE 1000
+# define BUFF_SIZE 1024
 
 typedef	struct 	s_flags
 {

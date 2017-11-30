@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 14:01:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:44:25 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
 int			ft_get_wchar_size(wint_t c);
 int			ft_get_wstr_size(wchar_t *s, int max);
 int			ft_put_float_to_string(double nb, char **s, int precision);
+int			ft_handle_colors(char **str, int size, t_flags *flags, int max);
 
 int			ft_write_wchar(wint_t c, t_flags *flags);
 int			ft_write_char(char c, t_flags *flags);

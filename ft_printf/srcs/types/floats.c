@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../../includes/core.h"
 
 int	type_f(va_list args, t_flags *flags)
@@ -21,6 +22,7 @@ int	type_f(va_list args, t_flags *flags)
 		flags->precision = 7;
 	size = ft_put_float_to_string(va_arg(args, double), &nb, flags->precision);
 	ft_write(nb, size, flags);
+	free(nb);
 	return (size);
 }
 

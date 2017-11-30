@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 14:01:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:03:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ft_handle(char **str, va_list args, t_flags *flags)
  ** start stdarg and process format with ft_handle if it's a % or display char
 */
 
-int	ft_printf(const char *restrict format, ...) // TODO: colors
+int	ft_printf(const char *restrict format, ...) // TODO: colors / %n / %b
 {
 	t_flags	flags;
 	int		bytes;

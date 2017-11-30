@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 14:01:34 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:01:18 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	speed_cmp(void)
 
 int		main(int argc, char *argv[])
 {
+	//printf("Le fichier {cyan}%s{eoc} contient : {red}%s{eoc}\n", "yolo.txt", "'contenu'");
+	ft_printf("Le fichier {cyan}%s{eoc} contient : {red}%s{eoc}", "yolo.txt", "'contenu'");
 //	speed();
 //	speed_cmp();
 	//ft_printf("%llu\n", ULLONG_MAX);

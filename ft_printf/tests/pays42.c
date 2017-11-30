@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include "../includes/core.h"
 
-int		main()
+int		maine()
 {
 	char		c;
 	int		*n;
