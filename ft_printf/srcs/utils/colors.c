@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 14:58:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 16:53:59 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 16:59:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,16 @@ int	ft_handle_colors(char **str, int size, t_flags *flags, int max)
 	size_t	color_name_size;
 
 	i = -1;
-//	while (++i < COLOR_COUNT)
-//		if ((start = ft_strnstr(*str, g_colors[i].name, (size_t)max)) != 0)
-//		{
-//			color_name_size = ft_strlen(g_colors[i].name);
-//			ft_write(*str, (int)(start - *str), flags);
-//			ft_write(g_colors[i].format, (int)ft_strlen(g_colors[i].format),
-//					flags);
-//			size -= (int)(start - *str) + color_name_size;
-//			*str += (start + color_name_size) - *str;
-//		}
 	while (++i < COLOR_COUNT)
 		if ((start = ft_strnstr(*str, g_colors[i].name, (size_t)max)) != 0)
 		{
-			// Get name length
 			color_name_size = ft_strlen(g_colors[i].name);
-			// Display string before
 			size = ft_handle_colors(str, size, flags, (int)(start - *str));
 			ft_write(*str, (int)(start - *str), flags);
-			// Calcul size without previous string + color
 			size -= (int)(start - *str) + color_name_size;
-			// Move string after previous string + color
 			*str += (start + color_name_size) - *str;
-			// Display color
 			ft_write(g_colors[i].format, (int)ft_strlen(g_colors[i].format),
-					 flags);
+					flags);
 			i--;
 		}
 	return (size);
