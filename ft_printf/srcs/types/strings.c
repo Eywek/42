@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 13:18:13 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:18:17 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ int	type_s_upper(va_list args, t_flags *flags)
 	if (flags->width && flags->minus)
 		while (width++ < flags->width - size)
 			ft_write(" ", 1, flags);
-	return (size);
+	return (size + (flags->width - size > 0 ? flags->width - size : 0));
 }
