@@ -59,6 +59,7 @@ void		ft_display_padding(t_flags *flags, uintmax_t nb, int *size,
 							char *base);
 int			ft_get_wchar_size(wint_t c);
 int			ft_get_wstr_size(wchar_t *s, int max);
+int			ft_put_float_to_string(double nb, char **s, int precision);
 
 int			ft_write_wchar(wint_t c, t_flags flags);
 int			ft_write_char(char c, t_flags flags);
