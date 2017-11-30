@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 13:40:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 13:57:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:58:03 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,6 @@ void	ft_putnbr_base_intmax_t_u(uintmax_t nbr, char *str,
 	if (nbr >= str_length)
 		ft_putnbr_base_intmax_t_u(nbr / str_length, str, str_length, flags);
 	ft_write_char(str[nbr % str_length], flags);
-/*	char	*res;
-	int		size;
-	int		i;
-
-	size = 0;
-	ft_get_number_size_u(nbr, str_length, &size);
-	if (!(res = malloc(sizeof(char) * size)))
-		return ;
-	i = size;
-	while (i > 0)
-	{
-		res[--i] = str[nbr % str_length];
-		nbr /= str_length;
-	}
-	ft_write(res, size, flags);
-	free(res);*/
 }
 
 void	ft_get_number_size_u(uintmax_t nbr, uintmax_t str_length, int *size)
