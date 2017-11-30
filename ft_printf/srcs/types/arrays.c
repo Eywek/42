@@ -6,14 +6,14 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:48:10 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/28 18:54:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:14:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "../../includes/core.h"
 
-int	type_a(va_list args, t_flags flags)
+int	type_a(va_list args, t_flags *flags)
 {
 	int		*tab;
 	int		index;
@@ -42,7 +42,7 @@ int	type_a(va_list args, t_flags flags)
 	return (size);
 }
 
-int	type_a_upper(va_list args, t_flags flags)
+int	type_a_upper(va_list args, t_flags *flags)
 {
 	char	**tab;
 	int		index;

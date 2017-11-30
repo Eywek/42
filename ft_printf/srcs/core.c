@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/29 20:39:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:13:34 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_types	g_types[ARGS_COUNT] = {
  ** Display some padding if the char isn't a valid type
 */
 
-int	ft_call_type(char **str, va_list args, t_flags flags)
+int	ft_call_type(char **str, va_list args, t_flags *flags)
 {
 	int arg;
 	int size;
@@ -42,16 +42,16 @@ int	ft_call_type(char **str, va_list args, t_flags flags)
 		if (**str == g_types[arg].name)
 		{
 			*str += 1;
-			flags.type = g_types[arg].name;
+			flags->type = g_types[arg].name;
 			return (g_types[arg].f(args, flags));
 		}
 		arg++;
 	}
 	size = 1;
-	if (!flags.minus)
+	if (!flags->minus)
 		size = ft_pad(flags, size);
 	ft_write(*str, 1, flags);
-	if (flags.minus)
+	if (flags->minus)
 		size = ft_pad(flags, size);
 	*str += 1;
 	return (size);
@@ -62,21 +62,18 @@ int	ft_call_type(char **str, va_list args, t_flags flags)
  ** Stop the process if the n+1 char is EndOf str or if we found a stranger char
 */
 
-int	ft_handle(char **str, va_list args, char **string, int *bytes)
+int	ft_handle(char **str, va_list args, t_flags *flags)
 {
-	t_flags		flags;
 	int			flags_found;
 
-	ft_init_flags(&flags);
-	flags.string = string;
-	flags.bytes = bytes;
+	ft_init_flags(flags);
 	while (**str)
 	{
 		flags_found = 0;
-		while (ft_handle_length(str, &flags) ||
-				ft_handle_flags(str, &flags) ||
-				ft_handle_width(str, &flags, args) ||
-				ft_handle_precision(str, &flags, args))
+		while (ft_handle_length(str, flags) ||
+				ft_handle_flags(str, flags) ||
+				ft_handle_width(str, flags, args) ||
+				ft_handle_precision(str, flags, args))
 			flags_found = 1;
 		if (ft_isalpha(**str) || **str == '%')
 			return (ft_call_type(str, args, flags));
@@ -93,26 +90,23 @@ int	ft_handle(char **str, va_list args, char **string, int *bytes)
 
 int	ft_printf(const char *restrict format, ...) // TODO: colors
 {
+	t_flags	flags;
 	int		bytes;
 	va_list	args;
-	char	*string;
 	char	*str;
 
 	bytes = 0;
-	string = ft_strnew(1);
+	flags.bytes = 0;
 	va_start(args, format);
 	str = (char*)format;
 	while (*str)
 		if (*str == '%')
 		{
 			str++;
-			if (ft_handle(&str, args, &string, &bytes) == -1)
-				return (-1);
+			bytes += ft_handle(&str, args, &flags);
 		}
 		else
-			ft_write_until_percentage(&str, &bytes, &string);
-	write(STDOUT, string, (size_t)bytes);
-	free(string);
+			bytes += ft_write_until_percentage(&str, &flags);
 	va_end(args);
 	return (bytes);
 }
