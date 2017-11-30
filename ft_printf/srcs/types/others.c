@@ -6,7 +6,7 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 14:01:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 17:09:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,14 @@ int	type_percentage(va_list args, t_flags *flags)
 	if (!flags->width || !flags->minus)
 		ft_write("%", 1, flags);
 	return ((flags->width) ? flags->width : 1);
+}
+
+int			type_n(va_list args, t_flags *flags)
+{
+	int	*n;
+
+	(void)flags;
+	n = va_arg(args, int*);
+	*n = flags->total_bytes;
+	return (0);
 }

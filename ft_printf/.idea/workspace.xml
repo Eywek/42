@@ -24,18 +24,6 @@
     <splitter split-orientation="horizontal" split-proportion="0.34652174">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="colors.c" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/srcs/utils/colors.c">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="630">
-                  <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-                  <folding>
-                    <element signature="e#892#911#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="floats.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/srcs/types/floats.c">
               <provider selected="true" editor-type-id="text-editor">
@@ -46,13 +34,23 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Makefile">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="285">
+                  <caret line="19" column="56" lean-forward="false" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="write.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/srcs/utils/write.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="795">
-                  <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+                <state relative-caret-position="760">
+                  <caret line="81" column="31" lean-forward="false" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
                   <folding>
-                    <marker date="1512053051000" expanded="true" signature="2523:2524" ph="{...}" />
+                    <marker date="1512058784000" expanded="true" signature="2552:2553" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -78,7 +76,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="binary.c" pinned="false" current-in-tab="true">
+          <file leaf-file-name="binary.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/srcs/types/binary.c">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="375">
@@ -88,21 +86,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="numbers.c" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/srcs/types/numbers.c">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="309">
-                  <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="64" selection-end-column="18" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="prototypes.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/includes/prototypes.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="399">
-                  <caret line="36" column="12" lean-forward="false" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
+                <state relative-caret-position="854">
+                  <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -111,18 +99,28 @@
           <file leaf-file-name="structs.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/includes/structs.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="615">
-                  <caret line="41" column="24" lean-forward="false" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
+                <state relative-caret-position="450">
+                  <caret line="30" column="27" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="27" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="core.c" pinned="false" current-in-tab="false">
+          <file leaf-file-name="others.c" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/srcs/types/others.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="570">
+                  <caret line="39" column="28" lean-forward="false" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="core.c" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/srcs/core.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="202">
-                  <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+                <state relative-caret-position="564">
+                  <caret line="91" column="47" lean-forward="false" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
                   <folding />
                 </state>
               </provider>
@@ -135,8 +133,8 @@
           <file leaf-file-name="main_test.c" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main_test.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="478">
-                  <caret line="85" column="4" lean-forward="false" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
+                <state relative-caret-position="135">
+                  <caret line="31" column="43" lean-forward="false" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
                   <folding />
                 </state>
               </provider>
@@ -224,7 +222,6 @@
         <option value="$PROJECT_DIR$/srcs/types/chars.c" />
         <option value="$PROJECT_DIR$/srcs/types/numbers.c" />
         <option value="$PROJECT_DIR$/srcs/types/numbers_l.c" />
-        <option value="$PROJECT_DIR$/srcs/types/others.c" />
         <option value="$PROJECT_DIR$/srcs/types/strings.c" />
         <option value="$PROJECT_DIR$/srcs/utils/bases.c" />
         <option value="$PROJECT_DIR$/srcs/types/pointers.c" />
@@ -232,15 +229,16 @@
         <option value="$PROJECT_DIR$/srcs/types/floats.c" />
         <option value="$PROJECT_DIR$/tests/pays42.c" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/Makefile" />
-        <option value="$PROJECT_DIR$/srcs/utils/write.c" />
-        <option value="$PROJECT_DIR$/includes/structs.h" />
         <option value="$PROJECT_DIR$/srcs/utils/colors.c" />
-        <option value="$PROJECT_DIR$/srcs/core.c" />
+        <option value="$PROJECT_DIR$/srcs/types/binary.c" />
         <option value="$PROJECT_DIR$/includes/core.h" />
         <option value="$PROJECT_DIR$/includes/prototypes.h" />
-        <option value="$PROJECT_DIR$/srcs/types/binary.c" />
+        <option value="$PROJECT_DIR$/Makefile" />
+        <option value="$PROJECT_DIR$/includes/structs.h" />
+        <option value="$PROJECT_DIR$/srcs/utils/write.c" />
+        <option value="$PROJECT_DIR$/srcs/types/others.c" />
         <option value="$PROJECT_DIR$/main_test.c" />
+        <option value="$PROJECT_DIR$/srcs/core.c" />
       </list>
     </option>
   </component>
@@ -393,12 +391,12 @@
       <workItem from="1511880336367" duration="10273000" />
       <workItem from="1511891582265" duration="6896000" />
       <workItem from="1511949217566" duration="22346000" />
-      <workItem from="1512035964083" duration="15690000" />
+      <workItem from="1512035964083" duration="16177000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156768000" />
+    <option name="totallyTimeSpent" value="157255000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -555,14 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/types/others.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/utils/flags.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -651,14 +641,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="23" lean-forward="false" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/utils/floats.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1140">
@@ -675,18 +657,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/structs.h">
+    <entry file="file://$PROJECT_DIR$/srcs/utils/colors.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="24" lean-forward="false" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="630">
+          <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+          <folding>
+            <element signature="e#892#911#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/types/chars.c">
+    <entry file="file://$PROJECT_DIR$/srcs/types/numbers.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state relative-caret-position="309">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="64" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -699,20 +683,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/utils/colors.c">
+    <entry file="file://$PROJECT_DIR$/srcs/types/chars.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-          <folding>
-            <element signature="e#892#911#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/core.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        <state relative-caret-position="465">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -725,29 +699,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/prototypes.h">
+    <entry file="file://$PROJECT_DIR$/Makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="36" column="12" lean-forward="false" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
+        <state relative-caret-position="285">
+          <caret line="19" column="56" lean-forward="false" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/types/numbers.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="64" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/utils/write.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding>
-            <marker date="1512053051000" expanded="true" signature="2523:2524" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -759,10 +715,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/includes/structs.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="27" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/utils/write.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="81" column="31" lean-forward="false" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
+          <folding>
+            <marker date="1512058784000" expanded="true" signature="2552:2553" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/prototypes.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="854">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/types/others.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="39" column="28" lean-forward="false" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main_test.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="85" column="4" lean-forward="false" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
+        <state relative-caret-position="135">
+          <caret line="31" column="43" lean-forward="false" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/core.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="91" column="47" lean-forward="false" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
           <folding />
         </state>
       </provider>

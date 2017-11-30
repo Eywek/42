@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 18:27:12 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 15:25:35 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:44:11 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ int		ft_write(void *s, int size, t_flags *flags)
 	str = s;
 	while (i < size)
 		flags->buffer[flags->bytes++] = str[i++];
+	flags->total_bytes += size;
 	return (size);
 }

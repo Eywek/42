@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:50:34 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 15:47:10 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:59:52 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef	struct 	s_flags
 	int 		length_type;
 	char 		type;
 	char 		buffer[BUFF_SIZE];
-	int 		bytes;
+	int			bytes;
+	int			total_bytes;
 }				t_flags;
 
 typedef struct	s_types

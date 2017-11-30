@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:25:54 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 17:06:49 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 17:22:32 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,68 +22,16 @@
 #include <unistd.h>
 #include <math.h>
 
-void	speed(void)
-{
-	int size;
-	int i = 2147483647;
-	long l = 2147483647;
-	long long ll = 9223372036854775807;
-	char c = 0;
-	intmax_t im = 9223372036854775807;
-
-	struct timeval stop, start;
-	gettimeofday(&start, NULL);
-	size = ft_printf("\n");
-	size += ft_printf("%%\n");
-	//size += ft_printf("%d\n", 42);
-	//size += ft_printf("%d%d\n", 42, 41);
-	//size += ft_printf("%d%d%d\n", 42, 43, 44);
-	//size += ft_printf("%ld\n", l);
-	//size += ft_printf("%lld\n", ll);
-	//size += ft_printf("%x %X %p %20.15d\n", 505, 505, &ll, 54321); <-- HERE
-	//size += ft_printf("%-10d % d %+d %010d %hhd\n", 3, 3, 3, 1, c); <-- HERE
-	//size += ft_printf("%jd %zd %u %o %#08x\n", im, (size_t)i, i, 40, 42); <-- HERE
-//	size += ft_printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
-	//size += ft_printf("%s%s%s\n", "test", "test", "test");
-//	size += ft_printf("%C\n", 15000);
-	gettimeofday(&stop, NULL);
-	printf("size     = %d in %lu microseconds\n", size, stop.tv_usec - start.tv_usec);
-}
-
-void	speed_cmp(void)
-{
-	int size;
-	int i = 2147483647;
-	long l = 2147483647;
-	long long ll = 9223372036854775807;
-	char c = 0;
-	intmax_t im = 9223372036854775807;
-
-	struct timeval stop, start;
-	gettimeofday(&start, NULL);
-	size = printf("\n");
-	size += printf("%%\n");
-	size += printf("%d\n", 42);
-	size += printf("%d%d\n", 42, 41);
-	size += printf("%d%d%d\n", 42, 43, 44);
-	//size += printf("%ld\n", l);
-	//size += printf("%lld\n", ll);
-	//size += printf("%x %X %p %20.15d\n", 505, 505, &ll, 54321);
-	//size += printf("%-10d % d %+d %010d %hhd\n", 3, 3, 3, 1, c);
-	//size += printf("%jd %zd %u %o %#08x\n", im, (size_t)i, i, 40, 42);
-//	size += printf("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
-	size += printf("%s%s%s\n", "test", "test", "test");
-//	size += printf("%C\n", 15000);
-	gettimeofday(&stop, NULL);
-	printf("size cmp = %d in %lu microseconds\n", size, stop.tv_usec - start.tv_usec);
-}
-
 int		main(int argc, char *argv[])
 {
 	//printf("Le fichier {cyan}%s{eoc} contient : {red}%s{eoc}\n", "yolo.txt", "'contenu'");
 	//ft_printf("Le fichier {cyan}%s{eoc} contient : {red}%s{eoc}", "yolo.txt", "'contenu'");
 	ft_printf("{blue}[{cyan}IMPORTANT{blue}] {eoc}Voici un message {red}important{eoc}, en voici la raison '{yellow}test{eoc}'\n");
-	ft_printf("Binary : %-5b\n", 10);
+	int	bytes;
+	ft_printf("Binary : %-5b\n%n", 10, &bytes);
+	ft_printf("Total bytes = %d\n", bytes);
+	printf("Binary : 1010 \n%n", &bytes);
+	ft_printf("Total bytes = %d\n", bytes);
 	//ft_printf("{green}[{red}IMPORTANT");
 //	speed();
 //	speed_cmp();

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 20:35:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 17:02:00 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/11/30 17:19:19 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_types	g_types[ARGS_COUNT] = {
 	{'o', type_o}, {'x', type_x}, {'X', type_x_upper}, {'u', type_u},
 	{'D', type_d_upper}, {'O', type_o_upper}, {'U', type_u_upper},
 	{'a', type_a}, {'A', type_a_upper}, {'f', type_f}, {'F', type_f_upper},
-	{'b', type_b}
+	{'b', type_b}, {'n', type_n}
 };
 
 /*
@@ -89,7 +89,7 @@ int	ft_handle(char **str, va_list args, t_flags *flags)
  ** start stdarg and process format with ft_handle if it's a % or display char
 */
 
-int	ft_printf(const char *restrict format, ...) // TODO: %n / %b
+int	ft_printf(const char *restrict format, ...)
 {
 	t_flags	flags;
 	int		bytes;
@@ -98,6 +98,7 @@ int	ft_printf(const char *restrict format, ...) // TODO: %n / %b
 
 	bytes = 0;
 	flags.bytes = 0;
+	flags.total_bytes = 0;
 	va_start(args, format);
 	str = (char*)format;
 	while (*str)
