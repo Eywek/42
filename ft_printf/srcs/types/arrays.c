@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 18:48:10 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/30 14:01:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/01 14:31:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	type_a(va_list args, t_flags *flags)
 	size = 0;
 	tab = va_arg(args, int*);
 	index = -1;
-	while (tab[++index])
+	while (tab && tab[++index])
 	{
 		size += ft_write("array[", 6, flags);
-		ft_putnbr_fd(index, STDOUT);
+		ft_putnbr_base_intmax_t_u((uintmax_t)index, "0123456789", 10, flags);
 		ft_get_number_size_u((uintmax_t)index, 10, &size);
 		size += ft_write("] = ", 4, flags);
 		if (ft_isprint(tab[index]) && (c = (char)tab[index]))
@@ -52,10 +52,10 @@ int	type_a_upper(va_list args, t_flags *flags)
 	size = 0;
 	tab = va_arg(args, char**);
 	index = 0;
-	while (tab[index])
+	while (tab && tab[index])
 	{
 		size += ft_write("array[", 6, flags);
-		ft_putnbr_fd(index, STDOUT);
+		ft_putnbr_base_intmax_t_u((uintmax_t)index, "0123456789", 10, flags);
 		ft_get_number_size_u((uintmax_t)index, 10, &size);
 		size += ft_write("] = \"", 5, flags);
 		size += ft_write(tab[index], (int)ft_strlen(tab[index]), flags);
