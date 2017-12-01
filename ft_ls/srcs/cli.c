@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/01 15:18:05 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/01 15:18:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static t_options	ft_handle_params(int argc, char *argv[])
 			check_for_flags = 0;
 			files_count++;
 		}
-		else if (argv[count][0] == '-' && check_for_flags)
+		else if (argv[count][0] == '-' && argv[count][1] && check_for_flags)
 		{
 			if (!ft_set_options(argv[count], &params))
 				ft_throw_error_options(argv[count]);
