@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/01 14:59:24 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/01 15:18:05 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void			ft_put_in_folders_options(char *filename, t_options *params)
 	current_index = 0;
 	while (params->folders[current_index])
 		current_index++;
-	--current_index;
 	if (!(params->folders[current_index] = malloc(sizeof(char) *
 														ft_strlen(filename))))
 		return (ft_throw_error_memory());
@@ -57,21 +56,35 @@ static int			ft_set_options(char *options, t_options *params)
 	return (state);
 }
 
+static void			ft_add_default_folder(t_options *params)
+{
+	if (!(params->folders = malloc(sizeof(char*) * 2)) ||
+		!(params->folders[0] = malloc(sizeof(char) * 2)))
+		return (ft_throw_error_memory());
+	params->folders[0] = ".";
+	params->folders[1] = 0;
+}
+
 static t_options	ft_handle_params(int argc, char *argv[])
 {
 	int			count;
 	t_options	params;
 	int			check_for_flags;
+	int			files_count;
+	int			errors_count;
 
 	ft_memset(&params, 0, sizeof(params));
 	count = 0;
 	check_for_flags = 1;
+	files_count = 0;
+	errors_count = 0;
 	while (++count < argc)
 	{
 		if (ft_is_file_or_dir(argv[count]))
 		{
 			ft_put_in_folders_options(argv[count], &params);
 			check_for_flags = 0;
+			files_count++;
 		}
 		else if (argv[count][0] == '-' && check_for_flags)
 		{
@@ -80,9 +93,11 @@ static t_options	ft_handle_params(int argc, char *argv[])
 			if (ft_strcmp(argv[count], "--") == 0)
 				check_for_flags = 0;
 		}
-		else
+		else if (++errors_count)
 			ft_throw_error_file_not_found(argv[count]);
 	}
+	if (files_count == 0 && errors_count == 0)
+		ft_add_default_folder(&params);
 	return (params);
 }
 
