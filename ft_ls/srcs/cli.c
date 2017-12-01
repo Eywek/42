@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/01 14:52:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/01 14:59:24 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ static void			ft_put_in_folders_options(char *filename, t_options *params)
 		params->folders[0] = 0;
 	}
 	current_index = 0;
-	while (params->folders[current_index++]);
+	while (params->folders[current_index])
+		current_index++;
 	--current_index;
-	if (!(params->folders[current_index] = malloc(sizeof(char) * ft_strlen(filename))))
+	if (!(params->folders[current_index] = malloc(sizeof(char) *
+														ft_strlen(filename))))
 		return (ft_throw_error_memory());
 	ft_strcpy(params->folders[current_index], filename);
 	params->folders[current_index + 1] = 0;
@@ -36,7 +38,6 @@ static int			ft_set_options(char *options, t_options *params)
 {
 	int	state;
 
-	// Each flag, after '-'
 	state = 0;
 	while (*(++options))
 	{
@@ -67,20 +68,15 @@ static t_options	ft_handle_params(int argc, char *argv[])
 	check_for_flags = 1;
 	while (++count < argc)
 	{
-		// First we need to check if the arg is a file or folder
 		if (ft_is_file_or_dir(argv[count]))
 		{
 			ft_put_in_folders_options(argv[count], &params);
 			check_for_flags = 0;
 		}
-		// If it start with '-' and check_for_flags == 1
 		else if (argv[count][0] == '-' && check_for_flags)
 		{
-			// Check if flags is valid
 			if (!ft_set_options(argv[count], &params))
 				ft_throw_error_options(argv[count]);
-				// Else, throw an error with usage
-			// If it's '-', check_for_flags -> 0
 			if (ft_strcmp(argv[count], "--") == 0)
 				check_for_flags = 0;
 		}
@@ -90,7 +86,7 @@ static t_options	ft_handle_params(int argc, char *argv[])
 	return (params);
 }
 
-int			main(int argc, char *argv[])
+int					main(int argc, char *argv[])
 {
 	t_options	params;
 
