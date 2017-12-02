@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 18:23:09 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/02 18:23:38 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options params)
 			ft_add_file(&files, entry->d_name, path);
 	}
 	folder->files = files;
-	folder->next = NULL;
 	closedir(dir);
 }
 
