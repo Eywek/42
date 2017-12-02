@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 16:24:59 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/02 16:57:58 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void				ft_usage(void);
 void				ft_throw_error_options(char *option);
 void				ft_throw_error_memory(void);
 void				ft_throw_error_file_not_found(char *filename);
+void				ft_throw_failed_open_dir(const char *dirname);
 
 /*
  ** DIRECTORY / FILE
@@ -29,6 +30,10 @@ void				ft_throw_error_file_not_found(char *filename);
 int					ft_is_dir(char *filename);
 int					ft_is_file(char *filename);
 int					ft_is_file_or_dir(char *filename);
+
+struct stat			ft_get_file_stats(char *filename);
+char				*ft_get_user_name(uid_t id);
+char				*ft_get_group_name(uid_t id);
 
 /*
  ** MEMORY

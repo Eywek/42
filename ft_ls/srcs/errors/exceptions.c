@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:38:58 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/01 14:51:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/02 16:58:21 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,11 @@ void	ft_throw_error_file_not_found(char *filename)
 	write(STD_ERR, "ft_ls: ", 7);
 	write(STD_ERR, filename, ft_strlen(filename));
 	write(STD_ERR, ": No such file or directory\n", 28);
+}
+
+void	ft_throw_failed_open_dir(const char *dirname)
+{
+	write(STD_ERR, "ft_ls: ", 7);
+	write(STD_ERR, dirname, ft_strlen(dirname));
+	write(STD_ERR, ": Permission denied\n", 20);
 }

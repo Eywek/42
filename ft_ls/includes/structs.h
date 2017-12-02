@@ -26,13 +26,13 @@ typedef struct		s_options {
 
 typedef struct		s_file {
 	char			*name;
-	struct stat		*stats;
+	struct stat		stats;
 	struct s_file	*next;
 }					t_file;
 
 typedef struct		s_dir {
 	char			*name;
-	struct stat		*stats;
+	struct stat		stats;
 	t_file			*files;
 	struct s_dir	*next;
 }					t_dir;

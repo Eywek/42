@@ -13,6 +13,8 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
+# include <sys/stat.h>
+
 # include "libs.h"
 # include "structs.h"
 # include "prototypes.h"
