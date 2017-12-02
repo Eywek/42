@@ -6,31 +6,31 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/01 15:18:09 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/02 16:24:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../includes/ft_ls.h"
 
-static void			ft_put_in_folders_options(char *filename, t_options *params)
+static void			ft_put_in_options(char *filename, char ***old)
 {
-	int	current_index;
+	char	**tab;
+	int		current_index;
 
-	if (!params->folders)
-	{
-		if (!(params->folders = malloc(sizeof(char*) * 2)))
-			return (ft_throw_error_memory());
-		params->folders[0] = 0;
-	}
 	current_index = 0;
-	while (params->folders[current_index])
-		current_index++;
-	if (!(params->folders[current_index] = malloc(sizeof(char) *
+	if (*old)
+		while ((*old)[current_index])
+			current_index++;
+	if (!(tab = malloc(sizeof(char*) * (current_index + 2))))
+		return (ft_throw_error_memory());
+	ft_copy_tab(&tab, *old);
+	if (!((tab)[current_index] = malloc(sizeof(char) *
 														ft_strlen(filename))))
 		return (ft_throw_error_memory());
-	ft_strcpy(params->folders[current_index], filename);
-	params->folders[current_index + 1] = 0;
+	ft_strcpy((tab)[current_index], filename);
+	(tab)[current_index + 1] = 0;
+	*old = tab;
 }
 
 static int			ft_set_options(char *options, t_options *params)
@@ -50,6 +50,8 @@ static int			ft_set_options(char *options, t_options *params)
 			params->sort_by_time = 1;
 		else if (*options == 'r' && (state = 1) == 1)
 			params->sort_reverse = 1;
+		else if (*options == '1' && (state = 1) == 1)
+			params->no_columns = 1;
 		else if (*options == '-')
 			state = 1;
 	}
@@ -82,7 +84,7 @@ static t_options	ft_handle_params(int argc, char *argv[])
 	{
 		if (ft_is_file_or_dir(argv[count]))
 		{
-			ft_put_in_folders_options(argv[count], &params);
+			ft_put_in_options(argv[count], ft_is_file(argv[count]) ? &(params.files) : &(params.folders));
 			check_for_flags = 0;
 			files_count++;
 		}
@@ -106,12 +108,9 @@ int					main(int argc, char *argv[])
 	t_options	params;
 
 	params = ft_handle_params(argc, argv);
-	ft_printf("params.hidden_files = %d\n", params.hidden_files);
-	ft_printf("params.long_format = %d\n", params.long_format);
-	ft_printf("params.recursive = %d\n", params.recursive);
-	ft_printf("params.sort_by_time = %d\n", params.sort_by_time);
-	ft_printf("params.reverse = %d\n", params.sort_reverse);
-	ft_printf("params.folders : \n%A\n", params.folders);
+	ft_debug_options(params);
+
+	ft_debug_dirs(ft_find_files(params));
 	//ft_display(ft_find_files(params), params);
 	return (0);
 }

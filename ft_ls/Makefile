@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/12/01 14:36:34 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/12/02 16:20:24 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME=ft_ls
 
 SRCS_PATH=./srcs/
 SRCS_FILES=cli.c errors/exceptions.c errors/usage.c utils/directory.c \
-			utils/file.c
+			utils/file.c finder.c utils/memory.c utils/debug.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 OBJECTS_PATH=./objs/
