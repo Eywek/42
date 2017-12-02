@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 17:46:07 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/02 18:23:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_dir	*ft_add_folder(t_dir **dirs, const char *name)
 	if (!(dir->files = malloc(sizeof(t_file))))
 		ft_throw_error_memory();
 	dir->files = NULL;
+	dir->next = NULL;
 	ptr = *dirs;
 	while (ptr->next)
 		ptr = ptr->next;
@@ -76,26 +77,27 @@ void	ft_handle_files_params(char **files_list, t_dir **dirs)
 	free(path);
 }
 
-void	ft_handle_folder(const char *name, t_dir **dirs, t_options params)
+void	ft_handle_folder(char *path, t_dir **dirs, t_options params)
 {
 	DIR				*dir;
 	struct dirent	*entry;
 	t_file			*files;
 	t_dir			*folder;
-	char			*path;
 
-	(void)params;
 	files = NULL;
-	path = ft_strdup(name);
-	if (!(dir = opendir(name)))
-		return (ft_throw_failed_open_dir(name));
-	folder = ft_add_folder(dirs, name);
+	if (!(dir = opendir(path)))
+		return (ft_throw_failed_open_dir(path));
+	folder = ft_add_folder(dirs, path);
 	while ((entry = readdir(dir)))
-		ft_add_file(&files, entry->d_name, path);
+	{
+		if (params.recursive && entry->d_type == DT_DIR && ft_strcmp(entry->d_name, "..") != 0 && ft_strcmp(entry->d_name, ".") != 0)
+			ft_handle_folder(ft_set_path(path, entry->d_name), dirs, params);
+		else
+			ft_add_file(&files, entry->d_name, path);
+	}
 	folder->files = files;
 	folder->next = NULL;
 	closedir(dir);
-	free(path);
 }
 
 t_dir	*ft_find_files(t_options params)
@@ -106,7 +108,10 @@ t_dir	*ft_find_files(t_options params)
 	ft_handle_files_params(params.files, &dirs);
 	ft_free_tab(params.files);
 	while (params.folders && *(params.folders))
-		ft_handle_folder(*(params.folders++), &dirs, params);
+	{
+		ft_handle_folder(*(params.folders), &dirs, params);
+		params.folders++;
+	}
 	ft_free_tab(params.folders);
 	return (dirs);
 }
