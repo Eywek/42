@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/01 11:24:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 16:44:23 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/12/02 17:35:55 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/12/02 17:48:38 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include <stdlib.h>
+#include "../../includes/ft_ls.h"
 
-# include <sys/stat.h>
-
-# include "libs.h"
-# include "structs.h"
-# include "prototypes.h"
-
-# define STD_ERR 1
-# define DIRECTORY_SEPARATOR "/"
-
-#endif
+char	*ft_set_path(char *path, const char *add)
+{
+	if (ft_strlen(path) > 0)
+		path = ft_strjoin(path, DIRECTORY_SEPARATOR);
+	path = ft_strjoin(path, add);
+	return (path);
+}

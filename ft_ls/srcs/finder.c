@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 17:20:36 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/02 17:46:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_dir	*ft_add_folder(t_dir **dirs, const char *name)
 	return (dir);
 }
 
-void	ft_add_file(t_file **files, char *filename)
+void	ft_add_file(t_file **files, char *filename, char *current_path)
 {
 	t_file	*pfiles;
 	t_file	*file;
@@ -40,7 +40,8 @@ void	ft_add_file(t_file **files, char *filename)
 	if (!(file = malloc(sizeof(t_file))))
 		return (ft_throw_error_memory());
 	file->name = ft_strdup(filename);
-	file->stats = ft_get_file_stats(filename);
+	file->path = ft_set_path(current_path, filename);
+	file->stats = ft_get_file_stats(*file);
 	file->next = NULL;
 	if (!*files)
 	{
@@ -56,6 +57,7 @@ void	ft_add_file(t_file **files, char *filename)
 void	ft_handle_files_params(char **files_list, t_dir **dirs)
 {
 	t_file	*files;
+	char	*path;
 
 	if (!(*dirs = malloc(sizeof(t_dir))))
 		return (ft_throw_error_memory());
@@ -63,32 +65,37 @@ void	ft_handle_files_params(char **files_list, t_dir **dirs)
 	if (!(files = malloc(sizeof(t_file))))
 		return (ft_throw_error_memory());
 	files = NULL;
+	path = ft_strdup("");
 	while (files_list && *files_list)
 	{
-		ft_add_file(&files, *files_list);
+		ft_add_file(&files, *files_list, path);
 		files_list++;
 	}
 	(*dirs)->files = files;
 	(*dirs)->next = NULL;
+	free(path);
 }
 
 void	ft_handle_folder(const char *name, t_dir **dirs, t_options params)
 {
-	DIR           *dir;
-	struct dirent *entry;
-	t_file        *files;
-	t_dir         *folder;
+	DIR				*dir;
+	struct dirent	*entry;
+	t_file			*files;
+	t_dir			*folder;
+	char			*path;
 
 	(void)params;
 	files = NULL;
+	path = ft_strdup(name);
 	if (!(dir = opendir(name)))
 		return (ft_throw_failed_open_dir(name));
 	folder = ft_add_folder(dirs, name);
 	while ((entry = readdir(dir)))
-		ft_add_file(&files, entry->d_name);
+		ft_add_file(&files, entry->d_name, path);
 	folder->files = files;
 	folder->next = NULL;
 	closedir(dir);
+	free(path);
 }
 
 t_dir	*ft_find_files(t_options params)

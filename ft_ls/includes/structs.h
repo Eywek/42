@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:43:44 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 13:21:37 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/02 17:32:46 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_options {
 
 typedef struct		s_file {
 	char			*name;
+	char			*path;
 	struct stat		stats;
 	struct s_file	*next;
 }					t_file;

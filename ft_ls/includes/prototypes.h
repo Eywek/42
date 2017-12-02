@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 16:57:58 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/02 17:42:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ int					ft_is_dir(char *filename);
 int					ft_is_file(char *filename);
 int					ft_is_file_or_dir(char *filename);
 
-struct stat			ft_get_file_stats(char *filename);
+struct stat			ft_get_file_stats(t_file file);
 char				*ft_get_user_name(uid_t id);
 char				*ft_get_group_name(uid_t id);
+
+char				*ft_set_path(char *path, const char *add);
 
 /*
  ** MEMORY
