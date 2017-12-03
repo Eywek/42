@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 17:42:07 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 15:07:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void				ft_copy_tab(char ***tab, char **ref);
 */
 
 void				ft_debug_options(t_options params);
+void				ft_debug_file(t_file *file);
+void				ft_debug_dir(t_dir *dir);
 void				ft_debug_dirs(t_dir *dirs);
 
 /*

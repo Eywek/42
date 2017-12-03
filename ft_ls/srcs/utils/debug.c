@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 16:23:51 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 16:50:53 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 15:08:46 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,31 @@ void	ft_debug_options(t_options params)
 	ft_printf("params.files : \n%A\n", params.files);
 }
 
+void	ft_debug_file(t_file *file)
+{
+	ft_printf(" - dirs.files.name = %s\n", file->name);
+	ft_printf("     dirs.files.size = %d\n", file->stats.st_size);
+	ft_printf("     dirs.files.user = %s\n",
+				ft_get_user_name(file->stats.st_uid));
+	ft_printf("     dirs.files.group = %s\n",
+				ft_get_group_name(file->stats.st_gid));
+}
+
+void	ft_debug_dir(t_dir *dir)
+{
+	ft_printf("dirs.name = %s\n", dir->name);
+	while (dir->files)
+	{
+		ft_debug_file(dir->files);
+		dir->files = dir->files->next;
+	}
+}
+
 void	ft_debug_dirs(t_dir *dirs)
 {
 	while (dirs)
 	{
-		ft_printf("dirs.name = %s\n", dirs->name);
-		while (dirs->files)
-		{
-			ft_printf(" - dirs.files.name = %s\n", dirs->files->name);
-			ft_printf("     dirs.files.size = %d\n", dirs->files->stats.st_size);
-			ft_printf("     dirs.files.user = %s\n", ft_get_user_name(dirs->files->stats.st_uid));
-			ft_printf("     dirs.files.group = %s\n", ft_get_group_name(dirs->files->stats.st_gid));
-			dirs->files = dirs->files->next;
-		}
+		ft_debug_dir(dirs);
 		dirs = dirs->next;
 	}
 }
