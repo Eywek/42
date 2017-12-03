@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 15:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 16:42:32 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 17:09:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,40 @@ void	ft_sort_files_reverse(t_file **files)
 	*files = previous;
 }
 
+void	ft_sort_tab_by_time(char **tab)
+{
+	int		index;
+	int		i;
+
+	i = 0;
+	while (tab && tab[i])
+	{
+		index = 0;
+		while (tab[index])
+		{
+			if (tab[index + 1] &&
+			ft_get_stats_from_name(tab[index]).st_mtimespec.tv_sec <
+			ft_get_stats_from_name(tab[index + 1]).st_mtimespec.tv_sec)
+				ft_swap(&tab[index], &tab[index + 1]);
+			++index;
+		}
+		++i;
+	}
+}
+
 void	ft_sort_params(t_options *params)
 {
-	// TODO: Sort lexico || by time
+	// TODO: Sort lexico
 	if (!params->sort_by_time)
 	{
 		ft_sort_wordtab(params->folders);
 		ft_sort_wordtab(params->files);
 	}
-	// TODO: Sort files then folders || by time
+	else // TODO: Sort by time
+	{
+		ft_sort_tab_by_time(params->folders);
+		ft_sort_tab_by_time(params->files);
+	}
 	// TODO: Sort reverse
 	if (params->sort_reverse)
 	{
