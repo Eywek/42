@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 15:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 17:09:39 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 17:10:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,16 @@ void	ft_sort_tab_by_time(char **tab)
 
 void	ft_sort_params(t_options *params)
 {
-	// TODO: Sort lexico
 	if (!params->sort_by_time)
 	{
 		ft_sort_wordtab(params->folders);
 		ft_sort_wordtab(params->files);
 	}
-	else // TODO: Sort by time
+	else
 	{
 		ft_sort_tab_by_time(params->folders);
 		ft_sort_tab_by_time(params->files);
 	}
-	// TODO: Sort reverse
 	if (params->sort_reverse)
 	{
 		ft_reverse_tab(params->folders);
