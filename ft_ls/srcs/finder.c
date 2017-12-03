@@ -92,7 +92,7 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options params)
 	{
 		if (params.recursive && entry->d_type == DT_DIR && ft_strcmp(entry->d_name, "..") != 0 && ft_strcmp(entry->d_name, ".") != 0)
 			ft_handle_folder(ft_set_path(path, entry->d_name), dirs, params);
-		else
+		else if (entry->d_name[0] != '.' || params.hidden_files)
 			ft_add_file(&files, entry->d_name, path);
 	}
 	folder->files = files;
