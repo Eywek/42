@@ -42,7 +42,8 @@ char		*ft_get_user_name(uid_t id)
 {
 	struct passwd *pwd;
 
-	pwd = getpwuid(id);
+	if (!(pwd = getpwuid(id)))
+		return (NULL);
 	return (pwd->pw_name);
 }
 
@@ -50,6 +51,7 @@ char		*ft_get_group_name(gid_t id)
 {
 	struct group *grp;
 
-	grp = getgrgid(id);
+	if (!(grp = getgrgid(id)))
+		return (NULL);
 	return (grp->gr_name);
 }
