@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 15:15:04 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 16:35:49 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ char				*ft_get_group_name(uid_t id);
 
 char				*ft_set_path(char *path, const char *add);
 
+/*
+ ** SORTING
+*/
+
+
+void				ft_sort_params(t_options *params);
 void				ft_sort_files_by_time(t_file **files);
 void				ft_sort_files_reverse(t_file **files);
 

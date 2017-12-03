@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 15:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 16:20:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 16:42:32 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,19 @@ void	ft_sort_files_reverse(t_file **files)
 	*files = previous;
 }
 
+void	ft_sort_params(t_options *params)
+{
+	// TODO: Sort lexico || by time
+	if (!params->sort_by_time)
+	{
+		ft_sort_wordtab(params->folders);
+		ft_sort_wordtab(params->files);
+	}
+	// TODO: Sort files then folders || by time
+	// TODO: Sort reverse
+	if (params->sort_reverse)
+	{
+		ft_reverse_tab(params->folders);
+		ft_reverse_tab(params->files);
+	}
+}
