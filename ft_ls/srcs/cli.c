@@ -6,12 +6,16 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 16:25:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 14:24:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../includes/ft_ls.h"
+
+/*
+ ** Add file or folder to tab[] for t_options struct
+*/
 
 static void			ft_put_in_options(char *filename, char ***old)
 {
@@ -32,6 +36,10 @@ static void			ft_put_in_options(char *filename, char ***old)
 	(tab)[current_index + 1] = 0;
 	*old = tab;
 }
+
+/*
+ ** Set options in t_options struct with the following option
+*/
 
 static int			ft_set_options(char *options, t_options *params)
 {
@@ -58,6 +66,10 @@ static int			ft_set_options(char *options, t_options *params)
 	return (state);
 }
 
+/*
+ ** Add the default folder with current path
+*/
+
 static void			ft_add_default_folder(t_options *params)
 {
 	if (!(params->folders = malloc(sizeof(char*) * 2)) ||
@@ -66,6 +78,11 @@ static void			ft_add_default_folder(t_options *params)
 	params->folders[0] = ".";
 	params->folders[1] = 0;
 }
+
+/*
+ ** Parse params with argv, fill the t_options struct with options and
+ ** files and folders.
+*/
 
 static t_options	ft_handle_params(int argc, char *argv[])
 {
@@ -102,6 +119,11 @@ static t_options	ft_handle_params(int argc, char *argv[])
 		ft_add_default_folder(&params);
 	return (params);
 }
+
+/*
+ ** Launch params parsing
+ ** Then, start find files
+*/
 
 int					main(int argc, char *argv[])
 {

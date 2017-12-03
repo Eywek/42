@@ -6,13 +6,17 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 14:19:10 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 14:25:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <dirent.h>
 #include "../includes/ft_ls.h"
+
+/*
+ ** Add folder to folder list with the name
+*/
 
 t_dir	*ft_add_folder(t_dir **dirs, const char *name)
 {
@@ -32,6 +36,10 @@ t_dir	*ft_add_folder(t_dir **dirs, const char *name)
 	ptr->next = dir;
 	return (dir);
 }
+
+/*
+ ** Add file in the t_file (from a t_dir) with the current_path
+*/
 
 void	ft_add_file(t_file **files, char *filename, char *current_path)
 {
@@ -55,6 +63,10 @@ void	ft_add_file(t_file **files, char *filename, char *current_path)
 	pfiles->next = file;
 }
 
+/*
+ ** Add files (from t_options) to the first dir
+*/
+
 void	ft_handle_files_params(char **files_list, t_dir **dirs)
 {
 	t_file	*files;
@@ -77,6 +89,10 @@ void	ft_handle_files_params(char **files_list, t_dir **dirs)
 	free(path);
 }
 
+/*
+ ** Find files in folders, recursive function if -R is present
+*/
+
 void	ft_handle_folder(char *path, t_dir **dirs, t_options params)
 {
 	DIR				*dir;
@@ -98,6 +114,10 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options params)
 	folder->files = files;
 	closedir(dir);
 }
+
+/*
+ ** Main function which find files and folders in t_options
+*/
 
 t_dir	*ft_find_files(t_options params)
 {
