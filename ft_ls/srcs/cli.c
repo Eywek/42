@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 14:24:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 15:11:43 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ static t_options	ft_handle_params(int argc, char *argv[])
 		else if (++errors_count)
 			ft_throw_error_file_not_found(argv[count]);
 	}
+	// TODO: Sort params.folders && params.files
 	if (files_count == 0 && errors_count == 0)
 		ft_add_default_folder(&params);
 	return (params);

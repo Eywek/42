@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 16:23:51 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 15:08:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 15:15:34 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,19 @@ void	ft_debug_file(t_file *file)
 				ft_get_group_name(file->stats.st_gid));
 }
 
+void	ft_debug_files(t_file *files)
+{
+	while (files)
+	{
+		ft_debug_file(files);
+		files = files->next;
+	}
+}
+
 void	ft_debug_dir(t_dir *dir)
 {
 	ft_printf("dirs.name = %s\n", dir->name);
-	while (dir->files)
-	{
-		ft_debug_file(dir->files);
-		dir->files = dir->files->next;
-	}
+	ft_debug_files(dir->files);
 }
 
 void	ft_debug_dirs(t_dir *dirs)

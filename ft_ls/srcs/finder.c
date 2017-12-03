@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 14:25:55 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 15:18:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,15 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options params)
 		else if (entry->d_name[0] != '.' || params.hidden_files)
 			ft_add_file(&files, entry->d_name, path);
 	}
+	if (params.sort_by_time)
+		ft_sort_files_by_time(&files);
+	if (params.sort_reverse)
+		ft_sort_files_reverse(&files);
+	ft_printf("\n--------------------\n");
+	ft_printf("- FT_HANDLE_FOLDER -\n");
+	ft_printf("--------------------\n\n");
+	ft_debug_files(files);
+	ft_printf("\n--------------------\n\n");
 	folder->files = files;
 	closedir(dir);
 }

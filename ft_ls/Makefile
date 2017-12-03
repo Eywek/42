@@ -14,7 +14,8 @@ NAME=ft_ls
 
 SRCS_PATH=./srcs/
 SRCS_FILES=cli.c errors/exceptions.c errors/usage.c utils/directory.c \
-			utils/file.c finder.c utils/memory.c utils/debug.c utils/path.c
+			utils/file.c finder.c utils/memory.c utils/debug.c utils/path.c \
+			utils/sort.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 OBJECTS_PATH=./objs/
