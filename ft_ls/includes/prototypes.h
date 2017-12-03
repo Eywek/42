@@ -28,6 +28,7 @@ void				ft_throw_failed_open_dir(const char *dirname);
 */
 
 int					ft_is_dir(char *filename);
+int					ft_can_browse(struct dirent entry);
 int					ft_is_file(char *filename);
 int					ft_is_file_or_dir(char *filename);
 

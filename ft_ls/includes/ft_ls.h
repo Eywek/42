@@ -14,6 +14,7 @@
 # define FT_LS_H
 
 # include <sys/stat.h>
+# include <sys/dirent.h>
 
 # include "libs.h"
 # include "structs.h"

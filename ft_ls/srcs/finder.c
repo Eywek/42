@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 18:23:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/03 14:19:10 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options params)
 	folder = ft_add_folder(dirs, path);
 	while ((entry = readdir(dir)))
 	{
-		if (params.recursive && entry->d_type == DT_DIR && ft_strcmp(entry->d_name, "..") != 0 && ft_strcmp(entry->d_name, ".") != 0)
+		if (params.recursive && ft_can_browse(*entry))
 			ft_handle_folder(ft_set_path(path, entry->d_name), dirs, params);
 		else if (entry->d_name[0] != '.' || params.hidden_files)
 			ft_add_file(&files, entry->d_name, path);
