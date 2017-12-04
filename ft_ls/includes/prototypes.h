@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 11:31:20 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:52:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void				ft_debug_dirs(t_dir *dirs);
  ** DISPLAY
 */
 
+void				ft_display_file(t_file *file);
 void				ft_display_files(t_file *files);
 void				ft_display_dir(t_dir *dir);
 
@@ -84,6 +85,7 @@ void				ft_display_dir(t_dir *dir);
  ** GENERAL
 */
 
+void				ft_handle_folder(char *path, t_dir **dirs, t_options params);
 t_dir				*ft_find_files(t_options params);
 
 #endif

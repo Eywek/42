@@ -6,11 +6,16 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 11:23:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:25:23 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+
+void	ft_display_file(t_file *file)
+{
+	ft_printf("%s\n", file->name);
+}
 
 void	ft_display_files(t_file *files)
 {
@@ -19,7 +24,7 @@ void	ft_display_files(t_file *files)
 	ptr = files;
 	while (ptr)
 	{
-		ft_printf("%s\n", ptr->name);
+		ft_display_file(ptr);
 		ptr = ptr->next;
 	}
 }
