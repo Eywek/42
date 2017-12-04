@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 15:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 11:31:01 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:31:12 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_sort_files(t_file **files_list, int (*f)(t_file *file1, t_file *file2))
 
 	files = *files_list;
 	swaped = 1;
-	while (swaped)
+	while (swaped && files)
 	{
 		swaped = 0;
 		ptr = *files_list;

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:27:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 11:32:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:33:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ int	ft_compare_files_alpha(t_file *file1, t_file *file2)
 {
 	return (ft_strcmp(file1->name, file2->name) > 0);
 }
-

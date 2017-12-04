@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 11:52:29 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 12:09:45 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ int					ft_compare_files_alpha(t_file *file1, t_file *file2);
 
 void				ft_free_tab(char **tab);
 void				ft_copy_tab(char ***tab, char **ref);
+
+/*
+ ** MERGE / ADD
+*/
+
+t_dir				*ft_add_folder(t_dir **dirs, const char *name);
+void				ft_add_file(t_file **files, char *filename, char *current_path);
 
 /*
  ** DEBUG
