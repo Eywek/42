@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 16:23:51 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 15:15:34 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 13:29:56 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_debug_options(t_options params)
 	ft_printf("params.sort_by_time = %d\n", params.sort_by_time);
 	ft_printf("params.reverse = %d\n", params.sort_reverse);
 	ft_printf("params.no_columns = %d\n", params.no_columns);
+	ft_printf("params.options_count = %d\n", params.options_count);
+	ft_printf("params.display_dirs = %d\n", params.display_dirs);
 	ft_printf("params.folders : \n%A\n", params.folders);
 	ft_printf("params.files : \n%A\n", params.files);
 }

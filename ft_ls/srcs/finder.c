@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 12:50:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 13:20:12 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options params)
 		ft_sort_files_reverse(&files);
 	folder->files = files;
 	closedir(dir);
-	ft_display_dir(folder);
+	ft_display_dir(folder, params);
 	if (params.recursive)
 		ft_recursive(path, &folder, params);
 }
@@ -102,7 +102,7 @@ t_dir	*ft_find_files(t_options params)
 
 	dirs = NULL;
 	ft_handle_files_params(params.files, &dirs);
-	ft_display_files(dirs->files);
+	ft_display_files(dirs->files, params);
 	ft_free_tab(params.files);
 	while (params.folders && *(params.folders))
 	{

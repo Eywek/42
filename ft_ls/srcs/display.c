@@ -6,31 +6,33 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 11:52:18 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 13:29:46 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-void	ft_display_file(t_file *file)
+void	ft_display_file(t_file *file, t_options params)
 {
+	(void)params;
 	ft_printf("%s\n", file->name);
 }
 
-void	ft_display_files(t_file *files)
+void	ft_display_files(t_file *files, t_options params)
 {
 	t_file	*ptr;
 
 	ptr = files;
 	while (ptr)
 	{
-		ft_display_file(ptr);
+		ft_display_file(ptr, params);
 		ptr = ptr->next;
 	}
 }
 
-void	ft_display_dir(t_dir *dir)
+void	ft_display_dir(t_dir *dir, t_options params)
 {
-	ft_printf("\n%s:\n", dir->name);
-	ft_display_files(dir->files);
+	if (params.display_dirs)
+		ft_printf("%s:\n", dir->name);
+	ft_display_files(dir->files, params);
 }

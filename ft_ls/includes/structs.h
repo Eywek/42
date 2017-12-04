@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:43:44 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 17:32:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 13:29:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ typedef struct		s_options {
 	int				sort_by_time;
 	int				sort_reverse;
 	int				no_columns;
+	int				options_count;
+	int				display_dirs;
 	char			**folders;
 	char			**files;
 }					t_options;
