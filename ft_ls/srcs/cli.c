@@ -6,9 +6,22 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 15:47:55 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 19:15:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+ * TODO:
+ *
+ * Free mes listes
+ * Free mes strings
+ * Faire les colonnes
+ * Afficher les couleurs avec le -G
+ * Afficher la size avec le -h
+ * Faire les ACL
+ * Faire les major / minor
+ * Edit la position du permission denied (-R)
+ */
 
 #include <stdlib.h>
 #include "../includes/ft_ls.h"

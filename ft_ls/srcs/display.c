@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 19:09:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 19:16:02 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void		ft_display_file_permissions(t_file *file)
 {
-	ft_printf("%c", ft_file_type(file->stats.st_mode)); // TODO: Display type
+	ft_printf("%c", ft_file_type(file->stats.st_mode));
 	ft_printf((file->stats.st_mode & S_IRUSR) ? "r" : "-");
 	ft_printf((file->stats.st_mode & S_IWUSR) ? "w" : "-");
 	ft_printf((file->stats.st_mode & S_IXUSR) ? "x" : "-");
@@ -28,7 +28,7 @@ void		ft_display_file_permissions(t_file *file)
 	ft_printf((file->stats.st_mode & S_IXOTH) ? "x" : "-");
 }
 
-// TODO: Date + ACL + Links + Major/Minor
+// TODO: ACL + Major/Minor
 void		ft_display_file(t_file *file, t_options params, t_display datas)
 {
 	if (!params.long_format)// && params.no_columns)
@@ -74,7 +74,7 @@ void		ft_display_files(t_file *files, t_options params)
 	t_display	datas;
 
 	ptr = files;
-	datas = ft_calcul_file_datas(files); // TODO: Display total
+	datas = ft_calcul_file_datas(files);
 	if (params.long_format && ptr)
 		ft_printf("total %d\n", datas.total_blocks);
 	while (ptr)
