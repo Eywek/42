@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 14:01:39 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 14:01:47 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void				ft_throw_failed_open_dir(const char *dirname);
 */
 
 int					ft_is_dir(char *filename);
-int					ft_can_browse(struct dirent entry);
+int					ft_can_browse(t_file file);
 int					ft_is_file(char *filename);
 int					ft_is_file_or_dir(char *filename);
 
