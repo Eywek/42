@@ -3,3 +3,5 @@ cmake-build-debug
 ft_ls
 objs
 test
+*.o
+*.a
