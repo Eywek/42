@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 13:20:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 14:01:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void				ft_display_dir(t_dir *dir, t_options params);
  ** GENERAL
 */
 
-void				ft_handle_folder(char *path, t_dir **dirs, t_options params);
+void				ft_handle_folder(char *path, t_dir **dirs, t_options *params);
 t_dir				*ft_find_files(t_options params);
 
 #endif

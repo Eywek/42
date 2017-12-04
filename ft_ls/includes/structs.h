@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:43:44 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 13:29:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 13:57:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_options {
 	int				no_columns;
 	int				options_count;
 	int				display_dirs;
+	int				dirs_count;
 	char			**folders;
 	char			**files;
 }					t_options;

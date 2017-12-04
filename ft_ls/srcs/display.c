@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 13:29:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 14:03:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	ft_display_files(t_file *files, t_options params)
 void	ft_display_dir(t_dir *dir, t_options params)
 {
 	if (params.display_dirs)
-		ft_printf("%s:\n", dir->name);
+		ft_printf("%c%s:\n", (params.dirs_count > 1 ? '\n' : 0), dir->name);
 	ft_display_files(dir->files, params);
 }
