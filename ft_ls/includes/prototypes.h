@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 17:08:36 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:31:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ struct stat			ft_get_stats_from_name(char *name);
 
 void				ft_sort_tab_by_time(char **tab);
 void				ft_sort_params(t_options *params);
-void				ft_sort_files_by_time(t_file **files);
+void				ft_sort_files(t_file **files, int (*f)(t_file *file1, t_file *file2));
 void				ft_sort_files_reverse(t_file **files);
+
+int					ft_compare_files_mtime(t_file *file1, t_file *file2);
+int					ft_compare_files_alpha(t_file *file1, t_file *file2);
 
 /*
  ** MEMORY
@@ -69,6 +72,13 @@ void				ft_debug_file(t_file *file);
 void				ft_debug_files(t_file *files);
 void				ft_debug_dir(t_dir *dir);
 void				ft_debug_dirs(t_dir *dirs);
+
+/*
+ ** DISPLAY
+*/
+
+void				ft_display_files(t_file *files);
+void				ft_display_dir(t_dir *dir);
 
 /*
  ** GENERAL

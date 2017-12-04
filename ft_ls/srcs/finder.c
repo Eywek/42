@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 15:18:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:27:02 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,16 +112,14 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options params)
 			ft_add_file(&files, entry->d_name, path);
 	}
 	if (params.sort_by_time)
-		ft_sort_files_by_time(&files);
+		ft_sort_files(&files, &ft_compare_files_mtime);
+	else
+		ft_sort_files(&files, &ft_compare_files_alpha);
 	if (params.sort_reverse)
 		ft_sort_files_reverse(&files);
-	ft_printf("\n--------------------\n");
-	ft_printf("- FT_HANDLE_FOLDER -\n");
-	ft_printf("--------------------\n\n");
-	ft_debug_files(files);
-	ft_printf("\n--------------------\n\n");
 	folder->files = files;
 	closedir(dir);
+	ft_display_dir(folder);
 }
 
 /*
@@ -134,6 +132,7 @@ t_dir	*ft_find_files(t_options params)
 
 	dirs = NULL;
 	ft_handle_files_params(params.files, &dirs);
+	ft_display_files(dirs->files);
 	ft_free_tab(params.files);
 	while (params.folders && *(params.folders))
 	{

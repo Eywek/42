@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 16:31:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:17:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int					main(int argc, char *argv[])
 	t_options	params;
 
 	params = ft_handle_params(argc, argv);
-	ft_debug_options(params);
-	ft_debug_dirs(ft_find_files(params));
+	//ft_debug_options(params);
+	/*ft_debug_dirs(*/ft_find_files(params)/*)*/;
 	return (0);
 }
