@@ -6,13 +6,14 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 17:58:22 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/03 16:29:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:34:32 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include <stdint.h>
 
 typedef struct	s_list
 {
@@ -21,6 +22,8 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+int				ft_max(int ref, int nb);
+int				ft_nbrlen(uintmax_t nb);
 void			ft_reverse_tab(char **tab);
 void			ft_swap(char **a, char **b);
 void			ft_sort_wordtab(char **tab);

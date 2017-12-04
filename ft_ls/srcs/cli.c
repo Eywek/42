@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 13:58:34 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 15:47:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int			ft_set_options(char *options, t_options *params)
 	int	state;
 
 	state = 0;
-	while (*(++options))
+	while (*(++options)) // TODO: -G -h
 	{
 		if (*options == 'a' && (state = 1) == 1)
 			params->hidden_files = 1;
@@ -62,6 +62,8 @@ static int			ft_set_options(char *options, t_options *params)
 			params->no_columns = 1;
 		else if (*options == '-')
 			state = 1;
+		else
+			return (0);
 	}
 	if (state)
 		params->options_count++;

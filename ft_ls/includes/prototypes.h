@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 14:01:47 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 17:58:14 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void				ft_debug_dirs(t_dir *dirs);
  ** DISPLAY
 */
 
-void				ft_display_file(t_file *file, t_options params);
+void				ft_display_format_time(time_t date);
+void				ft_display_file(t_file *file, t_options params, t_display datas);
 void				ft_display_files(t_file *files, t_options params);
 void				ft_display_dir(t_dir *dir, t_options params);
 

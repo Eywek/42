@@ -27,6 +27,13 @@ typedef struct		s_options {
 	char			**files;
 }					t_options;
 
+typedef struct		s_display {
+	int				max_hard_link_len;
+	int				max_user_len;
+	int				max_group_len;
+	int				max_size_len;
+}					t_display;
+
 typedef struct		s_file {
 	char			*name;
 	char			*path;
