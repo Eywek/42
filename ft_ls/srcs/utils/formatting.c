@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 17:34:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 18:14:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 18:40:33 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,22 @@ void	ft_display_format_time(time_t date)
 		write(1, s + 19, 5);
 	else
 		write(1, s + 11, 5);
+}
+
+char	ft_file_type(mode_t mode)
+{
+	if (S_ISBLK(mode))
+		return ('b');
+	else if (S_ISCHR(mode))
+		return ('c');
+	else if (S_ISDIR(mode))
+		return ('d');
+	else if (S_ISLNK(mode))
+		return ('l');
+	else if (S_ISSOCK(mode))
+		return ('s');
+	else if (S_ISFIFO(mode))
+		return ('p');
+	else
+		return ('-');
 }

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 17:58:14 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 18:41:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ struct stat			ft_get_file_stats(t_file file);
 char				*ft_get_user_name(uid_t id);
 char				*ft_get_group_name(uid_t id);
 
+char				*ft_get_link_path(char *path);
 char				*ft_set_path(char *path, const char *add);
 
 /*
@@ -84,6 +85,7 @@ void				ft_debug_dirs(t_dir *dirs);
  ** DISPLAY
 */
 
+char				ft_file_type(mode_t mode);
 void				ft_display_format_time(time_t date);
 void				ft_display_file(t_file *file, t_options params, t_display datas);
 void				ft_display_files(t_file *files, t_options params);

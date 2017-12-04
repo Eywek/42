@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:43:44 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 13:57:09 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 19:07:50 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_options {
 	int				options_count;
 	int				display_dirs;
 	int				dirs_count;
+	char			*current_path;
 	char			**folders;
 	char			**files;
 }					t_options;
@@ -32,6 +33,8 @@ typedef struct		s_display {
 	int				max_user_len;
 	int				max_group_len;
 	int				max_size_len;
+	int				max_name_len;
+	int				total_blocks;
 }					t_display;
 
 typedef struct		s_file {

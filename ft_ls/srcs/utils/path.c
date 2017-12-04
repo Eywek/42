@@ -6,17 +6,30 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:35:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 17:48:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 19:04:12 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include "../../includes/ft_ls.h"
 
 char	*ft_set_path(char *path, const char *add)
 {
-	if (ft_strlen(path) > 0)
-		path = ft_strjoin(path, DIRECTORY_SEPARATOR);
+	size_t	size;
+
+	if ((size = ft_strlen(path)) > 0) // TODO: Remove old path, remove old strjoin
+		path = ft_strjoin(path, path[size - 1] != *DIRECTORY_SEPARATOR ? DIRECTORY_SEPARATOR : "");
 	path = ft_strjoin(path, add);
 	return (path);
+}
+
+char	*ft_get_link_path(char *path)
+{
+	char		result[256];
+	ssize_t		ret;
+
+	ret = readlink(path, result, 256);
+	result[ret] = 0;
+	return (ft_strdup(result));
 }

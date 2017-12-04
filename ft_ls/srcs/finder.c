@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 14:25:13 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/04 14:25:18 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options *params)
 	t_dir			*folder;
 
 	files = NULL;
+	params->current_path = path;
 	if (!(dir = opendir(path)))
 		return (ft_throw_failed_open_dir(path));
 	folder = ft_add_folder(dirs, path);
