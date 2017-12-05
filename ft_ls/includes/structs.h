@@ -26,6 +26,7 @@ typedef struct		s_options {
 	char			*current_path;
 	char			**folders;
 	char			**files;
+	int				status;
 }					t_options;
 
 typedef struct		s_display {

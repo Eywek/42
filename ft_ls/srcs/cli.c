@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 13:43:50 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:18:34 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ static t_options	ft_handle_params(int argc, char *argv[])
 			files_count++;
 		}
 		else if (++errors_count)
-			ft_throw_error_file_not_found(argv[count]);
+			ft_throw_error_file_not_found(argv[count], &params);
 	}
 	params.display_dirs = argc - params.options_count > 2;
 	if (files_count == 0 && errors_count == 0)
@@ -152,6 +152,6 @@ int					main(int argc, char *argv[])
 
 	params = ft_handle_params(argc, argv);
 	//ft_debug_options(params);
-	/*ft_debug_dirs(*/ft_find_files(params)/*)*/;
-	return (0);
+	/*ft_debug_dirs(*/ft_find_files(&params)/*)*/;
+	return (params.status);
 }

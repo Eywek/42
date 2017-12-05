@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 12:25:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:19:43 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options *params)
 	files = NULL;
 	params->current_path = path;
 	if (!(dir = opendir(path)))
-		return (ft_throw_failed_open_dir(path, *params));
+		return (ft_throw_failed_open_dir(path, params));
 	folder = ft_add_folder(dirs, path);
 	while ((entry = readdir(dir)))
 	{
@@ -107,19 +107,19 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options *params)
  ** Main function which find files and folders in t_options
 */
 
-t_dir	*ft_find_files(t_options params)
+t_dir	*ft_find_files(t_options *params)
 {
 	t_dir	*dirs;
 
 	dirs = NULL;
-	params.dirs_count = ft_handle_files_params(params.files, &dirs, params);
-	ft_display_files(dirs->files, params);
-	ft_free_tab(params.files);
-	while (params.folders && *(params.folders))
+	params->dirs_count = ft_handle_files_params(params->files, &dirs, *params);
+	ft_display_files(dirs->files, *params);
+	ft_free_tab(params->files);
+	while (params->folders && *(params->folders))
 	{
-		ft_handle_folder(*(params.folders), &dirs, &params);
-		params.folders++;
+		ft_handle_folder(*(params->folders), &dirs, params);
+		params->folders++;
 	}
-	ft_free_tab(params.folders);
+	ft_free_tab(params->folders);
 	return (dirs);
 }
