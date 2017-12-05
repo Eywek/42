@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 17:47:07 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:10:27 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int		ft_handle_files_params(char **files_list, t_options params)
 	if (params.sort_reverse)
 		ft_sort_files_reverse(&files);
 	ft_display_files(files, params);
+	ft_remove_files(&files);
 	free(path);
+	ft_free_tab(files_list);
 	return (files_count);
 }
 
@@ -109,7 +111,6 @@ void	ft_handle_folder(char *path, t_options *params)
 void	ft_find_files(t_options *params)
 {
 	params->dirs_count = ft_handle_files_params(params->files, *params);
-	ft_free_tab(params->files);
 	while (params->folders && *(params->folders))
 	{
 		ft_handle_folder(*(params->folders), params);
