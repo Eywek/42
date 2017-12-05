@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 13:43:40 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 13:43:50 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
  * Faire les ACL
  * Faire les major / minor
  * Edit la position du permission denied (-R)
+ * Code de retour si une erreur (permission denied)
  */
 
 #include <stdlib.h>

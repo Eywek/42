@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:35:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 13:47:07 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:15:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ int			ft_is_file(char *filename)
 	struct stat path_stat;
 
 	lstat(filename, &path_stat);
-	return (S_ISREG(path_stat.st_mode) || S_ISLNK(path_stat.st_mode));
+	if (S_ISREG(path_stat.st_mode) || !path_stat.st_mode)
+		return (1);
+	else if (S_ISLNK(path_stat.st_mode))
+		return (ft_is_file(ft_get_link_path(filename)));
+	return (0);
 }
 
 int			ft_is_file_or_dir(char *filename)
