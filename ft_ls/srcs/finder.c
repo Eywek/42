@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 14:19:43 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:19:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@ void	ft_recursive(char *path, t_dir **dirs, t_options *params)
 	while (file)
 	{
 		if (ft_can_browse(*file))
-			ft_handle_folder(ft_set_path(path, file->name), dirs, params);
+		{
+			path = ft_set_path(path, file->name);
+			ft_handle_folder(path, dirs, params);
+			free(path);
+		}
 		file = file->next;
 	}
 }

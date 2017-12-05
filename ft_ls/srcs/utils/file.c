@@ -6,23 +6,33 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:35:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 14:15:07 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 15:56:00 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pwd.h>
 #include <grp.h>
+#include <stdlib.h>
 #include "../../includes/ft_ls.h"
 
 int			ft_is_file(char *filename)
 {
-	struct stat path_stat;
+	char		*link_path;
+	struct stat	path_stat;
 
 	lstat(filename, &path_stat);
 	if (S_ISREG(path_stat.st_mode) || !path_stat.st_mode)
 		return (1);
 	else if (S_ISLNK(path_stat.st_mode))
-		return (ft_is_file(ft_get_link_path(filename)));
+	{
+		link_path = ft_get_link_path(filename);
+		if (ft_is_file(link_path))
+		{
+			free(link_path);
+			return (1);
+		}
+		free(link_path);
+	}
 	return (0);
 }
 

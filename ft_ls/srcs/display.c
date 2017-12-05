@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 15:14:50 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 15:15:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void		ft_display_file_permissions(t_file *file)
 // TODO: ACL + Major/Minor
 void		ft_display_file(t_file *file, t_options params, t_display datas)
 {
+	char	*link_path;
+
 	if (!params.long_format)// && params.no_columns)
 		return ((void)ft_printf("%s\n", file->name));
 	//if (!params.long_format)
@@ -52,7 +54,11 @@ void		ft_display_file(t_file *file, t_options params, t_display datas)
 				datas.max_size_len, file->stats.st_size);
 	ft_display_format_time(file->stats.st_mtime);
 	if (S_ISLNK(file->stats.st_mode))
-		ft_printf(" %s -> %s\n", file->name, ft_get_link_path(ft_set_path(params.current_path, file->name)));
+	{
+		link_path = ft_get_link_path(ft_set_path(params.current_path, file->name));
+		ft_printf(" %s -> %s\n", file->name, link_path);
+		free(link_path);
+	}
 	else
 		ft_printf(" %s\n", file->name);
 }
