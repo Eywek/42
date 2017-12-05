@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:48:35 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 17:48:34 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:27:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  ** Add folder to folder list with the name
 */
 
-t_dir	*ft_add_folder(const char *name)
+t_dir		*ft_add_folder(const char *name)
 {
 	t_dir	*dir;
 
@@ -33,7 +33,7 @@ t_dir	*ft_add_folder(const char *name)
  ** Add file in the t_file (from a t_dir) with the current_path
 */
 
-void	ft_add_file(t_file **files, char *filename, char *current_path)
+void		ft_add_file(t_file **files, char *filename, char *current_path)
 {
 	t_file	*pfiles;
 	t_file	*file;
@@ -55,4 +55,17 @@ void	ft_add_file(t_file **files, char *filename, char *current_path)
 	while (pfiles->next)
 		pfiles = pfiles->next;
 	pfiles->next = file;
+}
+
+/*
+ ** Add the default folder with current path
+*/
+
+void		ft_add_default_folder(t_options *params)
+{
+	if (!(params->folders = malloc(sizeof(char*) * 2)) ||
+		!(params->folders[0] = malloc(sizeof(char) * 2)))
+		return (ft_throw_error_memory());
+	params->folders[0] = ".";
+	params->folders[1] = 0;
 }

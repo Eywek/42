@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 18:24:02 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:34:08 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,31 @@ static int			ft_set_options(char *options, t_options *params)
 	return (state);
 }
 
-/*
- ** Add the default folder with current path
-*/
-
-static void			ft_add_default_folder(t_options *params)
+int					ft_handle_param(char *param, int *errors_count,
+		int *check_for_flags, t_options *params)
 {
-	if (!(params->folders = malloc(sizeof(char*) * 2)) ||
-		!(params->folders[0] = malloc(sizeof(char) * 2)))
-		return (ft_throw_error_memory());
-	params->folders[0] = ".";
-	params->folders[1] = 0;
+	int	files_count;
+
+	files_count = 0;
+	if (param[0] == '-' && param[1] && *check_for_flags)
+	{
+		if (ft_strcmp(param, "--") == 0 && params->options_count++)
+			*check_for_flags = 0;
+		else
+			ft_set_options(param, params);
+	}
+	else if (ft_is_file_or_dir(param))
+	{
+		ft_put_in_options(param, ft_is_file(param) ?
+				&(params->files) : &(params->folders));
+		*check_for_flags = 0;
+		files_count++;
+	}
+	else if (ft_strlen(param) == 0)
+		ft_throw_error_fts_open();
+	else if (++(*errors_count))
+		ft_put_in_options(param, &(params->not_founds));
+	return (files_count);
 }
 
 /*
@@ -112,25 +126,8 @@ static t_options	ft_handle_params(int argc, char *argv[])
 	files_count = 0;
 	errors_count = 0;
 	while (++count < argc)
-	{
-		if (argv[count][0] == '-' && argv[count][1] && check_for_flags)
-		{
-			if (ft_strcmp(argv[count], "--") == 0 && params.options_count++)
-				check_for_flags = 0;
-			else if (!ft_set_options(argv[count], &params))
-				continue;
-		}
-		else if (ft_is_file_or_dir(argv[count]))
-		{
-			ft_put_in_options(argv[count], ft_is_file(argv[count]) ? &(params.files) : &(params.folders));
-			check_for_flags = 0;
-			files_count++;
-		}
-		else if (ft_strlen(argv[count]) == 0)
-			ft_throw_error_fts_open();
-		else if (++errors_count)
-			ft_put_in_options(argv[count], &(params.not_founds));
-	}
+		files_count += ft_handle_param(argv[count], &errors_count,
+				&check_for_flags, &params);
 	if (errors_count > 0)
 		ft_throw_error_files_not_found(params.not_founds, &params);
 	params.display_dirs = argc - params.options_count > 2;
