@@ -6,11 +6,13 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:48:35 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 19:06:01 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 19:40:21 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <ntsid.h>
+#define MA_MIN(x) (S_ISCHR(x) || S_ISBLK(x))
 #include "../../includes/ft_ls.h"
 
 /*
@@ -45,7 +47,9 @@ void		ft_add_file(t_file **files, char *filename, char *current_path)
 	file->stats = ft_get_file_stats(*file);
 	file->user = ft_get_user_name(file->stats.st_uid);
 	file->group = ft_get_group_name(file->stats.st_gid);
-	file->acl = ft_get_file_acl(file->path);
+	file->acl = ft_get_file_acl(*file);
+	file->major = (MA_MIN(file->stats.st_mode)) ? major(file->stats.st_dev) : 0;
+	file->minor = (MA_MIN(file->stats.st_mode)) ? minor(file->stats.st_dev) : 0;
 	file->next = NULL;
 	if (!*files)
 	{

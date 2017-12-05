@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:35:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 19:09:39 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 19:19:24 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,19 @@ char		*ft_get_group_name(gid_t id)
 	return (ft_strdup(grp->gr_name));
 }
 
-ssize_t		ft_get_file_acl(char *filename)
+ssize_t		ft_get_file_acl(t_file file)
 {
+	char	*filename;
 	char	name[256];
+	ssize_t	res;
 
+	if (S_ISLNK(file.stats.st_mode))
+		filename = ft_get_link_path(file.path);
+	else
+		filename = file.path;
 	listxattr(filename, name, sizeof(name), 0);
-	return (getxattr(filename, name, 0, 0, 0, 0));
+	res = getxattr(filename, name, 0, 0, 0, 0);
+	if (S_ISLNK(file.stats.st_mode))
+		free(filename);
+	return (res);
 }

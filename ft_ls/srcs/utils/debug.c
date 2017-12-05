@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 16:23:51 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 16:09:12 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 19:10:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	ft_debug_file(t_file *file)
 	ft_printf("     dirs.files.user = %s\n", file->user);
 	ft_printf("     dirs.files.group = %s\n", file->group);
 	ft_printf("     dirs.files.acl = %d\n", file->acl);
+	ft_printf("     dirs.files.major = %d\n", file->major);
+	ft_printf("     dirs.files.minor = %d\n", file->minor);
 }
 
 void	ft_debug_files(t_file *files)

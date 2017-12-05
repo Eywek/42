@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:43:44 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 14:18:49 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 19:07:10 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct		s_file {
 	char			*user;
 	char			*group;
 	ssize_t			acl;
+	int				major;
+	int				minor;
 	struct stat		stats;
 	struct s_file	*next;
 }					t_file;
