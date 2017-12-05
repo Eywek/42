@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:38:58 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 14:20:43 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:30:59 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,15 @@ void	ft_throw_error_file_not_found(char *filename, t_options *params)
 	ft_putstr_fd("ft_ls: ", STD_ERR);
 	ft_putstr_fd(filename, STD_ERR);
 	ft_putstr_fd(": No such file or directory\n", STD_ERR);
-	params->status = 1;
+	params->status = EXIT_FAILURE;
+}
+
+void	ft_throw_error_fts_open(void)
+{
+	ft_putstr_fd("ft_ls: ", STD_ERR);
+	ft_putstr_fd("fts_open", STD_ERR);
+	ft_putstr_fd(": No such file or directory\n", STD_ERR);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_throw_failed_open_dir(const char *dirname, t_options *params)
@@ -49,5 +57,5 @@ void	ft_throw_failed_open_dir(const char *dirname, t_options *params)
 	ft_putstr_fd("ft_ls: ", STD_ERR);
 	ft_putstr_fd(dirname, STD_ERR);
 	ft_putstr_fd(": Permission denied\n", STD_ERR);
-	params->status = 1;
+	params->status = EXIT_FAILURE;
 }

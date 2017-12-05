@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 14:18:34 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:50:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
  * Afficher la size avec le -h
  * Faire les ACL
  * Faire les major / minor
- * Edit la position du permission denied (-R)
  * Code de retour si une erreur (permission denied)
  */
 
@@ -109,13 +108,13 @@ static t_options	ft_handle_params(int argc, char *argv[])
 	t_options	params;
 	int			check_for_flags;
 	int			files_count;
-	int			errors_count;
+	//int			errors_count;
 
 	ft_memset(&params, 0, sizeof(params));
 	count = 0;
 	check_for_flags = 1;
 	files_count = 0;
-	errors_count = 0;
+	//errors_count = 0;
 	while (++count < argc)
 	{
 		if (argv[count][0] == '-' && argv[count][1] && check_for_flags)
@@ -125,17 +124,17 @@ static t_options	ft_handle_params(int argc, char *argv[])
 			else if (!ft_set_options(argv[count], &params))
 				continue;
 		}
-		else if (ft_is_file_or_dir(argv[count]))
+		else// if (ft_is_file_or_dir(argv[count]))
 		{
 			ft_put_in_options(argv[count], ft_is_file(argv[count]) ? &(params.files) : &(params.folders));
 			check_for_flags = 0;
 			files_count++;
 		}
-		else if (++errors_count)
-			ft_throw_error_file_not_found(argv[count], &params);
+		//else if (++errors_count)
+		//	ft_throw_error_file_not_found(argv[count], &params);
 	}
 	params.display_dirs = argc - params.options_count > 2;
-	if (files_count == 0 && errors_count == 0)
+	if (files_count == 0)// && errors_count == 0)
 		ft_add_default_folder(&params);
 	ft_sort_params(&params);
 	return (params);
@@ -148,8 +147,13 @@ static t_options	ft_handle_params(int argc, char *argv[])
 
 int					main(int argc, char *argv[])
 {
+	int			count;
 	t_options	params;
 
+	count = 1;
+	while (count < argc)
+		if (ft_strlen(argv[count++]) == 0)
+			ft_throw_error_fts_open();
 	params = ft_handle_params(argc, argv);
 	//ft_debug_options(params);
 	/*ft_debug_dirs(*/ft_find_files(&params)/*)*/;
