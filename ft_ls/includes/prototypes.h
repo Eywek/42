@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 14:20:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:55:05 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void				ft_usage(void);
 void				ft_throw_error_options(char option);
 void				ft_throw_error_memory(void);
-void				ft_throw_error_file_not_found(char *filename, t_options *params);
+void				ft_throw_error_files_not_found(char **files, t_options *params);
 void				ft_throw_failed_open_dir(const char *dirname, t_options *params);
 void				ft_throw_error_fts_open(void);
 

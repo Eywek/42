@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:43:44 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 19:07:50 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:18:49 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_options {
 	char			*current_path;
 	char			**folders;
 	char			**files;
+	char			**not_founds;
 	int				status;
 }					t_options;
 

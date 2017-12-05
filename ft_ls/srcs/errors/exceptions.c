@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:38:58 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 14:30:59 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:56:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,16 @@ void	ft_throw_error_options(char option)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_throw_error_file_not_found(char *filename, t_options *params)
+void	ft_throw_error_files_not_found(char **files, t_options *params)
 {
-	ft_putstr_fd("ft_ls: ", STD_ERR);
-	ft_putstr_fd(filename, STD_ERR);
-	ft_putstr_fd(": No such file or directory\n", STD_ERR);
+	ft_sort_wordtab(files);
+	while (*files)
+	{
+		ft_putstr_fd("ft_ls: ", STD_ERR);
+		ft_putstr_fd(*files, STD_ERR);
+		ft_putstr_fd(": No such file or directory\n", STD_ERR);
+		files++;
+	}
 	params->status = EXIT_FAILURE;
 }
 
