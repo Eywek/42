@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 15:50:15 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 16:16:48 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 10:55:28 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,29 @@ void	ft_copy_tab(char ***tab, char **ref)
 	}
 	while (*ref)
 		*(ptr++) = *(ref++);
+}
+
+void	ft_remove_files(t_file **files_list)
+{
+	t_file	*files;
+	t_file	*next;
+
+	files = *files_list;
+	while (files)
+	{
+		next = files->next;
+		free(files);
+		files = next;
+	}
+	*files_list = NULL;
+}
+
+void	ft_remove_dir(t_dir **dir)
+{
+	t_file	*files;
+
+	files = (*dir)->files;
+	ft_remove_files(&files);
+	//free(*dir);
+	//*dir = (*dir)->next;
 }

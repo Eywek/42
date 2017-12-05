@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 14:25:18 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 10:32:00 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options *params)
 	ft_display_dir(folder, *params);
 	if (params->recursive)
 		ft_recursive(path, &folder, params);
+	ft_remove_dir(&folder);
 }
 
 /*

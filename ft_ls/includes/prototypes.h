@@ -63,6 +63,7 @@ int					ft_compare_files_alpha(t_file *file1, t_file *file2);
 
 void				ft_free_tab(char **tab);
 void				ft_copy_tab(char ***tab, char **ref);
+void				ft_remove_dir(t_dir **dir);
 
 /*
  ** MERGE / ADD
