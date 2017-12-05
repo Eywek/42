@@ -42,6 +42,8 @@ typedef struct		s_display {
 typedef struct		s_file {
 	char			*name;
 	char			*path;
+	char			*user;
+	char			*group;
 	struct stat		stats;
 	struct s_file	*next;
 }					t_file;

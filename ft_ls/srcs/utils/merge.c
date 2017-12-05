@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:48:35 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 12:48:52 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 16:33:05 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ t_dir	*ft_add_folder(t_dir **dirs, const char *name)
 	if (!(dir = malloc(sizeof(t_dir))))
 		ft_throw_error_memory();
 	dir->name = (char*)name;
-	if (!(dir->files = malloc(sizeof(t_file))))
-		ft_throw_error_memory();
 	dir->files = NULL;
 	dir->next = NULL;
 	ptr = *dirs;
@@ -50,6 +48,8 @@ void	ft_add_file(t_file **files, char *filename, char *current_path)
 	file->name = ft_strdup(filename);
 	file->path = ft_set_path(current_path, filename);
 	file->stats = ft_get_file_stats(*file);
+	file->user = ft_get_user_name(file->stats.st_uid);
+	file->group = ft_get_group_name(file->stats.st_gid);
 	file->next = NULL;
 	if (!*files)
 	{

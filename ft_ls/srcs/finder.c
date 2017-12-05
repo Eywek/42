@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 14:19:55 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 16:35:45 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int		ft_handle_files_params(char **files_list, t_dir **dirs, t_options params)
 	if (!(*dirs = malloc(sizeof(t_dir))))
 		ft_throw_error_memory();
 	(*dirs)->name = NULL;
-	if (!(files = malloc(sizeof(t_file))))
-		ft_throw_error_memory();
 	files = NULL;
 	path = ft_strdup("");
 	files_count = 0;
@@ -57,6 +55,7 @@ void	ft_recursive(char *path, t_dir **dirs, t_options *params)
 {
 	t_file	*files;
 	t_file	*file;
+	char	*tmp;
 
 	files = (*dirs)->files;
 	file = files;
@@ -64,9 +63,9 @@ void	ft_recursive(char *path, t_dir **dirs, t_options *params)
 	{
 		if (ft_can_browse(*file))
 		{
-			path = ft_set_path(path, file->name);
-			ft_handle_folder(path, dirs, params);
-			free(path);
+			tmp = ft_set_path(path, file->name);
+			ft_handle_folder(tmp, dirs, params);
+			free(tmp);
 		}
 		file = file->next;
 	}

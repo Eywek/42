@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:35:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 15:56:00 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 16:31:28 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char		*ft_get_user_name(uid_t id)
 
 	if (!(pwd = getpwuid(id)))
 		return (ft_itoa(id));
-	return (pwd->pw_name);
+	return (ft_strdup(pwd->pw_name));
 }
 
 char		*ft_get_group_name(gid_t id)
@@ -68,5 +68,5 @@ char		*ft_get_group_name(gid_t id)
 
 	if (!(grp = getgrgid(id)))
 		return (ft_itoa(id));
-	return (grp->gr_name);
+	return (ft_strdup(grp->gr_name));
 }

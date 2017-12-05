@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 15:15:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 16:08:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void		ft_display_file(t_file *file, t_options params, t_display datas)
 	ft_display_file_permissions(file);
 	ft_printf(" %*lld %-*s %-*s %*lld ",
 				datas.max_hard_link_len + 1, file->stats.st_nlink,
-				datas.max_user_len + 1, ft_get_user_name(file->stats.st_uid),
-				datas.max_group_len + 1, ft_get_group_name(file->stats.st_gid),
+				datas.max_user_len + 1, file->user,
+				datas.max_group_len + 1, file->group,
 				datas.max_size_len, file->stats.st_size);
 	ft_display_format_time(file->stats.st_mtime);
 	if (S_ISLNK(file->stats.st_mode))
@@ -74,8 +74,8 @@ t_display	ft_calcul_file_datas(t_file *files)
 	{
 		datas.max_hard_link_len = ft_max(datas.max_hard_link_len, ft_nbrlen(ptr->stats.st_nlink));
 		datas.max_size_len = ft_max(datas.max_size_len, ft_nbrlen((uintmax_t)ptr->stats.st_size));
-		datas.max_user_len = ft_max(datas.max_user_len, (int)ft_strlen(ft_get_user_name(ptr->stats.st_uid)));
-		datas.max_group_len = ft_max(datas.max_group_len, (int)ft_strlen(ft_get_group_name(ptr->stats.st_gid)));
+		datas.max_user_len = ft_max(datas.max_user_len, (int)ft_strlen(ptr->user));
+		datas.max_group_len = ft_max(datas.max_group_len, (int)ft_strlen(ptr->group));
 		datas.max_name_len = ft_max(datas.max_name_len, (int)ft_strlen(ptr->name));
 		datas.total_blocks += ptr->stats.st_blocks;
 		ptr = ptr->next;

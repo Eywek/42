@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 15:50:15 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 10:55:28 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 16:32:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ void	ft_remove_files(t_file **files_list)
 	while (files)
 	{
 		next = files->next;
+		free(files->group);
+		free(files->name);
+		free(files->path);
+		free(files->user);
 		free(files);
 		files = next;
 	}
