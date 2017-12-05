@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 10:32:00 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 12:25:33 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ int		ft_handle_files_params(char **files_list, t_dir **dirs, t_options params)
 		files_count++;
 		files_list++;
 	}
+	ft_sort_files(&files, &ft_compare_files_alpha);
 	if (params.sort_by_time)
 		ft_sort_files(&files, &ft_compare_files_mtime);
-	else
-		ft_sort_files(&files, &ft_compare_files_alpha);
 	if (params.sort_reverse)
 		ft_sort_files_reverse(&files);
 	(*dirs)->files = files;
@@ -83,17 +82,16 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options *params)
 	files = NULL;
 	params->current_path = path;
 	if (!(dir = opendir(path)))
-		return (ft_throw_failed_open_dir(path));
+		return (ft_throw_failed_open_dir(path, *params));
 	folder = ft_add_folder(dirs, path);
 	while ((entry = readdir(dir)))
 	{
 		if (entry->d_name[0] != '.' || params->hidden_files)
 			ft_add_file(&files, entry->d_name, path);
 	}
+	ft_sort_files(&files, &ft_compare_files_alpha);
 	if (params->sort_by_time)
 		ft_sort_files(&files, &ft_compare_files_mtime);
-	else
-		ft_sort_files(&files, &ft_compare_files_alpha);
 	if (params->sort_reverse)
 		ft_sort_files_reverse(&files);
 	folder->files = files;

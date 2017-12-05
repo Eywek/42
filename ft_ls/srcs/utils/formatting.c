@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 17:34:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 18:40:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 12:48:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ void	ft_display_format_time(time_t date)
 	now = time(&now);
 	s = ctime(&date);
 	write(1, s + 4, 7);
-	if (date < now && now - date >= (3600 * 24 * 30.5 * 6))
+	if (date > now)
+	{
+		write(1, " ", 1);
+		write(1, ft_strtrim(s + 19),
+				(size_t)ft_nbrlen((uintmax_t)ft_atoi(s + 19)));
+	}
+	else if (date < now && now - date >= (3600 * 24 * 30.5 * 6))
 		write(1, s + 19, 5);
 	else
 		write(1, s + 11, 5);

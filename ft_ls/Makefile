@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/12/04 17:47:03 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/12/05 11:28:04 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,11 @@ OBJECTS=$(addprefix $(OBJECTS_PATH), $(OBJECTS_FILES))
 
 COMPILE=gcc -Wall -Wextra -Werror
 
-INCLUDES=-I./includes -I./libs/libft
+INCLUDES=-I./includes -I./libft
 HEADER=./includes/ft_ls.h ./includes/prototypes.h ./includes/structs.h
 
 LIB_NAME=libft.a
-LIB_PATH=./libs/libft/
+LIB_PATH=./libft/
 LIB=$(LIB_PATH)$(LIB_NAME)
 
 FT_PRINTF_NAME=libftprintf.a

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:38:58 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 16:58:21 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 13:23:54 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,32 @@ void	ft_throw_error_memory(void)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_throw_error_options(char *option)
+void	ft_throw_error_options(char option)
 {
-	write(STD_ERR, "ft_ls: illegal option -- ", 25);
-	write(STD_ERR, option + 1, ft_strlen(option) - 1);
-	write(STD_ERR, "\n", 1);
+	ft_putstr_fd("ft_ls: illegal option -- ", STD_ERR);
+	ft_putchar_fd(option, STD_ERR);
+	ft_putchar_fd('\n', STD_ERR);
 	ft_usage();
 	exit(EXIT_FAILURE);
 }
 
 void	ft_throw_error_file_not_found(char *filename)
 {
-	write(STD_ERR, "ft_ls: ", 7);
-	write(STD_ERR, filename, ft_strlen(filename));
-	write(STD_ERR, ": No such file or directory\n", 28);
+	ft_putstr_fd("ft_ls: ", STD_ERR);
+	ft_putstr_fd(filename, STD_ERR);
+	ft_putstr_fd(": No such file or directory\n", STD_ERR);
 }
 
-void	ft_throw_failed_open_dir(const char *dirname)
+void	ft_throw_failed_open_dir(const char *dirname, t_options params)
 {
-	write(STD_ERR, "ft_ls: ", 7);
-	write(STD_ERR, dirname, ft_strlen(dirname));
-	write(STD_ERR, ": Permission denied\n", 20);
+	if (params.display_dirs || (params.recursive && params.dirs_count > 1))
+	{
+		if (params.dirs_count > 1)
+			ft_putchar_fd('\n', STD_ERR);
+		ft_putstr_fd(dirname, STD_ERR);
+		ft_putstr_fd(":\n", STD_ERR);
+	}
+	ft_putstr_fd("ft_ls: ", STD_ERR);
+	ft_putstr_fd(dirname, STD_ERR);
+	ft_putstr_fd(": Permission denied\n", STD_ERR);
 }

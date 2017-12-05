@@ -20,7 +20,7 @@
 # include "structs.h"
 # include "prototypes.h"
 
-# define STD_ERR 1
+# define STD_ERR 2
 # define DIRECTORY_SEPARATOR "/"
 
 #endif

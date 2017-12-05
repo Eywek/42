@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 10:29:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 13:43:40 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ static int			ft_set_options(char *options, t_options *params)
 			params->sort_reverse = 1;
 		else if (*options == '1' && (state = 1) == 1)
 			params->no_columns = 1;
-		else if (*options == '-')
-			state = 1;
 		else
+		{
+			ft_throw_error_options(*options);
 			return (0);
+		}
 	}
 	if (state)
 		params->options_count++;
@@ -116,18 +117,18 @@ static t_options	ft_handle_params(int argc, char *argv[])
 	errors_count = 0;
 	while (++count < argc)
 	{
-		if (ft_is_file_or_dir(argv[count]))
+		if (argv[count][0] == '-' && argv[count][1] && check_for_flags)
+		{
+			if (ft_strcmp(argv[count], "--") == 0 && params.options_count++)
+				check_for_flags = 0;
+			else if (!ft_set_options(argv[count], &params))
+				continue;
+		}
+		else if (ft_is_file_or_dir(argv[count]))
 		{
 			ft_put_in_options(argv[count], ft_is_file(argv[count]) ? &(params.files) : &(params.folders));
 			check_for_flags = 0;
 			files_count++;
-		}
-		else if (argv[count][0] == '-' && argv[count][1] && check_for_flags)
-		{
-			if (!ft_set_options(argv[count], &params))
-				ft_throw_error_options(argv[count]);
-			if (ft_strcmp(argv[count], "--") == 0)
-				check_for_flags = 0;
 		}
 		else if (++errors_count)
 			ft_throw_error_file_not_found(argv[count]);

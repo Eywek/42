@@ -5,3 +5,4 @@ objs
 test
 *.o
 *.a
+sandbox
