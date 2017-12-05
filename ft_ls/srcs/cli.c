@@ -18,7 +18,6 @@
  * Afficher la size avec le -h
  * Faire les ACL
  * Faire les major / minor
- * Norminette
  */
 
 #include <stdlib.h>
