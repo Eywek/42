@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 15:50:15 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 16:32:29 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 16:32:36 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ void	ft_remove_files(t_file **files_list)
 
 void	ft_remove_dir(t_dir **dir)
 {
+	t_dir	*tmp;
 	t_file	*files;
 
 	files = (*dir)->files;
 	ft_remove_files(&files);
-	//free(*dir);
-	//*dir = (*dir)->next;
+	tmp = (*dir)->next;
+	free(*dir);
+	*dir = tmp;
 }

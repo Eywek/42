@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:48:35 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 16:33:05 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 17:19:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ t_dir	*ft_add_folder(t_dir **dirs, const char *name)
 	dir->files = NULL;
 	dir->next = NULL;
 	ptr = *dirs;
-	while (ptr->next)
+	while (ptr && ptr->next)
 		ptr = ptr->next;
-	ptr->next = dir;
+	if (ptr)
+		ptr->next = dir;
+	else
+		*dirs = dir;
 	return (dir);
 }
 

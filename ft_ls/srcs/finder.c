@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 16:35:45 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 17:17:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,12 @@
  ** Add files (from t_options) to the first dir
 */
 
-int		ft_handle_files_params(char **files_list, t_dir **dirs, t_options params)
+int		ft_handle_files_params(char **files_list, t_options params)
 {
 	t_file	*files;
 	char	*path;
 	int		files_count;
 
-	if (!(*dirs = malloc(sizeof(t_dir))))
-		ft_throw_error_memory();
-	(*dirs)->name = NULL;
 	files = NULL;
 	path = ft_strdup("");
 	files_count = 0;
@@ -41,8 +38,7 @@ int		ft_handle_files_params(char **files_list, t_dir **dirs, t_options params)
 		ft_sort_files(&files, &ft_compare_files_mtime);
 	if (params.sort_reverse)
 		ft_sort_files_reverse(&files);
-	(*dirs)->files = files;
-	(*dirs)->next = NULL;
+	ft_display_files(files, params);
 	free(path);
 	return (files_count);
 }
@@ -115,8 +111,7 @@ t_dir	*ft_find_files(t_options *params)
 	t_dir	*dirs;
 
 	dirs = NULL;
-	params->dirs_count = ft_handle_files_params(params->files, &dirs, *params);
-	ft_display_files(dirs->files, *params);
+	params->dirs_count = ft_handle_files_params(params->files, *params);
 	ft_free_tab(params->files);
 	while (params->folders && *(params->folders))
 	{
