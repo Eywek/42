@@ -6,13 +6,14 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:35:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 16:31:28 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 19:09:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pwd.h>
 #include <grp.h>
 #include <stdlib.h>
+# include <sys/xattr.h>
 #include "../../includes/ft_ls.h"
 
 int			ft_is_file(char *filename)
@@ -34,15 +35,6 @@ int			ft_is_file(char *filename)
 		free(link_path);
 	}
 	return (0);
-}
-
-int			ft_is_file_or_dir(char *filename)
-{
-	struct stat path_stat;
-
-	lstat(filename, &path_stat);
-	return (S_ISREG(path_stat.st_mode) || S_ISDIR(path_stat.st_mode) ||
-			S_ISLNK(path_stat.st_mode));
 }
 
 struct stat	ft_get_file_stats(t_file file)
@@ -69,4 +61,12 @@ char		*ft_get_group_name(gid_t id)
 	if (!(grp = getgrgid(id)))
 		return (ft_itoa(id));
 	return (ft_strdup(grp->gr_name));
+}
+
+ssize_t		ft_get_file_acl(char *filename)
+{
+	char	name[256];
+
+	listxattr(filename, name, sizeof(name), 0);
+	return (getxattr(filename, name, 0, 0, 0, 0));
 }

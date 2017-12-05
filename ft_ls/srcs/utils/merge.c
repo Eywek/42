@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:48:35 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 18:27:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 19:06:01 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		ft_add_file(t_file **files, char *filename, char *current_path)
 	file->stats = ft_get_file_stats(*file);
 	file->user = ft_get_user_name(file->stats.st_uid);
 	file->group = ft_get_group_name(file->stats.st_gid);
+	file->acl = ft_get_file_acl(file->path);
 	file->next = NULL;
 	if (!*files)
 	{

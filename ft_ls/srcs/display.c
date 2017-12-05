@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 18:23:01 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 19:11:11 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void		ft_display_file_permissions(t_file *file)
 		ft_printf(file->stats.st_mode & S_IXOTH ? "t" : "T");
 	else
 		ft_printf((file->stats.st_mode & S_IXOTH) ? "x" : "-");
+	ft_printf(file->acl != -1 ? "@" : " ");
 }
 
 void		ft_display_file(t_file *file, t_options params, t_display datas)
@@ -46,7 +47,7 @@ void		ft_display_file(t_file *file, t_options params, t_display datas)
 	//if (!params.long_format)
 	//	return ((void)ft_printf("%-*s\t", datas.max_name_len, file->name));
 	ft_display_file_permissions(file);
-	ft_printf(" %*lld %-*s %-*s %*lld ",
+	ft_printf("%*lld %-*s %-*s %*lld ",
 				datas.max_hard_link_len + 1, file->stats.st_nlink,
 				datas.max_user_len + 1, file->user,
 				datas.max_group_len + 1, file->group,

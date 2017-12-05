@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 18:27:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:32:48 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int					ft_is_file_or_dir(char *filename);
 struct stat			ft_get_file_stats(t_file file);
 char				*ft_get_user_name(uid_t id);
 char				*ft_get_group_name(uid_t id);
+ssize_t				ft_get_file_acl(char *filename);
 
 char				*ft_get_link_path(char *path);
 char				*ft_set_path(char *path, const char *add);
