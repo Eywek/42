@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:48:35 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 17:19:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 17:48:34 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,15 @@
  ** Add folder to folder list with the name
 */
 
-t_dir	*ft_add_folder(t_dir **dirs, const char *name)
+t_dir	*ft_add_folder(const char *name)
 {
 	t_dir	*dir;
-	t_dir	*ptr;
 
 	if (!(dir = malloc(sizeof(t_dir))))
 		ft_throw_error_memory();
 	dir->name = (char*)name;
 	dir->files = NULL;
 	dir->next = NULL;
-	ptr = *dirs;
-	while (ptr && ptr->next)
-		ptr = ptr->next;
-	if (ptr)
-		ptr->next = dir;
-	else
-		*dirs = dir;
 	return (dir);
 }
 

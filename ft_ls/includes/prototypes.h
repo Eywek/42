@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 14:55:05 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 17:47:30 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void				ft_remove_dir(t_dir **dir);
  ** MERGE / ADD
 */
 
-t_dir				*ft_add_folder(t_dir **dirs, const char *name);
+t_dir				*ft_add_folder(const char *name);
 void				ft_add_file(t_file **files, char *filename, char *current_path);
 
 /*
@@ -97,7 +97,7 @@ void				ft_display_dir(t_dir *dir, t_options params);
  ** GENERAL
 */
 
-void				ft_handle_folder(char *path, t_dir **dirs, t_options *params);
-t_dir				*ft_find_files(t_options *params);
+void				ft_handle_folder(char *path, t_options *params);
+void				ft_find_files(t_options *params);
 
 #endif

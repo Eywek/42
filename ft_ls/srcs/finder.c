@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 17:17:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 17:47:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_recursive(char *path, t_dir **dirs, t_options *params)
 		if (ft_can_browse(*file))
 		{
 			tmp = ft_set_path(path, file->name);
-			ft_handle_folder(tmp, dirs, params);
+			ft_handle_folder(tmp, params);
 			free(tmp);
 		}
 		file = file->next;
@@ -71,7 +71,7 @@ void	ft_recursive(char *path, t_dir **dirs, t_options *params)
  ** Find files in folders
 */
 
-void	ft_handle_folder(char *path, t_dir **dirs, t_options *params)
+void	ft_handle_folder(char *path, t_options *params)
 {
 	DIR				*dir;
 	struct dirent	*entry;
@@ -82,7 +82,7 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options *params)
 	params->current_path = path;
 	if (!(dir = opendir(path)))
 		return (ft_throw_failed_open_dir(path, params));
-	folder = ft_add_folder(dirs, path);
+	folder = ft_add_folder(path);
 	while ((entry = readdir(dir)))
 	{
 		if (entry->d_name[0] != '.' || params->hidden_files)
@@ -106,18 +106,14 @@ void	ft_handle_folder(char *path, t_dir **dirs, t_options *params)
  ** Main function which find files and folders in t_options
 */
 
-t_dir	*ft_find_files(t_options *params)
+void	ft_find_files(t_options *params)
 {
-	t_dir	*dirs;
-
-	dirs = NULL;
 	params->dirs_count = ft_handle_files_params(params->files, *params);
 	ft_free_tab(params->files);
 	while (params->folders && *(params->folders))
 	{
-		ft_handle_folder(*(params->folders), &dirs, params);
+		ft_handle_folder(*(params->folders), params);
 		params->folders++;
 	}
 	ft_free_tab(params->folders);
-	return (dirs);
 }
