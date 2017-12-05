@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 18:10:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:10:54 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,8 @@ void	ft_handle_folder(char *path, t_options *params)
 		return (ft_throw_failed_open_dir(path, params));
 	folder = ft_add_folder(path);
 	while ((entry = readdir(dir)))
-	{
 		if (entry->d_name[0] != '.' || params->hidden_files)
 			ft_add_file(&files, entry->d_name, path);
-	}
 	ft_sort_files(&files, &ft_compare_files_alpha);
 	if (params->sort_by_time)
 		ft_sort_files(&files, &ft_compare_files_mtime);

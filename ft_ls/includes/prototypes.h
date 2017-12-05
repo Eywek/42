@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 17:48:14 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:20:35 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 void				ft_usage(void);
 void				ft_throw_error_options(char option);
 void				ft_throw_error_memory(void);
-void				ft_throw_error_files_not_found(char **files, t_options *params);
-void				ft_throw_failed_open_dir(const char *dirname, t_options *params);
+void				ft_throw_error_files_not_found(char **files,
+						t_options *params);
+void				ft_throw_failed_open_dir(const char *dirname,
+						t_options *params);
 void				ft_throw_error_fts_open(void);
 
 /*
@@ -52,7 +54,8 @@ struct stat			ft_get_stats_from_name(char *name);
 
 void				ft_sort_tab_by_time(char **tab);
 void				ft_sort_params(t_options *params);
-void				ft_sort_files(t_file **files, int (*f)(t_file *file1, t_file *file2));
+void				ft_sort_files(t_file **files, int (*f)(t_file *file1,
+						t_file *file2));
 void				ft_sort_files_reverse(t_file **files);
 
 int					ft_compare_files_mtime(t_file *file1, t_file *file2);
@@ -72,7 +75,8 @@ void				ft_remove_files(t_file **files_list);
 */
 
 t_dir				*ft_add_folder(const char *name);
-void				ft_add_file(t_file **files, char *filename, char *current_path);
+void				ft_add_file(t_file **files, char *filename,
+						char *current_path);
 
 /*
  ** DEBUG
@@ -90,7 +94,8 @@ void				ft_debug_dirs(t_dir *dirs);
 
 char				ft_file_type(mode_t mode);
 void				ft_display_format_time(time_t date);
-void				ft_display_file(t_file *file, t_options params, t_display datas);
+void				ft_display_file(t_file *file, t_options params,
+						t_display datas);
 void				ft_display_files(t_file *files, t_options params);
 void				ft_display_dir(t_dir *dir, t_options params);
 

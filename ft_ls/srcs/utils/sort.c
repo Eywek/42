@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 15:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/04 11:31:12 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:20:35 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	ft_swap_files(t_file *file1, t_file *file2)
 	file2->stats = stats;
 }
 
-void	ft_sort_files(t_file **files_list, int (*f)(t_file *file1, t_file *file2))
+void	ft_sort_files(t_file **files_list,
+		int (*f)(t_file *file1, t_file *file2))
 {
 	t_file	*files;
 	t_file	*ptr;

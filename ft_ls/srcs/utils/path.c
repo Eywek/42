@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 17:35:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 16:24:30 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:20:35 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*ft_set_path(char *path, const char *add)
 	tmp = 0;
 	if ((size = ft_strlen(path)) > 0)
 	{
-		path = ft_strjoin(path, path[size - 1] != *DIRECTORY_SEPARATOR ? DIRECTORY_SEPARATOR : "");
+		path = ft_strjoin(path, path[size - 1] != *DIRECTORY_SEPARATOR ?
+				DIRECTORY_SEPARATOR : "");
 		tmp = path;
 	}
 	path = ft_strjoin(path, add);

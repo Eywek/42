@@ -6,21 +6,19 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 18:16:28 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:24:02 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
  * TODO:
  *
- * Free mes listes
- * Free mes strings
  * Faire les colonnes
  * Afficher les couleurs avec le -G
  * Afficher la size avec le -h
  * Faire les ACL
  * Faire les major / minor
- * Code de retour si une erreur (permission denied)
+ * Norminette
  */
 
 #include <stdlib.h>
@@ -59,8 +57,7 @@ static int			ft_set_options(char *options, t_options *params)
 	int	state;
 
 	state = 0;
-	while (*(++options)) // TODO: -G -h
-	{
+	while (*(++options))
 		if (*options == 'a' && (state = 1) == 1)
 			params->hidden_files = 1;
 		else if (*options == 'l' && (state = 1) == 1)
@@ -78,7 +75,6 @@ static int			ft_set_options(char *options, t_options *params)
 			ft_throw_error_options(*options);
 			return (0);
 		}
-	}
 	if (state)
 		params->options_count++;
 	return (state);
@@ -154,7 +150,6 @@ int					main(int argc, char *argv[])
 	t_options	params;
 
 	params = ft_handle_params(argc, argv);
-	//ft_debug_options(params);
-	/*ft_debug_dirs(*/ft_find_files(&params)/*)*/;
+	ft_find_files(&params);
 	return (params.status);
 }
