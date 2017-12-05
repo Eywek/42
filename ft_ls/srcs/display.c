@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 12:32:10 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/05 15:14:50 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,22 @@ void		ft_display_file_permissions(t_file *file)
 	ft_printf("%c", ft_file_type(file->stats.st_mode));
 	ft_printf((file->stats.st_mode & S_IRUSR) ? "r" : "-");
 	ft_printf((file->stats.st_mode & S_IWUSR) ? "w" : "-");
-	ft_printf((file->stats.st_mode & S_IXUSR) ? "x" : "-");
+	if (file->stats.st_mode & S_ISUID)
+		ft_printf(file->stats.st_mode & S_IXUSR ? "s" : "S");
+	else
+		ft_printf((file->stats.st_mode & S_IXUSR) ? "x" : "-");
 	ft_printf((file->stats.st_mode & S_IRGRP) ? "r" : "-");
 	ft_printf((file->stats.st_mode & S_IWGRP) ? "w" : "-");
-	ft_printf((file->stats.st_mode & S_IXGRP) ? "x" : "-");
+	if (file->stats.st_mode & S_ISGID)
+		ft_printf(file->stats.st_mode & S_IXGRP ? "s" : "S");
+	else
+		ft_printf((file->stats.st_mode & S_IXGRP) ? "x" : "-");
 	ft_printf((file->stats.st_mode & S_IROTH) ? "r" : "-");
 	ft_printf((file->stats.st_mode & S_IWOTH) ? "w" : "-");
-	ft_printf((file->stats.st_mode & S_IXOTH) ? "x" : "-");
+	if (file->stats.st_mode & S_ISVTX)
+		ft_printf(file->stats.st_mode & S_IXOTH ? "t" : "T");
+	else
+		ft_printf((file->stats.st_mode & S_IXOTH) ? "x" : "-");
 }
 
 // TODO: ACL + Major/Minor
