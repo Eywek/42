@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 13:52:02 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 14:56:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void			ft_put_in_options(char *filename, char ***old)
 	if (!((tab)[current_index] = malloc(sizeof(char) *
 												(ft_strlen(filename) + 1))))
 		return (ft_throw_error_memory());
-	ft_strcpy((tab)[current_index], filename);
+	ft_strcpy((tab)[current_index], ft_strdup(filename));
 	(tab)[current_index + 1] = 0;
 	*old = tab;
 	ft_free_tab(tmp);
@@ -97,7 +97,7 @@ int					ft_handle_param(char *param, int *errors_count,
 	}
 	else if (ft_is_file_or_dir(param))
 	{
-		ft_put_in_options(param, ft_is_file(param) ?
+		ft_put_in_options(param, ft_is_file(param, *params) ?
 				&(params->files) : &(params->folders));
 		*check_for_flags = 0;
 		files_count++;

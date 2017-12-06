@@ -10,16 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, const char *src)
+char	*ft_strcpy(char *dest, char const *src)
 {
-	unsigned int i;
+	char *s;
 
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = src[i];
+	s = dest;
+	while ((*s++ = *src++))
+		;
 	return (dest);
 }

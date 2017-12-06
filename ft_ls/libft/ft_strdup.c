@@ -6,29 +6,20 @@
 /*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 16:39:19 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/09 10:52:07 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 14:45:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(char const *src)
 {
-	char	*new;
-	int		i;
-	int		size;
+	char	*dup;
+	size_t	sz;
 
-	size = 0;
-	while (src[size])
-		++size;
-	if (!(new = malloc(sizeof(char) * (size + 1))))
+	sz = ft_strlen(src);
+	if (!(dup = malloc((sz + 1) * sizeof(char))))
 		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		new[i] = src[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
+	return (ft_strcpy(dup, src));
 }

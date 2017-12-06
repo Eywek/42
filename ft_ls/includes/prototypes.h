@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 19:06:58 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 14:15:16 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void				ft_throw_error_fts_open(void);
 
 int					ft_is_dir(char *filename);
 int					ft_can_browse(t_file file);
-int					ft_is_file(char *filename);
+int					ft_is_file(char *filename, t_options params);
 int					ft_is_file_or_dir(char *filename);
 
 struct stat			ft_get_file_stats(t_file file);

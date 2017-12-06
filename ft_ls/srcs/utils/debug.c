@@ -25,6 +25,7 @@ void	ft_debug_options(t_options params)
 	ft_printf("params.dirs_count = %d\n", params.dirs_count);
 	ft_printf("params.folders : \n%A\n", params.folders);
 	ft_printf("params.files : \n%A\n", params.files);
+	ft_printf("params.not_founds : \n%A\n", params.not_founds);
 }
 
 void	ft_debug_file(t_file *file)

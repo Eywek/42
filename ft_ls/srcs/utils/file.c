@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:35:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 13:26:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 14:25:08 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/xattr.h>
 #include "../../includes/ft_ls.h"
 
-int			ft_is_file(char *filename)
+int			ft_is_file(char *filename, t_options params)
 {
 	char		*link_path;
 	struct stat	path_stat;
@@ -27,7 +27,7 @@ int			ft_is_file(char *filename)
 	else if (S_ISLNK(path_stat.st_mode))
 	{
 		link_path = ft_get_link_path(filename);
-		if (ft_is_file(link_path))
+		if (ft_is_file(link_path, params))
 		{
 			free(link_path);
 			return (1);

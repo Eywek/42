@@ -17,16 +17,36 @@ void	ft_swap_files(t_file *file1, t_file *file2)
 	char		*name;
 	char		*path;
 	struct stat	stats;
+	char		*group;
+	char		*user;
+	ssize_t		acl;
+	int			major;
+	int			minor;
 
 	name = file1->name;
 	path = file1->path;
 	stats = file1->stats;
+	group = file1->group;
+	user = file1->user;
+	acl = file1->acl;
+	major = file1->major;
+	minor = file1->minor;
 	file1->name = file2->name;
 	file1->path = file2->path;
 	file1->stats = file2->stats;
+	file1->group = file2->group;
+	file1->user = file2->user;
+	file1->acl = file2->acl;
+	file1->major = file2->major;
+	file1->minor = file2->minor;
 	file2->name = name;
 	file2->path = path;
 	file2->stats = stats;
+	file2->group = group;
+	file2->user = user;
+	file2->acl = acl;
+	file2->major = major;
+	file2->minor = minor;
 }
 
 void	ft_sort_files(t_file **files_list,

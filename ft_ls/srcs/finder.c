@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 20:02:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 15:05:36 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 
 int		ft_handle_files_params(char **files_list, t_options params)
 {
-	t_file	*files;
-	char	*path;
-	int		files_count;
+	t_file *files;
+	char   *path;
+	int    files_count;
 
-	files = NULL;
 	path = ft_strdup("");
+	files = NULL;
 	files_count = 0;
 	while (files_list && *files_list)
 	{
@@ -41,7 +41,7 @@ int		ft_handle_files_params(char **files_list, t_options params)
 	ft_display_files(files, params);
 	ft_remove_files(&files);
 	free(path);
-	ft_free_tab(files_list);
+	ft_free_tab(params.files);
 	return (files_count);
 }
 
@@ -115,4 +115,5 @@ void	ft_find_files(t_options *params)
 		params->folders++;
 	}
 	ft_free_tab(params->folders);
+	ft_free_tab(params->not_founds);
 }
