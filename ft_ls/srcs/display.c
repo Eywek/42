@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 17:55:16 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 19:08:36 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include <stdlib.h>
 #include "../includes/ft_ls.h"
 
-void		ft_display_file(t_file *file, t_options params, t_display datas)
+void		ft_display_file(t_file *file, t_options params, t_display *datas)
 {
 	if (!params.long_format && params.no_columns)
 		return (ft_display_name("%s\n", 0, *file, params));
 	if (!params.long_format)
 		return (ft_display_columns(file, params, datas));
-	ft_display_long_file(file, params, datas);
+	ft_display_long_file(file, params, *datas);
 }
 
 void		ft_fill_datas(t_file *file, t_display *datas)
@@ -69,7 +69,7 @@ void		ft_display_files(t_file *files, t_options params)
 		ft_printf("total %d\n", datas.total_blocks);
 	while (ptr)
 	{
-		ft_display_file(ptr, params, datas);
+		ft_display_file(ptr, params, &datas);
 		ptr = ptr->next;
 	}
 }
@@ -84,6 +84,6 @@ void		ft_display_dir(t_dir *dir, t_options params)
 			ft_printf("%s:\n", dir->name);
 	}
 	ft_display_files(dir->files, params);
-	if (!params.long_format && !params.no_columns)
+	if (!params.long_format && !params.no_columns && dir->files)
 		ft_printf("\n");
 }

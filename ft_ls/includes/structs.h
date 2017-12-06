@@ -40,6 +40,7 @@ typedef struct		s_display {
 	int				total_blocks;
 	int				major_len;
 	int				minor_len;
+	int				c_count;
 }					t_display;
 
 typedef struct		s_file {

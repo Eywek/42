@@ -58,13 +58,13 @@ void	ft_display_name(char *format, int width, t_file file, t_options params)
 
 	color = 0;
 	if (params.colors && S_ISDIR(file.stats.st_mode))
-		color = ft_printf(COLOR_FOLDER);
+		color = ft_printf(COLOR_FOLDER) + 1;
 	else if (params.colors && S_ISLNK(file.stats.st_mode))
-		color = ft_printf(COLOR_LINK);
+		color = ft_printf(COLOR_LINK) + 1;
 	else if (params.colors && S_ISSOCK(file.stats.st_mode))
-		color = ft_printf(COLOR_SOCKET);
+		color = ft_printf(COLOR_SOCKET) + 1;
 	else if (params.colors && file.stats.st_mode & S_IXUSR)
-		color = ft_printf(COLOR_EXECUTE);
+		color = ft_printf(COLOR_EXECUTE) + 1;
 	if (width)
 		ft_printf(format, width, file.name);
 	else
