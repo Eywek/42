@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:35:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 19:19:24 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 13:26:46 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ ssize_t		ft_get_file_acl(t_file file)
 		filename = ft_get_link_path(file.path);
 	else
 		filename = file.path;
+	ft_memset(name, 0, 256);
 	listxattr(filename, name, sizeof(name), 0);
 	res = getxattr(filename, name, 0, 0, 0, 0);
 	if (S_ISLNK(file.stats.st_mode))

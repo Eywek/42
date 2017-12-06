@@ -40,7 +40,7 @@ static void			ft_put_in_options(char *filename, char ***old)
 		return (ft_throw_error_memory());
 	ft_copy_tab(&tab, *old);
 	if (!((tab)[current_index] = malloc(sizeof(char) *
-														ft_strlen(filename))))
+												(ft_strlen(filename) + 1))))
 		return (ft_throw_error_memory());
 	ft_strcpy((tab)[current_index], filename);
 	(tab)[current_index + 1] = 0;
