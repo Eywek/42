@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/12/05 11:28:04 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/12/06 17:20:12 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS_PATH=./srcs/
 SRCS_FILES=cli.c errors/exceptions.c errors/usage.c utils/directory.c \
 			utils/file.c finder.c utils/memory.c utils/debug.c utils/path.c \
 			utils/sort.c utils/stats.c display.c utils/compare.c utils/merge.c \
-			utils/formatting.c utils/long_display.c
+			utils/formatting.c utils/long_display.c utils/display_columns.c \
+			utils/window.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 OBJECTS_PATH=./objs/

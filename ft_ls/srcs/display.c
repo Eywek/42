@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 17:03:08 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 17:31:53 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		ft_display_file(t_file *file, t_options params, t_display datas)
 	if (!params.long_format && params.no_columns)
 		return ((void)ft_printf("%s\n", file->name));
 	if (!params.long_format)
-		return ((void)ft_printf("%-*s\t", datas.name_len, file->name));
+		return (ft_display_columns(file, params, datas));
 	ft_display_long_file(file, params, datas);
 }
 
@@ -84,4 +84,6 @@ void		ft_display_dir(t_dir *dir, t_options params)
 			ft_printf("%s:\n", dir->name);
 	}
 	ft_display_files(dir->files, params);
+	if (!params.long_format && !params.no_columns)
+		ft_printf("\n");
 }

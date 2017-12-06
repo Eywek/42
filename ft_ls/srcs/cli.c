@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 15:41:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 17:11:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
  * Faire les colonnes
  * Afficher les couleurs avec le -G
  * Afficher la size avec le -h
- * Faire les ACL
- * Faire les major / minor
+ * Tester la speed sur ~
  */
 
 #include <stdlib.h>

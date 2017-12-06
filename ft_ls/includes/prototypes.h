@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:48:06 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 16:04:02 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 17:19:18 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ void				ft_display_file(t_file *file, t_options params,
 void				ft_display_files(t_file *files, t_options params);
 void				ft_display_dir(t_dir *dir, t_options params);
 void				ft_display_long_file(t_file *file, t_options params,
+						t_display datas);
+int					ft_get_window_width(void);
+void				ft_display_columns(t_file *file, t_options params,
 						t_display datas);
 
 /*
