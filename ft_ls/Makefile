@@ -69,7 +69,7 @@ $(OBJECTS_PATH)%.o: $(SRCS_PATH)%.c
 clean:
 	@make -C $(FT_PRINTF_PATH) clean > /dev/null
 	@make -C $(LIB_PATH) clean > /dev/null
-	@rm -rfv $(OBJECTS) > /dev/null
+	@rm -rfv $(OBJECTS_PATH) > /dev/null
 
 fclean: clean
 	@make -C $(FT_PRINTF_PATH) fclean > /dev/null
