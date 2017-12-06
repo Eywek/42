@@ -20,7 +20,7 @@ char	*ft_set_path(char *path, const char *add)
 	char	*tmp;
 
 	if (!path)
-		return ((char*)add);
+		return (ft_strdup(add));
 	tmp = 0;
 	if ((size = ft_strlen(path)) > 0)
 	{

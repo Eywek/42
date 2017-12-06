@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:48:35 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 14:52:52 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 15:43:30 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_dir		*ft_add_folder(const char *name)
 
 	if (!(dir = malloc(sizeof(t_dir))))
 		ft_throw_error_memory();
-	dir->name = (char*)(name);
+	dir->name = ft_strdup(name);
 	dir->files = NULL;
 	dir->next = NULL;
 	return (dir);
