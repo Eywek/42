@@ -41,6 +41,7 @@ void		ft_display_file_permissions(t_file *file)
 void		ft_display_file(t_file *file, t_options params, t_display datas)
 {
 	char	*link_path;
+	char	*path;
 
 	if (!params.long_format)// && params.no_columns)
 		return ((void)ft_printf("%s\n", file->name));
@@ -55,8 +56,9 @@ void		ft_display_file(t_file *file, t_options params, t_display datas)
 	ft_display_format_time(file->stats.st_mtime);
 	if (S_ISLNK(file->stats.st_mode))
 	{
-		link_path = ft_get_link_path(ft_set_path(params.current_path,
-					file->name));
+		path = ft_set_path(params.current_path, file->name);
+		link_path = ft_get_link_path(path);
+		free(path);
 		ft_printf(" %s -> %s\n", file->name, link_path);
 		free(link_path);
 	}

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 18:34:08 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 13:52:02 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@
 static void			ft_put_in_options(char *filename, char ***old)
 {
 	char	**tab;
+	char	**tmp;
 	int		current_index;
 
 	current_index = 0;
+	tmp = *old;
 	if (*old)
 		while ((*old)[current_index])
 			current_index++;
@@ -45,6 +47,7 @@ static void			ft_put_in_options(char *filename, char ***old)
 	ft_strcpy((tab)[current_index], filename);
 	(tab)[current_index + 1] = 0;
 	*old = tab;
+	ft_free_tab(tmp);
 }
 
 /*
