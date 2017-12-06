@@ -15,5 +15,5 @@
 
 void	ft_usage(void)
 {
-	write(STD_ERR, "usage: ft_ls [-lrRatG] [file ...]\n", 34);
+	write(STD_ERR, "usage: ft_ls [-1lrRatG] [file ...]\n", 35);
 }
