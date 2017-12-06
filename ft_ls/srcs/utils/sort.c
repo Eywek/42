@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 15:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 16:03:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 16:11:28 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,15 @@
 
 void	ft_swap_files(t_file *file1, t_file *file2)
 {
-	char		*name;
-	char		*path;
-	struct stat	stats;
-	char		*group;
-	char		*user;
-	int			major;
-	int			minor;
+	t_file		tmp;
 
-	name = file1->name;
-	path = file1->path;
-	stats = file1->stats;
-	group = file1->group;
-	user = file1->user;
-	major = file1->major;
-	minor = file1->minor;
+	tmp.name = file1->name;
+	tmp.path = file1->path;
+	tmp.stats = file1->stats;
+	tmp.group = file1->group;
+	tmp.user = file1->user;
+	tmp.major = file1->major;
+	tmp.minor = file1->minor;
 	file1->name = file2->name;
 	file1->path = file2->path;
 	file1->stats = file2->stats;
@@ -36,13 +30,13 @@ void	ft_swap_files(t_file *file1, t_file *file2)
 	file1->user = file2->user;
 	file1->major = file2->major;
 	file1->minor = file2->minor;
-	file2->name = name;
-	file2->path = path;
-	file2->stats = stats;
-	file2->group = group;
-	file2->user = user;
-	file2->major = major;
-	file2->minor = minor;
+	file2->name = tmp.name;
+	file2->path = tmp.path;
+	file2->stats = tmp.stats;
+	file2->group = tmp.group;
+	file2->user = tmp.user;
+	file2->major = tmp.major;
+	file2->minor = tmp.minor;
 }
 
 void	ft_sort_files(t_file **files_list,

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:43:44 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 16:30:49 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 16:39:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct		s_options {
 }					t_options;
 
 typedef struct		s_display {
-	int				hard_link_len;
+	int				link_len;
 	int				user_len;
 	int				group_len;
 	int				size_len;

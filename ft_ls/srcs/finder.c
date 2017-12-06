@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 12:20:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 15:48:16 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 15:48:26 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 int		ft_handle_files_params(char **files_list, t_options params)
 {
-	t_file *files;
-	char   *path;
-	int    files_count;
+	t_file	*files;
+	char	*path;
+	int		files_count;
 
 	path = ft_strdup("");
 	files = NULL;

@@ -16,7 +16,7 @@ SRCS_PATH=./srcs/
 SRCS_FILES=cli.c errors/exceptions.c errors/usage.c utils/directory.c \
 			utils/file.c finder.c utils/memory.c utils/debug.c utils/path.c \
 			utils/sort.c utils/stats.c display.c utils/compare.c utils/merge.c \
-			utils/formatting.c
+			utils/formatting.c utils/long_display.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 OBJECTS_PATH=./objs/

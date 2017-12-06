@@ -26,7 +26,7 @@ int	ft_can_browse(t_file file)
 			ft_strcmp(file.name, ".") != 0);
 }
 
-int			ft_is_file_or_dir(char *filename)
+int	ft_is_file_or_dir(char *filename)
 {
 	struct stat path_stat;
 
