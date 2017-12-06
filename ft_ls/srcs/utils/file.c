@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:35:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 14:25:08 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 16:06:53 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <grp.h>
 #include <stdlib.h>
 # include <sys/xattr.h>
+#include <sys/acl.h>
 #include "../../includes/ft_ls.h"
 
 int			ft_is_file(char *filename)
@@ -63,20 +64,20 @@ char		*ft_get_group_name(gid_t id)
 	return (ft_strdup(grp->gr_name));
 }
 
-ssize_t		ft_get_file_acl(t_file file)
+char		ft_get_file_acl(t_file file)
 {
-	char	*filename;
-	char	name[256];
-	ssize_t	res;
+	int		xattrs;
+	acl_t	acl;
 
-	if (S_ISLNK(file.stats.st_mode))
-		filename = ft_get_link_path(file.path);
+	xattrs = (int)listxattr(file.path, NULL, 1, XATTR_NOFOLLOW);
+	if (xattrs > 0)
+		return ('@');
 	else
-		filename = file.path;
-	ft_memset(name, 0, 256);
-	listxattr(filename, name, sizeof(name), 0);
-	res = getxattr(filename, name, 0, 0, 0, 0);
-	if (S_ISLNK(file.stats.st_mode))
-		free(filename);
-	return (res);
+	{
+		acl = acl_get_file(file.path, ACL_TYPE_EXTENDED);
+		if (acl != NULL)
+			return ('+');
+		else
+			return (' ');
+	}
 }

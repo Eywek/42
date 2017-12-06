@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 15:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 15:46:57 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 15:47:05 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_swap_files(t_file *file1, t_file *file2)
 	struct stat	stats;
 	char		*group;
 	char		*user;
-	ssize_t		acl;
+	char		acl;
 	int			major;
 	int			minor;
 

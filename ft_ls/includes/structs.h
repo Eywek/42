@@ -44,7 +44,7 @@ typedef struct		s_file {
 	char			*path;
 	char			*user;
 	char			*group;
-	ssize_t			acl;
+	char			acl;
 	int				major;
 	int				minor;
 	struct stat		stats;
