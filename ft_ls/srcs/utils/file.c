@@ -16,7 +16,7 @@
 # include <sys/xattr.h>
 #include "../../includes/ft_ls.h"
 
-int			ft_is_file(char *filename, t_options params)
+int			ft_is_file(char *filename)
 {
 	char		*link_path;
 	struct stat	path_stat;
@@ -27,7 +27,7 @@ int			ft_is_file(char *filename, t_options params)
 	else if (S_ISLNK(path_stat.st_mode))
 	{
 		link_path = ft_get_link_path(filename);
-		if (ft_is_file(link_path, params))
+		if (ft_is_file(link_path))
 		{
 			free(link_path);
 			return (1);
