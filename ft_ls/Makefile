@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/12/06 17:20:12 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/12/06 18:47:53 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,10 +67,12 @@ $(OBJECTS_PATH)%.o: $(SRCS_PATH)%.c
 	@echo "Compiled $@" > /dev/null
 
 clean:
+	@make -C $(FT_PRINTF_PATH) clean > /dev/null
 	@make -C $(LIB_PATH) clean > /dev/null
 	@rm -rfv $(OBJECTS) > /dev/null
 
 fclean: clean
+	@make -C $(FT_PRINTF_PATH) fclean > /dev/null
 	@make -C $(LIB_PATH) fclean > /dev/null
 	@rm -rf $(NAME) > /dev/null
 

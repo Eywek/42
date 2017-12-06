@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 16:57:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 18:10:19 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:10:21 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_display_long_file(t_file *file, t_options params, t_display datas)
 		link_path = ft_get_link_path(path);
 		free(path);
 		ft_display_name(" %s", 0, *file, params);
-		ft_printf(" -> %s\n", file->name, link_path);
+		ft_printf(" -> %s\n", link_path);
 		free(link_path);
 	}
 	else

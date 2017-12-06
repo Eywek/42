@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:04:19 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/01 14:08:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:13:34 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 
 void	ft_usage(void)
 {
-	write(STD_ERR, "usage: ft_ls [-lrRatG] [file ...]\n", 33);
+	write(STD_ERR, "usage: ft_ls [-lrRatG] [file ...]\n", 34);
 }
