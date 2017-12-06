@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 17:18:20 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 17:40:19 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 17:56:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	ft_display_columns(t_file *file, t_options params, t_display datas)
 	elements_count = (ft_get_window_width() % datas.name_len) / 2;
 	elements_count += (elements_count % 2) ? 1 : 0;
 	if (count < elements_count)
-		ft_printf("%-*s", datas.name_len + 1, file->name);
+		ft_display_name("%-*s", datas.name_len + 1, *file, params);
 	else
 	{
-		ft_printf("%s\n", file->name);
+		ft_display_name("%s\n", 0, *file, params);
 		count = 0;
 	}
 }

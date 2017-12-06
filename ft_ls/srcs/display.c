@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 17:31:53 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 17:55:16 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void		ft_display_file(t_file *file, t_options params, t_display datas)
 {
 	if (!params.long_format && params.no_columns)
-		return ((void)ft_printf("%s\n", file->name));
+		return (ft_display_name("%s\n", 0, *file, params));
 	if (!params.long_format)
 		return (ft_display_columns(file, params, datas));
 	ft_display_long_file(file, params, datas);

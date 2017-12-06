@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:24:50 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/02 16:44:23 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:01:00 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,10 @@
 
 # define STD_ERR 2
 # define DIRECTORY_SEPARATOR "/"
+
+# define COLOR_FOLDER "{cyan}"
+# define COLOR_LINK "{purple}"
+# define COLOR_SOCKET "{green}"
+# define COLOR_EXECUTE "{red}"
 
 #endif

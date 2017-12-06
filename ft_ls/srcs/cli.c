@@ -6,17 +6,15 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 17:11:39 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:11:48 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
  * TODO:
  *
- * Faire les colonnes
  * Afficher les couleurs avec le -G
  * Afficher la size avec le -h
- * Tester la speed sur ~
  */
 
 #include <stdlib.h>
@@ -68,6 +66,8 @@ static int			ft_set_options(char *options, t_options *params)
 			params->sort_reverse = 1;
 		else if (*options == '1' && (state = 1) == 1)
 			params->no_columns = 1;
+		else if (*options == 'G' && (state = 1) == 1)
+			params->colors = 1;
 		else
 		{
 			ft_throw_error_options(*options);

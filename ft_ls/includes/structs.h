@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:43:44 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 16:39:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 17:01:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct		s_options {
 	int				sort_by_time;
 	int				sort_reverse;
 	int				no_columns;
+	int				colors;
 	int				options_count;
 	int				display_dirs;
 	int				dirs_count;

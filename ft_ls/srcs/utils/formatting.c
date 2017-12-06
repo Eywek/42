@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 17:34:17 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 12:48:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:09:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,21 @@ char	ft_file_type(mode_t mode)
 		return ('p');
 	else
 		return ('-');
+}
+
+void	ft_display_name(char *format, int width, t_file file, t_options params)
+{
+	if (params.colors && S_ISDIR(file.stats.st_mode))
+		ft_printf(COLOR_FOLDER);
+	else if (params.colors && S_ISLNK(file.stats.st_mode))
+		ft_printf(COLOR_LINK);
+	else if (params.colors && S_ISSOCK(file.stats.st_mode))
+		ft_printf(COLOR_SOCKET);
+	else if (params.colors && file.stats.st_mode & S_IXUSR)
+		ft_printf(COLOR_EXECUTE);
+	if (width)
+		ft_printf(format, width, file.name);
+	else
+		ft_printf(format, file.name);
+	ft_printf("{eoc}");
 }
