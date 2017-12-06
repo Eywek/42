@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 11:18:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 15:52:56 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 16:52:11 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		ft_display_file_permissions(t_file *file)
 		ft_printf(file->stats.st_mode & S_IXOTH ? "t" : "T");
 	else
 		ft_printf((file->stats.st_mode & S_IXOTH) ? "x" : "-");
-	ft_printf("%c", file->acl);
+	ft_printf("%c", ft_get_file_acl(*file));
 }
 
 void		ft_display_file(t_file *file, t_options params, t_display datas)
@@ -48,11 +48,15 @@ void		ft_display_file(t_file *file, t_options params, t_display datas)
 	//if (!params.long_format)
 	//	return ((void)ft_printf("%-*s\t", datas.max_name_len, file->name));
 	ft_display_file_permissions(file);
-	ft_printf("%*lld %-*s %-*s %*lld ",
-				datas.max_hard_link_len + 1, file->stats.st_nlink,
-				datas.max_user_len + 1, file->user,
-				datas.max_group_len + 1, file->group,
-				datas.max_size_len, file->stats.st_size);
+	ft_printf("%*lld %-*s %-*s ",
+				datas.hard_link_len + 1, file->stats.st_nlink,
+				datas.user_len + 1, file->user,
+				datas.group_len + 1, file->group);
+	if (file->major == -1 && file->minor == -1)
+		ft_printf("%*lld ", datas.size_len, file->stats.st_size);
+	else
+		ft_printf("%*d, %*d ", datas.major_len, file->major,
+				datas.minor_len, file->minor);
 	ft_display_format_time(file->stats.st_mtime);
 	if (S_ISLNK(file->stats.st_mode))
 	{
@@ -75,19 +79,25 @@ t_display	ft_calcul_file_datas(t_file *files)
 	ft_memset(&datas, 0, sizeof(datas));
 	while (ptr)
 	{
-		datas.max_hard_link_len = ft_max(datas.max_hard_link_len,
+		datas.hard_link_len = ft_max(datas.hard_link_len,
 				ft_nbrlen(ptr->stats.st_nlink));
-		datas.max_size_len = ft_max(datas.max_size_len,
+		datas.size_len = ft_max(datas.size_len,
 				ft_nbrlen((uintmax_t)ptr->stats.st_size));
-		datas.max_user_len = ft_max(datas.max_user_len,
-				(int)ft_strlen(ptr->user));
-		datas.max_group_len = ft_max(datas.max_group_len,
-				(int)ft_strlen(ptr->group));
-		datas.max_name_len = ft_max(datas.max_name_len,
-				(int)ft_strlen(ptr->name));
+		if (ptr->major > -1 || ptr->minor > -1)
+			datas.major_len = ft_max(datas.major_len,
+									ft_nbrlen((uintmax_t)ptr->major) + 1);
+		if (ptr->major > -1 || ptr->minor > -1)
+			datas.minor_len = ft_max(datas.minor_len,
+									ft_nbrlen((uintmax_t)ptr->minor));
+		datas.user_len = ft_max(datas.user_len, (int)ft_strlen(ptr->user));
+		datas.group_len = ft_max(datas.group_len, (int)ft_strlen(ptr->group));
+		datas.name_len = ft_max(datas.name_len, (int)ft_strlen(ptr->name));
 		datas.total_blocks += ptr->stats.st_blocks;
 		ptr = ptr->next;
 	}
+	if (datas.minor_len > 0 || datas.major_len > 0)
+		datas.size_len = ft_max(datas.size_len,
+				(datas.major_len + datas.minor_len + 2));
 	return (datas);
 }
 

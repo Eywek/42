@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:43:44 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/05 19:07:10 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 16:30:49 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ typedef struct		s_options {
 }					t_options;
 
 typedef struct		s_display {
-	int				max_hard_link_len;
-	int				max_user_len;
-	int				max_group_len;
-	int				max_size_len;
-	int				max_name_len;
+	int				hard_link_len;
+	int				user_len;
+	int				group_len;
+	int				size_len;
+	int				name_len;
 	int				total_blocks;
+	int				major_len;
+	int				minor_len;
 }					t_display;
 
 typedef struct		s_file {
@@ -44,7 +46,6 @@ typedef struct		s_file {
 	char			*path;
 	char			*user;
 	char			*group;
-	char			acl;
 	int				major;
 	int				minor;
 	struct stat		stats;

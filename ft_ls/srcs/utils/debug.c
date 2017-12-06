@@ -34,7 +34,7 @@ void	ft_debug_file(t_file *file)
 	ft_printf("     dirs.files.size = %d\n", file->stats.st_size);
 	ft_printf("     dirs.files.user = %s\n", file->user);
 	ft_printf("     dirs.files.group = %s\n", file->group);
-	ft_printf("     dirs.files.acl = %d\n", file->acl);
+	ft_printf("     dirs.files.acl = %d\n", ft_get_file_acl(*file));
 	ft_printf("     dirs.files.major = %d\n", file->major);
 	ft_printf("     dirs.files.minor = %d\n", file->minor);
 }

@@ -6,14 +6,14 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 14:35:39 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 16:06:53 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 16:09:27 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pwd.h>
 #include <grp.h>
 #include <stdlib.h>
-# include <sys/xattr.h>
+#include <sys/xattr.h>
 #include <sys/acl.h>
 #include "../../includes/ft_ls.h"
 
