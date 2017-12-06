@@ -6,16 +6,9 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 11:25:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/06 18:11:48 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/06 18:15:50 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
- * TODO:
- *
- * Afficher les couleurs avec le -G
- * Afficher la size avec le -h
- */
 
 #include <stdlib.h>
 #include "../includes/ft_ls.h"
@@ -69,10 +62,7 @@ static int			ft_set_options(char *options, t_options *params)
 		else if (*options == 'G' && (state = 1) == 1)
 			params->colors = 1;
 		else
-		{
 			ft_throw_error_options(*options);
-			return (0);
-		}
 	if (state)
 		params->options_count++;
 	return (state);
