@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 19:32:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/07 20:00:43 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,76 @@
 
 void	ft_push_swap_process(t_env *env)
 {
-	(void)env;
-	ft_putstr("Soon...\n");
+	ft_quicksort(&env->stack_a, 0, env->stack_a_size - 1);
+	ft_display_stacks(*env);
+}
+
+//int		ft_quicksort_partition(int **tab, int lower, int highter)
+//{
+//	int	pivot;
+//	int	i;
+//	int	j;
+//
+//	pivot = (*tab)[highter];
+//	i = lower - 1;
+//	j = lower;
+//	while (j < highter - 1)
+//	{
+//		if ((*tab)[j] < pivot)
+//		{
+//			++i;
+//			ft_swap(&(*tab)[i], &(*tab)[j]);
+//		}
+//		++j;
+//	}
+//	if (tab[highter] < tab[i + 1])
+//		ft_swap(&(*tab)[i + 1], &(*tab)[highter]);
+//	return (i + 1);
+//}
+//
+//void	ft_quicksort(int **tab, int lower, int highter)
+//{
+//	int	partition;
+//
+//	if (lower < highter)
+//	{
+//		partition = ft_quicksort_partition(tab, lower, highter);
+//		ft_quicksort(tab, lower, partition - 1);
+//		ft_quicksort(tab, partition + 1, highter);
+//	}
+//}
+
+int		ft_quicksort_partition(int **tab, int lower, int highter)
+{
+	int	pivot;
+	int	i;
+	int	j;
+
+	pivot = (*tab)[lower];
+	i = lower - 1;
+	j = highter + 1;
+	while (42)
+	{
+		while ((*tab)[i] < pivot)
+			++i;
+		while ((*tab)[j] > pivot)
+			--j;
+		if (i >= j)
+			return (j);
+		ft_swap(&(*tab)[i], &(*tab)[j]);
+	}
+}
+
+void	ft_quicksort(int **tab, int lower, int highter)
+{
+	int	partition;
+
+	if (lower < highter)
+	{
+		partition = ft_quicksort_partition(tab, lower, highter);
+		ft_quicksort(tab, lower, partition);
+		ft_quicksort(tab, partition + 1, highter);
+	}
 }
 
 int		main(int argc, char *argv[])
