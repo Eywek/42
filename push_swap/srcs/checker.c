@@ -6,7 +6,7 @@
 /*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 23:57:55 by valentin          #+#    #+#             */
-/*   Updated: 2017/12/07 02:17:20 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/07 12:25:33 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	ft_checker_handle_stack(int argc, char *argv[], t_env *env)
 	while (++count < argc)
 	{
 		if ((nb = ft_getnbr(argv[count])) == 0 && ft_strcmp(argv[count], "0") != 0)
+			ft_checker_error();
+		if (ft_in_tab(&nb, (void**)&env->stack_a))
 			ft_checker_error();
 		tmp = env->stack_a;
 		ft_free_tab((void*)(&env->stack_a));
