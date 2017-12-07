@@ -1,3 +1,0 @@
-/Users/valentin/Work/42/push_swap/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/valentin/Work/42/push_swap/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/valentin/Work/42/push_swap/cmake-build-debug/CMakeFiles/push_swap.dir
