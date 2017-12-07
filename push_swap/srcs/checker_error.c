@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:30:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 17:12:36 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/07 17:24:38 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	ft_checker_handle_stack(int argc, char *argv[], t_env *env)
 		if (!(tmp = malloc(sizeof(int) * (env->stack_a_size + 1))))
 			ft_checker_error();
 		ft_copy_tab(tmp, env->stack_a, env->stack_a_size);
-		tmp[env->stack_a_size] = nb; // TODO: Free old tab ? lol
+		free(env->stack_a);
+		tmp[env->stack_a_size] = nb;
 		env->stack_a = tmp;
 		env->stack_a_size++;
 	}
