@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2017/12/07 19:24:32 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/12/07 19:24:35 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS_PATH=./srcs/
 SRCS_CHECKER_FILES=checker.c checker_error.c display.c operate.c
 SRCS_CHECKER=$(addprefix $(SRCS_PATH), $(SRCS_CHECKER_FILES))
 
-SRCS_PUSH_SWAP_FILES=push_swap.c
+SRCS_PUSH_SWAP_FILES=push_swap.c checker_error.c
 SRCS_PUSH_SWAP=$(addprefix $(SRCS_PATH), $(SRCS_PUSH_SWAP_FILES))
 
 OBJECTS_PATH=./objs/
