@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:32:03 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 12:32:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/07 15:08:28 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,35 @@ void	ft_del_operation(void *name, size_t size)
 {
 	(void)size;
 	free(name);
+}
+
+void	ft_checker_order(t_env *env)
+{
+	t_list	*operations;
+
+	operations = env->operations;
+	while (operations)
+	{
+		ft_putstr(operations->content);
+		operations = operations->next;
+	}
+}
+
+void	ft_checker_check(t_env env)
+{
+	int	i;
+
+	i = 0;
+	while (i < env.stack_a_size - 1)
+	{
+		if (env.stack_a[i] > env.stack_a[i + 1])
+		{
+			ft_putstr("KO\n");
+			return ;
+		}
+		++i;
+	}
+	ft_putstr("OK\n");
 }
 
 int		main(int argc, char *argv[])
@@ -30,8 +59,10 @@ int		main(int argc, char *argv[])
 	ft_memset(&env, 0, sizeof(env));
 	ft_checker_handle_stack(argc, argv, &env);
 	ft_checker_handle_operations(&env);
-	ft_free_tab((void*)(&env.stack_b));
-	ft_free_tab((void*)(&env.stack_a));
+	ft_checker_order(&env);
+	ft_checker_check(env);
+	free(env.stack_a);
+	free(env.stack_b);
 	ft_lstdel(&env.operations, &ft_del_operation);
 	return (EXIT_SUCCESS);
 }

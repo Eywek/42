@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab.c                                      :+:      :+:    :+:   */
+/*   ft_copy_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <null>                            +#+  +:+       +#+        */
+/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/07 01:27:21 by valentin          #+#    #+#             */
-/*   Updated: 2017/12/07 15:08:07 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/12/07 14:00:07 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/12/07 15:00:26 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-void	ft_free_tab(void **tab, int size)
+void	ft_copy_tab(int *dest, int *src, int size)
 {
 	int	i;
 
-	i = 0;
-	if (!tab)
-		return ;
-	while (i < size)
-		free(tab[i++]);
+	i = -1;
+	while (++i < size)
+		dest[i] = src[i];
 }

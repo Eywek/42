@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 17:58:22 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 12:25:16 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/07 15:00:32 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-int				ft_in_tab(void *search, void **array);
-void			ft_free_tab(void **tab);
+void			ft_copy_tab(int *dest, int *src, int size);
+int				ft_in_tab(int search, int *tab, int size);
+void			ft_free_tab(void **tab, int size);
 int				ft_getnbr(char *str);
 int				ft_max(int ref, int nb);
 int				ft_nbrlen(uintmax_t nb);

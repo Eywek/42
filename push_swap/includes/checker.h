@@ -6,7 +6,7 @@
 /*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 23:56:59 by valentin          #+#    #+#             */
-/*   Updated: 2017/12/07 12:31:09 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/07 12:31:19 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 typedef struct	s_env {
 	int			*stack_a;
 	int			*stack_b;
+	int			stack_a_size;
+	int			stack_b_size;
 	t_list		*operations;
 }				t_env;
 

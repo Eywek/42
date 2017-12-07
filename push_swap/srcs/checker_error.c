@@ -6,10 +6,11 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:30:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 12:32:34 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/07 15:02:01 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <printf.h>
 #include "../includes/checker.h"
 
 void	ft_checker_error(void)
@@ -49,24 +50,23 @@ void	ft_checker_handle_stack(int argc, char *argv[], t_env *env)
 {
 	int		count;
 	int		nb;
-	int		i;
 	int		*tmp;
 
 	count = 0;
-	i = 0;
+	(void)argv;
 	while (++count < argc)
 	{
 		if ((nb = ft_getnbr(argv[count])) == 0 &&
 				ft_strcmp(argv[count], "0") != 0)
 			ft_checker_error();
-		if (ft_in_tab(&nb, (void**)&env->stack_a))
+		if (ft_in_tab(nb, env->stack_a, env->stack_a_size))
 			ft_checker_error();
-		tmp = env->stack_a;
-		ft_free_tab((void*)(&env->stack_a));
-		if (!(env->stack_a = malloc(sizeof(int) * (i + 1))))
+		if (!(tmp = malloc(sizeof(int) * (env->stack_a_size + 1))))
 			ft_checker_error();
-		ft_memcpy(&tmp, &env->stack_a, (size_t)i + 1);
-		env->stack_a[i++] = nb;
+		ft_copy_tab(tmp, env->stack_a, env->stack_a_size);
+		tmp[env->stack_a_size] = nb;
+		env->stack_a = tmp;
+		env->stack_a_size++;
 	}
 }
 
