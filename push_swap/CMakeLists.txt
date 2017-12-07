@@ -81,6 +81,6 @@ set(SOURCE_FILES
         libft/ft_tolower.c
         libft/ft_toupper.c
         libft/libft.h
-        Makefile srcs/checker.c libft/ft_getnbr.c libft/ft_free_tab.c libft/ft_in_tab.c srcs/checker_error.c libft/ft_copy_tab.c libft/ft_move_tab.c srcs/display.c srcs/operate.c)
+        Makefile srcs/checker.c libft/ft_getnbr.c libft/ft_free_tab.c libft/ft_in_tab.c srcs/checker_error.c libft/ft_copy_tab.c libft/ft_move_tab.c srcs/display.c srcs/operate.c srcs/push_swap.c includes/push_swap.h)
 
 add_executable(push_swap ${SOURCE_FILES})

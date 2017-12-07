@@ -3,3 +3,5 @@ cmake-build-debug
 objs
 checker
 *.a
+push_swap
+test
