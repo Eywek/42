@@ -23,6 +23,7 @@ typedef struct	s_list
 }				t_list;
 
 void			ft_push(int *a, int *b);
+void			ft_move_tab(int **tab, int size, int move);
 void			ft_copy_tab(int *dest, int *src, int size);
 int				ft_in_tab(int search, int *tab, int size);
 void			ft_free_tab(void **tab, int size);

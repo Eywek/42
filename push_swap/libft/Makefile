@@ -27,7 +27,7 @@ SRCS=ft_atoi.c ft_atoi_base.c ft_bzero.c ft_dup.c ft_isalnum.c \
 	ft_strrchr.c ft_strrev.c ft_strsplit.c ft_strsplitchrset.c ft_strstr.c \
 	ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c ft_swap.c \
 	ft_sort_wordtab.c ft_reverse_tab.c ft_nbrlen.c ft_max.c ft_getnbr.c \
-	ft_free_tab.c ft_in_tab.c ft_copy_tab.c ft_push.c
+	ft_free_tab.c ft_in_tab.c ft_copy_tab.c ft_push.c ft_move_tab.c
 
 OBJECTS=$(SRCS:.c=.o)
 
