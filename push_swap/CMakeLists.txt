@@ -7,6 +7,7 @@ set(SOURCE_FILES
         includes/checker.h
         libs/get_next_line/get_next_line.c
         libft/ft_atoi.c
+        libft/ft_push.c
         libft/ft_atoi_base.c
         libft/ft_bzero.c
         libft/ft_dup.c
