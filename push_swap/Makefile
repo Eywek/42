@@ -13,7 +13,7 @@
 NAME=checker
 
 SRCS_PATH=./srcs/
-SRCS_FILES=checker.c checker_error.c
+SRCS_FILES=checker.c checker_error.c display.c operate.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
 
 OBJECTS_PATH=./objs/

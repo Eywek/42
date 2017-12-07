@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:30:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 17:24:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/07 18:58:43 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,32 +72,35 @@ void	ft_checker_handle_stack(int argc, char *argv[], t_env *env)
 	ft_reverse_tab(&env->stack_a, env->stack_a_size);
 }
 
+void	ft_checker_handle_line(t_env *env, char *line)
+{
+	if (!ft_is_valid_operation(line))
+		return (ft_checker_error());
+	if (ft_strcmp(line, "ss") == 0)
+	{
+		ft_lstaddend(&env->operations, ft_lstnew("sa", 2));
+		ft_lstaddend(&env->operations, ft_lstnew("sb", 2));
+	}
+	else if (ft_strcmp(line, "rr") == 0)
+	{
+		ft_lstaddend(&env->operations, ft_lstnew("ra", 2));
+		ft_lstaddend(&env->operations, ft_lstnew("rb", 2));
+	}
+	else if (ft_strcmp(line, "rrr") == 0)
+	{
+		ft_lstaddend(&env->operations, ft_lstnew("rra", 3));
+		ft_lstaddend(&env->operations, ft_lstnew("rrb", 3));
+	}
+	else
+		ft_lstaddend(&env->operations, ft_lstnew(line, ft_strlen(line)));
+}
+
 void	ft_checker_handle_operations(t_env *env)
 {
 	char	*line;
 
 	env->operations = NULL;
 	while (get_next_line(0, &line) > 0)
-	{
-		if (!ft_is_valid_operation(line))
-			return (ft_checker_error());
-		if (ft_strcmp(line, "ss") == 0)
-		{
-			ft_lstaddend(&env->operations, ft_lstnew("sa", 2));
-			ft_lstaddend(&env->operations, ft_lstnew("sb", 2));
-		}
-		else if (ft_strcmp(line, "rr") == 0)
-		{
-			ft_lstaddend(&env->operations, ft_lstnew("ra", 2));
-			ft_lstaddend(&env->operations, ft_lstnew("rb", 2));
-		}
-		else if (ft_strcmp(line, "rrr") == 0)
-		{
-			ft_lstaddend(&env->operations, ft_lstnew("rra", 3));
-			ft_lstaddend(&env->operations, ft_lstnew("rrb", 3));
-		}
-		else
-			ft_lstaddend(&env->operations, ft_lstnew(line, ft_strlen(line)));
-	}
+		ft_checker_handle_line(env, line);
 	free(line);
 }
