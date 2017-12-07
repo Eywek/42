@@ -22,21 +22,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="checker.c" pinned="false" current-in-tab="false">
+      <file leaf-file-name="checker.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srcs/checker.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="53" column="56" lean-forward="false" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
+            <state relative-caret-position="990">
+              <caret line="94" column="20" lean-forward="false" selection-start-line="94" selection-start-column="20" selection-end-line="94" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ft_move_tab.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ft_move_tab.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/libft/ft_move_tab.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+            <state relative-caret-position="570">
+              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -153,8 +153,8 @@
         <option value="$PROJECT_DIR$/libft/ft_move_tab.c.c" />
         <option value="$PROJECT_DIR$/libft/libft.h" />
         <option value="$PROJECT_DIR$/libft/Makefile" />
-        <option value="$PROJECT_DIR$/srcs/checker.c" />
         <option value="$PROJECT_DIR$/libft/ft_move_tab.c" />
+        <option value="$PROJECT_DIR$/srcs/checker.c" />
       </list>
     </option>
   </component>
@@ -237,12 +237,12 @@
       <workItem from="1512657115671" duration="768000" />
       <workItem from="1512660138100" duration="337000" />
       <workItem from="1512662588188" duration="1728000" />
-      <workItem from="1512666606365" duration="1782000" />
+      <workItem from="1512666606365" duration="2018000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16150000" />
+    <option name="totallyTimeSpent" value="16386000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="680" y="0" width="1880" height="1440" extended-state="0" />
@@ -277,7 +277,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -684,18 +684,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/checker.c">
+    <entry file="file://$PROJECT_DIR$/libft/ft_move_tab.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="53" column="56" lean-forward="false" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
+        <state relative-caret-position="570">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libft/ft_move_tab.c">
+    <entry file="file://$PROJECT_DIR$/srcs/checker.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        <state relative-caret-position="990">
+          <caret line="94" column="20" lean-forward="false" selection-start-line="94" selection-start-column="20" selection-end-line="94" selection-end-column="20" />
           <folding />
         </state>
       </provider>

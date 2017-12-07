@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:32:03 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 18:28:20 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/07 18:43:36 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_checker_check(t_env env)
 	i = 0;
 	while (i < env.stack_a_size - 1)
 	{
-		if (env.stack_a[i] > env.stack_a[i + 1])
+		if (env.stack_a[i] < env.stack_a[i + 1])
 		{
 			ft_putstr("KO\n");
 			return ;
