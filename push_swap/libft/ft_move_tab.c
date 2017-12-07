@@ -6,12 +6,11 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 18:11:20 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 18:37:19 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/07 18:39:34 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <printf.h>
 
 void	ft_move_tab(int **tab, int size, int move)
 {
