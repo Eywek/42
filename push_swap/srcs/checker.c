@@ -34,6 +34,11 @@ void	ft_checker_check(t_env env)
 {
 	int	i;
 
+	if (env.stack_b_size > 0)
+	{
+		ft_putstr("KO\n");
+		return ;
+	}
 	i = 0;
 	while (i < env.stack_a_size - 1)
 	{
