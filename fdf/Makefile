@@ -58,11 +58,11 @@ $(OBJECTS_PATH)%.o: $(SRCS_PATH)%.c
 
 clean:
 	@make -C $(LIB_PATH) clean > /dev/null
-	@rm -fv $(OBJECTS) > /dev/null
+	@rm -rfv $(OBJECTS) > /dev/null
 
 fclean: clean
 	@make -C $(LIB_PATH) fclean > /dev/null
-	@rm $(NAME) > /dev/null
+	@rm -rfv $(NAME) > /dev/null
 
 re: fclean all
 
