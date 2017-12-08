@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/08 20:00:01 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/08 20:02:46 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ void	ft_merge_sort(int *A, int *B, int n, t_env *env)
 
 void	ft_do_operate(char *operation, t_env *env, int *state)
 {
-	ft_putstr("DO ");
-	ft_putendl(operation);
+//	ft_putstr("DO ");
+//	ft_putendl(operation);
 	ft_operate(operation, env);
 	ft_lstaddend(&env->operations, ft_lstnew(operation, ft_strlen(operation)));
 	*state = 1;
@@ -122,8 +122,8 @@ void	ft_sort(t_env *env)
 {
 	int	sorting;
 
-	ft_putendl(" === SORTING... === ");
-	ft_display_stacks(*env);
+//	ft_putendl(" === SORTING... === ");
+//	ft_display_stacks(*env);
 
 	sorting = 0;
 	if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[0])
@@ -162,9 +162,9 @@ void	ft_push_swap_process(t_env *env)
 	//ft_merge_sort(env->stack_a, env->stack_b, env->stack_a_size, env);
 	//ft_quicksort(env->stack_a, env->stack_a_size);
 	ft_sort(env);
-	ft_putendl(" === SORTED === ");
-	ft_display_stacks(*env);
-	ft_putendl(" ==== OPERATIONS ====");
+//	ft_putendl(" === SORTED === ");
+//	ft_display_stacks(*env);
+//	ft_putendl(" ==== OPERATIONS ====");
 	ft_display_operations(*env); // TODO: Malloc directement stack_b de la taille de stack_a
 }
 
