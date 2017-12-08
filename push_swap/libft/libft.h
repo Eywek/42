@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 17:58:22 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 00:05:51 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/07 17:08:02 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-void			ft_free_tab(void **tab);
+void			ft_push(int *a, int *b);
+void			ft_move_tab(int **tab, int size, int move);
+void			ft_copy_tab(int *dest, int *src, int size);
+int				ft_in_tab(int search, int *tab, int size);
+void			ft_free_tab(void **tab, int size);
 int				ft_getnbr(char *str);
 int				ft_max(int ref, int nb);
 int				ft_nbrlen(uintmax_t nb);
-void			ft_reverse_tab(char **tab);
-void			ft_swap(char **a, char **b);
+void			ft_reverse_tab(int **tab, int size);
+void			ft_swap(int *a, int *b);
 void			ft_sort_wordtab(char **tab);
 int				ft_atoi(const char *str);
 int				ft_islower(int c);

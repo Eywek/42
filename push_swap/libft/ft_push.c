@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/06 11:11:18 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 12:14:50 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/12/03 16:29:05 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/12/07 17:22:35 by vtouffet         ###   ########.fr       */
 /*                                                                            */
+#include <stdlib.h>
+
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char const *src)
+void	ft_push(int *a, int *b)
 {
-	char *s;
-
-	s = dest;
-	while ((*s++ = *src++))
-		;
-	return (dest);
+	*b = *a;
+	*a = 0;
 }

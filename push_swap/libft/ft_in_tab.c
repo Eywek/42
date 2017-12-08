@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_in_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/06 11:11:18 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 12:14:50 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/12/07 12:24:06 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/12/07 15:02:23 by vtouffet         ###   ########.fr       */
 /*                                                                            */
+#include <printf.h>
+
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char const *src)
+int	ft_in_tab(int search, int *tab, int size)
 {
-	char *s;
+	int	i;
 
-	s = dest;
-	while ((*s++ = *src++))
-		;
-	return (dest);
+	i = 0;
+	while (i < size)
+	{
+		if (tab[i] == search)
+			return (1);
+		++i;
+	}
+	return (0);
 }

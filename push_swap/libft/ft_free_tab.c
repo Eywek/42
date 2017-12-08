@@ -6,16 +6,19 @@
 /*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 01:27:21 by valentin          #+#    #+#             */
-/*   Updated: 2017/12/07 02:00:09 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/07 15:08:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-void	ft_free_tab(void **tab)
+void	ft_free_tab(void **tab, int size)
 {
+	int	i;
+
+	i = 0;
 	if (!tab)
 		return ;
-	while (*tab)
-		free(*(tab++));
+	while (i < size)
+		free(tab[i++]);
 }

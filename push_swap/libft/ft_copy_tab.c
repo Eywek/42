@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_copy_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/10 16:39:19 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 12:14:50 by vtouffet         ###   ########.fr       */
+/*   Created: 2017/12/07 14:00:07 by vtouffet          #+#    #+#             */
+/*   Updated: 2017/12/07 15:00:26 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
-
-char	*ft_strdup(char const *src)
+void	ft_copy_tab(int *dest, int *src, int size)
 {
-	char	*dup;
-	size_t	sz;
+	int	i;
 
-	sz = ft_strlen(src);
-	if (!(dup = malloc((sz + 1) * sizeof(char))))
-		return (NULL);
-	return (ft_strcpy(dup, src));
+	i = -1;
+	while (++i < size)
+		dest[i] = src[i];
 }

@@ -4,9 +4,9 @@ project(push_swap)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
-        includes/checker.h
         libs/get_next_line/get_next_line.c
         libft/ft_atoi.c
+        libft/ft_push.c
         libft/ft_atoi_base.c
         libft/ft_bzero.c
         libft/ft_dup.c
@@ -80,6 +80,7 @@ set(SOURCE_FILES
         libft/ft_tolower.c
         libft/ft_toupper.c
         libft/libft.h
-        Makefile srcs/checker.c libft/ft_getnbr.c libft/ft_free_tab.c)
+        Makefile libft/ft_getnbr.c libft/ft_free_tab.c libft/ft_in_tab.c srcs/checker_error.c libft/ft_copy_tab.c libft/ft_move_tab.c)
 
-add_executable(push_swap ${SOURCE_FILES})
+add_executable(push_swap ${SOURCE_FILES} srcs/push_swap.c includes/push_swap.h srcs/display.c srcs/operate.c)
+add_executable(checker ${SOURCE_FILES} srcs/checker.c srcs/operate.c includes/checker.h)
