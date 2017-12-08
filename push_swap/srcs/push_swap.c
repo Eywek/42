@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 20:00:43 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/08 16:12:51 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,76 +14,44 @@
 
 void	ft_push_swap_process(t_env *env)
 {
-	ft_quicksort(&env->stack_a, 0, env->stack_a_size - 1);
+	ft_quicksort(env->stack_a, env->stack_a_size);
 	ft_display_stacks(*env);
 }
 
-//int		ft_quicksort_partition(int **tab, int lower, int highter)
-//{
-//	int	pivot;
-//	int	i;
-//	int	j;
-//
-//	pivot = (*tab)[highter];
-//	i = lower - 1;
-//	j = lower;
-//	while (j < highter - 1)
-//	{
-//		if ((*tab)[j] < pivot)
-//		{
-//			++i;
-//			ft_swap(&(*tab)[i], &(*tab)[j]);
-//		}
-//		++j;
-//	}
-//	if (tab[highter] < tab[i + 1])
-//		ft_swap(&(*tab)[i + 1], &(*tab)[highter]);
-//	return (i + 1);
-//}
-//
-//void	ft_quicksort(int **tab, int lower, int highter)
-//{
-//	int	partition;
-//
-//	if (lower < highter)
-//	{
-//		partition = ft_quicksort_partition(tab, lower, highter);
-//		ft_quicksort(tab, lower, partition - 1);
-//		ft_quicksort(tab, partition + 1, highter);
-//	}
-//}
-
-int		ft_quicksort_partition(int **tab, int lower, int highter)
+int		ft_quicksort_get_pivot(int *tab, int size)
 {
-	int	pivot;
-	int	i;
+	int	pivot_index;
+	int	value;
 	int	j;
 
-	pivot = (*tab)[lower];
-	i = lower - 1;
-	j = highter + 1;
+	value = tab[0];
+	pivot_index = 0;
+	j = size;
 	while (42)
 	{
-		while ((*tab)[i] < pivot)
-			++i;
-		while ((*tab)[j] > pivot)
+		++pivot_index;
+		while (tab[pivot_index] < value && pivot_index < size)
+			++pivot_index;
+		--j;
+		while (tab[j] > value)
 			--j;
-		if (i >= j)
-			return (j);
-		ft_swap(&(*tab)[i], &(*tab)[j]);
+		if (pivot_index >= j)
+			break ;
+		ft_swap(&tab[pivot_index], &tab[j]);
 	}
+	ft_swap(&tab[pivot_index - 1], &tab[0]);
+	return (pivot_index);
 }
 
-void	ft_quicksort(int **tab, int lower, int highter)
+void	ft_quicksort(int *tab, int size)
 {
-	int	partition;
+	int	pivot_index;
 
-	if (lower < highter)
-	{
-		partition = ft_quicksort_partition(tab, lower, highter);
-		ft_quicksort(tab, lower, partition);
-		ft_quicksort(tab, partition + 1, highter);
-	}
+	if (size <= 1)
+		return ;
+	pivot_index = ft_quicksort_get_pivot(tab, size);
+	ft_quicksort(tab, pivot_index - 1);
+	ft_quicksort(tab + 1, size - pivot_index);
 }
 
 int		main(int argc, char *argv[])
