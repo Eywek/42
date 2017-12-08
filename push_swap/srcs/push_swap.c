@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/08 17:49:31 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/08 17:58:36 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 #define min(X, Y) (((X) < (Y)) ? (X) : (Y))
 //  Left run is A[iLeft :iRight-1].
 // Right run is A[iRight:iEnd-1  ].
-void BottomUpMerge(int *A, int iLeft, int iRight, int iEnd, int *B)
+void ft_merge(int *A, int iLeft, int iRight, int iEnd, int *B, t_env *env)
 {
 	int	i;
 	int	j;
@@ -63,23 +63,29 @@ void BottomUpMerge(int *A, int iLeft, int iRight, int iEnd, int *B)
 		// If left run head exists and is <= existing right run head.
 		if (i < iRight && (j >= iEnd || A[i] <= A[j])) {
 			B[k] = A[i];
+			ft_lstaddend(&env->operations, ft_lstnew("pb", 2));
 			i = i + 1;
 		} else {
 			B[k] = A[j];
+			ft_lstaddend(&env->operations, ft_lstnew("pb", 2));
 			j = j + 1;
 		}
 	}
 }
 
-void	CopyArray(int *B, int *A, int n)
+void	ft_copy_tab_op(int *dest, int *src, int size, t_env *env)
 {
 	int	i;
 
-	for(i = 0; i < n; i++)
-		A[i] = B[i];
+	i = -1;
+	while (++i < size)
+	{
+		dest[i] = src[i];
+		ft_lstaddend(&env->operations, ft_lstnew("pa", 2));
+	}
 }
 
-void	BottomUpMergeSort(int *A, int *B, int n)
+void	ft_merge_sort(int *A, int *B, int n, t_env *env)
 {
 	int	width;
 	int	i;
@@ -93,12 +99,12 @@ void	BottomUpMergeSort(int *A, int *B, int n)
 		{
 			// Merge two runs: A[i:i+width-1] and A[i+width:i+2*width-1] to B[]
 			// or copy A[i:n-1] to B[] ( if(i+width >= n) )
-			BottomUpMerge(A, i, min(i+width, n), min(i+2*width, n), B);
+			ft_merge(A, i, min(i+width, n), min(i+2*width, n), B, env);
 		}
 		// Now work array B is full of runs of length 2*width.
 		// Copy array B to array A for next iteration.
 		// A more efficient implementation would swap the roles of A and B.
-		CopyArray(B, A, n);
+		ft_copy_tab_op(A, B, n, env);
 		// Now array A is full of runs of length 2*width.
 	}
 }
@@ -112,9 +118,10 @@ void	ft_push_swap_process(t_env *env)
 	//result = ft_merge_sort(result);
 	//env->stack_a = result.tab;
 	env->stack_b = malloc(sizeof(int) * env->stack_a_size);
-	BottomUpMergeSort(env->stack_a, env->stack_b, env->stack_a_size);
+	ft_merge_sort(env->stack_a, env->stack_b, env->stack_a_size, env);
 	//ft_quicksort(env->stack_a, env->stack_a_size);
-	ft_display_stacks(*env);
+	//ft_display_stacks(*env);
+	ft_display_operations(*env);
 }
 
 int		ft_quicksort_get_pivot(int *tab, int size)
