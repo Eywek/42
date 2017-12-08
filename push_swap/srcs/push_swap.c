@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/08 16:12:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/08 16:17:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_quicksort(int *tab, int size)
 		return ;
 	pivot_index = ft_quicksort_get_pivot(tab, size);
 	ft_quicksort(tab, pivot_index - 1);
-	ft_quicksort(tab + 1, size - pivot_index);
+	ft_quicksort(tab + pivot_index, size - pivot_index);
 }
 
 int		main(int argc, char *argv[])
