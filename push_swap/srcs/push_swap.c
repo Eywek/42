@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/09 10:21:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/09 12:53:10 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,23 @@ void	ft_do_operate(char *operation, t_env *env, int *state)
 	*state = 1;
 }
 
+int		ft_get_index_inf(t_env env)
+{
+	int	i;
+
+	i = -1;
+	ft_putstr("FIND pos WHERE stack[pos] < ");
+	ft_putnbr(env.stack_a[0]);
+	ft_putstr("\n");
+	while (++i < env.stack_a_size)
+		if (env.stack_a[0] > env.stack_a[i])
+			break ;
+	ft_putstr("FOUND WITH pos = ");
+	ft_putnbr(i);
+	ft_putchar('\n');
+	return (i);
+}
+
 void	ft_sort(t_env *env)
 {
 	int	sorting;
@@ -125,31 +142,63 @@ void	ft_sort(t_env *env)
 //	ft_putendl(" === SORTING... === ");
 //	ft_display_stacks(*env);
 
-	if (ft_checker_check(*env))
-		return ;
-	sorting = 0;
-	if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[0])
-		ft_do_operate("rra", env, &sorting);
-	else if (env->stack_b_size >= 1 && env->stack_b[env->stack_b_size - 1] < env->stack_b[0])
-		ft_do_operate("rrb", env, &sorting);
-	else if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[0])
-		ft_do_operate("ra", env, &sorting);
-	else if (env->stack_b_size >= 1 && env->stack_b[env->stack_b_size - 1] < env->stack_b[0])
-		ft_do_operate("rb", env, &sorting);
-	else if (env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2])
-		ft_do_operate("sa", env, &sorting);
-	else if (env->stack_b_size > 1 && env->stack_b[env->stack_b_size - 1] < env->stack_b[env->stack_b_size - 2])
-		ft_do_operate("sb", env, &sorting);
-	if (!sorting && env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] < env->stack_a[env->stack_a_size - 2])
-		ft_do_operate("pb", env, &sorting);
-	if (sorting)
-		ft_sort(env);
-	else
+//	if (ft_checker_check(*env))
+//		return ;
+//	sorting = 0;
+//	if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[0])
+//		ft_do_operate("rra", env, &sorting);
+//	else if (env->stack_b_size >= 1 && env->stack_b[env->stack_b_size - 1] < env->stack_b[0])
+//		ft_do_operate("rrb", env, &sorting);
+//	else if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[0])
+//		ft_do_operate("ra", env, &sorting);
+//	else if (env->stack_b_size >= 1 && env->stack_b[env->stack_b_size - 1] < env->stack_b[0])
+//		ft_do_operate("rb", env, &sorting);
+//	else if (env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2])
+//		ft_do_operate("sa", env, &sorting);
+//	else if (env->stack_b_size > 1 && env->stack_b[env->stack_b_size - 1] < env->stack_b[env->stack_b_size - 2])
+//		ft_do_operate("sb", env, &sorting);
+//	if (!sorting && env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] < env->stack_a[env->stack_a_size - 2])
+//		ft_do_operate("pb", env, &sorting);
+//	if (sorting)
+//		ft_sort(env);
+//	else
+//	{
+//		int	i = 0;
+//		while (i < env->stack_b_size)
+//			ft_do_operate("pa", env, &sorting);
+//	}
+
+	int	i;
+//	int	pos;
+
+	i = -1;
+	while (++i < env->stack_a_size)
 	{
-		int	i = 0;
-		while (i < env->stack_b_size)
-			ft_do_operate("pa", env, &sorting);
+		if (env->stack_a_size > 2 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2] &&
+			env->stack_a[env->stack_a_size - 1] < env->stack_a[env->stack_a_size - 3])
+			ft_do_operate("sa", env, &sorting);
+		if (env->stack_a_size == 0 || ft_checker_check(*env))
+			break ;
+		if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] < env->stack_a[0])
+			ft_do_operate("rra", env, &sorting);
+		else if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[0])
+			ft_do_operate("ra", env, &sorting);
+//		pos = ft_get_index_inf(*env);
+//		if (pos > env->stack_a_size / 2)
+//			while (pos++ < env->stack_a_size)
+//				ft_do_operate("rra", env, &sorting);
+//		else
+//			while (pos-- > 0)
+//				ft_do_operate("ra", env, &sorting);
+		if ((ft_checker_check(*env) && env->stack_b_size == 0) ||
+			(ft_checker_check(*env) && env->stack_b_size == 0 && env->stack_a[0] > env->stack_b[0]))
+			break ;
+		ft_do_operate("pb", env, &sorting);
+		if (ft_checker_check(*env) && env->stack_b_size == 0)
+			break ;
 	}
+	while (env->stack_b_size > 0)
+		ft_do_operate("pa", env, &sorting);
 }
 
 void	ft_push_swap_process(t_env *env)
@@ -160,13 +209,15 @@ void	ft_push_swap_process(t_env *env)
 	//result.n = env->stack_a_size - 1;
 	//result = ft_merge_sort(result);
 	//env->stack_a = result.tab;
-	//env->stack_b = malloc(sizeof(int) * env->stack_a_size);
-	//ft_merge_sort(env->stack_a, env->stack_b, env->stack_a_size, env);
-	//ft_quicksort(env->stack_a, env->stack_a_size);
-	ft_sort(env);
-//	ft_putendl(" === SORTED === ");
+//	env->stack_b = malloc(sizeof(int) * env->stack_a_size);
+//	ft_merge_sort(env->stack_a, env->stack_b, env->stack_a_size, env);
+//	ft_quicksort(env->stack_a, env->stack_a_size);
+//	ft_putendl(" === BEFORE === ");
 //	ft_display_stacks(*env);
-//	ft_putendl(" ==== OPERATIONS ====");
+	ft_sort(env);
+	ft_putendl(" === SORTED === ");
+	ft_display_stacks(*env);
+	ft_putendl(" ==== OPERATIONS ====");
 	ft_display_operations(*env); // TODO: Malloc directement stack_b de la taille de stack_a
 }
 
