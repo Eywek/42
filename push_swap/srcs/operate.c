@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 18:47:25 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/09 12:42:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/09 14:29:53 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ void	ft_push_tab(int **tab1, int *size1, int **tab2, int *size2)
 
 void	ft_operate(char *operation, t_env *env)
 {
-
-	ft_putendl(" === SORTING... === ");
-	ft_display_stacks(*env);
-
 	if (ft_strncmp(operation, "sa", 2) == 0 && env->stack_a_size >= 2)
 		ft_swap(&(env->stack_a[env->stack_a_size - 1]),
 				&(env->stack_a[env->stack_a_size - 2]));
@@ -51,4 +47,7 @@ void	ft_operate(char *operation, t_env *env)
 		ft_move_tab(&env->stack_a, env->stack_a_size, -1);
 	else if (ft_strncmp(operation, "rrb", 3) == 0)
 		ft_move_tab(&env->stack_b, env->stack_b_size, -1);
+
+	ft_putendl(" === SORTING... === ");
+	ft_display_stacks(*env);
 }
