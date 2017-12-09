@@ -15,10 +15,10 @@ PUSH_SWAP_NAME=push_swap
 
 SRCS_PATH=./srcs/
 
-SRCS_CHECKER_FILES=checker.c checker_error.c display.c operate.c
+SRCS_CHECKER_FILES=checker.c checker_error.c display.c operate.c check_order.c
 SRCS_CHECKER=$(addprefix $(SRCS_PATH), $(SRCS_CHECKER_FILES))
 
-SRCS_PUSH_SWAP_FILES=push_swap.c checker_error.c display.c operate.c
+SRCS_PUSH_SWAP_FILES=push_swap.c checker_error.c display.c operate.c check_order.c
 SRCS_PUSH_SWAP=$(addprefix $(SRCS_PATH), $(SRCS_PUSH_SWAP_FILES))
 
 OBJECTS_PATH=./objs/

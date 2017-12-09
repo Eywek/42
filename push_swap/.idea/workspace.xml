@@ -26,8 +26,18 @@
       <file leaf-file-name="checker.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/checker.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="1" lean-forward="true" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+            <state relative-caret-position="765">
+              <caret line="51" column="4" lean-forward="false" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="check_order.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/srcs/check_order.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" column="1" lean-forward="false" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -36,8 +46,8 @@
       <file leaf-file-name="checker_error.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srcs/checker_error.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-61">
-              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="1214">
+              <caret line="105" column="8" lean-forward="false" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -46,8 +56,8 @@
       <file leaf-file-name="push_swap.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/push_swap.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-330">
-              <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+            <state relative-caret-position="372">
+              <caret line="128" column="16" lean-forward="false" selection-start-line="128" selection-start-column="16" selection-end-line="128" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -57,17 +67,7 @@
         <entry file="file://$PROJECT_DIR$/libft/ft_copy_tab.c">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
-              <caret line="5" column="32" lean-forward="true" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="817">
-              <caret line="84" column="108" lean-forward="false" selection-start-line="84" selection-start-column="108" selection-end-line="84" selection-end-column="108" />
+              <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -77,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/srcs/display.c">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
-              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+              <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -87,7 +87,7 @@
         <entry file="file://$PROJECT_DIR$/srcs/operate.c">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="675">
-              <caret line="45" column="50" lean-forward="true" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
+              <caret line="45" column="50" lean-forward="false" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -107,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/includes/checker.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="480">
-              <caret line="34" column="68" lean-forward="false" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
+              <caret line="34" column="36" lean-forward="false" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -116,8 +116,8 @@
       <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Makefile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="68" lean-forward="false" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="68" />
+            <state relative-caret-position="269">
+              <caret line="20" column="81" lean-forward="true" selection-start-line="20" selection-start-column="81" selection-end-line="20" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -151,15 +151,16 @@
         <option value="$PROJECT_DIR$/libft/libft.h" />
         <option value="$PROJECT_DIR$/libft/Makefile" />
         <option value="$PROJECT_DIR$/libft/ft_move_tab.c" />
-        <option value="$PROJECT_DIR$/srcs/checker_error.c" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/includes/checker.h" />
-        <option value="$PROJECT_DIR$/Makefile" />
         <option value="$PROJECT_DIR$/includes/push_swap.h" />
         <option value="$PROJECT_DIR$/srcs/display.c" />
-        <option value="$PROJECT_DIR$/srcs/checker.c" />
         <option value="$PROJECT_DIR$/srcs/operate.c" />
+        <option value="$PROJECT_DIR$/includes/checker.h" />
         <option value="$PROJECT_DIR$/srcs/push_swap.c" />
+        <option value="$PROJECT_DIR$/srcs/check_order.c" />
+        <option value="$PROJECT_DIR$/Makefile" />
+        <option value="$PROJECT_DIR$/srcs/checker.c" />
+        <option value="$PROJECT_DIR$/srcs/checker_error.c" />
       </list>
     </option>
   </component>
@@ -248,28 +249,29 @@
       <workItem from="1512666606365" duration="6949000" />
       <workItem from="1512673963847" duration="156000" />
       <workItem from="1512743326654" duration="11329000" />
+      <workItem from="1512810628482" duration="1113000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32802000" />
+    <option name="totallyTimeSpent" value="33915000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="744" y="0" width="1816" height="1440" extended-state="0" />
+    <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10429688" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296131" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296131" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296131" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.57384443" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.573471" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33035713" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296131" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -298,13 +300,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/libft/ft_in_tab.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="47" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libft/ft_free_tab.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -593,24 +588,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="817">
+        <state relative-caret-position="1260">
           <caret line="84" column="108" lean-forward="false" selection-start-line="84" selection-start-column="108" selection-end-line="84" selection-end-column="108" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/checker.h">
+    <entry file="file://$PROJECT_DIR$/srcs/display.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="34" column="68" lean-forward="false" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
+        <state relative-caret-position="360">
+          <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Makefile">
+    <entry file="file://$PROJECT_DIR$/libft/ft_copy_tab.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="68" lean-forward="false" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="68" />
+        <state relative-caret-position="75">
+          <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -623,10 +618,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/display.c">
+    <entry file="file://$PROJECT_DIR$/includes/checker.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        <state relative-caret-position="480">
+          <caret line="34" column="36" lean-forward="false" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/push_swap.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="128" column="16" lean-forward="false" selection-start-line="128" selection-start-column="16" selection-end-line="128" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="20" column="81" lean-forward="true" selection-start-line="20" selection-start-column="81" selection-end-line="20" selection-end-column="81" />
           <folding />
         </state>
       </provider>
@@ -634,39 +645,31 @@
     <entry file="file://$PROJECT_DIR$/srcs/operate.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
-          <caret line="45" column="50" lean-forward="true" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
+          <caret line="45" column="50" lean-forward="false" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libft/ft_copy_tab.c">
+    <entry file="file://$PROJECT_DIR$/srcs/check_order.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="32" lean-forward="true" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/push_swap.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-330">
-          <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+        <state relative-caret-position="420">
+          <caret line="28" column="1" lean-forward="false" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/srcs/checker.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="1" lean-forward="true" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+        <state relative-caret-position="765">
+          <caret line="51" column="4" lean-forward="false" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/srcs/checker_error.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="1214">
+          <caret line="105" column="8" lean-forward="false" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="8" />
           <folding />
         </state>
       </provider>

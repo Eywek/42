@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:32:03 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 19:26:11 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/09 10:26:17 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,6 @@ void	ft_checker_order(t_env *env)
 	}
 }
 
-void	ft_checker_check(t_env env)
-{
-	int	i;
-
-	if (env.stack_b_size > 0)
-	{
-		ft_putstr("KO\n");
-		return ;
-	}
-	i = 0;
-	while (i < env.stack_a_size - 1)
-	{
-		if (env.stack_a[i] < env.stack_a[i + 1])
-		{
-			ft_putstr("KO\n");
-			return ;
-		}
-		++i;
-	}
-	ft_putstr("OK\n");
-}
-
 int		main(int argc, char *argv[])
 {
 	t_env	env;
@@ -65,7 +43,10 @@ int		main(int argc, char *argv[])
 	ft_checker_handle_stack(argc, argv, &env);
 	ft_checker_handle_operations(&env);
 	ft_checker_order(&env);
-	ft_checker_check(env);
+	if (ft_checker_check(env))
+		ft_putstr("OK\n");
+	else
+		ft_putstr("KO\n");
 	free(env.stack_a);
 	free(env.stack_b);
 	ft_lstdel(&env.operations, &ft_del_operation);

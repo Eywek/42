@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/08 20:02:46 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/09 10:21:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void	ft_sort(t_env *env)
 //	ft_putendl(" === SORTING... === ");
 //	ft_display_stacks(*env);
 
+	if (ft_checker_check(*env))
+		return ;
 	sorting = 0;
 	if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[0])
 		ft_do_operate("rra", env, &sorting);

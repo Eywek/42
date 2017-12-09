@@ -32,6 +32,7 @@ void	ft_checker_handle_stack(int argc, char *argv[], t_env *env);
 void	ft_checker_handle_line(t_env *env, char *line);
 void	ft_checker_handle_operations(t_env *env);
 void	ft_operate(char *operation, t_env *env);
+int		ft_checker_check(t_env env);
 void	ft_push_tab(int **tab1, int *size1, int **tab2, int *size2);
 
 void	ft_display_stacks(t_env env);

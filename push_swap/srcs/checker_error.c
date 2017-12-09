@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:30:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/07 19:24:53 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/09 10:27:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ void	ft_checker_handle_operations(t_env *env)
 	env->operations = NULL;
 	while (get_next_line(0, &line) > 0)
 		ft_checker_handle_line(env, line);
-	free(line);
+	if (env->operations != NULL)
+		free(line);
 }
