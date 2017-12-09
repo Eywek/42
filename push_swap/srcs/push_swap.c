@@ -6,10 +6,11 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/09 12:53:10 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/09 14:29:40 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <printf.h>
 #include "../includes/push_swap.h"
 
 //t_array	ft_merge(t_array array1, t_array array2)
@@ -121,18 +122,24 @@ void	ft_do_operate(char *operation, t_env *env, int *state)
 int		ft_get_index_inf(t_env env)
 {
 	int	i;
+	int	pos;
+	int	min_value;
 
 	i = -1;
-	ft_putstr("FIND pos WHERE stack[pos] < ");
-	ft_putnbr(env.stack_a[0]);
-	ft_putstr("\n");
+	pos = 0;
+	min_value = env.stack_a[0];
+	//printf("- GET INDEX -\nmin_value start = %d\n", min_value);
 	while (++i < env.stack_a_size)
-		if (env.stack_a[0] > env.stack_a[i])
-			break ;
-	ft_putstr("FOUND WITH pos = ");
-	ft_putnbr(i);
-	ft_putchar('\n');
-	return (i);
+	{
+	//	printf("CHECK IF %d > %d (i=%d)\n", min_value, env.stack_a[i], i);
+		if (min_value < env.stack_a[i])
+		{
+			min_value = env.stack_a[i];
+			pos = i;
+		}
+	}
+	//printf("pos = %d\n--\n", pos);
+	return (pos);
 }
 
 void	ft_sort(t_env *env)
@@ -168,21 +175,40 @@ void	ft_sort(t_env *env)
 //			ft_do_operate("pa", env, &sorting);
 //	}
 
-	int	i;
+	int i;
+	int	pos;
 //	int	pos;
 
 	i = -1;
-	while (++i < env->stack_a_size)
+	sorting = 0;
+	while (++i < env->stack_a_size) // le pb il est là, psk la size est decremente pour pb
 	{
-		if (env->stack_a_size > 2 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2] &&
-			env->stack_a[env->stack_a_size - 1] < env->stack_a[env->stack_a_size - 3])
+
+
+		if (env->stack_a_size > 3 && env->stack_a[1] > env->stack_a[2] &&
+			env->stack_a[1] < env->stack_a[3])
 			ft_do_operate("sa", env, &sorting);
-		if (env->stack_a_size == 0 || ft_checker_check(*env))
-			break ;
-		if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] < env->stack_a[0])
+		if (env->stack_b_size == 0 && ft_checker_check(*env))
+		{
+		//	ft_putstr("I will break\n");
+			break;
+		}
+		/*if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] < env->stack_a[0])
 			ft_do_operate("rra", env, &sorting);
 		else if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[0])
-			ft_do_operate("ra", env, &sorting);
+			ft_do_operate("ra", env, &sorting);*/
+
+
+		pos = ft_get_index_inf(*env);
+		if (pos > (env->stack_a_size / 2) && env->stack_a_size > 1)
+			while (pos++ < env->stack_a_size)
+				ft_do_operate("rra", env, &sorting);
+		else
+			while (pos-- > 0)
+				ft_do_operate("ra", env, &sorting);
+
+
+
 //		pos = ft_get_index_inf(*env);
 //		if (pos > env->stack_a_size / 2)
 //			while (pos++ < env->stack_a_size)
@@ -191,11 +217,19 @@ void	ft_sort(t_env *env)
 //			while (pos-- > 0)
 //				ft_do_operate("ra", env, &sorting);
 		if ((ft_checker_check(*env) && env->stack_b_size == 0) ||
-			(ft_checker_check(*env) && env->stack_b_size == 0 && env->stack_a[0] > env->stack_b[0]))
+			(ft_checker_check(*env) && env->stack_b_size != 0 &&
+			env->stack_a[env->stack_a_size - 1] > env->stack_b[env->stack_b_size - 1]))
+		{
+			ft_putstr("It's me, Mario !\n");
 			break ;
+		}
+		--i;
 		ft_do_operate("pb", env, &sorting);
 		if (ft_checker_check(*env) && env->stack_b_size == 0)
+		{
+		//	ft_putstr("I BREAK LOL\n");
 			break ;
+		}
 	}
 	while (env->stack_b_size > 0)
 		ft_do_operate("pa", env, &sorting);
@@ -214,7 +248,10 @@ void	ft_push_swap_process(t_env *env)
 //	ft_quicksort(env->stack_a, env->stack_a_size);
 //	ft_putendl(" === BEFORE === ");
 //	ft_display_stacks(*env);
-	ft_sort(env);
+	ft_putendl(" === BEFORE === ");
+	ft_display_stacks(*env);
+	if (!ft_checker_check(*env))
+		ft_sort(env);
 	ft_putendl(" === SORTED === ");
 	ft_display_stacks(*env);
 	ft_putendl(" ==== OPERATIONS ====");

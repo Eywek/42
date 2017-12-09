@@ -27,6 +27,10 @@ void	ft_push_tab(int **tab1, int *size1, int **tab2, int *size2)
 
 void	ft_operate(char *operation, t_env *env)
 {
+
+	ft_putendl(" === SORTING... === ");
+	ft_display_stacks(*env);
+
 	if (ft_strncmp(operation, "sa", 2) == 0 && env->stack_a_size >= 2)
 		ft_swap(&(env->stack_a[env->stack_a_size - 1]),
 				&(env->stack_a[env->stack_a_size - 2]));
