@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="check_order.c" pinned="false" current-in-tab="false">
+      <file leaf-file-name="check_order.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srcs/check_order.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="51" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="51" />
+            <state relative-caret-position="735">
+              <caret line="49" column="53" lean-forward="false" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
               <folding>
                 <element signature="e#892#911#0" expanded="true" />
               </folding>
@@ -65,7 +65,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="push_swap.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="push_swap.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/push_swap.c">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="955">
@@ -163,8 +163,8 @@
         <option value="$PROJECT_DIR$/srcs/checker_error.c" />
         <option value="$PROJECT_DIR$/srcs/operate.c" />
         <option value="$PROJECT_DIR$/includes/push_swap.h" />
-        <option value="$PROJECT_DIR$/srcs/check_order.c" />
         <option value="$PROJECT_DIR$/srcs/push_swap.c" />
+        <option value="$PROJECT_DIR$/srcs/check_order.c" />
       </list>
     </option>
   </component>
@@ -256,12 +256,12 @@
       <workItem from="1512743326654" duration="11329000" />
       <workItem from="1512810628482" duration="1714000" />
       <workItem from="1512814036747" duration="5801000" />
-      <workItem from="1512823784718" duration="3435000" />
+      <workItem from="1512823784718" duration="3494000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43752000" />
+    <option name="totallyTimeSpent" value="43811000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="713" y="0" width="1847" height="1440" extended-state="0" />
@@ -650,16 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/check_order.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="51" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="51" />
-          <folding>
-            <element signature="e#892#911#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/checker_error.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1289">
@@ -680,6 +670,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="955">
           <caret line="218" column="8" lean-forward="false" selection-start-line="218" selection-start-column="8" selection-end-line="218" selection-end-column="8" />
+          <folding>
+            <element signature="e#892#911#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/check_order.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="53" lean-forward="false" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
           <folding>
             <element signature="e#892#911#0" expanded="true" />
           </folding>

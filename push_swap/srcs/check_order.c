@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 10:25:03 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/09 15:51:58 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/09 16:29:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ int		ft_checker_check_b(t_env env)
 	e.stack_a_size = env.stack_b_size;
 	env.stack_b_size = 0;
 	if (!ft_checker_check(env))
+	{
+		ft_reverse_tab(&env.stack_b, e.stack_a_size);
 		return (0);
+	}
 	state = ft_checker_check(e);
-	ft_reverse_tab(&env.stack_b, env.stack_b_size);
+	ft_reverse_tab(&env.stack_b, e.stack_a_size);
 	return (state);
 }
