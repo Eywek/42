@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/09 15:01:28 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/09 16:28:26 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ void	ft_sort(t_env *env)
 //		else
 //			while (pos-- > 0)
 //				ft_do_operate("ra", env, &sorting);
-		//printf("checker_check = %d\nchecker_check_b = %d\n", ft_checker_check(*env), ft_checker_check_b(*env));
+		printf("checker_check = %d\nchecker_check_b = %d\n", ft_checker_check(*env), ft_checker_check_b(*env));
 		if (ft_checker_check(*env) || ft_checker_check_b(*env))
 		{
 			ft_putstr("It's me, Mario !\n");
