@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/09 16:28:26 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/12 11:42:06 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,28 +177,17 @@ void	ft_sort(t_env *env)
 
 	int i;
 	int	pos;
-//	int	pos;
 
 	i = -1;
 	sorting = 0;
-	while (++i < env->stack_a_size) // le pb il est là, psk la size est decremente pour pb
+	while (++i < env->stack_a_size)
 	{
-
-
-		if (env->stack_a_size > 3 && env->stack_a[1] > env->stack_a[2] &&
-			env->stack_a[1] < env->stack_a[3])
+		/////////////////// SA //////////////////
+		if (env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2])
 			ft_do_operate("sa", env, &sorting);
 		if (env->stack_b_size == 0 && ft_checker_check(*env))
-		{
-		//	ft_putstr("I will break\n");
 			break;
-		}
-		/*if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] < env->stack_a[0])
-			ft_do_operate("rra", env, &sorting);
-		else if (env->stack_a_size >= 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[0])
-			ft_do_operate("ra", env, &sorting);*/
-
-
+		/////////////// RRA (vers le bas) / RA (vers le haut) ///////////////
 		pos = ft_get_index_inf(*env);
 		if (pos > (env->stack_a_size / 2) && env->stack_a_size > 1)
 			while (pos++ < env->stack_a_size)
@@ -206,29 +195,13 @@ void	ft_sort(t_env *env)
 		else
 			while (pos-- > 0)
 				ft_do_operate("ra", env, &sorting);
-
-
-
-//		pos = ft_get_index_inf(*env);
-//		if (pos > env->stack_a_size / 2)
-//			while (pos++ < env->stack_a_size)
-//				ft_do_operate("rra", env, &sorting);
-//		else
-//			while (pos-- > 0)
-//				ft_do_operate("ra", env, &sorting);
-		printf("checker_check = %d\nchecker_check_b = %d\n", ft_checker_check(*env), ft_checker_check_b(*env));
 		if (ft_checker_check(*env) || ft_checker_check_b(*env))
-		{
-			ft_putstr("It's me, Mario !\n");
 			break ;
-		}
 		--i;
+		//////////////// PB ////////////////////
 		ft_do_operate("pb", env, &sorting);
 		if (ft_checker_check(*env) && env->stack_b_size == 0)
-		{
-		//	ft_putstr("I BREAK LOL\n");
 			break ;
-		}
 	}
 	while (env->stack_b_size > 0)
 		ft_do_operate("pa", env, &sorting);
