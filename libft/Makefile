@@ -6,7 +6,7 @@
 #    By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/18 16:30:59 by vtouffet          #+#    #+#              #
-#    Updated: 2017/11/09 11:16:51 by vtouffet         ###   ########.fr        #
+#    Updated: 2017/12/12 11:11:57 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ INCLUDES=./
 
 all: $(NAME)
 
-$(NAME): 
+$(NAME): $(SRCS) libft.h
 	@gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(SRCS)
 	@ar rc $(NAME) $(OBJECTS)
 	@ranlib $(NAME)
