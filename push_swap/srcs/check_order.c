@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 10:25:03 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/19 15:46:41 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/19 16:17:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,35 @@
 
 int		ft_checker_check(t_env env)
 {
-	int	i;
-
 	if (env.stack_b_size > 0)
 	{
-		printf("STACK B NOT EMPTY\n");
+		ft_putstr("STACK B NOT EMPTY\n");
 		return (0);
 	}
+	return (ft_checker_check_a(env));
+}
+
+int		ft_checker_check_a(t_env env)
+{
+	int	i;
+
 	i = 0;
 	while (i < env.stack_a_size - 1)
 	{
 		if (env.stack_a[i] < env.stack_a[i + 1])
 		{
-			printf("%d < %d (%d)\n", env.stack_a[i], env.stack_a[i + 1], i);
+			ft_putnbr(env.stack_a[i]);
+			ft_putstr(" < ");
+			ft_putnbr(env.stack_a[i + 1]);
+			ft_putstr(" (");
+			ft_putnbr(i);
+			ft_putstr(")\n");
+			ft_putstr("CHECKER CHECK A =0\n");
 			return (0);
 		}
 		++i;
 	}
+	ft_putstr("CHECKER CHECK A =1\n");
 	return (1);
 }
 

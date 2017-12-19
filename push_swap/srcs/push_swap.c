@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/19 15:50:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/19 16:51:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int		ft_get_index_inf(t_env env)
 		ft_putstr(" (i=");
 		ft_putnbr(i);
 		ft_putstr(")\n");
-		printf("CHECK IF %d > %d (i=%d)\n", min_value, env.stack_a[i], i);
+		printf("CHECK IF %d < %d (i=%d)\n", min_value, env.stack_a[i], i);
 		if (min_value < env.stack_a[i])
 		{
 			min_value = env.stack_a[i];
@@ -210,52 +210,40 @@ void	ft_sort(t_env *env)
 //			ft_do_operate("pa", env, &sorting);
 //	}
 
-	int i;
 	int	pos;
 
-	i = -1;
 	sorting = 0;
-	while (++i < env->stack_a_size)
+	// SI A ET B SONT PAS TRIER
+	while (!ft_checker_check_b(*env) || !ft_checker_check_a(*env))
 	{
+		ft_putendl("-- WHILE --");
 		//////////////// PB ////////////////////
 		if (ft_can_push(*env))
 		{
 			ft_putstr("OK PUSH TO B\n");
 			ft_do_operate("pb", env, &sorting);
-			if (ft_checker_check(*env) && env->stack_b_size == 0)
-				break;
+			continue ;
+		}
+		/////////////// RRA (vers le bas) / RA (vers le haut) ///////////////
+		pos = env->stack_a_size - 1 - ft_get_index_inf(*env);
+		ft_putstr("POS= ");
+		ft_putnbr(pos);
+		ft_putendl("");
+		if (pos > 0)
+		{
+			sorting = 0;
+			if (pos >= (env->stack_a_size / 2) && env->stack_a_size > 1)
+				while (pos++ < env->stack_a_size - 1)
+					ft_do_operate("rra", env, &sorting);
+			else
+				while (pos-- > 0)
+					ft_do_operate("ra", env, &sorting);
+			if (sorting)
+				continue ;
 		}
 		/////////////////// SA //////////////////
 		if (env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2])
 			ft_do_operate("sa", env, &sorting);
-		if (env->stack_b_size == 0 && ft_checker_check(*env))
-			break;
-		//////////////// PB ////////////////////
-		if (ft_can_push(*env))
-		{
-			if (ft_checker_check(*env) || ft_checker_check_b(*env))
-				break ;
-			ft_putstr("OK PUSH TO B\n");
-			ft_do_operate("pb", env, &sorting);
-			if (ft_checker_check(*env) && env->stack_b_size == 0)
-				break;
-		}
-		/////////////// RRA (vers le bas) / RA (vers le haut) ///////////////
-		pos = ft_get_index_inf(*env);
-		if (pos > 0)
-			pos++;
-		ft_putstr("POS= ");
-		ft_putnbr(pos);
-		ft_putendl("");
-		if (pos > (env->stack_a_size / 2) && env->stack_a_size > 1)
-			while (pos++ < env->stack_a_size)
-				ft_do_operate("rra", env, &sorting);
-		else
-			while (pos-- > 0)
-				ft_do_operate("ra", env, &sorting);
-		if (ft_checker_check(*env) || ft_checker_check_b(*env))
-			break ;
-		--i;
 	}
 	while (env->stack_b_size > 0)
 		ft_do_operate("pa", env, &sorting);
