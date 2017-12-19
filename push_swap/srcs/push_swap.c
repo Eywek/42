@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/12 11:42:06 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/19 15:21:04 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,19 @@ int		ft_get_index_inf(t_env env)
 	i = -1;
 	pos = 0;
 	min_value = env.stack_a[0];
-	//printf("- GET INDEX -\nmin_value start = %d\n", min_value);
+	ft_putstr("- GET INDEX -\nmin_value start = ");
+	ft_putnbr(min_value);
+	ft_putendl("");
 	while (++i < env.stack_a_size)
 	{
-	//	printf("CHECK IF %d > %d (i=%d)\n", min_value, env.stack_a[i], i);
+		ft_putstr("CHECK IF ");
+		ft_putnbr(min_value);
+		ft_putstr(" > ");
+		ft_putnbr(env.stack_a[i]);
+		ft_putstr(" (i=");
+		ft_putnbr(i);
+		ft_putstr(")\n");
+		printf("CHECK IF %d > %d (i=%d)\n", min_value, env.stack_a[i], i);
 		if (min_value < env.stack_a[i])
 		{
 			min_value = env.stack_a[i];
@@ -140,6 +149,32 @@ int		ft_get_index_inf(t_env env)
 	}
 	//printf("pos = %d\n--\n", pos);
 	return (pos);
+}
+
+int		ft_can_push(t_env env)
+{
+	int	search;
+	int	i;
+
+	search = env.stack_a[env.stack_a_size - 1];
+	i = env.stack_a_size - 1;
+	ft_putstr("GET MIN INDEX = ");
+	ft_putnbr(0);
+	ft_putstr(" (");
+	ft_putnbr(search);
+	ft_putstr(")\n");
+	while (i >= 0)
+	{
+		if (env.stack_a[i] < search)
+			return (0);
+		--i;
+	}
+	ft_putstr("GET MIN INDEX = ");
+	ft_putnbr(0);
+	ft_putstr(" (");
+	ft_putnbr(search);
+	ft_putstr(")\n");
+	return (1);
 }
 
 void	ft_sort(t_env *env)
@@ -182,13 +217,32 @@ void	ft_sort(t_env *env)
 	sorting = 0;
 	while (++i < env->stack_a_size)
 	{
+		//////////////// PB ////////////////////
+		if (ft_can_push(*env))
+		{
+			ft_putstr("OK PUSH TO B\n");
+			ft_do_operate("pb", env, &sorting);
+			if (ft_checker_check(*env) && env->stack_b_size == 0)
+				break;
+		}
 		/////////////////// SA //////////////////
 		if (env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2])
 			ft_do_operate("sa", env, &sorting);
 		if (env->stack_b_size == 0 && ft_checker_check(*env))
 			break;
+		//////////////// PB ////////////////////
+		if (ft_can_push(*env))
+		{
+			ft_putstr("OK PUSH TO B\n");
+			ft_do_operate("pb", env, &sorting);
+			if (ft_checker_check(*env) && env->stack_b_size == 0)
+				break;
+		}
 		/////////////// RRA (vers le bas) / RA (vers le haut) ///////////////
 		pos = ft_get_index_inf(*env);
+		ft_putstr("POS= ");
+		ft_putnbr(pos);
+		ft_putendl("");
 		if (pos > (env->stack_a_size / 2) && env->stack_a_size > 1)
 			while (pos++ < env->stack_a_size)
 				ft_do_operate("rra", env, &sorting);
@@ -198,10 +252,6 @@ void	ft_sort(t_env *env)
 		if (ft_checker_check(*env) || ft_checker_check_b(*env))
 			break ;
 		--i;
-		//////////////// PB ////////////////////
-		ft_do_operate("pb", env, &sorting);
-		if (ft_checker_check(*env) && env->stack_b_size == 0)
-			break ;
 	}
 	while (env->stack_b_size > 0)
 		ft_do_operate("pa", env, &sorting);
