@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/19 17:04:43 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/19 17:14:58 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void	ft_sort(t_env *env)
 			continue ;
 		}
 		/////////////// RRA (vers le bas) / RA (vers le haut) ///////////////
-		pos = env->stack_a_size - 1 - ft_get_index_inf(*env);
+		pos = /*env->stack_a_size - 1 -*/ ft_get_index_inf(*env);
 		ft_putstr("POS= ");
 		ft_putnbr(pos);
 		ft_putendl("");
