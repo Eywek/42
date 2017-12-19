@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/19 16:51:42 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/19 17:04:43 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,11 @@ int		ft_get_index_inf(t_env env)
 	{
 		ft_putstr("CHECK IF ");
 		ft_putnbr(min_value);
-		ft_putstr(" > ");
+		ft_putstr(" < ");
 		ft_putnbr(env.stack_a[i]);
 		ft_putstr(" (i=");
 		ft_putnbr(i);
 		ft_putstr(")\n");
-		printf("CHECK IF %d < %d (i=%d)\n", min_value, env.stack_a[i], i);
 		if (min_value < env.stack_a[i])
 		{
 			min_value = env.stack_a[i];
