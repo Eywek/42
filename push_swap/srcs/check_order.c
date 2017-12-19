@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 10:25:03 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/09 16:29:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/19 15:46:41 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int		ft_checker_check_b(t_env env)
 	int		state;
 	t_env	e;
 
+	if (env.stack_b_size == 1)
+	{
+		ft_putstr("CHECKER CHECK B =1\n");
+		return (1);
+	}
 	ft_reverse_tab(&env.stack_b, env.stack_b_size);
 	ft_memset(&e, 0, sizeof(t_env));
 	e.stack_a = env.stack_b;
@@ -52,5 +57,8 @@ int		ft_checker_check_b(t_env env)
 	}
 	state = ft_checker_check(e);
 	ft_reverse_tab(&env.stack_b, e.stack_a_size);
+	ft_putstr("CHECKER CHECK B =");
+	ft_putnbr(state);
+	ft_putendl("");
 	return (state);
 }

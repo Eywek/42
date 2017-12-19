@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/19 15:30:47 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/19 15:50:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,8 @@ void	ft_sort(t_env *env)
 		//////////////// PB ////////////////////
 		if (ft_can_push(*env))
 		{
+			if (ft_checker_check(*env) || ft_checker_check_b(*env))
+				break ;
 			ft_putstr("OK PUSH TO B\n");
 			ft_do_operate("pb", env, &sorting);
 			if (ft_checker_check(*env) && env->stack_b_size == 0)
