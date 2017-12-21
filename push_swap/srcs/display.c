@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 18:45:16 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/08 18:00:09 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/21 16:22:47 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	ft_display_stacks(t_env env)
 
 t_list	*ft_display_operation(t_list *lst)
 {
-	ft_putendl(lst->content);
+	write(1, lst->content, lst->content_size);
+	write(1, "\n", 1);
 	return (lst);
 }
 
