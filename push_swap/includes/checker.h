@@ -23,6 +23,7 @@ typedef struct	s_env {
 	int			stack_a_size;
 	int			stack_b_size;
 	t_list		*operations;
+	int			mode;
 }				t_env;
 
 void	ft_del_operation(void *name, size_t size);

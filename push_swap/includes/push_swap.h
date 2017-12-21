@@ -15,13 +15,6 @@
 
 # include "checker.h"
 
-typedef struct	s_array {
-	int	*tab;
-	int	n;
-}				t_array;
-
-int		ft_quicksort_get_pivot(int *tab, int size);
-void 	ft_quicksort(int *tab, int size);
 void	ft_push_swap_process(t_env *env);
 void	ft_display_operations(t_env env);
 int		ft_checker_check_b(t_env env);

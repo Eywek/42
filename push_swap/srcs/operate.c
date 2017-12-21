@@ -47,7 +47,9 @@ void	ft_operate(char *operation, t_env *env)
 		ft_move_tab(&env->stack_a, env->stack_a_size, -1);
 	else if (ft_strncmp(operation, "rrb", 3) == 0)
 		ft_move_tab(&env->stack_b, env->stack_b_size, -1);
-
-	ft_putendl(" === SORTING... === ");
-	ft_display_stacks(*env);
+	if (env->mode > 0)
+	{
+		ft_putendl(" === SORTING... === ");
+		ft_display_stacks(*env);
+	}
 }

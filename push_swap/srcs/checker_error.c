@@ -46,7 +46,7 @@ int		ft_is_valid_operation(char *str)
 	return (0);
 }
 
-void	ft_checker_handle_stack(int argc, char *argv[], t_env *env)
+void	ft_checker_handle_stack(int argc, char *argv[], t_env *env) // TODO: Handle spaces
 {
 	int		count;
 	int		nb;

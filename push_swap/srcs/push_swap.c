@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/21 16:27:51 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/21 16:30:45 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,19 @@ void	ft_sort(t_env *env)
 
 void	ft_push_swap_process(t_env *env)
 {
-	ft_putendl(" === BEFORE === ");
-	ft_display_stacks(*env);
+	if (env->mode > 0)
+	{
+		ft_putendl(" === BEFORE === ");
+		ft_display_stacks(*env);
+	}
 	if (!ft_checker_check(*env))
 		ft_sort(env);
-	ft_putendl(" === SORTED === ");
-	ft_display_stacks(*env);
-	ft_putendl(" ==== OPERATIONS ====");
+	if (env->mode > 0)
+	{
+		ft_putendl(" === SORTED === ");
+		ft_display_stacks(*env);
+		ft_putendl(" ==== OPERATIONS ====");
+	}
 	ft_display_operations(*env); // TODO: Malloc directement stack_b de la taille de stack_a
 }
 
@@ -137,6 +143,8 @@ int		main(int argc, char *argv[])
 		!(env.stack_b = malloc(sizeof(int))))
 		ft_checker_error();
 	ft_memset(&env, 0, sizeof(env));
+	// TODO: Handle mode
+	env.mode = 1;
 	ft_checker_handle_stack(argc, argv, &env);
 	ft_push_swap_process(&env);
 	//free(env.stack_a);
