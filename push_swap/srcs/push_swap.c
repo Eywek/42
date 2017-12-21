@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/19 17:14:58 by vtouffet         ###   ########.fr       */
+/*   Updated: 2017/12/21 15:55:17 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,39 @@ int		ft_can_push(t_env env)
 	return (1);
 }
 
+int		ft_order_reverse(t_env *env)
+{
+	int	is_reversed;
+	int	i;
+	int	sorting;
+
+	ft_putstr("CHECK IF IS REVERSED\n");
+	is_reversed = 1;
+	i = -1;
+	while (++i < env->stack_a_size - 1)
+	{
+		ft_putstr("COMPARE ");
+		ft_putnbr(env->stack_a[i]);
+		ft_putstr(" > ");
+		ft_putnbr(env->stack_a[i + 1]);
+		ft_putendl("");
+		if (env->stack_a[i] > env->stack_a[i + 1])
+			is_reversed = 0;
+	}
+	if (!is_reversed)
+		return (0);
+	ft_putstr("IS REVERSED\n");
+	i = 0;
+	while (!ft_checker_check_b(*env) || !ft_checker_check_a(*env))
+	{
+		if (i++ > 0)
+			ft_do_operate("pb", env, &sorting);
+		ft_putstr("I WILL DO RRA LOL\n");
+		ft_do_operate("rra", env, &sorting);
+	}
+	return (1);
+}
+
 void	ft_sort(t_env *env)
 {
 	int	sorting;
@@ -216,6 +249,9 @@ void	ft_sort(t_env *env)
 	while (!ft_checker_check_b(*env) || !ft_checker_check_a(*env))
 	{
 		ft_putendl("-- WHILE --");
+		////////////// REVERSED /////////////////
+		if (ft_order_reverse(env))
+			break ;
 		//////////////// PB ////////////////////
 		if (ft_can_push(*env))
 		{
@@ -224,18 +260,21 @@ void	ft_sort(t_env *env)
 			continue ;
 		}
 		/////////////// RRA (vers le bas) / RA (vers le haut) ///////////////
-		pos = /*env->stack_a_size - 1 -*/ ft_get_index_inf(*env);
+		pos = (env->stack_a_size - 1) - ft_get_index_inf(*env);
 		ft_putstr("POS= ");
 		ft_putnbr(pos);
 		ft_putendl("");
-		if (pos > 0)
+		if (pos >= 0)
 		{
 			sorting = 0;
 			if (pos >= (env->stack_a_size / 2) && env->stack_a_size > 1)
+			{
+				ft_putstr("I WILL DO RRA\n");
 				while (pos++ < env->stack_a_size - 1)
 					ft_do_operate("rra", env, &sorting);
+			}
 			else
-				while (pos-- > 0)
+				while (pos-- >= 0)
 					ft_do_operate("ra", env, &sorting);
 			if (sorting)
 				continue ;
