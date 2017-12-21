@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/21 15:55:17 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/21 16:18:58 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,9 @@ void	ft_sort(t_env *env)
 		////////////// REVERSED /////////////////
 		if (ft_order_reverse(env))
 			break ;
+		/////////////////// SA //////////////////
+		if (env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2])
+			ft_do_operate("sa", env, &sorting);
 		//////////////// PB ////////////////////
 		if (ft_can_push(*env))
 		{
@@ -270,7 +273,7 @@ void	ft_sort(t_env *env)
 			if (pos >= (env->stack_a_size / 2) && env->stack_a_size > 1)
 			{
 				ft_putstr("I WILL DO RRA\n");
-				while (pos++ < env->stack_a_size - 1)
+				while (pos++ < env->stack_a_size)
 					ft_do_operate("rra", env, &sorting);
 			}
 			else
@@ -279,9 +282,6 @@ void	ft_sort(t_env *env)
 			if (sorting)
 				continue ;
 		}
-		/////////////////// SA //////////////////
-		if (env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2])
-			ft_do_operate("sa", env, &sorting);
 	}
 	while (env->stack_b_size > 0)
 		ft_do_operate("pa", env, &sorting);
