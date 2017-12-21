@@ -144,7 +144,7 @@ int		main(int argc, char *argv[])
 		ft_checker_error();
 	ft_memset(&env, 0, sizeof(env));
 	// TODO: Handle mode
-	env.mode = 1;
+	//env.mode = 1;
 	ft_checker_handle_stack(argc, argv, &env);
 	ft_push_swap_process(&env);
 	//free(env.stack_a);

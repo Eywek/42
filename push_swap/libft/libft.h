@@ -22,6 +22,7 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+int				ft_get_chartab_size(char **tab);
 void			ft_push(int *a, int *b);
 void			ft_move_tab(int **tab, int size, int move);
 void			ft_copy_tab(int *dest, int *src, int size);

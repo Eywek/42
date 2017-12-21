@@ -6,18 +6,12 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:30:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/20 18:30:58 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/21 19:00:59 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <printf.h>
 #include "../includes/checker.h"
-
-void	ft_checker_error(void)
-{
-	ft_putstr_fd("Error\n", 2);
-	exit(EXIT_FAILURE);
-}
 
 int		ft_is_valid_operation(char *str)
 {
@@ -46,18 +40,25 @@ int		ft_is_valid_operation(char *str)
 	return (0);
 }
 
-void	ft_checker_handle_stack(int argc, char *argv[], t_env *env) // TODO: Handle spaces
+void	ft_checker_store_stack(int size, char *tab[], t_env *env)
 {
 	int		count;
 	int		nb;
 	int		*tmp;
+	char	**splited;
 
-	count = 0;
-	(void)argv;
-	while (++count < argc)
+	count = size > 0 ? 0 : -1;
+	while ((size > 0) ? ++count < size : tab[++count] != 0)
 	{
-		if ((nb = ft_getnbr(argv[count])) == 0 &&
-				ft_strcmp(argv[count], "0") != 0)
+		if (ft_strstr(tab[count], " "))
+		{
+			splited = ft_strsplit(tab[count], ' ');
+			ft_checker_store_stack(0, splited, env);
+			ft_free_tab((void**)splited, ft_get_chartab_size(splited));
+			continue;
+		}
+		if ((nb = ft_getnbr(tab[count])) == 0 &&
+			ft_strcmp(tab[count], "0") != 0)
 			ft_checker_error();
 		if (ft_in_tab(nb, env->stack_a, env->stack_a_size))
 			ft_checker_error();
@@ -69,6 +70,11 @@ void	ft_checker_handle_stack(int argc, char *argv[], t_env *env) // TODO: Handle
 		env->stack_a = tmp;
 		env->stack_a_size++;
 	}
+}
+
+void	ft_checker_handle_stack(int argc, char *argv[], t_env *env) // TODO: Handle spaces
+{
+	ft_checker_store_stack(argc, argv, env);
 	ft_reverse_tab(&env->stack_a, env->stack_a_size);
 }
 

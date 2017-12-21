@@ -43,3 +43,9 @@ void	ft_display_operations(t_env env)
 {
 	ft_lstmap(env.operations, &ft_display_operation);
 }
+
+void	ft_checker_error(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
+}

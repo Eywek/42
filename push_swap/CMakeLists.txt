@@ -79,6 +79,7 @@ set(SOURCE_FILES
         libft/ft_swap.c
         libft/ft_tolower.c
         libft/ft_toupper.c
+        libft/ft_get_chartab_size.c
         libft/libft.h
         Makefile libft/ft_getnbr.c libft/ft_free_tab.c libft/ft_in_tab.c srcs/checker_error.c libft/ft_copy_tab.c libft/ft_move_tab.c)
 
