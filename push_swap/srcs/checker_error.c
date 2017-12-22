@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:30:09 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/21 19:00:59 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/22 15:53:13 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@ int		ft_is_valid_operation(char *str)
 	return (0);
 }
 
-void	ft_checker_store_stack(int size, char *tab[], t_env *env)
+void	ft_checker_store_stack(int size, char *tab[], int start, t_env *env)
 {
 	int		count;
 	int		nb;
 	int		*tmp;
 	char	**splited;
 
-	count = size > 0 ? 0 : -1;
+	count = start - 1;
 	while ((size > 0) ? ++count < size : tab[++count] != 0)
 	{
 		if (ft_strstr(tab[count], " "))
 		{
 			splited = ft_strsplit(tab[count], ' ');
-			ft_checker_store_stack(0, splited, env);
+			ft_checker_store_stack(0, splited, 0, env);
 			ft_free_tab((void**)splited, ft_get_chartab_size(splited));
 			continue;
 		}
@@ -72,9 +72,9 @@ void	ft_checker_store_stack(int size, char *tab[], t_env *env)
 	}
 }
 
-void	ft_checker_handle_stack(int argc, char *argv[], t_env *env) // TODO: Handle spaces
+void	ft_checker_handle_stack(int argc, char *argv[], int start, t_env *env)
 {
-	ft_checker_store_stack(argc, argv, env);
+	ft_checker_store_stack(argc, argv, start, env);
 	ft_reverse_tab(&env->stack_a, env->stack_a_size);
 }
 

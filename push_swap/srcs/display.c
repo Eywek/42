@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 18:45:16 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/21 16:22:47 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/22 15:58:37 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ void	ft_display_stacks(t_env env)
 
 t_list	*ft_display_operation(t_list *lst)
 {
+	if (ft_strcmp(lst->content, "sa") == 0)
+		write(1, "\033[0;32m", 7);
+	else if (ft_strcmp(lst->content, "ra") == 0)
+		write(1, "\033[0;33m", 7);
+	else if (ft_strcmp(lst->content, "rra") == 0)
+		write(1, "\033[1;33m", 7);
+	else if (ft_strcmp(lst->content, "pa") == 0)
+		write(1, "\033[0;35m", 7);
+	else if (ft_strcmp(lst->content, "pb") == 0)
+		write(1, "\033[0;36m", 7);
 	write(1, lst->content, lst->content_size);
 	write(1, "\n", 1);
 	return (lst);

@@ -40,7 +40,7 @@ int		main(int argc, char *argv[])
 			!(env.stack_b = malloc(sizeof(int))))
 		ft_checker_error();
 	ft_memset(&env, 0, sizeof(env));
-	ft_checker_handle_stack(argc, argv, &env);
+	ft_checker_handle_stack(argc, argv, 0, &env);
 	ft_checker_handle_operations(&env);
 	ft_checker_order(&env);
 	if (ft_checker_check(env))

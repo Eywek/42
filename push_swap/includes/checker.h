@@ -6,7 +6,7 @@
 /*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/06 23:56:59 by valentin          #+#    #+#             */
-/*   Updated: 2017/12/20 18:30:58 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/22 15:42:11 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ typedef struct	s_env {
 	int			stack_a_size;
 	int			stack_b_size;
 	t_list		*operations;
-	int			mode;
+	int			verbose;
+	int			color;
 }				t_env;
 
 void	ft_del_operation(void *name, size_t size);
 void	ft_checker_error(void);
 int		ft_is_valid_operation(char *str);
-void	ft_checker_handle_stack(int argc, char *argv[], t_env *env);
+void	ft_checker_handle_stack(int argc, char *argv[], int start, t_env *env);
 void	ft_checker_handle_line(t_env *env, char *line);
 void	ft_checker_handle_operations(t_env *env);
 void	ft_operate(char *operation, t_env *env);

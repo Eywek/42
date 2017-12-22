@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/22 15:12:01 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/22 15:53:24 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	ft_sort(t_env *env)
 	sorting = 0;
 	while (!ft_checker_check_b(*env) || !ft_checker_check_a(*env))
 	{
-		//ft_putstr("-- WHILE --\n");
 		if (ft_order_reverse(env))
 			break ;
 		if (env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2])
@@ -104,9 +103,6 @@ void	ft_sort(t_env *env)
 		pos = (env->stack_a_size - 1) - ft_get_index_inf(*env);
 		if (pos >= 0)
 		{
-//			ft_putstr("POS= ");
-//			ft_putnbr(pos);
-//			ft_putchar('\n');
 			sorting = 0;
 			if (pos >= (env->stack_a_size / 2) && env->stack_a_size > 1)
 				while (pos++ < env->stack_a_size && (!ft_checker_check_b(*env) || !ft_checker_check_a(*env)))
@@ -124,14 +120,14 @@ void	ft_sort(t_env *env)
 
 void	ft_push_swap_process(t_env *env)
 {
-	if (env->mode > 0)
+	if (env->verbose)
 	{
 		ft_putendl(" === BEFORE === ");
 		ft_display_stacks(*env);
 	}
 	if (!ft_checker_check(*env))
 		ft_sort(env);
-	if (env->mode > 0)
+	if (env->verbose)
 	{
 		ft_putendl(" === SORTED === ");
 		ft_display_stacks(*env);
@@ -140,9 +136,35 @@ void	ft_push_swap_process(t_env *env)
 	ft_display_operations(*env); // TODO: Malloc directement stack_b de la taille de stack_a
 }
 
+int		ft_handle_options(int argc, char *argv[], t_env *env)
+{
+	int	i;
+	int	start;
+
+	i = 1;
+	start = i;
+	while (i < argc - 1)
+	{
+		if (argv[i][0] == '-')
+		{
+			while (*(++argv[i]))
+			{
+				if (*(argv[i]) == 'v')
+					++env->verbose;
+				else if (*(argv[i]) == 'c')
+					++env->color;
+			}
+			++start;
+		}
+		++i;
+	}
+	return (start);
+}
+
 int		main(int argc, char *argv[])
 {
 	t_env	env;
+	int		start;
 
 	if (argc < 2)
 		return (EXIT_SUCCESS);
@@ -150,11 +172,10 @@ int		main(int argc, char *argv[])
 		!(env.stack_b = malloc(sizeof(int))))
 		ft_checker_error();
 	ft_memset(&env, 0, sizeof(env));
-	// TODO: Handle mode
-	env.mode = 1;
-	ft_checker_handle_stack(argc, argv, &env);
+	start = ft_handle_options(argc, argv, &env);
+	ft_checker_handle_stack(argc, argv, start, &env);
 	ft_push_swap_process(&env);
-	//free(env.stack_a);
-	//free(env.stack_b);
+	free(env.stack_a);
+	free(env.stack_b);
 	return (EXIT_SUCCESS);
 }
