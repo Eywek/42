@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 12:32:03 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/20 18:30:58 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/21 19:09:59 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int		main(int argc, char *argv[])
 {
 	t_env	env;
 
-	if (argc < 2)
-		ft_checker_error();
+	if (argc == 1)
+		return (EXIT_SUCCESS);
 	if (!(env.stack_a = malloc(sizeof(int))) ||
 			!(env.stack_b = malloc(sizeof(int))))
 		ft_checker_error();

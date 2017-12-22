@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 19:09:55 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/21 16:30:45 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/22 15:12:01 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,14 @@ void	ft_sort(t_env *env)
 	sorting = 0;
 	while (!ft_checker_check_b(*env) || !ft_checker_check_a(*env))
 	{
+		//ft_putstr("-- WHILE --\n");
 		if (ft_order_reverse(env))
 			break ;
 		if (env->stack_a_size > 1 && env->stack_a[env->stack_a_size - 1] > env->stack_a[env->stack_a_size - 2])
+		{
 			ft_do_operate("sa", env, &sorting);
+			continue ;
+		}
 		if (ft_can_push(*env))
 		{
 			ft_do_operate("pb", env, &sorting);
@@ -100,12 +104,15 @@ void	ft_sort(t_env *env)
 		pos = (env->stack_a_size - 1) - ft_get_index_inf(*env);
 		if (pos >= 0)
 		{
+//			ft_putstr("POS= ");
+//			ft_putnbr(pos);
+//			ft_putchar('\n');
 			sorting = 0;
 			if (pos >= (env->stack_a_size / 2) && env->stack_a_size > 1)
-				while (pos++ < env->stack_a_size)
+				while (pos++ < env->stack_a_size && (!ft_checker_check_b(*env) || !ft_checker_check_a(*env)))
 					ft_do_operate("rra", env, &sorting);
 			else
-				while (pos-- >= 0)
+				while (pos-- >= 0 && (!ft_checker_check_b(*env) || !ft_checker_check_a(*env)))
 					ft_do_operate("ra", env, &sorting);
 			if (sorting)
 				continue ;
@@ -144,7 +151,7 @@ int		main(int argc, char *argv[])
 		ft_checker_error();
 	ft_memset(&env, 0, sizeof(env));
 	// TODO: Handle mode
-	//env.mode = 1;
+	env.mode = 1;
 	ft_checker_handle_stack(argc, argv, &env);
 	ft_push_swap_process(&env);
 	//free(env.stack_a);

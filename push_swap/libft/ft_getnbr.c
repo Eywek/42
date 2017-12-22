@@ -6,7 +6,7 @@
 /*   By: valentin <null>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 00:05:26 by valentin          #+#    #+#             */
-/*   Updated: 2017/12/07 02:12:19 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/21 19:08:54 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_getnbr(char *str)
 			continue ;
 		}
 		nb = nb * 10 + (*str - 48);
-		if (nb >= INT_MAX || nb < 0)
+		if (nb > INT_MAX || nb < 0)
 			return (0);
 		str++;
 	}

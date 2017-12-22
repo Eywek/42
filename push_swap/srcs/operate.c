@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 18:47:25 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/20 18:30:58 by valentin         ###   ########.fr       */
+/*   Updated: 2017/12/22 15:24:38 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	ft_operate(char *operation, t_env *env)
 		ft_move_tab(&env->stack_b, env->stack_b_size, -1);
 	if (env->mode > 0)
 	{
-		ft_putendl(" === SORTING... === ");
+		ft_putstr(" === SORTING '");
+		ft_putstr(operation);
+		ft_putendl("' === ");
 		ft_display_stacks(*env);
 	}
 }
