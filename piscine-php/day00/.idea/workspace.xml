@@ -10,14 +10,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.5841503">
       <split-first>
         <leaf>
           <file leaf-file-name="doft.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/ex02/doft.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="675">
-                  <caret line="45" column="47" lean-forward="false" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
+                <state relative-caret-position="615">
+                  <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
                   <folding />
                 </state>
               </provider>
@@ -30,8 +30,8 @@
           <file leaf-file-name="doft.css" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/ex02/doft.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1030">
-                  <caret line="98" column="17" lean-forward="false" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
+                <state relative-caret-position="888">
+                  <caret line="124" column="20" lean-forward="false" selection-start-line="124" selection-start-column="20" selection-end-line="124" selection-end-column="20" />
                   <folding />
                 </state>
               </provider>
@@ -145,15 +145,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1515406265500</updated>
-      <workItem from="1515406269592" duration="8552000" />
+      <workItem from="1515406269592" duration="10948000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8552000" />
+    <option name="totallyTimeSpent" value="10948000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1418" y="0" width="1142" height="1440" extended-state="0" />
+    <frame x="1134" y="0" width="1426" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22339028" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -233,16 +233,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ex02/doft.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1030">
-          <caret line="98" column="17" lean-forward="false" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
+        <state relative-caret-position="888">
+          <caret line="124" column="20" lean-forward="false" selection-start-line="124" selection-start-column="20" selection-end-line="124" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ex02/doft.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="47" lean-forward="false" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
+        <state relative-caret-position="615">
+          <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
           <folding />
         </state>
       </provider>
