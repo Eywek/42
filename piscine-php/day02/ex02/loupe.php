@@ -15,9 +15,18 @@ echo preg_replace_callback('/<a [^>]+.*<\/a>/i', function ($matches) {
     }, $result);
 
     // Replace content
+//    $result = preg_replace_callback('/>.*</i', function ($matches) {
+//        var_dump($matches);
+//        return strtoupper($matches[0]);
+//    }, $result);
+
     $result = preg_replace_callback('/>.*</i', function ($matches) {
-        var_dump($matches);
-        return strtoupper($matches[0]);
+        $callback = function ($match) {
+            return strtoupper($match[1]);
+        };
+        $regex = '/(\w+(?=&)|(?<=;)\w+)/';
+        return preg_replace_callback($regex, $callback, $matches[0]);
     }, $result);
+
     return ($result);
 }, $content);
