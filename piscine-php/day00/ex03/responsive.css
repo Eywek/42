@@ -1,0 +1,95 @@
+body {
+	background-color: #f5efe3;
+}
+
+.content {
+	max-width: 1210px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+td.element {
+	border: 1px solid black;
+}
+
+table td {
+	position: relative;
+	text-align: center;
+	width: 4vw;
+	height: 4.5vw;
+}
+
+table td .number {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	font-size: 0.8vw;
+}
+
+table td .atomic-mass {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 0.8vw;
+}
+
+table td .letter {
+	font-size: 2vw;
+}
+
+table tr.spacer {
+	height: 4.5vw;
+}
+
+h1 {
+	font-size: 3vw;
+	text-align: center;
+	margin-bottom: 100px;
+	font-family: Georgia,sans-serif;
+	text-decoration: underline;
+}
+
+h1 img {
+	width: 50px;
+	border-radius: 50px;
+	margin-left: 30px;
+	margin-bottom: -20px;
+}
+
+table td.element {
+	background-color: #efff7f;
+}
+table td.element.colored.pink {
+	background-color: #ff9dd8;
+}
+table td.element.colored.purple {
+	background-color: #b680db;
+}
+table td.element.colored.orange {
+	background-color: #ff9b69;
+}
+table td.element.colored.light-orange {
+	background-color: #ffbfa2;
+}
+table td.element.colored.yellow {
+	background-color: #fffe52;
+}
+table td.element.colored.green {
+	background-color: #ADFF2F;
+}
+table td.element.colored.blue {
+	background-color: #8efff8;
+}
+table td.element.colored.grey {
+	background-color: #a1a0a1;
+}
+table td.element.colored.light-green {
+	background-color: #bcff87;
+}
+table td.element.colored.light-light-green {
+	background-color: #80e424;
+}
