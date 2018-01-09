@@ -1,5 +1,8 @@
 #!/usr/bin/php
 <?php
+if ($argc < 2)
+    exit(0);
+
 // Global
 date_default_timezone_set('Europe/Paris');
 
