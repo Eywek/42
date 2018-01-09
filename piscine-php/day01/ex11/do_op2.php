@@ -11,13 +11,24 @@ function syntax_error()
     exit(1);
 }
 
-$operationString = trim(preg_replace('/ +/', ' ', $argv[1]));
-$operationString = explode(' ', $operationString);
-if (count($operationString) != 3 || !is_numeric($operationString[0]) || !is_numeric($operationString[2]))
+$operationString = trim(preg_replace('/ +/', '', $argv[1]));
+if (strpos($operationString, '+') !== false)
+    $operation = '+';
+else if (strpos($operationString, '-') !== false)
+    $operation = '-';
+else if (strpos($operationString, '*') !== false)
+    $operation = '*';
+else if (strpos($operationString, '/') !== false)
+    $operation = '/';
+else if (strpos($operationString, '%') !== false)
+    $operation = '%';
+else
+    syntax_error();
+$operationString = explode($operation, $operationString);
+if (count($operationString) != 2 || !is_numeric($operationString[0]) || !is_numeric($operationString[1]))
     syntax_error();
 $first = intval($operationString[0]);
-$operation = $operationString[1];
-$second = intval($operationString[2]);
+$second = intval($operationString[1]);
 
 if (!in_array($operation, ['+', '-', '*', '/', '%']))
     syntax_error();

@@ -4,7 +4,10 @@ while (42)
 {
     echo "Entrez un nombre: ";
     $fd = fopen("php://stdin","r");
-    $number = trim(fgets($fd));
+    $line = fgets($fd);
+    if (!$line)
+        break;
+    $number = trim($line);
     fclose($fd);
     if (is_numeric($number))
         echo "Le chiffre $number est " . (intval($number) % 2 ? 'Impair' : 'Pair') . "\n";
