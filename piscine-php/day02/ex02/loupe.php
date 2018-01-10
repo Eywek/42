@@ -3,12 +3,12 @@
 if ($argc < 2 || !file_exists($argv[1]))
     exit(1);
 $content = file_get_contents($argv[1]);
-echo preg_replace_callback('/<a [^>]+.*<\/a>/i', function ($matches) {
+echo preg_replace_callback('/<a [^>]+((?!<\/a>).|\n)*<\/a>/i', function ($matches) {
     // Setup a
     $result = $matches[0];
 
     // Replace content
-    $result = preg_replace_callback('/>.*</i', function ($matches) {
+    $result = preg_replace_callback('/>(.|\n)*</i', function ($matches) {
         // To upper
         $result = strtoupper($matches[0]);
         if (strpos(substr($matches[0], 1, strlen($matches[0]) - 2), '<') !== false) {
