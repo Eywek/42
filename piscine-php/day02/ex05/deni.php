@@ -13,13 +13,11 @@ if (!in_array($argv[2], $line))
 $key = $argv[2];
 
 // Set vars
-$vars = [];
+$vars = $line;
 $varsList = [];
-foreach ($line as $var) {
-    $$var = [];
-    $vars[] = $var;
+foreach ($line as $var)
     $varsList[$var] = [];
-}
+
 while ($line = fgetcsv($file, 0, ';')) {
     foreach ($line as $index => $value)
         $varsList[$vars[$index]][$line[array_search($key, $vars)]] = $value;
