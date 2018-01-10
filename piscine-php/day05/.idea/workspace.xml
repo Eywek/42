@@ -105,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/ex21/ex21.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -209,12 +209,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1515597173671</updated>
-      <workItem from="1515597174809" duration="7345000" />
+      <workItem from="1515597174809" duration="7391000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7345000" />
+    <option name="totallyTimeSpent" value="7391000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="788" y="0" width="1772" height="1440" extended-state="0" />
@@ -421,7 +421,7 @@
     <entry file="file://$PROJECT_DIR$/ex21/ex21.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
           <folding />
         </state>
       </provider>
