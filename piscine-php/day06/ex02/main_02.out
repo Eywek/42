@@ -1,0 +1,41 @@
+Vector( x:1.00, y:0.00, z:0.00, w:0.00 ) constructed
+Vector( x:0.00, y:1.00, z:0.00, w:0.00 ) constructed
+Vector( x:0.00, y:0.00, z:1.00, w:0.00 ) constructed
+Vector( x:1.00, y:0.00, z:0.00, w:0.00 )
+Vector( x:0.00, y:1.00, z:0.00, w:0.00 )
+Vector( x:0.00, y:0.00, z:1.00, w:0.00 )
+Vertex( x: 0.00, y: 0.00, z:0.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) ) constructed
+Vector( x:-12.34, y:23.45, z:-34.56, w:0.00 ) constructed
+Vertex( x: 0.00, y: 0.00, z:0.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) ) destructed
+Vector( x:-36.21, y:61.40, z:-112.90, w:0.00 ) constructed
+Magnitude is 133.51978917
+Vector( x:-0.27, y:0.46, z:-0.85, w:0.00 ) constructed
+Normalized $vtc2 is Vector( x:-0.27, y:0.46, z:-0.85, w:0.00 )
+Normalized $vtc2 magnitude is 1
+Vector( x:-48.55, y:84.85, z:-147.46, w:0.00 ) constructed
+Vector( x:-48.55, y:84.85, z:-147.46, w:0.00 ) destructed
+$vtc1 + $vtc2 is Vector( x:-48.55, y:84.85, z:-147.46, w:0.00 )
+Vector( x:23.87, y:-37.95, z:78.34, w:0.00 ) constructed
+Vector( x:23.87, y:-37.95, z:78.34, w:0.00 ) destructed
+$vtc1 - $vtc2 is Vector( x:23.87, y:-37.95, z:78.34, w:0.00 )
+Vector( x:12.34, y:-23.45, z:34.56, w:0.00 ) constructed
+Vector( x:12.34, y:-23.45, z:34.56, w:0.00 ) destructed
+opposite of $vtc1 is Vector( x:12.34, y:-23.45, z:34.56, w:0.00 )
+Vector( x:-518.28, y:984.90, z:-1451.52, w:0.00 ) constructed
+Vector( x:-518.28, y:984.90, z:-1451.52, w:0.00 ) destructed
+scalar product of $vtc1 and 42 is Vector( x:-518.28, y:984.90, z:-1451.52, w:0.00 )
+dot product of $vtc1 and $vtc2 is 5788.4854
+Vector( x:-525.52, y:-141.77, z:91.45, w:0.00 ) constructed
+Vector( x:-525.52, y:-141.77, z:91.45, w:0.00 ) destructed
+cross product of $vtc1 and $vtc2 is Vector( x:-525.52, y:-141.77, z:91.45, w:0.00 )
+Vector( x:0.00, y:0.00, z:1.00, w:0.00 ) constructed
+Vector( x:0.00, y:0.00, z:1.00, w:0.00 ) destructed
+cross product of $vtcXunit and $vtcYunit is Vector( x:0.00, y:0.00, z:1.00, w:0.00 )aka $vtcZunit
+cosinus of angle between $vtc1 and $vtc2 is 0.99548488751903
+cosinus of angle between $vtcXunit and $vtcYunit is 0
+Vector( x:-0.27, y:0.46, z:-0.85, w:0.00 ) destructed
+Vector( x:-36.21, y:61.40, z:-112.90, w:0.00 ) destructed
+Vector( x:-12.34, y:23.45, z:-34.56, w:0.00 ) destructed
+Vector( x:0.00, y:0.00, z:1.00, w:0.00 ) destructed
+Vector( x:0.00, y:1.00, z:0.00, w:0.00 ) destructed
+Vector( x:1.00, y:0.00, z:0.00, w:0.00 ) destructed
