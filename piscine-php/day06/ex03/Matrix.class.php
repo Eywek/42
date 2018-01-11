@@ -1,0 +1,226 @@
+<?php
+
+require_once 'Vector.class.php';
+
+class Matrix
+{
+
+    const IDENTITY = 'IDENTITY';
+    const SCALE = 'SCALE';
+    const RX = 'Ox ROTATION';
+    const RY = 'Oy ROTATION';
+    const RZ = 'Oz ROTATION';
+    const TRANSLATION = 'TRANSLATION';
+    const PROJECTION = 'PROJECTION';
+
+    private $coords = ['x', 'y', 'z', 'w'];
+    private $matrix = [
+        [0.00, 0.00, 0.00, 0.00],
+        [0.00, 0.00, 0.00, 0.00],
+        [0.00, 0.00, 0.00, 0.00],
+        [0.00, 0.00, 0.00, 0.00],
+    ];
+    private $data = [];
+
+    static public $verbose = false;
+
+    /*
+     * Global functions
+     */
+
+    public function __construct(array $data)
+    {
+        // Validation
+        if (!isset($data['preset']) || !in_array($data['preset'], [
+            self::IDENTITY, self::SCALE, self::RX, self::RY, self::RZ, self::TRANSLATION, self::PROJECTION
+        ]))
+            return false;
+        if (!isset($data['scale']) && $data['preset'] === self::SCALE)
+            return false;
+        if (!isset($data['angle']) && in_array($data['preset'], [self::RY, self::RY, self::RZ]))
+            return false;
+        if ((!isset($data['vtc']) || !($data['vtc'] instanceof Vector)) && $data['preset'] === self::TRANSLATION)
+            return false;
+        if ((!isset($data['fov']) || !isset($data['ratio']) || !isset($data['near']) || !isset($data['far'])) && $data['preset'] === self::PROJECTION)
+            return false;
+        // Verbose
+        if (self::$verbose)
+            echo "Matrix {$data['preset']} preset instance constructed" . PHP_EOL;
+        // Process
+        $functionName = 'generate' . str_replace(' ', '', ucwords(strtolower($data['preset']))) . 'Preset';
+        $this->{$functionName}($data);
+        $this->data = $data;
+        return true;
+    }
+
+    public function __destruct()
+    {
+        if (self::$verbose)
+            echo 'Matrix instance destructed' . PHP_EOL;
+    }
+
+    public function __toString()
+    {
+        echo 'M | vtcX | vtcY | vtcZ | vtxO' . PHP_EOL;
+        echo '-----------------------------' . PHP_EOL;
+        for ($i = 0; $i < count($this->matrix); $i++)
+        {
+            echo "{$this->coords[$i]}";
+            for ($j = 0; $j < count($this->matrix[$i]); $j++)
+            {
+                echo ' | ' . number_format($this->matrix[$i][$j], 2, '.', '');
+            }
+            echo PHP_EOL;
+        }
+        return '';
+    }
+
+    public function __get($name)
+    {
+        return false;
+    }
+
+    public function __set($name, $value)
+    {
+        return false;
+    }
+
+    static public function doc()
+    {
+        return file_get_contents('Matrix.doc.txt') . PHP_EOL;
+    }
+
+    /*
+     * General functions
+     */
+
+    public function mult(Matrix $rhs)
+    {
+        // Calcul
+        $coords = [];
+        for ($i = 0; $i < count($this->matrix); $i++)
+        {
+            $coords[$i] = [];
+            for ($j = 0; $j < count($this->matrix[$i]); $j++)
+            {
+                $coords[$i][$j] = $this->matrix[$i][$j] * $rhs->get()[$i][$j];
+            }
+        }
+        // Instance
+        $matrix = new Matrix($this->data);
+        $matrix->set($coords);
+        return $matrix;
+    }
+
+    public function transformVertex(Vertex $vtx)
+    {
+        $matrix = $this->get();
+        $x = ($vtx->getX() * $matrix[0][0]) + ($vtx->getY() * $matrix[0][1]) + ($vtx->getZ() * $matrix[2][2]) + ($vtx->getW() * $matrix[0][3]);
+        $y = ($vtx->getX() * $matrix[1][0]) + ($vtx->getY() * $matrix[0][2]) + ($vtx->getZ() * $matrix[0][2]) + ($vtx->getW() * $matrix[1][3]);
+        $z = ($vtx->getX() * $matrix[2][0]) + ($vtx->getY() * $matrix[2][1]) + ($vtx->getZ() * $matrix[2][2]) + ($vtx->getW() * $matrix[2][3]);
+        $w = ($vtx->getX() * $matrix[2][3]) + ($vtx->getY() * $matrix[3][0]) + ($vtx->getZ() * $matrix[3][1]) + ($vtx->getW() * $matrix[3][2]);
+        $color = $vtx->getColor();
+        $vertex = new Vertex(compact('x', 'y', 'z', 'w', 'color'));
+        return $vertex;
+    }
+
+    /*
+     * Generate functions
+     */
+
+    public function generateIdentityPreset(array $data)
+    {
+        $this->set([
+            [1.00, 0.00, 0.00, 0.00],
+            [0.00, 1.00, 0.00, 0.00],
+            [0.00, 0.00, 1.00, 0.00],
+            [0.00, 0.00, 0.00, 1.00],
+        ]);
+    }
+
+    public function generateScalePreset(array $data)
+    {
+        $this->set([
+            [$data['scale'], 0.00, 0.00, 0.00],
+            [0.00, $data['scale'], 0.00, 0.00],
+            [0.00, 0.00, $data['scale'], 0.00],
+            [0.00, 0.00, 0.00, 1.00],
+        ]);
+    }
+
+    public function generateOxRotationPreset(array $data)
+    {
+        $this->generateIdentityPreset($data);
+        $matrix = $this->get();
+        $matrix[0][0] = 1;
+        $matrix[1][1] = cos($data['angle']);
+        $matrix[1][2] = -sin($data['angle']);
+        $matrix[2][1] = sin($data['angle']);
+        $matrix[2][2] = cos($data['angle']);
+        $this->set($matrix);
+    }
+
+    public function generateOyRotationPreset(array $data)
+    {
+        $this->generateIdentityPreset($data);
+        $matrix = $this->get();
+        $matrix[0][0] = cos($data['angle']);
+        $matrix[0][2] = sin($data['angle']);
+        $matrix[1][0] = 1;
+        $matrix[2][0] = -sin($data['angle']);
+        $matrix[2][2] = cos($data['angle']);
+        $this->set($matrix);
+    }
+
+    public function generateOzRotationPreset(array $data)
+    {
+        $this->generateIdentityPreset($data);
+        $matrix = $this->get();
+        $matrix[0][0] = cos($data['angle']);
+        $matrix[0][1] = -sin($data['angle']);
+        $matrix[1][0] = sin($data['angle']);
+        $matrix[1][1] = cos($data['angle']);
+        $matrix[2][2] = 1;
+        $this->set($matrix);
+    }
+
+    public function generateTranslationPreset(array $data)
+    {
+        $this->generateIdentityPreset($data);
+        $matrix = $this->get();
+        $matrix[0][3] = $data['vtc']->getX();
+        $matrix[1][3] = $data['vtc']->getY();
+        $matrix[3][3] = $data['vtc']->getZ();
+        $this->set($matrix);
+    }
+
+    public function generateProjectionPreset(array $data)
+    {
+        $this->generateIdentityPreset($data);
+        $matrix = $this->get();
+        $matrix[1][1] = 1 / tan(0.5 * deg2rad($data['fov']));
+        $matrix[0][0] = $matrix[1][1] / $data['ratio'];
+        $matrix[2][2] = -1 * (-$data['near'] - $data['far']) / ($data['near'] - $data['far']);
+        $matrix[2][3] = (2 * $data['near'] * $data['far']) / ($data['near'] - $data['far']);
+        $matrix[3][2] = -1;
+        $matrix[3][3] = 0;
+        $this->set($matrix);
+    }
+
+    /**
+     * @param array $matrix
+     */
+    public function set($matrix)
+    {
+        $this->matrix = $matrix;
+    }
+
+    /**
+     * @return array
+     */
+    public function get()
+    {
+        return $this->matrix;
+    }
+
+}
