@@ -1,0 +1,24 @@
+Vertex( x: 0.00, y: 0.00, z:0.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) ) constructed
+Vertex( x: 0.00, y: 0.00, z:0.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) )
+Vertex( x: 1.00, y: 0.00, z:0.00, w:1.00, Color( red:   0, green: 255, blue:   0 ) ) constructed
+Vertex( x: 0.00, y: 1.00, z:0.00, w:1.00, Color( red: 255, green:   0, blue:   0 ) ) constructed
+Vertex( x: 0.00, y: 0.00, z:1.00, w:1.00, Color( red:   0, green:   0, blue: 255 ) ) constructed
+Vertex( x: 1.00, y: 0.00, z:0.00, w:1.00, Color( red:   0, green: 255, blue:   0 ) )
+Vertex( x: 0.00, y: 1.00, z:0.00, w:1.00, Color( red: 255, green:   0, blue:   0 ) )
+Vertex( x: 0.00, y: 0.00, z:1.00, w:1.00, Color( red:   0, green:   0, blue: 255 ) )
+Vertex( x: 0.00, y: 0.00, z:0.00, w:1.00 )
+Vertex( x: 4.20, y: 0.00, z:0.00, w:1.00 )
+Vertex( x: 4.20, y: 4.20, z:0.00, w:1.00 )
+Vertex( x: 0.00, y: 4.20, z:0.00, w:1.00 )
+Vertex( x: 3.00, y: 3.00, z:3.00, w:1.00 )
+Vertex( x: 9.00, y: 9.00, z:9.00, w:3.00 )
+Vertex( x: 9.00, y: 9.00, z:9.00, w:3.00, Color( red: 255, green: 255, blue: 255 ) ) destructed
+Vertex( x: 3.00, y: 3.00, z:3.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) ) destructed
+Vertex( x: 0.00, y: 4.20, z:0.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) ) destructed
+Vertex( x: 4.20, y: 4.20, z:0.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) ) destructed
+Vertex( x: 4.20, y: 0.00, z:0.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) ) destructed
+Vertex( x: 0.00, y: 0.00, z:0.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) ) destructed
+Vertex( x: 0.00, y: 0.00, z:1.00, w:1.00, Color( red:   0, green:   0, blue: 255 ) ) destructed
+Vertex( x: 0.00, y: 1.00, z:0.00, w:1.00, Color( red: 255, green:   0, blue:   0 ) ) destructed
+Vertex( x: 1.00, y: 0.00, z:0.00, w:1.00, Color( red:   0, green: 255, blue:   0 ) ) destructed
+Vertex( x: 0.00, y: 0.00, z:0.00, w:1.00, Color( red: 255, green: 255, blue: 255 ) ) destructed

@@ -1,0 +1,16 @@
+<- Vertex ----------------------------------------------------------------------
+The Vertex class handles vertex.
+
+An instance can be contructed with an array with this values :
+- x
+- y
+- z
+- w (optionnal, 1.0 default)
+- instance of Color class (optionnal)
+
+Each of this vars have getters and setters like this :
+Vertex->getX();
+Vertex->setX($value);
+
+You can enable verbose mode with the static var Vertex::$verbose.
+---------------------------------------------------------------------- Vertex ->
