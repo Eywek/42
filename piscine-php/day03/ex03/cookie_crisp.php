@@ -15,7 +15,7 @@ if ($_GET && isset($_GET['action'])) {
         case 'del':
             if (!isset($_GET['name']) || !isset($_COOKIE[$_GET['name']]))
                 break;
-            setcookie($_GET['name'], "", time() - 3600);
+            setcookie($_GET['name'], "", -1);
             break;
     }
 
