@@ -22,7 +22,6 @@ $website = $argv[1];
 $website = substr($website, strlen('http://') + (strpos($website, 'https') !== false));
 if (substr($website, -1) !== '/')
     $website .= '/';
-var_dump($website);
 
 // Get all images
 if (!preg_match_all('/<img[^>]+\/?>/i', $body, $matches))

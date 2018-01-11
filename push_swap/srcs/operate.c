@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 18:47:25 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/12/22 15:24:38 by valentin         ###   ########.fr       */
+/*   Updated: 2018/01/11 17:32:23 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_operate(char *operation, t_env *env)
 		ft_move_tab(&env->stack_a, env->stack_a_size, -1);
 	else if (ft_strncmp(operation, "rrb", 3) == 0)
 		ft_move_tab(&env->stack_b, env->stack_b_size, -1);
-	if (env->mode > 0)
+	if (env->verbose > 0)
 	{
 		ft_putstr(" === SORTING '");
 		ft_putstr(operation);
