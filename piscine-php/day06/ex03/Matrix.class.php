@@ -28,7 +28,7 @@ class Matrix
      * Global functions
      */
 
-    public function __construct(array $data)
+    public function __construct(array $data, $new = true)
     {
         // Validation
         if (!isset($data['preset']) || !in_array($data['preset'], [
@@ -44,7 +44,7 @@ class Matrix
         if ((!isset($data['fov']) || !isset($data['ratio']) || !isset($data['near']) || !isset($data['far'])) && $data['preset'] === self::PROJECTION)
             return false;
         // Verbose
-        if (self::$verbose)
+        if (self::$verbose && $new)
             echo "Matrix {$data['preset']} preset instance constructed" . PHP_EOL;
         // Process
         $functionName = 'generate' . str_replace(' ', '', ucwords(strtolower($data['preset']))) . 'Preset';
@@ -61,18 +61,15 @@ class Matrix
 
     public function __toString()
     {
-        echo 'M | vtcX | vtcY | vtcZ | vtxO' . PHP_EOL;
-        echo '-----------------------------' . PHP_EOL;
+        $string = 'M | vtcX | vtcY | vtcZ | vtxO' . PHP_EOL;
+        $string .= '-----------------------------';
         for ($i = 0; $i < count($this->matrix); $i++)
         {
-            echo "{$this->coords[$i]}";
+            $string .= PHP_EOL . "{$this->coords[$i]}";
             for ($j = 0; $j < count($this->matrix[$i]); $j++)
-            {
-                echo ' | ' . number_format($this->matrix[$i][$j], 2, '.', '');
-            }
-            echo PHP_EOL;
+                $string .= ' | ' . number_format($this->matrix[$i][$j], 2, '.', '');
         }
-        return '';
+        return $string;
     }
 
     public function __get($name)
@@ -103,11 +100,15 @@ class Matrix
             $coords[$i] = [];
             for ($j = 0; $j < count($this->matrix[$i]); $j++)
             {
-                $coords[$i][$j] = $this->matrix[$i][$j] * $rhs->get()[$i][$j];
+                $sum = 0;
+                for ($k = 0; $k < count($rhs->get()); $k++) {
+                    $sum += $this->matrix[$i][$k] * $rhs->get()[$k][$j];
+                }
+                $coords[$i][$j] = $sum;
             }
         }
         // Instance
-        $matrix = new Matrix($this->data);
+        $matrix = new Matrix($this->data, false);
         $matrix->set($coords);
         return $matrix;
     }
@@ -116,9 +117,9 @@ class Matrix
     {
         $matrix = $this->get();
         $x = ($vtx->getX() * $matrix[0][0]) + ($vtx->getY() * $matrix[0][1]) + ($vtx->getZ() * $matrix[2][2]) + ($vtx->getW() * $matrix[0][3]);
-        $y = ($vtx->getX() * $matrix[1][0]) + ($vtx->getY() * $matrix[0][2]) + ($vtx->getZ() * $matrix[0][2]) + ($vtx->getW() * $matrix[1][3]);
+        $y = ($vtx->getX() * $matrix[1][0]) + ($vtx->getY() * $matrix[1][1]) + ($vtx->getZ() * $matrix[1][2]) + ($vtx->getW() * $matrix[1][3]);
         $z = ($vtx->getX() * $matrix[2][0]) + ($vtx->getY() * $matrix[2][1]) + ($vtx->getZ() * $matrix[2][2]) + ($vtx->getW() * $matrix[2][3]);
-        $w = ($vtx->getX() * $matrix[2][3]) + ($vtx->getY() * $matrix[3][0]) + ($vtx->getZ() * $matrix[3][1]) + ($vtx->getW() * $matrix[3][2]);
+        $w = ($vtx->getX() * $matrix[2][3]) + ($vtx->getY() * $matrix[3][0]) + ($vtx->getZ() * $matrix[3][2]) + ($vtx->getW() * $matrix[3][3]);
         $color = $vtx->getColor();
         $vertex = new Vertex(compact('x', 'y', 'z', 'w', 'color'));
         return $vertex;
@@ -166,7 +167,7 @@ class Matrix
         $matrix = $this->get();
         $matrix[0][0] = cos($data['angle']);
         $matrix[0][2] = sin($data['angle']);
-        $matrix[1][0] = 1;
+        $matrix[1][1] = 1;
         $matrix[2][0] = -sin($data['angle']);
         $matrix[2][2] = cos($data['angle']);
         $this->set($matrix);
@@ -190,7 +191,7 @@ class Matrix
         $matrix = $this->get();
         $matrix[0][3] = $data['vtc']->getX();
         $matrix[1][3] = $data['vtc']->getY();
-        $matrix[3][3] = $data['vtc']->getZ();
+        $matrix[2][3] = $data['vtc']->getZ();
         $this->set($matrix);
     }
 

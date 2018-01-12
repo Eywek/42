@@ -37,8 +37,8 @@ class Vertex
 
     public function __toString()
     {
-        return "Vertex( x:" . str_pad(number_format($this->_x, 2, ".", ""), 5, " ", STR_PAD_LEFT) .
-                ", y:" . str_pad(number_format($this->_y, 2, ".", ""), 5, " ", STR_PAD_LEFT) .
+        return "Vertex( x: " . number_format($this->_x, 2, ".", "") .
+                ", y: " . number_format($this->_y, 2, ".", "") .
                 ", z:" . number_format($this->_z, 2, ".", "") .
                 ", w:" . number_format($this->_w, 2, ".", "") .
                 (self::$verbose ? ", $this->_color" : '') . " )";

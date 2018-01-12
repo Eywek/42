@@ -11,11 +11,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Matrix.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Matrix.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ex03/Matrix.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="659">
-              <caret line="168" column="26" lean-forward="true" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
+            <state relative-caret-position="1114">
+              <caret line="119" column="140" lean-forward="false" selection-start-line="119" selection-start-column="140" selection-end-line="119" selection-end-column="140" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Vertex.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ex03/Vertex.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="42" column="37" lean-forward="true" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -24,8 +34,8 @@
       <file leaf-file-name="main_03.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ex03/main_03.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+            <state relative-caret-position="900">
+              <caret line="60" column="46" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -34,18 +44,28 @@
       <file leaf-file-name="main_03.out" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ex03/main_03.out">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="22" lean-forward="false" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
+            <state relative-caret-position="1079">
+              <caret line="86" column="21" lean-forward="true" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Matrix.doc.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="a" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ex03/a">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Matrix.doc.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ex03/Matrix.doc.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="80" lean-forward="false" selection-start-line="2" selection-start-column="80" selection-end-line="2" selection-end-column="80" />
+            <state relative-caret-position="15">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -76,12 +96,14 @@
         <option value="$PROJECT_DIR$/ex02/main_02.php" />
         <option value="$PROJECT_DIR$/ex02/main_02.out" />
         <option value="$PROJECT_DIR$/ex02/Vector.class.php" />
+        <option value="$PROJECT_DIR$/ex03/main_03.php" />
+        <option value="$PROJECT_DIR$/ex03/main_03.out" />
+        <option value="$PROJECT_DIR$/ex03/a" />
+        <option value="$PROJECT_DIR$/ex03/Matrix.class.php" />
+        <option value="$PROJECT_DIR$/ex03/Vertex.class.php" />
         <option value="$PROJECT_DIR$/ex02/Vertex.class.php" />
         <option value="$PROJECT_DIR$/ex01/Vertex.class.php" />
         <option value="$PROJECT_DIR$/ex03/Matrix.doc.txt" />
-        <option value="$PROJECT_DIR$/ex03/main_03.php" />
-        <option value="$PROJECT_DIR$/ex03/main_03.out" />
-        <option value="$PROJECT_DIR$/ex03/Matrix.class.php" />
       </list>
     </option>
   </component>
@@ -93,8 +115,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="1282" />
-    <option name="width" value="1278" />
+    <option name="x" value="1709" />
+    <option name="width" value="851" />
     <option name="height" value="1440" />
   </component>
   <component name="ProjectView">
@@ -112,6 +134,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -143,8 +167,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -180,24 +202,25 @@
       <updated>1515670737715</updated>
       <workItem from="1515670741924" duration="10825000" />
       <workItem from="1515696865991" duration="5951000" />
+      <workItem from="1515756684406" duration="2606000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16776000" />
+    <option name="totallyTimeSpent" value="19382000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="876" y="0" width="1684" height="1440" extended-state="0" />
+    <frame x="969" y="0" width="1591" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14372717" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11749516" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3599269" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43447384" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -220,6 +243,38 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ex03/Matrix.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex03/main_03.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex03/main_03.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="22" lean-forward="false" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex03/Matrix.doc.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="80" lean-forward="false" selection-start-line="2" selection-start-column="80" selection-end-line="2" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ex02/main_02.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
@@ -248,7 +303,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="32" column="5" lean-forward="false" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -290,13 +344,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ex01/main_01.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ex01/Vertex.doc.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -315,15 +362,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="32" column="5" lean-forward="false" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ex02/main_02.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -343,22 +381,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ex01/Vertex.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1253">
-          <caret line="109" column="5" lean-forward="false" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ex02/Vertex.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1253">
-          <caret line="109" column="5" lean-forward="false" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ex02/Vector.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1072">
@@ -371,23 +393,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ex03/Matrix.doc.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="80" lean-forward="false" selection-start-line="2" selection-start-column="80" selection-end-line="2" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ex03/main_03.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -399,18 +404,82 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ex03/a">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex03/main_03.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="60" column="46" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ex03/main_03.out">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="22" lean-forward="false" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
+        <state relative-caret-position="1079">
+          <caret line="86" column="21" lean-forward="true" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ex03/Matrix.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
-          <caret line="168" column="26" lean-forward="true" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
+        <state relative-caret-position="1114">
+          <caret line="119" column="140" lean-forward="false" selection-start-line="119" selection-start-column="140" selection-end-line="119" selection-end-column="140" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex02/main_02.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex01/main_01.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex02/Vertex.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="39" column="27" lean-forward="false" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex01/Vertex.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="40" column="22" lean-forward="false" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex03/Vertex.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="37" lean-forward="true" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ex03/Matrix.doc.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
