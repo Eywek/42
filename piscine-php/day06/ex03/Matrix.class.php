@@ -37,7 +37,7 @@ class Matrix
             return false;
         if (!isset($data['scale']) && $data['preset'] === self::SCALE)
             return false;
-        if (!isset($data['angle']) && in_array($data['preset'], [self::RY, self::RY, self::RZ]))
+        if (!isset($data['angle']) && in_array($data['preset'], [self::RY, self::RX, self::RZ]))
             return false;
         if ((!isset($data['vtc']) || !($data['vtc'] instanceof Vector)) && $data['preset'] === self::TRANSLATION)
             return false;
