@@ -1,8 +1,6 @@
 <?php
 require 'include/app.php';
 
-loadModel('user');
-
 redirectIfNotLogged();
 $user = getUser();
 

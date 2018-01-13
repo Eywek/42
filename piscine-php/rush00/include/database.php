@@ -10,14 +10,15 @@ function initDB()
     global $db;
     if (!empty($db))
         return $db;
-    // TODO: use an env
-    $db = mysqli_connect("149.202.102.52", "rush00", "N8dNpRJRqZLcxwyG", "rush00");
+    $config = getConfig();
+    $db = @mysqli_connect($config['database']['host'], $config['database']['user'], $config['database']['password'], $config['database']['database']);
 
     // Check if failed
     if (mysqli_connect_errno()) {
         printf("Échec de la connexion à la base de données : %s\n", mysqli_connect_error());
         exit();
     }
+    mysqli_set_charset($db, "utf8");
 }
 
 function refValues($arr){
@@ -31,17 +32,20 @@ function queryDB($queryString, array $params = [], $close = false)
 {
     global $db;
     initDB();
-    $results = [];
 
     // Prepare
-    $query = mysqli_prepare($db, $queryString);
+    if (!($query = mysqli_prepare($db, $queryString)))
+        return new Error('MYSQL ERROR CODE: ' . mysqli_errno($db));
 
     // Add params
-    $params = array_merge([$query], $params);
-    call_user_func_array('mysqli_stmt_bind_param', refValues($params));
+    if (!empty($params)) {
+        $params = array_merge([$query], $params);
+        call_user_func_array('mysqli_stmt_bind_param', refValues($params));
+    }
 
     // Execute and get result
-    mysqli_stmt_execute($query);
+    if (!mysqli_stmt_execute($query))
+        return new Error('MYSQL ERROR CODE: ' . mysqli_errno($db));
     $result = mysqli_stmt_get_result($query);
     $results = [];
     if ($result)
@@ -60,4 +64,5 @@ function closeDB()
 {
     global $db;
     mysqli_close($db);
+    $db = NULL;
 }

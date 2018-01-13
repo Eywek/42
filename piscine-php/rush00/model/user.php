@@ -1,5 +1,5 @@
 <?php
-function signup($data)
+function signup($data, $is_admin = false)
 {
     // Validate data
     if (($error = validate([
@@ -38,10 +38,12 @@ function signup($data)
         'password' => hashPassword($data['password']),
         'created_at' => date('Y-m-d H:i:s')
     ]);
-    queryDB('INSERT INTO users VALUES(NULL, ?, ?, ?, ?, 0, ?)', [
+    $req = queryDB('INSERT INTO users VALUES(NULL, ?, ?, ?, ?, ' . ($is_admin ? '1' : '0') . ', ?)', [
         'sssss',
         $user['first_name'], $user['name'], $user['email'], $user['password'], $user['created_at']
     ]);
+    if ($req instanceof Error)
+        return 'Une erreur interne est survenue';
     $user = queryDB('SELECT id FROM users WHERE email = ?', ['s', $data['email']]);
     return $user[0]['id'];
 }

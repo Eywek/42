@@ -1,6 +1,6 @@
 /* Page générale */
 body{
-	background-color: #F4F3F3;
+	background-color: #666666;
 	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;width: 100%;
 	min-height: 100%;
 }
@@ -15,8 +15,15 @@ img{
   }
 }
 div{
-	background-color:#909090;
+	background-color:#CECECE;
 	border-radius: 5px;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+li{
+	justify-content: space-between;
 }
 #content{
 	width: 90%;
@@ -43,7 +50,7 @@ footer{
    text-align: right;
    padding-bottom: 0;
    bottom: 0;
-   width: 0%
+   /*width: 0%;*/
    height: 0%;
  }
  /* Menu */
@@ -53,7 +60,6 @@ footer{
  	height: 50%;
  	width: 10%;
  	text-align: center;
-
  }
  #menu{
  	text-align:center;
@@ -61,7 +67,7 @@ footer{
  /* Rectangle noir*/
  .hr{
  	height: 20px;
- 	background-color: #000000;
+ 	background-color: #AB0000;
  	width: 100%;
  	display: block;
  }
@@ -72,10 +78,10 @@ footer{
 	padding-left: 10px;
 	padding-right: 10px;
 }
-.block-icon:hover
+a:hover
 {
 	cursor: pointer;
-	color: green;
+	color: #AB0000;
 }
 .icon
 {
@@ -97,4 +103,27 @@ label{
 form{
 	display: inline-block;
 	width: 100%;
+}
+
+/*
+	ALERTS
+ */
+
+div.alert {
+	padding: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+div.alert.alert-error {
+	background-color: #e74c3c;
+	color: #5c060b;
+	border: solid #c0392b 1px;
+}
+
+div.alert.alert-success {
+	background-color: #2ecc71;
+	color: #0c4914;
+	border: solid #27ae60 1px;
 }
