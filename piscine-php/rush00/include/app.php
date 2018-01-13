@@ -5,8 +5,11 @@
 
 session_start();
 define('DS', DIRECTORY_SEPARATOR);
-define('INCLUDE_DIR', realpath('.') . DS);
-define('MODEL_DIR', realpath('../model') . DS);
+define('INCLUDE_DIR', realpath('../include'));
+define('MODEL_DIR', realpath(__DIR__ . DS . '..' . DS . 'model') . DS);
+
+require 'functions.php';
+require 'database.php';
 
 /*
  * Templating

@@ -1,0 +1,100 @@
+/* Page générale */
+body{
+	background-color: #F4F3F3;
+	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;width: 100%;
+	min-height: 100%;
+}
+img{
+	max-width: 100%;
+	height: auto;
+}
+@media only screen and (max-width:620px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
+div{
+	background-color:#909090;
+	border-radius: 5px;
+}
+#content{
+	width: 90%;
+	height: 100%;
+	margin: auto;
+}
+#haut{
+	width: 100%;
+    height : 15%;
+    text-align: center;
+    margin: auto;
+    margin-top: 1%;
+ }
+#milieu{
+	width: 80%;	
+	height: 70%;
+	background-color: transparent;
+	text-align: center;
+	margin: auto;
+}
+footer{
+   margin:auto; 
+   position: relative;
+   text-align: right;
+   padding-bottom: 0;
+   bottom: 0;
+   width: 0%
+   height: 0%;
+ }
+ /* Menu */
+ #menu li{
+ 	display: inline;
+ 	font-size: 2vw;
+ 	height: 50%;
+ 	width: 10%;
+ 	text-align: center;
+
+ }
+ #menu{
+ 	text-align:center;
+ }
+ /* Rectangle noir*/
+ .hr{
+ 	height: 20px;
+ 	background-color: #000000;
+ 	width: 100%;
+ 	display: block;
+ }
+ /* Connexion & cie */
+ .block-icon
+{
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.block-icon:hover
+{
+	cursor: pointer;
+	color: green;
+}
+.icon
+{
+	height: 32px;
+	width: 32px;
+	margin: auto;
+	display: block;
+}
+#up_link
+{
+	display: flex;
+	justify-content: flex-end;
+	overflow: hidden;
+}
+/* Page de connexion */
+label{
+	display: inline-block;
+}
+form{
+	display: inline-block;
+	width: 100%;
+}

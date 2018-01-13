@@ -1,8 +1,8 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang ="fr">
 <head>
-    <meta charset="utf-8">
-    <title><?= $title ?> | Eshop</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Goodies World</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>

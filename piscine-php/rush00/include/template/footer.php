@@ -1,5 +1,6 @@
-    <footer>
-        <p>Tous droits réservés.</p>
-    </footer>
+<footer>
+			© vtouffet / abrichar | Goodies World | Phpool Janvier 2018
+		</footer>
+	</div>
 </body>
 </html>
