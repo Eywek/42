@@ -20,6 +20,11 @@ if (isset($error))
 if (isset($status) && $status === true)
     echo "<div class='alert alert-success'><b>Succès :</b> Votre commande a bien été validée ! Vous recevrez vos goodies bientôt !</div>";
 ?>
+        <div class="hr"></div>
+        <div id="milieu">
+            Affichage des articles<br />
+        </div>
+        <div class="hr"></div>
 --> Afficher (dans une table?) les articles présents dans $_SESSION['cart'], mettre un bouton pour acheter dans un form POST avec le nom "buy" et ajouter un input pour renseigner l'addresse au format XX Rue de XXXX, CODE VILLE, France
 <?php
 includeFooter();

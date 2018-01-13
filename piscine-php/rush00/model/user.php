@@ -48,6 +48,48 @@ function signup($data, $is_admin = false)
     return $user[0]['id'];
 }
 
+function edit($data)
+{
+    // Validate data
+    if (($error = validate([
+            'first_name' => [
+                'name' => 'Prénom',
+                'rules' => ['not_empty', 'min_length' => 2, 'max_length' => 255]
+            ],
+            'name' => [
+                'name' => 'Nom',
+                'rules' => ['not_empty', 'min_length' => 2, 'max_length' => 255]
+            ],
+            'email' => [
+                'name' => 'Email',
+                'rules' => ['not_empty', 'min_length' => 6, 'max_length' => 255, 'email']
+            ]
+        ], $data)) !== true)
+        return $error;
+    if (!empty($data['password']) && $data['password'] !== $data['password_confirmation'])
+        return "Le champ Mot de passe doit être identique au contenu du champ Confirmation de mot de passe !";
+    $findUserWithThisEmail = queryDB('SELECT id FROM users WHERE email = ? AND id != ?', ['si', $data['email'], $_SESSION['user']]);
+    if ($findUserWithThisEmail && !empty($findUserWithThisEmail))
+        return "L'email est déjà utilisé par un autre utilisateur !";
+    // Prepare data
+    $user = sanitize([
+        'first_name' => $data['first_name'],
+        'name' => $data['name'],
+        'email' => $data['email']
+    ]);
+    if (!empty($data['password']))
+        $user['password'] = hashPassword($data['password']);
+    else
+        $user['password'] = getUser()['password'];
+    $req = queryDB('UPDATE users SET first_name = ?, name = ?, email = ?, password = ? WHERE id = ?', [
+        'ssssi',
+        $user['first_name'], $user['name'], $user['email'], $user['password'], $_SESSION['user']
+    ]);
+    if ($req instanceof Error)
+        return 'Une erreur interne est survenue';
+    return true;
+}
+
 function login($value, $password = NULL, $key = 'id')
 {
     // Check if userId exist
@@ -64,8 +106,10 @@ function login($value, $password = NULL, $key = 'id')
 
 function redirectIfNotLogged()
 {
-    if (!getUser())
+    if (!getUser()) {
         header('Location: signin.php');
+        exit();
+    }
 }
 
 function getUser()
@@ -77,6 +121,11 @@ function getUser()
     if (!$user)
         return false;
     return $user[0];
+}
+
+function deleteUser($userId)
+{
+    return queryDB('DELETE FROM users WHERE `id` = ?', ['i', $userId]);
 }
 
 function logout()

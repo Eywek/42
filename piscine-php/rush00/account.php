@@ -5,7 +5,7 @@ redirectIfNotLogged();
 $user = getUser();
 
 // Get orders
-$orders = queryDB('SELECT `items`.`name` AS `item_name`, `items`.`price` AS `item_price`, `orders`.`created_at` AS `created_at`, `orders`.`address` AS `address`
+$orders = queryDB('SELECT `items`.`name` AS `item_name`, `items`.`price` AS `item_price`, `orders`.`created_at` AS `created_at`, `orders`.`address` AS `address`, `orders`.`id` AS `id`
                     FROM `orders`
                     INNER JOIN `items` ON `items`.`id` = `orders`.`item_id`
                     WHERE `orders`.`user_id` = ?
@@ -28,6 +28,11 @@ includeHead();
         <li><b>Date d'inscription :</b> <?= $user['created_at'] ?></li>
     </ul>
 </div>
+<h3>Actions possibles</h3>
+<ul>
+    <li><a href="edit_account.php">Modifier mon compte</a></li>
+    <li><a href="#" onclick="confirmation('&Ecirc;tes-vous sûr de vouloir supprimer ?','delete_account.php')">Supprimer mon compte</a></li>
+</ul>
 
 <h3>Vos commandes :</h3>
 
@@ -40,7 +45,7 @@ includeHead();
                 <th>Article</th>
                 <th>Prix</th>
                 <th>Date</th>
-                <th>Addresse de livraison</th>
+                <th>Adresse de livraison</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -52,13 +57,15 @@ includeHead();
                     echo "<td>{$order['item_price']}</td>";
                     echo "<td>{$order['created_at']}</td>";
                     echo "<td>{$order['address']}</td>";
-                    echo "<td><a href=\"order.php\">Télécharger une facture</a></td>";
+                    echo "<td><a href=\"invoice.php?id={$order['id']}\">Télécharger une facture</a></td>";
                 echo '</tr>';
             }
             ?>
         </tbody>
     </table>
+    <div class="hr"></div>
 <?php endif; ?>
+
 
 <?php
 includeFooter()
