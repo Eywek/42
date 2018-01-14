@@ -4,7 +4,11 @@ redirectIfNotAdmin();
 
 $usersCount = queryDB('SELECT COUNT(`id`) AS `count` FROM `users`')[0]['count'];
 $purchasesCount = queryDB('SELECT COUNT(`id`) AS `count` FROM `orders`')[0]['count'];
-$profit = queryDB('SELECT SUM(`items`.`price` * `orders`.`quantity`) AS `sum` FROM `orders` INNER JOIN `items` ON `items`.`id` = `orders`.`item_id`')[0]['sum'];
+$profit = queryDB('SELECT SUM(`items`.`price` * `orders`.`quantity`) AS `sum` FROM `orders` INNER JOIN `items` ON `items`.`id` = `orders`.`item_id`');
+if (empty($profit) || !isset($profit[0]['sum']))
+    $profit = 0;
+else
+    $profit = $profit[0]['sum'];
 $itemsCount = queryDB('SELECT COUNT(`id`) AS `count` FROM `items`')[0]['count'];
 
 $orders = queryDB('SELECT `users`.`email`, `items`.`name`, `orders`.`created_at` FROM `orders` INNER JOIN `items` ON `items`.`id` = `orders`.`item_id` INNER JOIN `users` ON `users`.`id` = `orders`.`user_id` ORDER BY `orders`.`id` DESC LIMIT 15');

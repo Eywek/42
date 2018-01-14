@@ -6,9 +6,15 @@
 date_default_timezone_set('Europe/Paris');
 session_start();
 define('DS', DIRECTORY_SEPARATOR);
+define('ROOT', realpath(__DIR__) . DS . '..' . DS);
 define('INCLUDE_DIR', realpath(__DIR__) . DS);
 define('MODEL_DIR', realpath(__DIR__ . DS . '..' . DS . 'model') . DS);
 define('CONFIG_DIR', realpath(__DIR__ . DS . '..' . DS . 'config') . DS);
+
+if (!file_exists(ROOT . 'installed') && basename($_SERVER["SCRIPT_FILENAME"], '.php') != 'install') {
+    header('Location: install.php');
+    exit();
+}
 
 require 'functions.php';
 require 'database.php';

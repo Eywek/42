@@ -140,5 +140,5 @@ function deleteUser($userId)
 
 function logout()
 {
-    session_destroy();
+    unset($_SESSION['user']);
 }
