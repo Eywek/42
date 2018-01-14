@@ -130,3 +130,36 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+INSERT INTO `categories` (`id`, `name`, `created_at`) VALUES
+  (NULL, 'League Of Legends', '2018-01-14 17:07:35'),
+  (NULL, 'Overwatch', '2018-01-14 17:12:01'),
+  (NULL, 'HearthStone', '2018-01-14 17:12:15'),
+  (NULL, 'Cs:Go', '2018-01-14 17:20:02');
+
+--
+-- Contenu de la table `items`
+--
+
+INSERT INTO `items` (`id`, `name`, `price`, `description`, `image_url`, `created_at`) VALUES
+  (NULL, 'Peluche Blitzcrank', 20, 'Peluche trop douce blitz', 'http://img11.hostingpics.net/pics/305293IMG0010.jpg', '2018-01-14 17:08:34'),
+  (NULL, 'Peluche Gnar', 22, 'Gnar Gnar Gnar Gnar Gnar', 'https://euw.merch.riotgames.com/media/catalog/product/cache/61/image/570x/9df78eab33525d08d6e5fb8d27136e95/i/m/image_49.png', '2018-01-14 17:11:50'),
+  (NULL, 'Choppe &agrave; bi&egrave;re', 8, 'Choppe &agrave; bi&egrave;re HearthStone une fois !', 'https://img0.etsystatic.com/199/0/14294785/il_fullxfull.1320621716_qi68.jpg', '2018-01-14 17:13:36'),
+  (NULL, 'Tapis de souris Windowsmaker', 12, 'Tapis de souris Windowsmaker', 'https://i2.cdscdn.com/pdt2/7/8/5/1/700x700/auc0669321478785/rw/overwatch-tracer-vs-widowmaker-tapis-de-souris-sur.jpg', '2018-01-14 17:14:50'),
+  (NULL, 'Sac &agrave; dos Cs:Go', 16, 'Sac &agrave; dos Cs:Go trololol', 'https://geekmaroc.com/wp-content/uploads/2017/08/csgo-2.png', '2018-01-14 17:18:00');
+
+--
+-- Contenu de la table `items_categories`
+--
+
+INSERT INTO `items_categories` (`id`, `item_id`, `category_id`, `created_at`) VALUES
+  (NULL, 1, 1, '2018-01-30 11:32:49'),
+  (NULL, 3, 3, '2018-01-14 16:28:15'),
+  (NULL, 2, 1, '2018-01-14 16:28:21'),
+  (NULL, 2, 3, '2018-01-14 16:28:21'),
+  (NULL, 4, 5, '2018-01-14 17:08:34'),
+  (NULL, 5, 5, '2018-01-14 17:11:50'),
+  (NULL, 7, 6, '2018-01-14 17:14:50'),
+  (NULL, 6, 7, '2018-01-14 17:15:20'),
+  (NULL, 8, 8, '2018-01-14 17:18:00');
