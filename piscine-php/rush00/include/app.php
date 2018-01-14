@@ -26,6 +26,16 @@ function includeFooter()
     include INCLUDE_DIR . 'template' . DS . 'footer.php';
 }
 
+function includeAdminHead()
+{
+    include INCLUDE_DIR . 'template' . DS . 'admin' . DS . 'header.php';
+}
+
+function includeAdminFooter()
+{
+    include INCLUDE_DIR . 'template' . DS . 'admin' . DS . 'footer.php';
+}
+
 function displayPost($name)
 {
     return (isset($_POST[$name])) ? $_POST[$name] : '';

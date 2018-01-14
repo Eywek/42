@@ -14,12 +14,15 @@ loadModel('item');
     <div id="content">
         <div class="hr"></div>
         <div id="up_link">
-            <?php if (!getUser()): ?>
-                <a href="./signin.php" title="to_signin"><div class="block-icon" id="connect-icon"><img class="icon" src="assets/img/user-2.png"><span style="display:block">Connexion</span></div></a>
-                <a href="./signup.php" title="to_signup"><div class="block-icon" style="border-left: 1px solid #9A9A9A; border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/pen.png"><span style="display:block">Inscription</span></div></a>
+            <?php if (!($user = getUser())): ?>
+                <a href="./signin.php"><div class="block-icon" id="connect-icon"><img class="icon" src="assets/img/user-2.png"><span style="display:block">Connexion</span></div></a>
+                <a href="./signup.php"><div class="block-icon" style="border-left: 1px solid #9A9A9A; border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/pen.png"><span style="display:block">Inscription</span></div></a>
             <?php else: ?>
-                <a href="./account.php" title="to_signup"><div class="block-icon" style="border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/user-2.png"><span style="display:block">Mon compte</span></div></a>
-                <a href="./signout.php" title="to_signup"><div class="block-icon" style="border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/user-2.png"><span style="display:block">Se déconnecter</span></div></a>
+                <?php if ($user['is_admin']): ?>
+                    <a href="admin"><div class="block-icon" style="border-left: 1px solid #9A9A9A; border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/pen.png"><span style="display:block">Panel administrateur</span></div></a>
+                <?php endif; ?>
+                <a href="./account.php"><div class="block-icon" style="border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/user-2.png"><span style="display:block">Mon compte</span></div></a>
+                <a href="./signout.php"><div class="block-icon" style="border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/user-2.png"><span style="display:block">Se déconnecter</span></div></a>
             <?php endif; ?>
             <a href="./cart.php" title="to_cart"><div class="block-icon"><img class="icon" src="assets/img/shopping-cart.png"><span style="display:block">Mon panier</span></div></a>
         </div>

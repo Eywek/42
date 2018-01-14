@@ -1,6 +1,7 @@
 <?php
 include 'include/app.php';
 redirectIfNotLogged();
+logout();
 deleteUser($_SESSION['user']);
 
 $title = "delete_account";

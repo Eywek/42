@@ -48,8 +48,10 @@ function signup($data, $is_admin = false)
     return $user[0]['id'];
 }
 
-function edit($data)
+function edit($data, $userId = null)
 {
+    if (empty($userId))
+        $userId = $_SESSION['user'];
     // Validate data
     if (($error = validate([
             'first_name' => [
@@ -68,7 +70,7 @@ function edit($data)
         return $error;
     if (!empty($data['password']) && $data['password'] !== $data['password_confirmation'])
         return "Le champ Mot de passe doit être identique au contenu du champ Confirmation de mot de passe !";
-    $findUserWithThisEmail = queryDB('SELECT id FROM users WHERE email = ? AND id != ?', ['si', $data['email'], $_SESSION['user']]);
+    $findUserWithThisEmail = queryDB('SELECT id FROM users WHERE email = ? AND id != ?', ['si', $data['email'], $userId]);
     if ($findUserWithThisEmail && !empty($findUserWithThisEmail))
         return "L'email est déjà utilisé par un autre utilisateur !";
     // Prepare data
@@ -83,7 +85,7 @@ function edit($data)
         $user['password'] = getUser()['password'];
     $req = queryDB('UPDATE users SET first_name = ?, name = ?, email = ?, password = ? WHERE id = ?', [
         'ssssi',
-        $user['first_name'], $user['name'], $user['email'], $user['password'], $_SESSION['user']
+        $user['first_name'], $user['name'], $user['email'], $user['password'], $userId
     ]);
     if ($req instanceof Error)
         return 'Une erreur interne est survenue';
@@ -108,6 +110,14 @@ function redirectIfNotLogged()
 {
     if (!getUser()) {
         header('Location: signin.php');
+        exit();
+    }
+}
+
+function redirectIfNotAdmin()
+{
+    if (!($user = getUser()) || !$user['is_admin']) {
+        header('Location: ../index.php');
         exit();
     }
 }

@@ -22,11 +22,11 @@ function validate(array $rulesByInput = [], array $data = [])
                     break;
                 case 'min_length':
                     if (strlen($data[$input]) < $value)
-                        return "Le champ $name doit avoir au minimum $value charactères !";
+                        return "Le champ $name doit avoir au minimum $value caractères !";
                     break;
                 case 'max_length':
                     if (strlen($data[$input]) > $value)
-                        return "Le champ $name doit avoir au maximum $value charactères !";
+                        return "Le champ $name doit avoir au maximum $value caractères !";
                     break;
                 case 'email':
                     $email = htmlentities($data[$input]);

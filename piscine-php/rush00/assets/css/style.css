@@ -1,4 +1,6 @@
-/* Page générale */
+/* 
+	Page générale
+*/
 body{
 	background-color: #666666;
 	font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;width: 100%;
@@ -50,10 +52,11 @@ footer{
    text-align: right;
    padding-bottom: 0;
    bottom: 0;
-   /*width: 0%;*/
    height: 0%;
  }
- /* Menu */
+ /* 
+ 	Menu
+ */
  #menu li{
  	display: inline;
  	font-size: 2vw;
@@ -64,39 +67,41 @@ footer{
  #menu{
  	text-align:center;
  }
- /* Rectangle noir*/
+ /* 
+ 	Rectangle noir
+ */
  .hr{
  	height: 20px;
  	background-color: #AB0000;
  	width: 100%;
  	display: block;
  }
- /* Connexion & cie */
- .block-icon
-{
+ /* 
+ 	Connexion & cie
+ */
+ .block-icon{
 	text-align: center;
 	padding-left: 10px;
 	padding-right: 10px;
 }
-a:hover
-{
+a:hover{
 	cursor: pointer;
 	color: #AB0000;
 }
-.icon
-{
+.icon{
 	height: 32px;
 	width: 32px;
 	margin: auto;
 	display: block;
 }
-#up_link
-{
+#up_link{
 	display: flex;
 	justify-content: flex-end;
 	overflow: hidden;
 }
-/* Page de connexion */
+/* 
+	Page de connexion 
+*/
 label{
 	display: inline-block;
 }
@@ -126,4 +131,18 @@ div.alert.alert-success {
 	background-color: #2ecc71;
 	color: #0c4914;
 	border: solid #27ae60 1px;
+}
+
+/*
+	Dans liste des articles
+*/
+table{
+	width: 50%;
+	margin: auto;
+}
+.img_category {
+	max-width: 30%;
+}
+th, td {
+    border-bottom: 2px solid #ddd;
 }
