@@ -8,7 +8,7 @@ if (!$_GET || !isset($_GET['id'])) {
 }
 
 // Find order
-$order = queryDB('SELECT * FROM `orders` INNER JOIN `items` ON `items`.`id` = `orders`.`item_id` INNER JOIN `users` ON `users`.`id` = `orders`.`user_id` WHERE `orders`.`id` = ?', ['i', $_GET['id']]);
+$order = queryDB('SELECT `items`.`name` AS `name`, `items`.`price` AS `price`, `orders`.`quantity` AS `quantity`, `orders`.`id` AS `id`, `orders`.`created_at` AS `created_at` FROM `orders` INNER JOIN `items` ON `items`.`id` = `orders`.`item_id` INNER JOIN `users` ON `users`.`id` = `orders`.`user_id` WHERE `orders`.`id` = ?', ['i', $_GET['id']]);
 if (empty($order)) {
     header('Location: account.php');
     exit();
@@ -129,7 +129,7 @@ $order = $order[0];
 
                         <td>
                             Facture #<?= $order['id'] ?><br>
-                            Payé: <?= date('j M Y H:i', $order['created_at']) ?><br>
+                            Payé: <?= date('j M Y H:i', strtotime($order['created_at'])) ?><br>
                         </td>
                     </tr>
                 </table>
@@ -148,7 +148,7 @@ $order = $order[0];
 
         <tr class="item">
             <td>
-                <?= $order['name']; ?>
+                <?= $order['quantity']; ?>x <?= $order['name']; ?>
             </td>
 
             <td>
@@ -160,7 +160,7 @@ $order = $order[0];
             <td></td>
 
             <td>
-                Total: <?= $order['price']; ?>€
+                Total: <?= $order['price'] * $order['quantity']; ?>€
             </td>
         </tr>
     </table>

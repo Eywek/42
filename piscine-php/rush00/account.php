@@ -5,7 +5,7 @@ redirectIfNotLogged();
 $user = getUser();
 
 // Get orders
-$orders = queryDB('SELECT `items`.`name` AS `item_name`, `items`.`price` AS `item_price`, `orders`.`created_at` AS `created_at`, `orders`.`address` AS `address`, `orders`.`id` AS `id`
+$orders = queryDB('SELECT `items`.`name` AS `item_name`, `items`.`price` AS `item_price`, `orders`.`created_at` AS `created_at`, `orders`.`address` AS `address`, `orders`.`quantity` AS `quantity`, `orders`.`id` AS `id`
                     FROM `orders`
                     INNER JOIN `items` ON `items`.`id` = `orders`.`item_id`
                     WHERE `orders`.`user_id` = ?
@@ -53,8 +53,8 @@ includeHead();
             <?php
             foreach ($orders as $order) {
                 echo '<tr>';
-                    echo "<td>{$order['item_name']}</td>";
-                    echo "<td>{$order['item_price']}</td>";
+                    echo "<td>x{$order['quantity']} {$order['item_name']}</td>";
+                    echo "<td>{$order['item_price']}€</td>";
                     echo "<td>{$order['created_at']}</td>";
                     echo "<td>{$order['address']}</td>";
                     echo "<td><a href=\"invoice.php?id={$order['id']}\">Télécharger une facture</a></td>";

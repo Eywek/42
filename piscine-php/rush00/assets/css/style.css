@@ -146,3 +146,48 @@ table{
 th, td {
     border-bottom: 2px solid #ddd;
 }
+
+.button {
+	text-decoration: none;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border-radius: 4px;
+	color: #333;
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+
+.button.disabled {
+	opacity: 0.6;
+	color: #333!important;
+}
+
+input, textarea, select {
+	display: inline-block;
+	width: 100%;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+input {
+	height: 20px;
+}

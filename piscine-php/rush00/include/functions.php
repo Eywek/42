@@ -33,6 +33,20 @@ function validate(array $rulesByInput = [], array $data = [])
                     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
                         return "Le champ $name doit être un email valide !";
                     break;
+                case 'is_numeric':
+                    if (!is_numeric($data[$input]))
+                        return "Le champ $name doit être un nombre valide !";
+                    break;
+                case 'in':
+                    foreach ($data[$input] as $datum)
+                        if (!in_array($datum, $value))
+                            return "Le champ $name doit être une catégorie valide !";
+                    break;
+                case 'url':
+                    $url = htmlentities($data[$input]);
+                    if (!filter_var($url, FILTER_VALIDATE_URL))
+                        return "Le champ $name doit être une URL valide !";
+                    break;
             }
         }
     }
@@ -48,8 +62,10 @@ function hashPassword($password)
     return hash('sha512', $password);
 }
 
-function sanitize(array $data = [])
+function sanitize($data = [])
 {
+    if (!is_array($data))
+        return htmlentities($data);
     foreach ($data as $key => $value)
         $data[$key] = htmlentities($value);
     return $data;

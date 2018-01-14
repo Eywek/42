@@ -3,6 +3,7 @@
  * Globals
  */
 
+date_default_timezone_set('Europe/Paris');
 session_start();
 define('DS', DIRECTORY_SEPARATOR);
 define('INCLUDE_DIR', realpath(__DIR__) . DS);
@@ -36,9 +37,9 @@ function includeAdminFooter()
     include INCLUDE_DIR . 'template' . DS . 'admin' . DS . 'footer.php';
 }
 
-function displayPost($name)
+function displayPost($name, $default = '')
 {
-    return (isset($_POST[$name])) ? $_POST[$name] : '';
+    return (isset($_POST[$name])) ? $_POST[$name] : $default;
 }
 
 /*

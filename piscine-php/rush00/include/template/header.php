@@ -8,7 +8,6 @@ loadModel('item');
 	<title>Goodies World</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="assets/js/script.js"></script>
 </head>
 <body>
     <div id="content">
@@ -19,7 +18,7 @@ loadModel('item');
                 <a href="./signup.php"><div class="block-icon" style="border-left: 1px solid #9A9A9A; border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/pen.png"><span style="display:block">Inscription</span></div></a>
             <?php else: ?>
                 <?php if ($user['is_admin']): ?>
-                    <a href="admin"><div class="block-icon" style="border-left: 1px solid #9A9A9A; border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/pen.png"><span style="display:block">Panel administrateur</span></div></a>
+                    <a href="admin/index.php"><div class="block-icon" style="border-left: 1px solid #9A9A9A; border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/pen.png"><span style="display:block">Panel administrateur</span></div></a>
                 <?php endif; ?>
                 <a href="./account.php"><div class="block-icon" style="border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/user-2.png"><span style="display:block">Mon compte</span></div></a>
                 <a href="./signout.php"><div class="block-icon" style="border-right: 1px solid #9A9A9A;"><img class="icon" src="assets/img/user-2.png"><span style="display:block">Se déconnecter</span></div></a>
@@ -34,7 +33,7 @@ loadModel('item');
             <ul id="menu">
                 <?php
                 foreach (getItemCategories() as $category) {
-                    echo "<a href=\"index.php?category=$category\"><li>$category</li></a>";
+                    echo "<a href=\"index.php?category={$category['id']}\"><li>{$category['name']}</li></a>&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
                 ?>
             </ul>

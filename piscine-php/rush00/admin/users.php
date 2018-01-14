@@ -16,6 +16,7 @@ includeAdminHead();
         <tr>
             <th>Nom</th>
             <th>Email</th>
+            <th>Administrateur</th>
             <th>Date d'inscription</th>
             <th>Actions</th>
         </tr>
@@ -26,6 +27,7 @@ includeAdminHead();
             echo '<tr>';
             echo '<td>' . strtoupper($user['name']) . ' ' . $user['first_name'] . '</td>';
             echo '<td>' . $user['email'] . '</td>';
+            echo '<td>' . ($user['is_admin'] ? 'Oui' : 'Non') . '</td>';
             echo '<td>' . $user['created_at'] . '</td>';
             echo '<td>';
                 echo '<a class="button button-info" href="edit_user.php?id=' . $user['id'] . '">Éditer</a>&nbsp;';

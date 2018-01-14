@@ -37,9 +37,9 @@ includeHead();
                 echo "<div class='alert alert-error'><b>Erreur :</b> $error</div>";
             ?>
             <form action="" method="post">
-                <label for="login">Email: </label><input type="text" name="email" placeholder="votre email"/><br />
-                <label for="password">Mot de passe: </label><input type="password" name="password" placeholder="votre mot de passe"/><br />
-                <input type="submit" name="submit" value="signin"/><br />
+                <br><label for="login">Email: </label><input type="text" name="email" placeholder="Votre email"/><br />
+                <br><label for="password">Mot de passe: </label><input type="password" name="password" placeholder="Votre mot de passe"/><br />
+                <br><button type="submit" class="button">Se connecter</button><br /><br>
             </form>
         </div>
         <div class="hr"></div>

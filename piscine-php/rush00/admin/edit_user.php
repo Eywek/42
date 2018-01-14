@@ -15,9 +15,13 @@ if (empty($user))
 $user = $user[0];
 
 if ($_POST) {
-    $edit = edit($_POST);
+    $edit = edit($_POST, $_GET['id']);
     if ($edit === true)
     {
+        if ($_POST['is_admin'])
+            queryDB('UPDATE `users` SET `is_admin` = 1 WHERE `id` = ?', ['i', $_GET['id']]);
+        else
+            queryDB('UPDATE `users` SET `is_admin` = 0 WHERE `id` = ?', ['i', $_GET['id']]);
         // Redirect
         header('Location: users.php');
     } else
@@ -61,6 +65,13 @@ includeAdminHead();
         <div class="form-group">
             <label>Mot de passe (confirmation)</label>
             <input type="password" name="password_confirmation" placeholder="Laisser vider pour ne pas éditer">
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="is_admin" <?= ($user['is_admin'] ? 'checked' : '') ?>>
+                Administrateur
+            </label>
         </div>
 
         <br>

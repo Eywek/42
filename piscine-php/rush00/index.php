@@ -11,11 +11,11 @@ includeHead();
 ?>
 		<div class="hr"></div>
 		<div>
+            <div>
 			<?php
             if (empty($items)):
                 echo '<div class="alert alert-error">Aucun article disponible sur cette page !</div>';
             else:?>
-            <div>
             <table>
                 <thead>
                     <tr>
@@ -28,22 +28,23 @@ includeHead();
                 </thead>
                 <?php
                 foreach ($items as $item) {
-                    // TODO
             ?>
                     <tr>
                         <th><img class="img_category" src="<?= $item['image_url']?>" title="<?= $item['name']?>"></th>
                         <th><span style="display:block"><?= $item['name']?></span></th>
                         <th><?= $item['price']?>€</th>
                         <th><?= $item['description']?></th>
-                        <th><form action="add_cart.php" method="get">
-                                <input type="submit" value="Ajouter au panier">
-                            </form></th>
-                        </tr>
+                        <th>
+                            <a class="button add-to-cart <?= isInCart($item['id']) ? 'disabled' : '' ?>" data-item-id="<?= $item['id'] ?>"><?= isInCart($item['id']) ? 'Ajouté' : 'Ajouter' ?> au panier</a>
+                        </th>
+                    </tr>
             <?php
                 }
-            endif;
             ?>
-        </table>
+            </table>
+            <?php
+                endif;
+            ?>
     </div>
 		</div>
 		<div class="hr"></div>

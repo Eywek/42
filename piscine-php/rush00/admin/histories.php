@@ -2,7 +2,7 @@
 require '../include/app.php';
 redirectIfNotAdmin();
 
-$orders = queryDB('SELECT `users`.`email`, `items`.`name`, `items`.`price`, `orders`.`created_at`, `orders`.`address` FROM `orders` INNER JOIN `items` ON `items`.`id` = `orders`.`item_id` INNER JOIN `users` ON `users`.`id` = `orders`.`user_id` ORDER BY `orders`.`id` DESC');
+$orders = queryDB('SELECT `users`.`email`, `items`.`name`, `items`.`price`, `orders`.`created_at`, `orders`.`address`, `orders`.`quantity` FROM `orders` INNER JOIN `items` ON `items`.`id` = `orders`.`item_id` INNER JOIN `users` ON `users`.`id` = `orders`.`user_id` ORDER BY `orders`.`id` DESC');
 
 includeAdminHead();
 ?>
@@ -25,7 +25,7 @@ includeAdminHead();
         <?php
         foreach ($orders as $order) {
             echo '<tr>';
-            echo '<td>' . $order['name'] . '</td>';
+            echo '<td>x' . $order['quantity']. ' ' . $order['name'] . '</td>';
             echo '<td>' . $order['price'] . '</td>';
             echo '<td>' . $order['email'] . '</td>';
             echo '<td>' . $order['address'] . '</td>';
