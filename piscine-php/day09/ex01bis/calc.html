@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calc</title>
+</head>
+<body>
+
+    <form action="">
+
+        <input type="text" name="first-operand" placeholder="Number">
+        <select name="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input type="text" name="second-operand" placeholder="Number">
+        <input type="submit" value="Try me!">
+
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function display(text)
+        {
+            alert(text);
+            console.log(text);
+            return false;
+        }
+
+        $('form').on('submit', function (event) {
+            event.preventDefault();
+            var form = $(this);
+            var firstOperand = form.find('input[name="first-operand"]').val();
+            var operator = form.find('select[name="operator"]').val();
+            var secondOperand = form.find('input[name="second-operand"]').val();
+
+            // Validation
+            if (parseInt(firstOperand) != firstOperand || parseInt(secondOperand) != secondOperand)
+                return display('Error :(');
+            firstOperand = parseInt(firstOperand);
+            secondOperand = parseInt(secondOperand);
+            if (firstOperand < 0 || secondOperand < 0)
+                return display('Error :(');
+            if (['+', '-', '*', '/', '%'].indexOf(operator) === -1)
+                return display('Error :(');
+            if ((operator === '/' || operator === '%') && secondOperand === 0)
+                return display('It’s over 9000!');
+
+            // Calcul
+            switch (operator) {
+                case '+':
+                    display((firstOperand + secondOperand).toString());
+                    break;
+                case '-':
+                    display((firstOperand - secondOperand).toString());
+                    break;
+                case '*':
+                    display((firstOperand * secondOperand).toString());
+                    break;
+                case '/':
+                    display((firstOperand / secondOperand).toString());
+                    break;
+                case '%':
+                    display((firstOperand % secondOperand).toString());
+                    break;
+            }
+        });
+
+        setInterval(function () {
+            alert('Please, use me...');
+        }, 30000)
+    </script>
+
+</body>
+</html>
