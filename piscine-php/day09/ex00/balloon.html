@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Balloon</title>
+    <style>
+        .balloon {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+
+            position:absolute;
+            left:0; right:0;
+            top:0; bottom:0;
+            margin:auto;
+
+            max-width:100%;
+            max-height:100%;
+            overflow:auto;
+
+            border-radius: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="balloon"></div>
+
+    <script type="text/javascript">
+        document.querySelector('.balloon').addEventListener('click', function (event) {
+            var balloon = this;
+
+            // Size
+            var size = parseInt(window.getComputedStyle(balloon).getPropertyValue('width')) + 10;
+            if (size > 420)
+                size = 200;
+            balloon.style.borderRadius = balloon.style.width = balloon.style.height = size.toString() + 'px';
+
+            // Color
+            var currentColor = window.getComputedStyle(balloon).getPropertyValue('background-color');
+            var newColor;
+            if (currentColor === 'rgb(255, 0, 0)') // red
+                newColor = 'green';
+            else if (currentColor === 'rgb(0, 128, 0)') // green
+                newColor = 'blue';
+            else
+                newColor = 'red';
+            balloon.style.backgroundColor = newColor;
+        });
+
+        document.querySelector('.balloon').addEventListener('mouseleave', function (event) {
+            var balloon = this;
+
+            // Size
+            var size = parseInt(window.getComputedStyle(balloon).getPropertyValue('width')) - 5;
+            if (size < 200)
+                size = 200;
+            balloon.style.borderRadius = balloon.style.width = balloon.style.height = size.toString() + 'px';
+
+            // Color
+            var currentColor = window.getComputedStyle(balloon).getPropertyValue('background-color');
+            var newColor;
+            if (currentColor === 'rgb(255, 0, 0)') // red
+                newColor = 'blue';
+            else if (currentColor === 'rgb(0, 128, 0)') // green
+                newColor = 'red';
+            else
+                newColor = 'green';
+            balloon.style.backgroundColor = newColor;
+        });
+    </script>
+
+</body>
+</html>
