@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO</title>
+
+    <style>
+        body {
+            margin: 50px;
+            font-family: sans-serif;
+        }
+
+        #ft_list {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 3px;
+        }
+
+        #ft_list button {
+            background: #3498db;
+            border: solid 1px #2980b9;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-family: sans-serif;
+            width: 100%;
+        }
+
+        #ft_list button:focus {
+            outline: 0;
+        }
+
+        #ft_list button:hover {
+            background: #2980b9;
+            cursor: pointer;
+        }
+
+        #ft_list div {
+            background: #d2d9dd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        #ft_list div:after {
+            content: 'x';
+            position: absolute;
+            color: #c0392b;
+            font-size: 20px;
+            text-align: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+            top: 20%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        #ft_list div:before {
+            content: '';
+            background: #e74c3c;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        #ft_list div:hover {
+            cursor: pointer;
+        }
+        #ft_list div:hover:after {
+            opacity: 1;
+        }
+        #ft_list div:hover:before {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ft_list">
+        <button type="button">New</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="todo.js"></script>
+</body>
+</html>
