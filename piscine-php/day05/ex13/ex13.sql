@@ -1,1 +1,1 @@
-SELECT ROUND(AVG(`nbr_siege`)) FROM `salle`;
+SELECT ROUND(AVG(`nbr_siege`)) AS `moyenne` FROM `salle`;
