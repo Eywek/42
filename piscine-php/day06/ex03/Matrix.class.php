@@ -13,14 +13,14 @@ class Matrix
     const TRANSLATION = 'TRANSLATION';
     const PROJECTION = 'PROJECTION';
 
-    private $coords = ['x', 'y', 'z', 'w'];
-    private $matrix = [
+    private $_coords = ['x', 'y', 'z', 'w'];
+    private $_matrix = [
         [0.00, 0.00, 0.00, 0.00],
         [0.00, 0.00, 0.00, 0.00],
         [0.00, 0.00, 0.00, 0.00],
         [0.00, 0.00, 0.00, 0.00],
     ];
-    private $data = [];
+    private $_data = [];
 
     static public $verbose = false;
 
@@ -45,11 +45,11 @@ class Matrix
             return false;
         // Verbose
         if (self::$verbose && $new)
-            echo "Matrix {$data['preset']} preset instance constructed" . PHP_EOL;
+            echo "Matrix {$data['preset']} " . ($data['preset'] !== self::IDENTITY ? 'preset ' : '') . "instance constructed" . PHP_EOL;
         // Process
-        $functionName = 'generate' . str_replace(' ', '', ucwords(strtolower($data['preset']))) . 'Preset';
+        $functionName = '_generate' . str_replace(' ', '', ucwords(strtolower($data['preset']))) . 'Preset';
         $this->{$functionName}($data);
-        $this->data = $data;
+        $this->_data = $data;
         return true;
     }
 
@@ -63,11 +63,11 @@ class Matrix
     {
         $string = 'M | vtcX | vtcY | vtcZ | vtxO' . PHP_EOL;
         $string .= '-----------------------------';
-        for ($i = 0; $i < count($this->matrix); $i++)
+        for ($i = 0; $i < count($this->_matrix); $i++)
         {
-            $string .= PHP_EOL . "{$this->coords[$i]}";
-            for ($j = 0; $j < count($this->matrix[$i]); $j++)
-                $string .= ' | ' . number_format($this->matrix[$i][$j], 2, '.', '');
+            $string .= PHP_EOL . "{$this->_coords[$i]}";
+            for ($j = 0; $j < count($this->_matrix[$i]); $j++)
+                $string .= ' | ' . number_format($this->_matrix[$i][$j], 2, '.', '');
         }
         return $string;
     }
@@ -95,20 +95,20 @@ class Matrix
     {
         // Calcul
         $coords = [];
-        for ($i = 0; $i < count($this->matrix); $i++)
+        for ($i = 0; $i < count($this->_matrix); $i++)
         {
             $coords[$i] = [];
-            for ($j = 0; $j < count($this->matrix[$i]); $j++)
+            for ($j = 0; $j < count($this->_matrix[$i]); $j++)
             {
                 $sum = 0;
                 for ($k = 0; $k < count($rhs->get()); $k++) {
-                    $sum += $this->matrix[$i][$k] * $rhs->get()[$k][$j];
+                    $sum += $this->_matrix[$i][$k] * $rhs->get()[$k][$j];
                 }
                 $coords[$i][$j] = $sum;
             }
         }
         // Instance
-        $matrix = new Matrix($this->data, false);
+        $matrix = new Matrix($this->_data, false);
         $matrix->set($coords);
         return $matrix;
     }
@@ -129,7 +129,7 @@ class Matrix
      * Generate functions
      */
 
-    public function generateIdentityPreset(array $data)
+    private function _generateIdentityPreset(array $data)
     {
         $this->set([
             [1.00, 0.00, 0.00, 0.00],
@@ -139,7 +139,7 @@ class Matrix
         ]);
     }
 
-    public function generateScalePreset(array $data)
+    private function _generateScalePreset(array $data)
     {
         $this->set([
             [$data['scale'], 0.00, 0.00, 0.00],
@@ -149,9 +149,9 @@ class Matrix
         ]);
     }
 
-    public function generateOxRotationPreset(array $data)
+    private function _generateOxRotationPreset(array $data)
     {
-        $this->generateIdentityPreset($data);
+        $this->_generateIdentityPreset($data);
         $matrix = $this->get();
         $matrix[0][0] = 1;
         $matrix[1][1] = cos($data['angle']);
@@ -161,9 +161,9 @@ class Matrix
         $this->set($matrix);
     }
 
-    public function generateOyRotationPreset(array $data)
+    private function _generateOyRotationPreset(array $data)
     {
-        $this->generateIdentityPreset($data);
+        $this->_generateIdentityPreset($data);
         $matrix = $this->get();
         $matrix[0][0] = cos($data['angle']);
         $matrix[0][2] = sin($data['angle']);
@@ -173,9 +173,9 @@ class Matrix
         $this->set($matrix);
     }
 
-    public function generateOzRotationPreset(array $data)
+    private function _generateOzRotationPreset(array $data)
     {
-        $this->generateIdentityPreset($data);
+        $this->_generateIdentityPreset($data);
         $matrix = $this->get();
         $matrix[0][0] = cos($data['angle']);
         $matrix[0][1] = -sin($data['angle']);
@@ -185,9 +185,9 @@ class Matrix
         $this->set($matrix);
     }
 
-    public function generateTranslationPreset(array $data)
+    private function _generateTranslationPreset(array $data)
     {
-        $this->generateIdentityPreset($data);
+        $this->_generateIdentityPreset($data);
         $matrix = $this->get();
         $matrix[0][3] = $data['vtc']->getX();
         $matrix[1][3] = $data['vtc']->getY();
@@ -195,9 +195,9 @@ class Matrix
         $this->set($matrix);
     }
 
-    public function generateProjectionPreset(array $data)
+    private function _generateProjectionPreset(array $data)
     {
-        $this->generateIdentityPreset($data);
+        $this->_generateIdentityPreset($data);
         $matrix = $this->get();
         $matrix[1][1] = 1 / tan(0.5 * deg2rad($data['fov']));
         $matrix[0][0] = $matrix[1][1] / $data['ratio'];
@@ -213,7 +213,7 @@ class Matrix
      */
     public function set($matrix)
     {
-        $this->matrix = $matrix;
+        $this->_matrix = $matrix;
     }
 
     /**
@@ -221,7 +221,7 @@ class Matrix
      */
     public function get()
     {
-        return $this->matrix;
+        return $this->_matrix;
     }
 
 }
