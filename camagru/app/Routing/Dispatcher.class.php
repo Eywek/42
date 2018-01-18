@@ -59,7 +59,11 @@ class Dispatcher
         $controller = new $route[0]();
         $res = $controller->{$route[1]}($this->_req, $this->_res);
         // Display
-        if ($res instanceof Response)
+        if (empty($res)) {
+            $res = new Response();
+            $res->view($res->getViewFromController($route[0], $route[1]), $controller->getVars())->send();
+        }
+        else if ($res instanceof Response)
             $res->send();
         else
             (new Response($res))->send();

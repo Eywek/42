@@ -7,12 +7,20 @@ namespace Controllers;
 class Controller
 {
 
-    public function __construct()
+    private $_vars = [];
+
+    /**
+     * @return array
+     */
+    public function getVars(): array
     {
+        return $this->_vars;
     }
 
-    public function __destruct()
+    protected function set($vars = [])
     {
+        foreach ($vars as $name => $value)
+            $this->_vars[$name] = $value;
     }
 
 }

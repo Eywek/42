@@ -7,7 +7,7 @@ define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', realpath(__DIR__ . DS . '..') . DS);
 define('PUBLIC_PATH', ROOT . 'public' . DS);
 define('APP_PATH', ROOT . 'app' . DS);
-define('VIEW_PATH', APP_PATH . 'views' . DS);
+define('VIEW_PATH', APP_PATH . 'Views' . DS);
 define('CONFIG_PATH', ROOT . 'config' . DS);
 
 // GLOBALS FUNCTIONS

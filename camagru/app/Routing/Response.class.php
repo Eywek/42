@@ -40,6 +40,7 @@ class Response
     public function setStatus($code)
     {
         http_response_code($code);
+        return $this;
     }
 
     public function redirect($location = '/')
@@ -52,7 +53,21 @@ class Response
     {
         $this->setType('application/json');
         $this->_content = json_encode($array);
-        $this->send();
+        return $this;
+    }
+
+    public function view($name, $vars = [])
+    {
+        $this->_content = new View($name, $vars);
+        return $this;
+    }
+
+    public function getViewFromController($controller, $action)
+    {
+        $controller = explode('\\', $controller);
+        $controller = $controller[count($controller) - 1];
+        $controller = substr($controller, 0, -strlen('Controller'));
+        return $controller . DS . strtolower($action);
     }
 
     /**

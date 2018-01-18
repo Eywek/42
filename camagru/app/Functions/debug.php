@@ -6,7 +6,7 @@
 function debug()
 {
     echo '<pre>';
-    call_user_func('var_dump', func_get_args());
+    call_user_func_array('var_dump', func_get_args());
     echo '</pre>';
 }
 

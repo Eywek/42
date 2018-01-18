@@ -10,7 +10,7 @@ class IndexController extends Controller
 
     public function index(Request $req, Response $res)
     {
-        return 'ok';
+        $this->set(['path' => 'path']);
     }
 
 }
