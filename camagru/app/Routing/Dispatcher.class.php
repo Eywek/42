@@ -56,7 +56,7 @@ class Dispatcher
             preg_match_all('/[^{}]*({([A-Za-z]+):([^}]+)})[^{}]*/', $route, $matches);
             $result = [
                 'args_name' => [],
-                'route' => '',
+                'route' => (empty($matches[0]) ? $route : ''),
                 'action' => $action
             ];
             $count = count($matches[1]);
@@ -69,7 +69,7 @@ class Dispatcher
 
         // Try to match one
         foreach ($routes as $route) {
-            $match = '/' . str_replace('/', '\\/', $route['route']) . '/';
+            $match = '/^' . str_replace('/', '\\/', $route['route']) . '$/';
             if (preg_match($match, $req->getPath(), $matches)) {
                 $matches = array_splice($matches, 1);
                 $args = array_combine($route['args_name'], $matches);
