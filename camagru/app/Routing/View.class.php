@@ -14,7 +14,7 @@ class View
         $this->_vars = $vars;
     }
 
-    public function render()
+    public function render($viewName)
     {
         // VARS
         foreach ($this->_vars as $name => $value)
@@ -22,14 +22,19 @@ class View
 
         // TO STRING
         ob_start();
-        require VIEW_PATH . $this->_name . '.php';
+        require VIEW_PATH . $viewName . '.php';
         $html = ob_get_clean();
         return $html;
     }
 
     public function __toString()
     {
-        return $this->render();
+        return $this->render($this->_name);
+    }
+
+    public function template($name)
+    {
+        return $this->render('Templates' . DS . $name);
     }
 
 }

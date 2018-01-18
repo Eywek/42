@@ -47,9 +47,37 @@ class Dispatcher
 
     private function _findRoute(Request $req)
     {
-        // TODO: Args
         if (isset($this->_routes[$req->getMethod()][$req->getPath()]))
             return $this->_routes[$req->getMethod()][$req->getPath()];
+
+        // Generate routes
+        $routes = [];
+        foreach ($this->_routes[$req->getMethod()] as $route => $action) {
+            preg_match_all('/[^{}]*({([A-Za-z]+):([^}]+)})[^{}]*/', $route, $matches);
+            $result = [
+                'args_name' => [],
+                'route' => '',
+                'action' => $action
+            ];
+            $count = count($matches[1]);
+            for ($i = 0; $i < $count; $i++) {
+                $result['route'] .= str_replace($matches[1][$i], '(' . $matches[3][$i] . ')', $matches[0][$i]);
+                $result['args_name'][] = $matches[2][$i];
+            }
+            $routes[] = $result;
+        }
+
+        // Try to match one
+        foreach ($routes as $route) {
+            $match = '/' . str_replace('/', '\\/', $route['route']) . '/';
+            if (preg_match($match, $req->getPath(), $matches)) {
+                $matches = array_splice($matches, 1);
+                $args = array_combine($route['args_name'], $matches);
+                $this->_req->setArgs($args);
+                return $route['action'];
+            }
+        }
+
         return false;
     }
 

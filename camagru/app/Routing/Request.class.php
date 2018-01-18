@@ -14,9 +14,18 @@ class Request
 
     public function __construct($path = '/', $method = 'GET', $data = [])
     {
+        if (substr($path, 0, 1) != '/')
+            $path = '/' . $path;
         $this->_path = $path;
         $this->_method = $method;
         $this->_data = $data;
+    }
+
+    public function __get($name)
+    {
+        if (isset($this->_args[$name]))
+            return $this->_args[$name];
+        return NULL;
     }
 
     /**
