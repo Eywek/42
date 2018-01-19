@@ -5,6 +5,7 @@ namespace Controllers;
 use Models\UserModel;
 use Routing\Request;
 use Routing\Response;
+use Routing\View;
 
 class UserController
 {
@@ -30,6 +31,11 @@ class UserController
         $user->save();
 
         // Send email
+        \sendMail($user->email, 'Inscription', new View('Emails/signup', [
+            'username' => $user->username,
+            'date' => date('Y-m-d H:i:s'),
+            'ip' => getIP()
+        ]));
 
         // Success message
         return $res->sendJSON(['status' => true, 'success' => 'Vous vous êtes bien inscris, vous avez reçu un mail de confirmation.']);
