@@ -9,10 +9,7 @@ class UsersTokenModel extends Model
 
     static public function generate($type, $userId)
     {
-        $token = new UsersTokenModel();
-        $token->user_id = $userId;
-        $token->type = $type;
-        $token->token = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+        $token = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"
             mt_rand(0, 0xffff), mt_rand(0, 0xffff),
             // 16 bits for "time_mid"
@@ -27,7 +24,11 @@ class UsersTokenModel extends Model
             // 48 bits for "node"
             mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
         );
-        $token->save();
+        UsersTokenModel::create([
+            'user_id' => $userId,
+            'type' => $type,
+            'token' => $token
+        ]);
         return $token;
     }
 

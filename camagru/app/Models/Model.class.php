@@ -13,7 +13,7 @@ class Model
         $model = get_called_class();
         $model = explode('\\', $model);
         $model = $model[count($model) - 1]; // remove namespace
-        $model = substr($model, 0, strlen('Model') - 1); // remove model
+        $model = substr($model, 0, -strlen('Model')); // remove model
         $model = lcfirst($model); // remove first upper
 
         $model = preg_replace_callback('/([a-z])([A-Z])/', function ($matches) {
@@ -46,7 +46,7 @@ class Model
     {
         if (!isset($data['conditions']))
             return '';
-        return ' WHERE ' . implode(', ', array_map(function ($field) {
+        return ' WHERE ' . implode(' AND ', array_map(function ($field) {
             return "$field=?";
         }, array_keys($data['conditions'])));
     }
@@ -103,7 +103,7 @@ class Model
     {
         $data = array_merge($data, ['limit' => 1]);
         $result = self::find($data);
-        if (!empty($result))
+        if (!empty($result) && !($result instanceof \Exception))
             return $result[0];
         return NULL;
     }

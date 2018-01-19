@@ -15,7 +15,7 @@ class UserController
     {
         if (!isset($req->getData()['username']) || !isset($req->getData()['password']))
             return $res->sendJSON(['status' => false, 'error' => 'Vous devez remplir tous les champs.']);
-        $findUser = UserModel::findFirst(['conditions' => ['username' => $req->getData()['username'], 'password' => $req->getData()['password']]]);
+        $findUser = UserModel::findFirst(['conditions' => ['username' => $req->getData()['username'], 'password' => hashPassword($req->getData()['password'])]]);
         if (!$findUser)
             return $res->sendJSON(['status' => false, 'error' => 'Vos identifiants sont incorrects.']);
 
@@ -51,7 +51,7 @@ class UserController
             'username' => $user->username,
             'date' => date('Y-m-d H:i:s'),
             'ip' => getIP(),
-            'url' => '/user/valid-email/' . $token->token
+            'url' => '/user/valid-email/' . $token
         ]));
 
         // Success message
