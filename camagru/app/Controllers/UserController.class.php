@@ -12,7 +12,17 @@ class UserController
 
     public function signin(Request $req, Response $res)
     {
+        if (!isset($req->getData()['username']) || !isset($req->getData()['password']))
+            return $res->sendJSON(['status' => false, 'error' => 'Vous devez remplir tous les champs.']);
+        $findUser = UserModel::findFirst(['conditions' => ['username' => $req->getData()['username'], 'password' => $req->getData()['password']]]);
+        if (!$findUser)
+            return $res->sendJSON(['status' => false, 'error' => 'Vos identifiants sont incorrects.']);
 
+        // TODO: Check if user has valided his email
+
+        $findUser->login();
+
+        return $res->sendJSON(['status' => true, 'success' => 'Vous vous êtes bien connecté !']);
     }
 
     public function signup(Request $req, Response $res)
@@ -30,7 +40,7 @@ class UserController
         $user->password = \hashPassword($req->getData()['password']);
         $user->save();
 
-        // Send email
+        // Send email, TODO: Create a token to valid email, store it
         \sendMail($user->email, 'Inscription', new View('Emails/signup', [
             'username' => $user->username,
             'date' => date('Y-m-d H:i:s'),
@@ -59,17 +69,20 @@ class UserController
 
     public function editPassword(Request $req, Response $res)
     {
-
+        if (!UserModel::isLogged())
+            $res->redirect('/');
     }
 
     public function edit(Request $req, Response $res)
     {
-
+        if (!UserModel::isLogged())
+            $res->redirect('/');
     }
 
     public function profile(Request $req, Response $res)
     {
-
+        if (!UserModel::isLogged())
+            $res->redirect('/');
     }
 
 }
