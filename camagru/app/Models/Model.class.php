@@ -135,7 +135,7 @@ class Model
         }
     }
 
-    public function validate(array $data = [])
+    public function validate(array $data = [], array $requireds = NULL)
     {
         foreach ($this->_fields as $name => $types) {
             foreach (explode(':', $types) as $type) {
@@ -143,7 +143,7 @@ class Model
 
                 switch ($type) {
                     case 'required':
-                        if (!isset($data[$name]) || empty($data[$name]))
+                        if ((!isset($data[$name]) || empty($data[$name])) && ($requireds === NULL || in_array($name, $requireds)))
                             return $this->_setValidationError("Le champ $name ne peut pas être vide.");
                         break;
                     case 'unique':

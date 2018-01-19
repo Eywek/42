@@ -24,16 +24,16 @@
       <file leaf-file-name="Model.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/Model.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1313">
-              <caret line="195" column="1" lean-forward="true" selection-start-line="195" selection-start-column="1" selection-end-line="195" selection-end-column="1" />
+            <state relative-caret-position="278">
+              <caret line="126" column="42" lean-forward="true" selection-start-line="126" selection-start-column="42" selection-end-line="126" selection-end-column="42" />
               <folding>
-                <marker date="1516385341000" expanded="true" signature="1171:1183" ph="INSERT INTO ${debug($keysString)}... " />
-                <marker date="1516385341000" expanded="true" signature="1171:1211" ph="INSERT INTO ${self::getTableName()}... " />
-                <marker date="1516385341000" expanded="true" signature="1171:1225" ph="INSERT INTO ${self::getTableName()}... " />
-                <marker date="1516385341000" expanded="true" signature="1171:1247" ph="INSERT INTO ${self::getTableName()}... " />
-                <marker date="1516385341000" expanded="true" signature="1171:1306" ph="INSERT INTO ${self::getTableName()}... " />
-                <marker date="1516385341000" expanded="true" signature="2681:2725" ph="SELECT ${$fi... ${self::getTableName()}" />
-                <marker date="1516385341000" expanded="true" signature="2687:2725" ph="INSERT INTO ${self::getTableName()}... " />
+                <marker date="1516385750000" expanded="true" signature="1171:1183" ph="INSERT INTO ${debug($keysString)}... " />
+                <marker date="1516385750000" expanded="true" signature="1171:1211" ph="INSERT INTO ${self::getTableName()}... " />
+                <marker date="1516385750000" expanded="true" signature="1171:1225" ph="INSERT INTO ${self::getTableName()}... " />
+                <marker date="1516385750000" expanded="true" signature="1171:1247" ph="INSERT INTO ${self::getTableName()}... " />
+                <marker date="1516385750000" expanded="true" signature="1171:1306" ph="INSERT INTO ${self::getTableName()}... " />
+                <marker date="1516385750000" expanded="true" signature="2681:2725" ph="SELECT ${$fi... ${self::getTableName()}" />
+                <marker date="1516385750000" expanded="true" signature="2687:2725" ph="INSERT INTO ${self::getTableName()}... " />
               </folding>
             </state>
           </provider>
@@ -102,8 +102,8 @@
       <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="17" column="157" lean-forward="false" selection-start-line="17" selection-start-column="157" selection-end-line="17" selection-end-column="157" />
+            <state relative-caret-position="323">
+              <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
               <folding>
                 <element signature="e#31#52#0#PHP" expanded="true" />
               </folding>
@@ -173,8 +173,8 @@
         <option value="$PROJECT_DIR$/app/Models/Database.class.php" />
         <option value="$PROJECT_DIR$/app/Views/Emails/signup.php" />
         <option value="$PROJECT_DIR$/app/Models/UsersTokenModel.class.php" />
-        <option value="$PROJECT_DIR$/app/Models/Model.class.php" />
         <option value="$PROJECT_DIR$/app/Controllers/UserController.class.php" />
+        <option value="$PROJECT_DIR$/app/Models/Model.class.php" />
       </list>
     </option>
   </component>
@@ -332,12 +332,12 @@
       <option name="presentableId" value="Default" />
       <updated>1516278379513</updated>
       <workItem from="1516278382348" duration="9756000" />
-      <workItem from="1516369307669" duration="10009000" />
+      <workItem from="1516369307669" duration="10271000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19765000" />
+    <option name="totallyTimeSpent" value="20027000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -647,6 +647,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Model.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="126" column="42" lean-forward="true" selection-start-line="126" selection-start-column="42" selection-end-line="126" selection-end-column="42" />
+          <folding>
+            <marker date="1516385750000" expanded="true" signature="1171:1183" ph="INSERT INTO ${debug($keysString)}... " />
+            <marker date="1516385750000" expanded="true" signature="1171:1211" ph="INSERT INTO ${self::getTableName()}... " />
+            <marker date="1516385750000" expanded="true" signature="1171:1225" ph="INSERT INTO ${self::getTableName()}... " />
+            <marker date="1516385750000" expanded="true" signature="1171:1247" ph="INSERT INTO ${self::getTableName()}... " />
+            <marker date="1516385750000" expanded="true" signature="1171:1306" ph="INSERT INTO ${self::getTableName()}... " />
+            <marker date="1516385750000" expanded="true" signature="2681:2725" ph="SELECT ${$fi... ${self::getTableName()}" />
+            <marker date="1516385750000" expanded="true" signature="2687:2725" ph="INSERT INTO ${self::getTableName()}... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/UsersTokenModel.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -655,26 +671,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Model.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1313">
-          <caret line="195" column="1" lean-forward="true" selection-start-line="195" selection-start-column="1" selection-end-line="195" selection-end-column="1" />
-          <folding>
-            <marker date="1516385341000" expanded="true" signature="1171:1183" ph="INSERT INTO ${debug($keysString)}... " />
-            <marker date="1516385341000" expanded="true" signature="1171:1211" ph="INSERT INTO ${self::getTableName()}... " />
-            <marker date="1516385341000" expanded="true" signature="1171:1225" ph="INSERT INTO ${self::getTableName()}... " />
-            <marker date="1516385341000" expanded="true" signature="1171:1247" ph="INSERT INTO ${self::getTableName()}... " />
-            <marker date="1516385341000" expanded="true" signature="1171:1306" ph="INSERT INTO ${self::getTableName()}... " />
-            <marker date="1516385341000" expanded="true" signature="2681:2725" ph="SELECT ${$fi... ${self::getTableName()}" />
-            <marker date="1516385341000" expanded="true" signature="2687:2725" ph="INSERT INTO ${self::getTableName()}... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="17" column="157" lean-forward="false" selection-start-line="17" selection-start-column="157" selection-end-line="17" selection-end-column="157" />
+        <state relative-caret-position="323">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding>
             <element signature="e#31#52#0#PHP" expanded="true" />
           </folding>

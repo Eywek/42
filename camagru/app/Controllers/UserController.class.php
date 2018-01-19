@@ -90,6 +90,7 @@ class UserController
     {
         if (!UserModel::isLogged())
             $res->redirect('/');
+        $res->view('User/profile', ['user' => UserModel::getCurrent()]);
     }
 
 }
