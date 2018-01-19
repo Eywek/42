@@ -12,6 +12,7 @@ define('CONFIG_PATH', ROOT . 'config' . DS);
 
 // GLOBALS FUNCTIONS
 require APP_PATH . 'Functions' . DS . 'debug.php';
+require APP_PATH . 'Functions' . DS . 'security.php';
 
 // AUTOLOAD
 require APP_PATH . 'Core' . DS . 'Autoloader.class.php';

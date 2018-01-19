@@ -5,6 +5,9 @@ namespace Models;
 class Model
 {
 
+    protected $_fields = [];
+    private $_validationError = NULL;
+
     static public function getTableName()
     {
         $model = get_called_class();
@@ -29,8 +32,8 @@ class Model
     static public function create(array $fields)
     {
         $keys = array_keys($fields);
-        $keysString = implode(', ', $keys);
-        $values = array_values($fields);
+        $keysString = implode(', ', array_merge($keys, ['created_at']));
+        $values = array_merge(array_values($fields), [date('Y-m-d H:i:s')]);
         $valuesString = implode(', ', array_map(function () {
             return '?';
         }, $values));
@@ -119,10 +122,71 @@ class Model
 
     public function save()
     {
+        $vars = [];
+        foreach ($this->_fields as $name => $type)
+            $vars[$name] = $this->{$name};
         if (isset($this->id))
-            return self::update(get_object_vars($this), ['id' => $this->id]);
+            return self::update($vars, ['id' => $this->id]);
         else
-            return self::create(get_object_vars($this));
+            return self::create($vars);
+    }
+
+    public function validate(array $data = [])
+    {
+        foreach ($this->_fields as $name => $types) {
+            foreach (explode(':', $types) as $type) {
+                list($type, $value) = explode('=', $type);
+
+                switch ($type) {
+                    case 'required':
+                        if (!isset($data[$name]) || empty($data[$name]))
+                            return $this->_setValidationError("Le champ $name ne peut pas être vide.");
+                        break;
+                    case 'unique':
+                        if (!empty(self::find(['conditions' => [$name => $data[$name]]])))
+                            return $this->_setValidationError("La valeur du champ $name est déjà utilisée.");
+                        break;
+                    case 'email':
+                        if (!filter_var($data[$name], FILTER_VALIDATE_EMAIL))
+                            return $this->_setValidationError("Le champ $name doit être un email valide.");
+                        break;
+                    case 'password':
+                        if (strlen($data[$name]) <= '8')
+                            return $this->_setValidationError("Le champ $name doit avoir un minimum de 8 caractères.");
+                        else if (!preg_match("#[0-9]+#", $data[$name]))
+                            return $this->_setValidationError("Le champ $name doit contenir au minimum un chiffre.");
+                        else if (!preg_match("#[A-Z]+#", $data[$name]))
+                            return $this->_setValidationError("Le champ $name doit contenir au minimum une lettre majuscule.");
+                        else if (!preg_match("#[a-z]+#", $data[$name]))
+                            return $this->_setValidationError("Le champ $name doit contenir au minimum une lettre minuscule.");
+                        break;
+                    case 'min':
+                        if (strlen($data[$name]) < $value)
+                            return $this->_setValidationError("Le champ $name doit avoir un minimum de $value caractères.");
+                        break;
+                    case 'max':
+                        if (strlen($data[$name]) > $value)
+                            return $this->_setValidationError("Le champ $name doit avoir un maximum de $value caractères.");
+                        break;
+                    case 'alpha_num':
+                        if (!preg_match('/^[0-9a-zA-Z]+$/', $data[$name]))
+                            return $this->_setValidationError("Le champ $name doit être uniquement alphanumérique.");
+                        break;
+                }
+            }
+        }
+        return true;
+    }
+
+    private function _setValidationError($error)
+    {
+        $this->_validationError = $error;
+        return false;
+    }
+
+    public function getValidationError()
+    {
+        return $this->_validationError;
     }
 
 }
