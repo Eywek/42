@@ -34,7 +34,7 @@ class UserController
         $user = new UserModel();
         if (!$user->validate($req->getData()))
             return $res->sendJSON(['status' => false, 'error' => $user->getValidationError()]);
-        if ($req->getData()['password'] !== $req->getData()['password_confirmation'])
+        if (!isset($req->getData()['password_confirmation']) || $req->getData()['password'] !== $req->getData()['password_confirmation'])
             return $res->sendJSON(['status' => false, 'error' => 'Les mot de passe ne correspondent pas.']);
 
         // Save
@@ -78,12 +78,35 @@ class UserController
     {
         if (!UserModel::isLogged())
             $res->redirect('/');
+        // Validate
+        $user = new UserModel();
+        if (!$user->validate($req->getData(), ['password']))
+            return $res->sendJSON(['status' => false, 'error' => $user->getValidationError()]);
+        if (!isset($req->getData()['password_confirmation']) || $req->getData()['password'] !== $req->getData()['password_confirmation'])
+            return $res->sendJSON(['status' => false, 'error' => 'Les mot de passe ne correspondent pas.']);
+
+        // Update data
+        $user->password = \hashPassword($req->getData()['password']);
+        $user->save();
+
+        return $res->sendJSON(['status' => true, 'success' => 'Votre mot de passe a bien été sauvegardé !']);
     }
 
     public function edit(Request $req, Response $res)
     {
         if (!UserModel::isLogged())
             $res->redirect('/');
+        // Validate
+        $user = new UserModel();
+        if (!$user->validate($req->getData(), ['username', 'email']))
+            return $res->sendJSON(['status' => false, 'error' => $user->getValidationError()]);
+
+        // Update data
+        $user->username = \sanitize($req->getData()['username']);
+        $user->email = \sanitize($req->getData()['email']);
+        $user->save();
+
+        return $res->sendJSON(['status' => true, 'success' => 'Vos informations ont bien été sauvegardées !']);
     }
 
     public function profile(Request $req, Response $res)
