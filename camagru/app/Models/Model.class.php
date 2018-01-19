@@ -125,10 +125,14 @@ class Model
         $vars = [];
         foreach ($this->_fields as $name => $type)
             $vars[$name] = $this->{$name};
-        if (isset($this->id))
-            return self::update($vars, ['id' => $this->id]);
-        else
-            return self::create($vars);
+        if (isset($this->id)) {
+            self::update($vars, ['id' => $this->id]);
+            return $this;
+        } else {
+            self::create($vars);
+            $this->id = Database::getLastInsertId();
+            return $this;
+        }
     }
 
     public function validate(array $data = [])

@@ -1,1 +1,1 @@
-Coucou tu as bien été inscrit avec le pseudo <?= $username ?> (<?= $ip ?>) !
+Coucou tu as bien été inscrit avec le pseudo <?= $username ?> (<?= $ip ?>) va sur <?= $url ?> !

@@ -57,4 +57,9 @@ class Database
         }
    }
 
+   static public function getLastInsertId()
+   {
+       return self::_getDatabase()->lastInsertId();
+   }
+
 }

@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\UserModel;
+use Models\UsersTokenModel;
 use Routing\Request;
 use Routing\Response;
 use Routing\View;
@@ -18,10 +19,12 @@ class UserController
         if (!$findUser)
             return $res->sendJSON(['status' => false, 'error' => 'Vos identifiants sont incorrects.']);
 
-        // TODO: Check if user has valided his email
+        // Check email
+        if (!empty(UsersTokenModel::findFirst(['conditions' => ['user_id' => $findUser->id, 'type' => 'EMAIL', 'used_at' => NULL]])))
+            return $res->sendJSON(['status' => false, 'error' => 'Vous devez avoir validé votre email.']);
 
+        // Success
         $findUser->login();
-
         return $res->sendJSON(['status' => true, 'success' => 'Vous vous êtes bien connecté !']);
     }
 
@@ -40,11 +43,15 @@ class UserController
         $user->password = \hashPassword($req->getData()['password']);
         $user->save();
 
-        // Send email, TODO: Create a token to valid email, store it
+        // Generate email token
+        $token = UsersTokenModel::generate('EMAIL', $user->id);
+
+        // Send email
         \sendMail($user->email, 'Inscription', new View('Emails/signup', [
             'username' => $user->username,
             'date' => date('Y-m-d H:i:s'),
-            'ip' => getIP()
+            'ip' => getIP(),
+            'url' => '/user/valid-email/' . $token->token
         ]));
 
         // Success message
