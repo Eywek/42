@@ -78,7 +78,7 @@ class Dispatcher
         foreach ($routes as $route) {
             $match = '/^' . str_replace('/', '\\/', $route['route']) . '$/';
             if (preg_match($match, $req->getPath(), $matches)) {
-                $matches = array_splice($matches, 1);
+                $matches = array_splice($matches, 1, count($route['args_name']));
                 $args = array_combine($route['args_name'], $matches);
                 $this->_req->setArgs($args);
                 return $route['action'];

@@ -10,7 +10,7 @@ class Request
     private $_path;
     private $_method;
     private $_data;
-    private $_args;
+    private $_args = [];
 
     public function __construct($path = '/', $method = 'GET', $data = [])
     {

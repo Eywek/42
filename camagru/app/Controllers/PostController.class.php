@@ -73,10 +73,13 @@ class PostController extends Controller
 
     public function get(Request $req, Response $res)
     {
-        $posts = PostModel::find([
+        $params = [
             'order' => ['`posts`.`created_at`' => 'DESC'],
             'join' => [PostsCommentModel::class, PostsLikeModel::class]
-        ]);
+        ];
+        if ($req->limit)
+            $params['limit'] = $req->limit . (($req->offset) ? ',' . $req->offset : '');
+        $posts = PostModel::find($params);
         return $res->sendJSON(['status' => true, 'data' => ['posts' => $posts, 'count' => count($posts)]]);
     }
 

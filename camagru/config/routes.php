@@ -23,6 +23,7 @@ $dispatcher->addRoute('POST', '/user/edit-settings', \Controllers\UserController
  * POSTS
  */
 $dispatcher->addRoute('GET', '/posts', \Controllers\PostController::class, 'get');
+$dispatcher->addRoute('GET', '/posts/limit/{limit:[0-9]+}{slash:/?}{offset:([0-9]+)?}', \Controllers\PostController::class, 'get');
 $dispatcher->addRoute('POST', '/posts/{id:[0-9]+}/like', \Controllers\PostController::class, 'like');
 $dispatcher->addRoute('POST', '/posts/{id:[0-9]+}/unlike', \Controllers\PostController::class, 'unlike');
 $dispatcher->addRoute('POST', '/posts/{id:[0-9]+}/comment', \Controllers\PostController::class, 'comment');
