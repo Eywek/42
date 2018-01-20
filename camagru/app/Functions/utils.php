@@ -22,3 +22,15 @@ function toPlural($str)
         $str .= 's';
     return $str;
 }
+
+function url($path = '/')
+{
+    $currentUrl = "http" . (isset($_SERVER['HTTPS']) ? 's' : '') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    if ($path[0] === '/')
+        $path = substr($path, 1);
+    if (REWRITE_URL)
+        return $currentUrl . $path;
+    if (strpos($currentUrl, '?path=') !== false)
+        $currentUrl = substr($currentUrl, 0, -strlen(substr($currentUrl, strpos($currentUrl, '?path='))));
+    return $currentUrl . '?path=' . $path;
+}

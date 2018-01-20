@@ -46,7 +46,7 @@
                 <div class="navbar-item">
                     <div class="field is-grouped">
                         <p class="control">
-                            <a class="bd-tw-button button is-link">
+                            <a href="<?= $this->url('/user/login') ?>" class="bd-tw-button button is-link">
                                 <span>Se connecter</span>
                             </a>
                         </p>

@@ -3,8 +3,12 @@ session_start();
 date_default_timezone_set('Europe/Paris');
 
 // GLOBALS
-define('DS', DIRECTORY_SEPARATOR);
-define('ROOT', realpath(__DIR__ . DS . '..') . DS);
+if (!defined('REWRITE_URL'))
+    define('REWRITE_URL', true);
+if (!defined('DS'))
+    define('DS', DIRECTORY_SEPARATOR);
+if (!defined('ROOT'))
+    define('ROOT', realpath(__DIR__ . DS . '..') . DS);
 define('PUBLIC_PATH', ROOT . 'public' . DS);
 define('APP_PATH', ROOT . 'app' . DS);
 define('VIEW_PATH', APP_PATH . 'Views' . DS);

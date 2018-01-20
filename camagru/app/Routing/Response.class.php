@@ -45,7 +45,7 @@ class Response
 
     public function redirect($location = '/')
     {
-        $this->_headers['Location'] = $location;
+        $this->_headers['Location'] = \url($location);
         $this->send();
     }
 
