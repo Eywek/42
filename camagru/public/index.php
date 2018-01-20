@@ -31,6 +31,9 @@ $dispatcher->addErrorHandler(500, function (\Routing\Request $req) {
 $dispatcher->addErrorHandler(403, function (\Routing\Request $req) {
     echo $req->getPath() . ' forbidden!';
 });
+$dispatcher->addErrorHandler(400, function (\Routing\Request $req) {
+    echo $req->getPath() . ' bad request!';
+});
 
 require CONFIG_PATH . 'routes.php';
 

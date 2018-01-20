@@ -8,9 +8,8 @@ class Model
     protected $_fields = [];
     private $_validationError = NULL;
 
-    static public function getTableName()
+    static public function getTableNameFrom($model, $plural = true)
     {
-        $model = get_called_class();
         $model = explode('\\', $model);
         $model = $model[count($model) - 1]; // remove namespace
         $model = substr($model, 0, -strlen('Model')); // remove model
@@ -21,12 +20,15 @@ class Model
         }, $model); // camel case to snake case
 
         // to plural
-        if (substr($model, -1) == 'y')
-            $model = substr($model, 0, -1) . 'ies';
-        else
-            $model .= 's';
+        if ($plural)
+            $model = \toPlural($model);
 
         return $model;
+    }
+
+    static public function getTableName($plural = true)
+    {
+        return self::getTableNameFrom(get_called_class(), $plural);
     }
 
     static public function create(array $fields)
@@ -49,12 +51,6 @@ class Model
         return ' WHERE ' . implode(' AND ', array_map(function ($field) {
             return "$field=?";
         }, array_keys($data['conditions'])));
-    }
-
-    static private function _makeJoinQuery(array $data)
-    {
-        // TODO
-        return '';
     }
 
     static private function _makeGroupQuery(array $data)
@@ -81,6 +77,24 @@ class Model
         return ' LIMIT ' . $data['limit'];
     }
 
+    static private function _generateModelJoinName($model)
+    {
+        $name = substr($model, strlen(\toPlural(get_called_class())) - strlen('Model'), -strlen('Model'));
+        $name = strtolower(\toPlural($name));
+        return $name;
+    }
+
+    static private function _getJoinData($results, array $data)
+    {
+        foreach ($results as $key => $result) {
+            foreach ($data['join'] as $model) {
+                $modelJoinName = self::_generateModelJoinName($model);
+                $results[$key]->$modelJoinName = $model::find(['conditions' => [self::getTableName(false) . '_id' => $result->id]]);
+            }
+        }
+        return $results;
+    }
+
     static public function find(array $data = [])
     {
         $fields = '*';
@@ -92,11 +106,13 @@ class Model
 
         $query = "SELECT $fields FROM " . self::getTableName();
         $query .= self::_makeWhereQuery($data);
-        $query .= self::_makeJoinQuery($data);
         $query .= self::_makeGroupQuery($data);
         $query .= self::_makeOrderQuery($data);
         $query .= self::_makeLimitQuery($data);
-        return Database::query($query, $values, true, get_called_class());
+        if (!isset($data['join']))
+            return Database::query($query, $values, true, get_called_class());
+        else
+            return self::_getJoinData(Database::query($query, $values, true, get_called_class()), $data);
     }
 
     static public function findFirst(array $data)
@@ -175,6 +191,11 @@ class Model
                     case 'alpha_num':
                         if (!preg_match('/^[0-9a-zA-Z]+$/', $data[$name]))
                             return $this->_setValidationError("Le champ $name doit être uniquement alphanumérique.");
+                        break;
+                    case 'model':
+                        $model = "{$value}Model";
+                        if (!($model::findFirst(['conditions' => ['id' => $data[$name]]])))
+                            return $this->_setValidationError("Le champ $name doit correspondre à une entrée dans $value.");
                         break;
                 }
             }

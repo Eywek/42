@@ -18,7 +18,14 @@ class Dispatcher
     private $_errorsHandlers = [
         404 => NULL,
         500 => NULL,
-        403 => NULL
+        403 => NULL,
+        400 => NULL
+    ];
+    private $_exceptions = [
+        NotFoundException::class => 404,
+        InternalErrorException::class => 500,
+        ForbiddenException::class => 403,
+        BadRequestException::class => 400
     ];
 
     public function __construct(Request $req, Response $res)
@@ -41,7 +48,7 @@ class Dispatcher
     {
         $route = $this->_findRoute($this->_req);
         if (!$route)
-            return $this->_errorsHandlers[404]($this->_req);
+            return $this->_dispatchError(404);
         return $this->_callRoute($route);
     }
 
@@ -85,7 +92,11 @@ class Dispatcher
     {
         // Call controller
         $controller = new $route[0]();
-        $res = $controller->{$route[1]}($this->_req, $this->_res);
+        try {
+            $res = $controller->{$route[1]}($this->_req, $this->_res);
+        } catch (\Exception $e) {
+            $this->_handleExceptions($e);
+        }
         // Display
         if (empty($res)) {
             $res = new Response();
@@ -96,6 +107,18 @@ class Dispatcher
         else
             (new Response($res))->send();
         return true;
+    }
+
+    private function _handleExceptions(\Exception $e)
+    {
+        if (isset($this->_exceptions[get_class($e)]))
+            return $this->_dispatchError($this->_exceptions[get_class($e)]);
+        return $this->_dispatchError(500);
+    }
+
+    private function _dispatchError($errorCode)
+    {
+        return $this->_errorsHandlers[$errorCode]($this->_req);
     }
 
 }

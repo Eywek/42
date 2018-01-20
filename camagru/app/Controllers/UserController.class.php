@@ -3,7 +3,9 @@
 namespace Controllers;
 
 use Models\UserModel;
+use Models\UsersSettingModel;
 use Models\UsersTokenModel;
+use Routing\ForbiddenException;
 use Routing\Request;
 use Routing\Response;
 use Routing\View;
@@ -28,6 +30,19 @@ class UserController
         return $res->sendJSON(['status' => true, 'success' => 'Vous vous êtes bien connecté !']);
     }
 
+    public function validEmail(Request $req, Response $res)
+    {
+        $findToken = UsersTokenModel::findFirst(['fields' => ['id'], 'conditions' => ['token' => $req->token, 'type' => 'EMAIL']]);
+        if (!$findToken)
+            throw new \Routing\NotFoundException();
+
+        // Set token as used
+        $findToken->used_at = date('Y-m-d H:i:s');
+        $findToken->save();
+
+        $res->redirect('/');
+    }
+
     public function signup(Request $req, Response $res)
     {
         // Validate
@@ -42,6 +57,11 @@ class UserController
         $user->email = \sanitize($req->getData()['email']);
         $user->password = \hashPassword($req->getData()['password']);
         $user->save();
+
+        // Add settings
+        UsersSettingModel::create([
+            'user_id' => $user->id
+        ]);
 
         // Generate email token
         $token = UsersTokenModel::generate('EMAIL', $user->id);
@@ -66,18 +86,58 @@ class UserController
 
     public function lostPassword(Request $req, Response $res)
     {
+        if (!isset($req->getData()['email']))
+            return $res->sendJSON(['status' => false, 'error' => 'Vous devez spécifier un email.']);
+        $findUser = UserModel::findFirst(['fields' => ['id', 'email', 'username'], 'conditions' => ['email' => $req->getData()['email']]]);
+        if (!$findUser)
+            return $res->sendJSON(['status' => false, 'error' => 'Aucun utilisateur trouvé avec ce mail.']);
 
+        // Generate email token
+        $token = UsersTokenModel::generate('RESET_PW', $findUser->id);
+
+        // Send email
+        \sendMail($findUser->email, 'Réinitialisation de mot de passe', new View('Emails/reset_password', [
+            'username' => $findUser->username,
+            'date' => date('Y-m-d H:i:s'),
+            'ip' => getIP(),
+            'url' => '/user/reset-password/' . $token
+        ]));
+
+        // Success message
+        return $res->sendJSON(['status' => true, 'success' => 'Vous vous êtes bien inscris, vous avez reçu un mail de confirmation.']);
     }
 
     public function resetPassword(Request $req, Response $res)
     {
+        $findToken = UsersTokenModel::findFirst(['fields' => ['id'], 'conditions' => ['token' => $req->token, 'type' => 'RESET_PW']]);
+        if (!$findToken)
+            throw new \Routing\NotFoundException();
+        if ($req->getMethod() !== 'POST')
+            return NULL;
+        // Validate
+        $user = $findToken->getUser();
+        if (!$user)
+            throw new \Routing\NotFoundException();
+        if (!$user->validate($req->getData(), ['password']))
+            return $res->sendJSON(['status' => false, 'error' => $user->getValidationError()]);
+        if (!isset($req->getData()['password_confirmation']) || $req->getData()['password'] !== $req->getData()['password_confirmation'])
+            return $res->sendJSON(['status' => false, 'error' => 'Les mot de passe ne correspondent pas.']);
 
+        // Save
+        $user->password = \hashPassword($req->getData()['password']);
+        $user->save();
+
+        // Set token as used
+        $findToken->used_at = date('Y-m-d H:i:s');
+        $findToken->save();
+
+        return $res->sendJSON(['status' => true, 'success' => 'Le mot de passe à bien été modifié']);
     }
 
     public function editPassword(Request $req, Response $res)
     {
         if (!UserModel::isLogged())
-            $res->redirect('/');
+            throw new \Routing\ForbiddenException();
         // Validate
         $user = new UserModel();
         if (!$user->validate($req->getData(), ['password']))
@@ -95,7 +155,7 @@ class UserController
     public function edit(Request $req, Response $res)
     {
         if (!UserModel::isLogged())
-            $res->redirect('/');
+            throw new \Routing\ForbiddenException();
         // Validate
         $user = new UserModel();
         if (!$user->validate($req->getData(), ['username', 'email']))
@@ -107,6 +167,20 @@ class UserController
         $user->save();
 
         return $res->sendJSON(['status' => true, 'success' => 'Vos informations ont bien été sauvegardées !']);
+    }
+
+    public function editSettings(Request $req, Response $res)
+    {
+        if (!UserModel::isLogged())
+            throw new \Routing\ForbiddenException();
+        if (!isset($req->getData()['email_notifications']))
+            throw new \Routing\BadRequestException();
+
+        UsersSettingModel::update([
+            'email_notifications' => intval($req->getData()['email_notifications'])
+        ], ['user_id' => UserModel::getCurrent()['id']]);
+
+        return $res->sendJSON(['status' => true, 'success' => 'Vos préférences ont bien été sauvegardées !']);
     }
 
     public function profile(Request $req, Response $res)

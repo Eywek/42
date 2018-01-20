@@ -7,6 +7,12 @@ namespace Models;
 class UsersTokenModel extends Model
 {
 
+    protected $_fields = [
+        'user_id' => 'required',
+        'type' => 'required',
+        'token' => 'required'
+    ];
+
     static public function generate($type, $userId)
     {
         $token = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
@@ -30,6 +36,11 @@ class UsersTokenModel extends Model
             'token' => $token
         ]);
         return $token;
+    }
+
+    public function getUser()
+    {
+        return UserModel::findFirst(['conditions' => ['id' => $this->user_id]]);
     }
 
 }

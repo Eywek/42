@@ -9,10 +9,7 @@ class Controller
 
     private $_vars = [];
 
-    /**
-     * @return array
-     */
-    public function getVars(): array
+    public function getVars()
     {
         return $this->_vars;
     }

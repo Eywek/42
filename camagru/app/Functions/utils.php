@@ -13,3 +13,12 @@ function sendMail($email, $title, $content)
 
     return mail($email, $title, $content, $headers);
 }
+
+function toPlural($str)
+{
+    if (substr($str, -1) == 'y')
+        $str = substr($str, 0, -1) . 'ies';
+    else
+        $str .= 's';
+    return $str;
+}
