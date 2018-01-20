@@ -133,7 +133,19 @@ class Model
 
         $query = 'UPDATE ' . self::getTableName() . " SET $fields";
         $query .= self::_makeWhereQuery(['conditions' => $conditions]);
-        return Database::query($query, $values, true, get_called_class());
+        return Database::query($query, $values, false);
+    }
+
+    static public function delete(array $data)
+    {
+        $values = [];
+        if (isset($data['conditions']))
+            $values = array_values($data['conditions']);
+
+        $query = "DELETE FROM " . self::getTableName();
+        $query .= self::_makeWhereQuery($data);
+        $query .= self::_makeLimitQuery($data);
+        return Database::query($query, $values, false);
     }
 
     public function save()

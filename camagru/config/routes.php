@@ -24,5 +24,6 @@ $dispatcher->addRoute('POST', '/user/edit-settings', \Controllers\UserController
  */
 $dispatcher->addRoute('GET', '/posts', \Controllers\PostController::class, 'get');
 $dispatcher->addRoute('POST', '/posts/{id:[0-9]+}/like', \Controllers\PostController::class, 'like');
+$dispatcher->addRoute('POST', '/posts/{id:[0-9]+}/unlike', \Controllers\PostController::class, 'unlike');
 $dispatcher->addRoute('POST', '/posts/{id:[0-9]+}/comment', \Controllers\PostController::class, 'comment');
 $dispatcher->addRoute('POST', '/posts', \Controllers\PostController::class, 'post');

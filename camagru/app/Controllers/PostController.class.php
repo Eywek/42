@@ -33,6 +33,22 @@ class PostController extends Controller
         return $res->sendJSON(['status' => true, 'success' => 'Le like a été ajouté']);
     }
 
+    public function unlike(Request $req, Response $res)
+    {
+        if (!UserModel::isLogged())
+            throw new \Routing\ForbiddenException();
+        $findPost = PostModel::findFirst(['fields' => ['id'], 'conditions' => ['id' => $req->id]]);
+        if (!$findPost)
+            throw new \Routing\NotFoundException();
+
+        PostsLikeModel::delete([
+            'post_id' => $findPost->id,
+            'user_id' => UserModel::getCurrent()['id']
+        ]);
+
+        return $res->sendJSON(['status' => true, 'success' => 'Le like a été supprimé']);
+    }
+
     public function comment(Request $req, Response $res)
     {
         if (!UserModel::isLogged())
