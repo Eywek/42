@@ -96,6 +96,7 @@ class Dispatcher
             $res = $controller->{$route[1]}($this->_req, $this->_res);
         } catch (\Exception $e) {
             $this->_handleExceptions($e);
+            return true;
         }
         // Display
         if (empty($res)) {
