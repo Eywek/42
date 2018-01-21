@@ -45,16 +45,29 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="field is-grouped">
-                        <p class="control">
-                            <a href="#signinModal" class="bd-tw-button button is-link toggle-modal">
-                                <span>Se connecter</span>
-                            </a>
-                        </p>
-                        <p class="control">
-                            <a href="#signupModal" class="bd-tw-button button is-info toggle-modal">
-                                <span>S'inscrire</span>
-                            </a>
-                        </p>
+                        <?php if (\Models\UserModel::isLogged()): ?>
+                            <p class="control">
+                                <a href="<?= $this->url('/user/profile') ?>" class="bd-tw-button button is-link">
+                                    <span><i class="fa fa-user"></i> &nbsp;Mon profil</span>
+                                </a>
+                            </p>
+                            <p class="control">
+                                <a href="<?= $this->url('/user/signout') ?>" class="bd-tw-button button">
+                                    <span>Se déconnecter</span>
+                                </a>
+                            </p>
+                        <?php else: ?>
+                            <p class="control">
+                                <a href="#signinModal" class="bd-tw-button button is-link toggle-modal">
+                                    <span>Se connecter</span>
+                                </a>
+                            </p>
+                            <p class="control">
+                                <a href="#signupModal" class="bd-tw-button button is-info toggle-modal">
+                                    <span>S'inscrire</span>
+                                </a>
+                            </p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

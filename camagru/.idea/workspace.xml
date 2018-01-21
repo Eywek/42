@@ -11,35 +11,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="form.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/js/form.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
-              <caret line="79" column="57" lean-forward="false" selection-start-line="79" selection-start-column="56" selection-end-line="79" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="modals.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/js/modals.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="41" lean-forward="false" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="modals.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Views/Templates/modals.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="32" column="44" lean-forward="false" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
+            <state relative-caret-position="750">
+              <caret line="50" column="84" lean-forward="true" selection-start-line="50" selection-start-column="84" selection-end-line="50" selection-end-column="84" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#section#0;n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#section#0;n#form#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#section#0;n#form#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#section#0;n#form#0;n#div#0;n#div#1;n#div#2;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reset_password.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Views/Emails/reset_password.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signup.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Views/Emails/signup.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -47,18 +48,30 @@
       <file leaf-file-name="navbar.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Views/Templates/navbar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="53" column="98" lean-forward="false" selection-start-line="53" selection-start-column="98" selection-end-line="53" selection-end-column="98" />
+            <state relative-caret-position="540">
+              <caret line="36" column="51" lean-forward="true" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+              <folding>
+                <element signature="e#1863#1869#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="form.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/assets/js/form.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="69" column="29" lean-forward="true" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="head.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Views/Templates/head.php">
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+            <state relative-caret-position="45">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -76,7 +89,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utils.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="utils.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Functions/utils.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="465">
@@ -110,16 +123,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UsersTokenModel.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/UsersTokenModel.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -143,7 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/.htaccess" />
         <option value="$PROJECT_DIR$/lib/Functions/debug.php" />
         <option value="$PROJECT_DIR$/lib/Routing/Dispatcher.php" />
         <option value="$PROJECT_DIR$/lib/Core/Autoloader.class.php" />
@@ -160,7 +162,6 @@
         <option value="$PROJECT_DIR$/app/Functions/hash.php" />
         <option value="$PROJECT_DIR$/app/Functions/security.php" />
         <option value="$PROJECT_DIR$/app/Models/UserModel.class.php" />
-        <option value="$PROJECT_DIR$/app/Views/Emails/signup.php" />
         <option value="$PROJECT_DIR$/app/Routing/Exceptions/NotFoundException.php" />
         <option value="$PROJECT_DIR$/app/Routing/Exceptions/NotFoundException.class.php" />
         <option value="$PROJECT_DIR$/app/Routing/Exceptions/InternalError.class.php" />
@@ -174,7 +175,6 @@
         <option value="$PROJECT_DIR$/app/Models/PostsCommentModel.class.php" />
         <option value="$PROJECT_DIR$/app/Models/PostsLikeModel.class.php" />
         <option value="$PROJECT_DIR$/app/Models/Database.class.php" />
-        <option value="$PROJECT_DIR$/config/routes.php" />
         <option value="$PROJECT_DIR$/app/Routing/Request.class.php" />
         <option value="$PROJECT_DIR$/app/Routing/Dispatcher.class.php" />
         <option value="$PROJECT_DIR$/app/Controllers/PostController.class.php" />
@@ -186,14 +186,17 @@
         <option value="$PROJECT_DIR$/public/assets/css/modals.css" />
         <option value="$PROJECT_DIR$/app/Views/Templates/footer.php" />
         <option value="$PROJECT_DIR$/public/index.php" />
-        <option value="$PROJECT_DIR$/app/Views/Templates/navbar.php" />
-        <option value="$PROJECT_DIR$/app/Views/Templates/modals.php" />
         <option value="$PROJECT_DIR$/public/assets/js/modals.js" />
-        <option value="$PROJECT_DIR$/public/assets/js/form.js" />
         <option value="$PROJECT_DIR$/app/Models/UsersTokenModel.class.php" />
         <option value="$PROJECT_DIR$/app/Models/Model.class.php" />
         <option value="$PROJECT_DIR$/app/Controllers/UserController.class.php" />
         <option value="$PROJECT_DIR$/app/Functions/utils.php" />
+        <option value="$PROJECT_DIR$/app/Views/Templates/modals.php" />
+        <option value="$PROJECT_DIR$/app/Views/Emails/reset_password.php" />
+        <option value="$PROJECT_DIR$/app/Views/Emails/signup.php" />
+        <option value="$PROJECT_DIR$/config/routes.php" />
+        <option value="$PROJECT_DIR$/app/Views/Templates/navbar.php" />
+        <option value="$PROJECT_DIR$/public/assets/js/form.js" />
       </list>
     </option>
   </component>
@@ -278,6 +281,13 @@
               <item name="camagru" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Emails" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="camagru" type="b2602c69:ProjectViewProjectNode" />
+              <item name="camagru" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Views" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -353,12 +363,12 @@
       <workItem from="1516469342616" duration="1545000" />
       <workItem from="1516473369359" duration="7160000" />
       <workItem from="1516537605044" duration="3509000" />
-      <workItem from="1516549512507" duration="4551000" />
+      <workItem from="1516549512507" duration="5215000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37252000" />
+    <option name="totallyTimeSpent" value="37916000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -394,13 +404,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Views/Index/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="14" lean-forward="false" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Views/Templates/head.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -509,13 +512,6 @@
         <state relative-caret-position="195">
           <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Views/Emails/signup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="90" lean-forward="false" selection-start-line="0" selection-start-column="90" selection-end-line="0" selection-end-column="90" />
         </state>
       </provider>
     </entry>
@@ -689,14 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="63" lean-forward="true" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -713,37 +701,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Views/Templates/navbar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="53" column="98" lean-forward="false" selection-start-line="53" selection-start-column="98" selection-end-line="53" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/js/modals.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="41" lean-forward="false" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Views/Templates/modals.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="32" column="44" lean-forward="false" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#section#0;n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#section#0;n#form#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="79" column="57" lean-forward="false" selection-start-line="79" selection-start-column="56" selection-end-line="79" selection-end-column="57" />
           <folding />
         </state>
       </provider>
@@ -776,6 +737,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Functions/utils.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="524">
@@ -786,10 +755,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Functions/utils.php">
+    <entry file="file://$PROJECT_DIR$/app/Views/Templates/modals.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
+        <state relative-caret-position="750">
+          <caret line="50" column="84" lean-forward="true" selection-start-line="50" selection-start-column="84" selection-end-line="50" selection-end-column="84" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#section#0;n#form#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#section#0;n#form#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#section#0;n#form#0;n#div#0;n#div#1;n#div#2;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Views/Emails/reset_password.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Views/Emails/signup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Views/Templates/navbar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="51" lean-forward="true" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+          <folding>
+            <element signature="e#1863#1869#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/form.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="69" column="29" lean-forward="true" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
           <folding />
         </state>
       </provider>

@@ -15,6 +15,7 @@ $dispatcher->addRoute('GET', '/user/reset-password/{token:[0-9a-f-]+}', \Control
 $dispatcher->addRoute('POST', '/user/reset-password/{token:[0-9a-f-]+}', \Controllers\UserController::class, 'resetPassword');
 
 $dispatcher->addRoute('GET', '/user', \Controllers\UserController::class, 'profile');
+$dispatcher->addRoute('GET', '/user/profile', \Controllers\UserController::class, 'profile');
 $dispatcher->addRoute('POST', '/user/edit', \Controllers\UserController::class, 'edit');
 $dispatcher->addRoute('POST', '/user/edit-password', \Controllers\UserController::class, 'editPassword');
 $dispatcher->addRoute('POST', '/user/edit-settings', \Controllers\UserController::class, 'editSettings');
