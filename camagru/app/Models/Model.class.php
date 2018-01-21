@@ -48,8 +48,11 @@ class Model
     {
         if (!isset($data['conditions']))
             return '';
-        return ' WHERE ' . implode(' AND ', array_map(function ($field) {
-            return "$field=?";
+        return ' WHERE ' . implode(' AND ', array_map(function ($field) use ($data) {
+            if ($data['conditions'][$field] !== NULL)
+                return "$field=?";
+            else
+                return "$field IS NULL";
         }, array_keys($data['conditions'])));
     }
 
@@ -102,7 +105,9 @@ class Model
             $fields = implode(',', $data['fields']);
         $values = [];
         if (isset($data['conditions']))
-            $values = array_values($data['conditions']);
+            $values = array_values(array_filter($data['conditions'], function ($value) {
+                return ($value !== NULL);
+            }));
 
         $query = "SELECT $fields FROM " . self::getTableName();
         $query .= self::_makeWhereQuery($data);

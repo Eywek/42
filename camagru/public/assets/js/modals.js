@@ -5,6 +5,10 @@ for (var i = 0; i < modalsButtons.length; i++) {
         var button = this;
         var modalSelector = button.getAttribute('href');
         var modal = document.querySelector(modalSelector);
+        var linksToOthersModals = modal.querySelectorAll('a.toggle-modal');
+
+        for (var j = 0; j < linksToOthersModals.length; j++)
+            setModalCloseEvent(linksToOthersModals[j], modal);
 
         modal.classList.add('active');
         setTimeout(function () {
@@ -13,12 +17,13 @@ for (var i = 0; i < modalsButtons.length; i++) {
     })
 }
 
-function setModalCloseEvent(element)
+function setModalCloseEvent(element, modal)
 {
     element.addEventListener('click', function (e) {
         e.preventDefault();
         var btn = this;
-        var modal = btn.parentElement;
+        if (!modal)
+            modal = btn.parentElement;
 
         modal.style.opacity = '0';
         setTimeout(function () {

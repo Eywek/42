@@ -46,12 +46,12 @@
                 <div class="navbar-item">
                     <div class="field is-grouped">
                         <p class="control">
-                            <a href="#loginModal" class="bd-tw-button button is-link toggle-modal">
+                            <a href="#signinModal" class="bd-tw-button button is-link toggle-modal">
                                 <span>Se connecter</span>
                             </a>
                         </p>
                         <p class="control">
-                            <a class="bd-tw-button button is-info">
+                            <a href="#signupModal" class="bd-tw-button button is-info toggle-modal">
                                 <span>S'inscrire</span>
                             </a>
                         </p>

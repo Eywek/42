@@ -128,28 +128,29 @@ function serialize(form)
                     case 'text':
                     case 'hidden':
                     case 'password':
+                    case 'email':
                     case 'submit':
-                        data[form.elements[i].name] = encodeURIComponent(form.elements[i].value);
+                        data[form.elements[i].name] = (form.elements[i].value);
                         break;
                     case 'checkbox':
                     case 'radio':
                         if (form.elements[i].checked)
-                            data[form.elements[i].name] = encodeURIComponent(form.elements[i].value);
+                            data[form.elements[i].name] = (form.elements[i].value);
                         break;
                 }
                 break;
             case 'TEXTAREA': // TEXTAREA
-                data[form.elements[i].name] = encodeURIComponent(form.elements[i].value);
+                data[form.elements[i].name] = (form.elements[i].value);
                 break;
             case 'SELECT': // SELECTS
                 switch (form.elements[i].type) {
                     case 'select-one':
-                        data[form.elements[i].name] = encodeURIComponent(form.elements[i].value);
+                        data[form.elements[i].name] = (form.elements[i].value);
                         break;
                     case 'select-multiple': // Multiple select
                         for (var j = form.elements[i].options.length - 1; j >= 0; j = j - 1) {
                             if (form.elements[i].options[j].selected) {
-                                data[form.elements[i].name] = encodeURIComponent(form.elements[i].options[j].value);
+                                data[form.elements[i].name] = (form.elements[i].options[j].value);
                             }
                         }
                         break;
