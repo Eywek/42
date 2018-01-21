@@ -9,7 +9,7 @@
     </div>
 </section>
 <section class="section">
-    <div class="container">
+    <div class="container posts-list" data-current-post-index="<?= count($posts) ?>">
 
         <?php foreach ($posts as $post): ?>
 
