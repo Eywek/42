@@ -108,15 +108,15 @@ class UserController
 
     public function resetPassword(Request $req, Response $res)
     {
-        $findToken = UsersTokenModel::findFirst(['fields' => ['id'], 'conditions' => ['token' => $req->token, 'type' => 'RESET_PW']]);
+        $findToken = UsersTokenModel::findFirst(['fields' => ['id', 'user_id'], 'conditions' => ['token' => $req->token, 'type' => 'RESET_PW']]);
         if (!$findToken)
             throw new \Routing\NotFoundException();
-        if ($req->getMethod() !== 'POST')
-            return $res->view('User/reset_password', ['title' => 'Rénitialiser son mot de passe']);
-        // Validate
         $user = $findToken->getUser();
         if (!$user)
             throw new \Routing\NotFoundException();
+        if ($req->getMethod() !== 'POST')
+            return $res->view('User/reset_password', ['title' => 'Rénitialiser son mot de passe', 'user' => $user]);
+        // Validate
         if (!$user->validate($req->getData(), ['password']))
             return $res->sendJSON(['status' => false, 'error' => $user->getValidationError()]);
         if (!isset($req->getData()['password_confirmation']) || $req->getData()['password'] !== $req->getData()['password_confirmation'])
