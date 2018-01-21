@@ -5,3 +5,8 @@
 .navbar-brand a {
     font-size: 33px;
 }
+
+.card {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}

@@ -36,8 +36,8 @@
       <file leaf-file-name="PostController.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Controllers/PostController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="32" column="32" lean-forward="true" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+            <state relative-caret-position="1043">
+              <caret line="93" column="10" lean-forward="true" selection-start-line="93" selection-start-column="10" selection-end-line="93" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -55,11 +55,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="UserModel.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/UserModel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Views/Index/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+            <state relative-caret-position="1057">
+              <caret line="77" column="129" lean-forward="true" selection-start-line="77" selection-start-column="63" selection-end-line="77" selection-end-column="129" />
               <folding>
                 <element signature="e#1189#1195#0#HTML" expanded="true" />
                 <element signature="e#1391#1397#0#HTML" expanded="true" />
@@ -68,22 +78,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserModel.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/UserModel.class.php">
+      <file leaf-file-name="posts.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/js/posts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+            <state relative-caret-position="525">
+              <caret line="35" column="49" lean-forward="false" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="posts.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/assets/js/posts.js">
+      <file leaf-file-name="custom.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/css/custom.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="55" lean-forward="false" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+            <state relative-caret-position="150">
+              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Model.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Models/Model.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1027">
+              <caret line="108" column="22" lean-forward="false" selection-start-line="108" selection-start-column="22" selection-end-line="108" selection-end-column="22" />
+              <folding>
+                <marker date="1516572149435" expanded="true" signature="1261:1337" ph="INSERT INTO ${self::getTableName()}... " />
+                <marker date="1516572149435" expanded="true" signature="4244:4264" ph="SELECT ${$fi... ${self::getTableName()}" />
+                <marker date="1516572149435" expanded="true" signature="5682:5694" ph="DELETE FROM " />
+                <marker date="1516572149435" expanded="true" signature="7102:7168" ph="SELECT `id` ${self::getTableName()}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -91,37 +116,9 @@
       <file leaf-file-name="PostModel.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/PostModel.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Model.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/Model.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="107" column="14" lean-forward="false" selection-start-line="107" selection-start-column="14" selection-end-line="107" selection-end-column="14" />
-              <folding>
-                <marker date="1516568493020" expanded="true" signature="1227:1303" ph="INSERT INTO ${self::getTableName()}... " />
-                <marker date="1516568493020" expanded="true" signature="4036:4056" ph="SELECT ${$fi... ${self::getTableName()}" />
-                <marker date="1516568493020" expanded="true" signature="5474:5486" ph="DELETE FROM " />
-                <marker date="1516568493020" expanded="true" signature="6894:6960" ph="SELECT `id` ${self::getTableName()}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="navbar.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Views/Templates/navbar.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="47" lean-forward="false" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-              <folding>
-                <element signature="e#699#705#0#HTML" expanded="true" />
-                <element signature="e#705#711#0#HTML" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -177,7 +174,6 @@
         <option value="$PROJECT_DIR$/app/Models/UsersSettingModel.class.php" />
         <option value="$PROJECT_DIR$/app/Routing/ForbiddenException.class.php" />
         <option value="$PROJECT_DIR$/app/Routing/BadRequestException.class.php" />
-        <option value="$PROJECT_DIR$/app/Models/PostModel.class.php" />
         <option value="$PROJECT_DIR$/app/Models/PostsCommentModel.class.php" />
         <option value="$PROJECT_DIR$/app/Models/PostsLikeModel.class.php" />
         <option value="$PROJECT_DIR$/app/Models/Database.class.php" />
@@ -205,13 +201,14 @@
         <option value="$PROJECT_DIR$/public/assets/css/custom.html" />
         <option value="$PROJECT_DIR$/app/Views/Templates/head.php" />
         <option value="$PROJECT_DIR$/app/Views/Templates/footer.php" />
-        <option value="$PROJECT_DIR$/public/assets/css/custom.css" />
         <option value="$PROJECT_DIR$/app/Controllers/IndexController.class.php" />
-        <option value="$PROJECT_DIR$/app/Models/Model.class.php" />
-        <option value="$PROJECT_DIR$/app/Models/UserModel.class.php" />
-        <option value="$PROJECT_DIR$/app/Views/Index/index.php" />
+        <option value="$PROJECT_DIR$/public/assets/css/custom.css" />
         <option value="$PROJECT_DIR$/app/Controllers/PostController.class.php" />
         <option value="$PROJECT_DIR$/public/assets/js/posts.js" />
+        <option value="$PROJECT_DIR$/app/Views/Index/index.php" />
+        <option value="$PROJECT_DIR$/app/Models/UserModel.class.php" />
+        <option value="$PROJECT_DIR$/app/Models/PostModel.class.php" />
+        <option value="$PROJECT_DIR$/app/Models/Model.class.php" />
       </list>
     </option>
   </component>
@@ -400,12 +397,12 @@
       <workItem from="1516469342616" duration="1545000" />
       <workItem from="1516473369359" duration="7160000" />
       <workItem from="1516537605044" duration="3509000" />
-      <workItem from="1516549512507" duration="11997000" />
+      <workItem from="1516549512507" duration="13869000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44698000" />
+    <option name="totallyTimeSpent" value="46570000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -762,14 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/css/custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Views/Templates/navbar.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -801,24 +790,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/PostModel.class.php">
+    <entry file="file://$PROJECT_DIR$/config/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="270">
+          <caret line="18" column="46" lean-forward="true" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Model.class.php">
+    <entry file="file://$PROJECT_DIR$/app/Controllers/PostController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="107" column="14" lean-forward="false" selection-start-line="107" selection-start-column="14" selection-end-line="107" selection-end-column="14" />
-          <folding>
-            <marker date="1516568493020" expanded="true" signature="1227:1303" ph="INSERT INTO ${self::getTableName()}... " />
-            <marker date="1516568493020" expanded="true" signature="4036:4056" ph="SELECT ${$fi... ${self::getTableName()}" />
-            <marker date="1516568493020" expanded="true" signature="5474:5486" ph="DELETE FROM " />
-            <marker date="1516568493020" expanded="true" signature="6894:6960" ph="SELECT `id` ${self::getTableName()}" />
-          </folding>
+        <state relative-caret-position="1043">
+          <caret line="93" column="10" lean-forward="true" selection-start-line="93" selection-start-column="10" selection-end-line="93" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -832,26 +816,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="46" lean-forward="true" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/UserModel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Views/Index/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        <state relative-caret-position="1057">
+          <caret line="77" column="129" lean-forward="true" selection-start-line="77" selection-start-column="63" selection-end-line="77" selection-end-column="129" />
           <folding>
             <element signature="e#1189#1195#0#HTML" expanded="true" />
             <element signature="e#1391#1397#0#HTML" expanded="true" />
@@ -859,19 +827,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/PostController.class.php">
+    <entry file="file://$PROJECT_DIR$/public/assets/js/posts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="32" column="32" lean-forward="true" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+        <state relative-caret-position="525">
+          <caret line="35" column="49" lean-forward="false" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/posts.js">
+    <entry file="file://$PROJECT_DIR$/app/Models/UserModel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="55" lean-forward="false" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+        <state relative-caret-position="225">
+          <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/PostModel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Model.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1027">
+          <caret line="108" column="22" lean-forward="false" selection-start-line="108" selection-start-column="22" selection-end-line="108" selection-end-column="22" />
+          <folding>
+            <marker date="1516572149435" expanded="true" signature="1261:1337" ph="INSERT INTO ${self::getTableName()}... " />
+            <marker date="1516572149435" expanded="true" signature="4244:4264" ph="SELECT ${$fi... ${self::getTableName()}" />
+            <marker date="1516572149435" expanded="true" signature="5682:5694" ph="DELETE FROM " />
+            <marker date="1516572149435" expanded="true" signature="7102:7168" ph="SELECT `id` ${self::getTableName()}" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -6,6 +6,7 @@ class Model
 {
 
     protected $_fields = [];
+    static protected $_from = [];
     private $_validationError = NULL;
 
     static public function getTableNameFrom($model, $plural = true)
@@ -102,7 +103,10 @@ class Model
             }
             foreach ($data['from'] as $model) {
                 $modelJoinName = self::_generateModelJoinName($model, 'ModelModels\\');
-                $results[$key]->$modelJoinName = $model::find(['conditions' => ['id' => $result->{self::getTableNameFrom($model,false) . "_id"}]]);
+                $params = ['conditions' => ['id' => $result->{self::getTableNameFrom($model,false) . "_id"}]];
+                if (isset(get_called_class()::$_from[$model]))
+                    $params['fields'] = get_called_class()::$_from[$model];
+                $results[$key]->$modelJoinName = $model::find($params);
             }
         }
         return $results;

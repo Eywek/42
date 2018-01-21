@@ -93,8 +93,11 @@ class PostController extends Controller
             'from' => [UserModel::class]
         ];
         if ($req->limit)
-            $params['limit'] = $req->limit . (($req->offset) ? ',' . $req->offset : '');
+            $params['limit'] = (($req->offset) ? $req->offset . ',' : '') . $req->limit;
         $posts = PostModel::find($params);
+        if (UserModel::isLogged())
+            foreach ($posts as $key => $post)
+                $posts[$key]->hasLiked = UserModel::hasLike($post);
         return $res->sendJSON(['status' => true, 'data' => ['posts' => $posts, 'count' => count($posts)]]);
     }
 

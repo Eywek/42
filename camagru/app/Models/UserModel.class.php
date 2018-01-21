@@ -44,6 +44,8 @@ class UserModel extends Model
 
     static public function hasLike(PostModel $post)
     {
+        if (!self::isLogged())
+            return false;
         foreach ($post->likes as $like)
             if ($like->user_id === self::getCurrent()->id)
                 return true;

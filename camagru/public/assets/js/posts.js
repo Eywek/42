@@ -30,4 +30,28 @@ function onLikePost(e)
 window.onload = function ()
 {
     initPostEventListeners();
+
+    sendGETRequest(ROOT_URL + 'posts/limit/10/5', function (posts) {
+        console.log(posts);
+        console.log(getPostHtml(posts.data.posts[0]));
+    });
 };
+
+/*
+    INFINITE SCROLL
+ */
+
+function getPostHtml(post)
+{
+    var html = document.querySelector('#post-template').innerHTML;
+    html = html.replace(new RegExp('{POST_ID}', 'g'), post.id);
+    html = html.replace('{TITLE}', post.title);
+    html = html.replace('{USERNAME}', post.users[0].username);
+    html = html.replace('{LIKES_COUNT}', post.likes.length);
+    html = html.replace('{COMMENTS_COUNT}', post.comments.length);
+    html = html.replace('{LIKE_STATE}', post.hasLiked ? '1' : '0');
+    html = html.replace('{LIKE_TEXT}', post.hasLiked ? "Je n'aime plus" : "J'aime");
+    html = html.replace('{CREATED_AT}', post.created_at);
+
+    return html;
+}
