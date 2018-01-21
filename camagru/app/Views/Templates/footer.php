@@ -14,6 +14,7 @@
 
         <script type="application/javascript" src="<?= $this->url('/assets/js/navbar.js') ?>"></script>
         <script type="application/javascript" src="<?= $this->url('/assets/js/modals.js') ?>"></script>
+        <script type="application/javascript" src="<?= $this->url('/assets/js/form.js') ?>"></script>
 
     </body>
 </html>

@@ -24,7 +24,7 @@ require APP_PATH . 'Core' . DS . 'Autoloader.class.php';
 \Core\Autoloader::register();
 
 // HANDLE REQUEST
-$dispatcher = new \Routing\Dispatcher(new \Routing\Request($_GET['path'] ?? '/', $_SERVER['REQUEST_METHOD'], $_POST), new \Routing\Response());
+$dispatcher = new \Routing\Dispatcher(new \Routing\Request($_GET['path'] ?? '/', $_SERVER['REQUEST_METHOD'], @json_decode(@file_get_contents('php://input'), true)), new \Routing\Response());
 
 $dispatcher->addErrorHandler(404, function (\Routing\Request $req) {
    echo $req->getPath() . ' not found!';

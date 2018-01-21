@@ -5,7 +5,6 @@ namespace Controllers;
 use Models\UserModel;
 use Models\UsersSettingModel;
 use Models\UsersTokenModel;
-use Routing\ForbiddenException;
 use Routing\Request;
 use Routing\Response;
 use Routing\View;
