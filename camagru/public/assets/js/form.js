@@ -65,6 +65,8 @@ function handleForm(form)
                 displayResponseAlert(res.success, true, form);
             else
                 displayResponseAlert(res.error, false, form);
+            if (res.redirect)
+                document.location = redirect;
         }, function (error) {
             console.error(error);
             displayResponseAlert('Une erreur interne est survenue', false, form);

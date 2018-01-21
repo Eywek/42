@@ -26,7 +26,7 @@ class UserController
 
         // Success
         $findUser->login();
-        return $res->sendJSON(['status' => true, 'success' => 'Vous vous êtes bien connecté !']);
+        return $res->sendJSON(['status' => true, 'success' => 'Vous vous êtes bien connecté !', 'redirect' => \url('/')]);
     }
 
     public function validEmail(Request $req, Response $res)
