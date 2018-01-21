@@ -169,19 +169,22 @@ class Model
         }
     }
 
-    public function validate(array $data = [], array $requireds = NULL)
+    public function validate(array $data = [], array $requireds = NULL, $uniqueBypassIds = [])
     {
         foreach ($this->_fields as $name => $types) {
+            if ($requireds !== NULL && !in_array($name, $requireds))
+                continue;
             foreach (explode(':', $types) as $type) {
-                list($type, $value) = explode('=', $type);
+                if (strpos($type, '='))
+                    list($type, $value) = explode('=', $type);
 
                 switch ($type) {
                     case 'required':
-                        if ((!isset($data[$name]) || empty($data[$name])) && ($requireds === NULL || in_array($name, $requireds)))
+                        if ((!isset($data[$name]) || empty($data[$name])))
                             return $this->_setValidationError("Le champ $name ne peut pas être vide.");
                         break;
                     case 'unique':
-                        if (!empty(self::find(['conditions' => [$name => $data[$name]]])))
+                        if (!empty(Database::query('SELECT `id` FROM `' . self::getTableName() . "` WHERE `$name` = ? ". ($uniqueBypassIds ? "AND `id` NOT IN (" . implode(', ', $uniqueBypassIds) .")" : ''), [$data[$name]])))
                             return $this->_setValidationError("La valeur du champ $name est déjà utilisée.");
                         break;
                     case 'email':

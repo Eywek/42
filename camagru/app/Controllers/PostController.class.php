@@ -68,6 +68,8 @@ class PostController extends Controller
             'content' => \sanitize($req->getData()['content'])
         ]);
 
+        // todo: send email to user
+
         return $res->sendJSON(['status' => true, 'success' => 'Le commentaire a été ajouté']);
     }
 

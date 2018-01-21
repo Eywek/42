@@ -112,7 +112,7 @@ class UserController
         if (!$findToken)
             throw new \Routing\NotFoundException();
         if ($req->getMethod() !== 'POST')
-            return NULL;
+            return $res->view('User/reset_password', ['title' => 'Rénitialiser son mot de passe']);
         // Validate
         $user = $findToken->getUser();
         if (!$user)
@@ -156,8 +156,8 @@ class UserController
         if (!UserModel::isLogged())
             throw new \Routing\ForbiddenException();
         // Validate
-        $user = new UserModel();
-        if (!$user->validate($req->getData(), ['username', 'email']))
+        $user = UserModel::getCurrent();
+        if (!$user->validate($req->getData(), ['username', 'email'], [$user->id]))
             return $res->sendJSON(['status' => false, 'error' => $user->getValidationError()]);
 
         // Update data
@@ -177,7 +177,7 @@ class UserController
 
         UsersSettingModel::update([
             'email_notifications' => intval($req->getData()['email_notifications'])
-        ], ['user_id' => UserModel::getCurrent()['id']]);
+        ], ['user_id' => UserModel::getCurrent()->id]);
 
         return $res->sendJSON(['status' => true, 'success' => 'Vos préférences ont bien été sauvegardées !']);
     }
@@ -186,7 +186,9 @@ class UserController
     {
         if (!UserModel::isLogged())
             $res->redirect('/');
-        $res->view('User/profile', ['user' => UserModel::getCurrent()]);
+        $user = UserModel::getCurrent();
+        $user->settings = UsersSettingModel::findFirst(['conditions' => ['user_id' => $user->id]]);
+        return $res->view('User/profile', ['user' => $user, 'title' => $user->username]);
     }
 
 }
