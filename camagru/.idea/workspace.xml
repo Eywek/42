@@ -11,16 +11,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="head.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Views/Templates/head.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -34,10 +24,19 @@
       <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="89" column="88" lean-forward="false" selection-start-line="89" selection-start-column="88" selection-end-line="89" selection-end-column="88" />
+            <state relative-caret-position="105">
+              <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
               <folding>
-                <element signature="e#31#52#0#PHP" expanded="true" />
+                <element signature="e#201#1184#0#PHP" expanded="false" />
+                <element signature="e#1190#1624#0#PHP" expanded="false" />
+                <element signature="e#1630#3018#0#PHP" expanded="false" />
+                <element signature="e#3024#3144#0#PHP" expanded="false" />
+                <element signature="e#3150#4224#0#PHP" expanded="false" />
+                <element signature="e#4230#5539#0#PHP" expanded="false" />
+                <element signature="e#5545#6388#0#PHP" expanded="false" />
+                <element signature="e#6394#7070#0#PHP" expanded="false" />
+                <element signature="e#7076#7637#0#PHP" expanded="false" />
+                <element signature="e#7643#8007#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -53,7 +52,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reset_password.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="reset_password.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Views/User/reset_password.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
@@ -101,11 +100,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostController.class.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PostController.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Controllers/PostController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="70" column="35" lean-forward="false" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+            <state relative-caret-position="270">
+              <caret line="53" column="55" lean-forward="true" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+              <folding>
+                <element signature="e#347#903#0#PHP" expanded="false" />
+                <element signature="e#909#1469#0#PHP" expanded="false" />
+                <element signature="e#3015#3502#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new_comment.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Views/Emails/new_comment.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -151,7 +164,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/Core/Autoloader.class.php" />
         <option value="$PROJECT_DIR$/lib/Routing/Response.class.php" />
         <option value="$PROJECT_DIR$/lib/Routing/Request.class.php" />
         <option value="$PROJECT_DIR$/lib/App/Controller.class.php" />
@@ -196,12 +208,13 @@
         <option value="$PROJECT_DIR$/public/assets/js/form.js" />
         <option value="$PROJECT_DIR$/app/Controllers/IndexController.class.php" />
         <option value="$PROJECT_DIR$/app/Views/Templates/head.php" />
-        <option value="$PROJECT_DIR$/app/Controllers/PostController.class.php" />
         <option value="$PROJECT_DIR$/app/Views/User/profile.php" />
         <option value="$PROJECT_DIR$/app/Models/Model.class.php" />
         <option value="$PROJECT_DIR$/app/Controllers/UserController.class.php" />
         <option value="$PROJECT_DIR$/app/Models/UsersTokenModel.class.php" />
         <option value="$PROJECT_DIR$/app/Views/User/reset_password.php" />
+        <option value="$PROJECT_DIR$/app/Controllers/PostController.class.php" />
+        <option value="$PROJECT_DIR$/app/Views/Emails/new_comment.php" />
       </list>
     </option>
   </component>
@@ -382,12 +395,12 @@
       <workItem from="1516469342616" duration="1545000" />
       <workItem from="1516473369359" duration="7160000" />
       <workItem from="1516537605044" duration="3509000" />
-      <workItem from="1516549512507" duration="8197000" />
+      <workItem from="1516549512507" duration="8663000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40898000" />
+    <option name="totallyTimeSpent" value="41364000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -419,18 +432,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Views/Templates/footer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Routing/View.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -758,14 +765,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/PostController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="70" column="35" lean-forward="false" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Routing/ForbiddenException.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -818,16 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="89" column="88" lean-forward="false" selection-start-line="89" selection-start-column="88" selection-end-line="89" selection-end-column="88" />
-          <folding>
-            <element signature="e#31#52#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Views/User/reset_password.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -835,6 +824,45 @@
           <folding>
             <element signature="e#492#519#0#HTML" expanded="true" />
             <marker date="1516561152617" expanded="false" signature="1350:1356" ph=" " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding>
+            <element signature="e#201#1184#0#PHP" expanded="false" />
+            <element signature="e#1190#1624#0#PHP" expanded="false" />
+            <element signature="e#1630#3018#0#PHP" expanded="false" />
+            <element signature="e#3024#3144#0#PHP" expanded="false" />
+            <element signature="e#3150#4224#0#PHP" expanded="false" />
+            <element signature="e#4230#5539#0#PHP" expanded="false" />
+            <element signature="e#5545#6388#0#PHP" expanded="false" />
+            <element signature="e#6394#7070#0#PHP" expanded="false" />
+            <element signature="e#7076#7637#0#PHP" expanded="false" />
+            <element signature="e#7643#8007#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Views/Emails/new_comment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controllers/PostController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="53" column="55" lean-forward="true" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+          <folding>
+            <element signature="e#347#903#0#PHP" expanded="false" />
+            <element signature="e#909#1469#0#PHP" expanded="false" />
+            <element signature="e#3015#3502#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>

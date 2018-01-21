@@ -6,8 +6,10 @@ use Models\PostModel;
 use Models\PostsCommentModel;
 use Models\PostsLikeModel;
 use Models\UserModel;
+use Models\UsersSettingModel;
 use Routing\Request;
 use Routing\Response;
+use Routing\View;
 
 class PostController extends Controller
 {
@@ -53,7 +55,7 @@ class PostController extends Controller
     {
         if (!UserModel::isLogged())
             throw new \Routing\ForbiddenException();
-        $findPost = PostModel::findFirst(['fields' => ['id'], 'conditions' => ['id' => $req->id]]);
+        $findPost = PostModel::findFirst(['fields' => ['id', 'title', 'user_id'], 'conditions' => ['id' => $req->id]]);
         if (!$findPost)
             throw new \Routing\NotFoundException();
         // Validate
@@ -68,7 +70,14 @@ class PostController extends Controller
             'content' => \sanitize($req->getData()['content'])
         ]);
 
-        // todo: send email to user
+        $postAuthorSettings = UsersSettingModel::findFirst(['fields' => ['email_notifications'], 'conditions' => ['user_id' => $findPost->user_id]]);
+        $authorEmail = UsersSettingModel::findFirst(['fields' => ['email'], 'conditions' => ['id' => $findPost->user_id]]);
+        if ($postAuthorSettings && $postAuthorSettings->email_notifications && $authorEmail)
+            \sendMail($authorEmail->email, "Commentaire sur votre publication", new View('Emails/new_comment', [
+                'author' => UserModel::getCurrent()->username,
+                'date' => date('Y-m-d H:i:s'),
+                'title' => $findPost->title
+            ]));
 
         return $res->sendJSON(['status' => true, 'success' => 'Le commentaire a été ajouté']);
     }
