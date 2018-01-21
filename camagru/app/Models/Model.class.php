@@ -80,19 +80,29 @@ class Model
         return ' LIMIT ' . $data['limit'];
     }
 
-    static private function _generateModelJoinName($model)
+    static private function _generateModelJoinName($model, $prefix = false)
     {
-        $name = substr($model, strlen(\toPlural(get_called_class())) - strlen('Model'), -strlen('Model'));
+        if ($prefix === false)
+            $prefix = \toPlural(get_called_class());
+        $name = substr($model, strlen($prefix) - strlen('Model'), -strlen('Model'));
         $name = strtolower(\toPlural($name));
         return $name;
     }
 
     static private function _getJoinData($results, array $data)
     {
+        if (!isset($data['join']))
+            $data['join'] = [];
+        if (!isset($data['from']))
+            $data['from'] = [];
         foreach ($results as $key => $result) {
             foreach ($data['join'] as $model) {
                 $modelJoinName = self::_generateModelJoinName($model);
                 $results[$key]->$modelJoinName = $model::find(['conditions' => [self::getTableName(false) . '_id' => $result->id]]);
+            }
+            foreach ($data['from'] as $model) {
+                $modelJoinName = self::_generateModelJoinName($model, 'ModelModels\\');
+                $results[$key]->$modelJoinName = $model::find(['conditions' => ['id' => $result->{self::getTableNameFrom($model,false) . "_id"}]]);
             }
         }
         return $results;
@@ -114,7 +124,7 @@ class Model
         $query .= self::_makeGroupQuery($data);
         $query .= self::_makeOrderQuery($data);
         $query .= self::_makeLimitQuery($data);
-        if (!isset($data['join']))
+        if (!isset($data['join']) && !isset($data['from']))
             return Database::query($query, $values, true, get_called_class());
         else
             return self::_getJoinData(Database::query($query, $values, true, get_called_class()), $data);

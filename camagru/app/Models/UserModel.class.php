@@ -13,6 +13,8 @@ class UserModel extends Model
         'password' => 'required:password'
     ];
 
+    static private $_currentUser;
+
     public function login()
     {
         if (!isset($this->id))
@@ -30,11 +32,22 @@ class UserModel extends Model
     {
         if (!isset($_SESSION['user']))
             return false;
+        if (self::$_currentUser)
+            return self::$_currentUser;
         // Find user
         $findUser = self::findFirst(['conditions' => ['id' => $_SESSION['user']]]);
         if (!$findUser)
             return false;
+        self::$_currentUser = $findUser;
         return $findUser;
+    }
+
+    static public function hasLike(PostModel $post)
+    {
+        foreach ($post->likes as $like)
+            if ($like->user_id === self::getCurrent()->id)
+                return true;
+        return false;
     }
 
 }

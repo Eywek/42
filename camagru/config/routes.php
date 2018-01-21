@@ -14,8 +14,7 @@ $dispatcher->addRoute('POST', '/user/lost-password', \Controllers\UserController
 $dispatcher->addRoute('GET', '/user/reset-password/{token:[0-9a-f-]+}', \Controllers\UserController::class, 'resetPassword');
 $dispatcher->addRoute('POST', '/user/reset-password/{token:[0-9a-f-]+}', \Controllers\UserController::class, 'resetPassword');
 
-$dispatcher->addRoute('GET', '/user', \Controllers\UserController::class, 'profile');
-$dispatcher->addRoute('GET', '/user/profile', \Controllers\UserController::class, 'profile');
+$dispatcher->addRoute('GET', '/account', \Controllers\UserController::class, 'profile');
 $dispatcher->addRoute('POST', '/user/edit', \Controllers\UserController::class, 'edit');
 $dispatcher->addRoute('POST', '/user/edit-password', \Controllers\UserController::class, 'editPassword');
 $dispatcher->addRoute('POST', '/user/edit-settings', \Controllers\UserController::class, 'editSettings');
@@ -28,4 +27,5 @@ $dispatcher->addRoute('GET', '/posts/limit/{limit:[0-9]+}{slash:/?}{offset:([0-9
 $dispatcher->addRoute('POST', '/posts/{id:[0-9]+}/like', \Controllers\PostController::class, 'like');
 $dispatcher->addRoute('POST', '/posts/{id:[0-9]+}/unlike', \Controllers\PostController::class, 'unlike');
 $dispatcher->addRoute('POST', '/posts/{id:[0-9]+}/comment', \Controllers\PostController::class, 'comment');
-$dispatcher->addRoute('POST', '/posts', \Controllers\PostController::class, 'post');
+$dispatcher->addRoute('GET', '/post', \Controllers\PostController::class, 'post');
+$dispatcher->addRoute('POST', '/post', \Controllers\PostController::class, 'post');

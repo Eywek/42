@@ -26,10 +26,13 @@ class PostController extends Controller
         $findPost = PostModel::findFirst(['fields' => ['id'], 'conditions' => ['id' => $req->id]]);
         if (!$findPost)
             throw new \Routing\NotFoundException();
+        $findLikeWithThisUser = PostsLikeModel::findFirst(['fields' => ['id'], 'conditions' => ['post_id' => $req->id, 'user_id' => UserModel::getCurrent()->id]]);
+        if (!empty($findLikeWithThisUser))
+            throw new \Routing\BadRequestException();
 
         PostsLikeModel::create([
             'post_id' => $findPost->id,
-            'user_id' => UserModel::getCurrent()['id']
+            'user_id' => UserModel::getCurrent()->id
         ]);
 
         return $res->sendJSON(['status' => true, 'success' => 'Le like a été ajouté']);
@@ -45,7 +48,7 @@ class PostController extends Controller
 
         PostsLikeModel::delete([
             'post_id' => $findPost->id,
-            'user_id' => UserModel::getCurrent()['id']
+            'user_id' => UserModel::getCurrent()->id
         ]);
 
         return $res->sendJSON(['status' => true, 'success' => 'Le like a été supprimé']);
@@ -66,7 +69,7 @@ class PostController extends Controller
         // Save
         PostsCommentModel::create([
             'post_id' => $findPost->id,
-            'user_id' => UserModel::getCurrent()['id'],
+            'user_id' => UserModel::getCurrent()->id,
             'content' => \sanitize($req->getData()['content'])
         ]);
 
@@ -86,7 +89,8 @@ class PostController extends Controller
     {
         $params = [
             'order' => ['`posts`.`created_at`' => 'DESC'],
-            'join' => [PostsCommentModel::class, PostsLikeModel::class]
+            'join' => [PostsCommentModel::class, PostsLikeModel::class],
+            'from' => [UserModel::class]
         ];
         if ($req->limit)
             $params['limit'] = $req->limit . (($req->offset) ? ',' . $req->offset : '');

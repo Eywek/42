@@ -15,30 +15,11 @@
         <div class="navbar-menu" id="navbar">
             <div class="navbar-start">
 
-                <a class="navbar-item" href="<?= $this->url('/') ?>">
-                    Home
-                </a>
-
-                <div class="navbar-item has-dropdown">
-                    <a class="navbar-link">
-                        Docs
+                <div class="navbar-item">
+                    <a class="button is-primary" href="<?= $this->url('/post') ?>">
+                        <i class="fa fa-plus"></i>&nbsp;&nbsp;
+                        Poster une image
                     </a>
-
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                            Overview
-                        </a>
-                        <a class="navbar-item">
-                            Elements
-                        </a>
-                        <a class="navbar-item">
-                            Components
-                        </a>
-                        <hr class="navbar-divider">
-                        <div class="navbar-item">
-                            Version 0.6.2
-                        </div>
-                    </div>
                 </div>
 
             </div>
@@ -47,8 +28,8 @@
                     <div class="field is-grouped">
                         <?php if (\Models\UserModel::isLogged()): ?>
                             <p class="control">
-                                <a href="<?= $this->url('/user/profile') ?>" class="bd-tw-button button is-link">
-                                    <span><i class="fa fa-user"></i> &nbsp;Mon profil</span>
+                                <a href="<?= $this->url('/account') ?>" class="bd-tw-button button is-link">
+                                    <span><i class="fa fa-user"></i> &nbsp;Mon compte</span>
                                 </a>
                             </p>
                             <p class="control">
