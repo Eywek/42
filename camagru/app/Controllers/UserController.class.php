@@ -31,7 +31,7 @@ class UserController
 
     public function validEmail(Request $req, Response $res)
     {
-        $findToken = UsersTokenModel::findFirst(['fields' => ['id'], 'conditions' => ['token' => $req->token, 'type' => 'EMAIL']]);
+        $findToken = UsersTokenModel::findFirst(['fields' => ['id'], 'conditions' => ['token' => $req->token, 'type' => 'EMAIL', 'used_at' => NULL]]);
         if (!$findToken)
             throw new \Routing\NotFoundException();
 

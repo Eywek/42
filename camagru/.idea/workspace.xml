@@ -74,16 +74,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="footer.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Views/Templates/footer.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="82" lean-forward="false" selection-start-line="16" selection-start-column="82" selection-end-line="16" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -94,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="123" lean-forward="false" selection-start-line="23" selection-start-column="123" selection-end-line="23" selection-end-column="123" />
+            <state relative-caret-position="449">
+              <caret line="34" column="24" lean-forward="true" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
               <folding>
                 <element signature="e#31#52#0#PHP" expanded="true" />
               </folding>
@@ -106,16 +96,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Model.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Model.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/Model.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1019">
-              <caret line="116" column="31" lean-forward="false" selection-start-line="116" selection-start-column="31" selection-end-line="116" selection-end-column="31" />
+            <state relative-caret-position="536">
+              <caret line="140" column="14" lean-forward="false" selection-start-line="140" selection-start-column="14" selection-end-line="140" selection-end-column="14" />
               <folding>
-                <marker date="1516555992554" expanded="true" signature="1227:1303" ph="INSERT INTO ${self::getTableName()}... " />
-                <marker date="1516555992554" expanded="true" signature="3525:3545" ph="SELECT ${$fi... ${self::getTableName()}" />
-                <marker date="1516555992554" expanded="true" signature="4938:4950" ph="DELETE FROM " />
+                <marker date="1516556484790" expanded="true" signature="1227:1303" ph="INSERT INTO ${self::getTableName()}... " />
+                <marker date="1516556484790" expanded="true" signature="3525:3545" ph="SELECT ${$fi... ${self::getTableName()}" />
+                <marker date="1516556484790" expanded="true" signature="4938:4950" ph="DELETE FROM " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UsersTokenModel.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/UsersTokenModel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -168,7 +168,6 @@
         <option value="$PROJECT_DIR$/app/Controllers/Controller.class.php" />
         <option value="$PROJECT_DIR$/app/Models/UsersSetting.class.php" />
         <option value="$PROJECT_DIR$/app/Models/UsersSettingModel.class.php" />
-        <option value="$PROJECT_DIR$/app/Models/UsersTokenModel.class.php" />
         <option value="$PROJECT_DIR$/app/Routing/ForbiddenException.class.php" />
         <option value="$PROJECT_DIR$/app/Routing/BadRequestException.class.php" />
         <option value="$PROJECT_DIR$/app/Models/PostModel.class.php" />
@@ -192,8 +191,9 @@
         <option value="$PROJECT_DIR$/app/Views/Templates/modals.php" />
         <option value="$PROJECT_DIR$/public/assets/js/modals.js" />
         <option value="$PROJECT_DIR$/public/assets/js/form.js" />
-        <option value="$PROJECT_DIR$/app/Controllers/UserController.class.php" />
+        <option value="$PROJECT_DIR$/app/Models/UsersTokenModel.class.php" />
         <option value="$PROJECT_DIR$/app/Models/Model.class.php" />
+        <option value="$PROJECT_DIR$/app/Controllers/UserController.class.php" />
       </list>
     </option>
   </component>
@@ -353,12 +353,12 @@
       <workItem from="1516469342616" duration="1545000" />
       <workItem from="1516473369359" duration="7160000" />
       <workItem from="1516537605044" duration="3509000" />
-      <workItem from="1516549512507" duration="3516000" />
+      <workItem from="1516549512507" duration="3977000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36217000" />
+    <option name="totallyTimeSpent" value="36678000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -539,14 +539,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/UsersTokenModel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="6" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="13" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -772,24 +764,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
+    <entry file="file://$PROJECT_DIR$/app/Models/UsersTokenModel.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="123" lean-forward="false" selection-start-line="23" selection-start-column="123" selection-end-line="23" selection-end-column="123" />
-          <folding>
-            <element signature="e#31#52#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="195">
+          <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Model.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1019">
-          <caret line="116" column="31" lean-forward="false" selection-start-line="116" selection-start-column="31" selection-end-line="116" selection-end-column="31" />
+        <state relative-caret-position="536">
+          <caret line="140" column="14" lean-forward="false" selection-start-line="140" selection-start-column="14" selection-end-line="140" selection-end-column="14" />
           <folding>
-            <marker date="1516555992554" expanded="true" signature="1227:1303" ph="INSERT INTO ${self::getTableName()}... " />
-            <marker date="1516555992554" expanded="true" signature="3525:3545" ph="SELECT ${$fi... ${self::getTableName()}" />
-            <marker date="1516555992554" expanded="true" signature="4938:4950" ph="DELETE FROM " />
+            <marker date="1516556484790" expanded="true" signature="1227:1303" ph="INSERT INTO ${self::getTableName()}... " />
+            <marker date="1516556484790" expanded="true" signature="3525:3545" ph="SELECT ${$fi... ${self::getTableName()}" />
+            <marker date="1516556484790" expanded="true" signature="4938:4950" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="34" column="24" lean-forward="true" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+          <folding>
+            <element signature="e#31#52#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

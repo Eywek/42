@@ -10,7 +10,8 @@ class UsersTokenModel extends Model
     protected $_fields = [
         'user_id' => 'required',
         'type' => 'required',
-        'token' => 'required'
+        'token' => 'required',
+        'used_at' => ''
     ];
 
     static public function generate($type, $userId)

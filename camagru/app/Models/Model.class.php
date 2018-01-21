@@ -157,7 +157,8 @@ class Model
     {
         $vars = [];
         foreach ($this->_fields as $name => $type)
-            $vars[$name] = $this->{$name};
+            if (isset($this->{$name}))
+                $vars[$name] = $this->{$name};
         if (isset($this->id)) {
             self::update($vars, ['id' => $this->id]);
             return $this;
