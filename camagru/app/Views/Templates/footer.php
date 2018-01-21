@@ -1,3 +1,5 @@
+        <?= $this->template('modals') ?>
+
         <footer class="footer">
             <div class="container">
                 <div class="content has-text-centered">
@@ -11,6 +13,7 @@
         </footer>
 
         <script type="application/javascript" src="<?= $this->url('/assets/js/navbar.js') ?>"></script>
+        <script type="application/javascript" src="<?= $this->url('/assets/js/modals.js') ?>"></script>
 
     </body>
 </html>

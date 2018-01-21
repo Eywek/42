@@ -1,0 +1,16 @@
+.modal {
+    opacity: 0;
+    transition: opacity 0.5s;
+
+    align-items: center;
+}
+
+.modal.active {
+    display: flex;
+    transition: opacity 0.5s;
+}
+
+.modal .modal-card-foot .button.is-pulled-right {
+    position: absolute;
+    right: 20px;
+}
