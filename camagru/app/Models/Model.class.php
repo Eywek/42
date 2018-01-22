@@ -7,6 +7,7 @@ class Model
 
     protected $_fields = [];
     static protected $_from = [];
+    static protected $_fromDefault = false;
     private $_validationError = NULL;
 
     static public function getTableNameFrom($model, $plural = true)
@@ -95,7 +96,10 @@ class Model
         if (!isset($data['join']))
             $data['join'] = [];
         if (!isset($data['from']))
-            $data['from'] = [];
+            if (get_called_class()::$_fromDefault)
+                $data['from'] = array_keys(get_called_class()::$_from);
+            else
+                $data['from'] = [];
         foreach ($results as $key => $result) {
             foreach ($data['join'] as $model) {
                 $modelJoinName = self::_generateModelJoinName($model);
@@ -128,7 +132,7 @@ class Model
         $query .= self::_makeGroupQuery($data);
         $query .= self::_makeOrderQuery($data);
         $query .= self::_makeLimitQuery($data);
-        if (!isset($data['join']) && !isset($data['from']))
+        if (!isset($data['join']) && !get_called_class()::$_fromDefault && !isset($data['from']))
             return Database::query($query, $values, true, get_called_class());
         else
             return self::_getJoinData(Database::query($query, $values, true, get_called_class()), $data);
@@ -158,12 +162,13 @@ class Model
     static public function delete(array $data)
     {
         $values = [];
+        if (!empty($data))
+            $data['conditions'] = $data;
         if (isset($data['conditions']))
             $values = array_values($data['conditions']);
 
         $query = "DELETE FROM " . self::getTableName();
         $query .= self::_makeWhereQuery($data);
-        $query .= self::_makeLimitQuery($data);
         return Database::query($query, $values, false);
     }
 

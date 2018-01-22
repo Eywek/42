@@ -49,6 +49,7 @@ function handleForm(form)
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         var button = form.querySelector('button[type="submit"]');
+        var callback = form.getAttribute('data-ajax-callback');
 
         // Disable button
         button.classList.add('is-loading');
@@ -67,6 +68,8 @@ function handleForm(form)
                 displayResponseAlert(res.error, false, form);
             if (res.redirect)
                 document.location = res.redirect;
+            if (res.status && callback)
+                window[callback](data, res);
         }, function (error) {
             console.error(error);
             displayResponseAlert('Une erreur interne est survenue', false, form);

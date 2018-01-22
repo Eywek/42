@@ -1,9 +1,38 @@
 function initPostEventListeners()
 {
+    // Like
     var likeButtons = document.querySelectorAll('.like-post');
     for (var i = 0; i < likeButtons.length; i++) {
         likeButtons[i].removeEventListener('click', onLikePost);
         likeButtons[i].addEventListener('click', onLikePost);
+    }
+
+    // Comment button
+    var commentsButtons = document.querySelectorAll('.see-post-comments');
+    for (i = 0; i < commentsButtons.length; i++) {
+        commentsButtons[i].removeEventListener('click', onSeeComment);
+        commentsButtons[i].addEventListener('click', onSeeComment);
+    }
+
+    // Post a comment
+}
+
+function onSeeComment(e) {
+    e.preventDefault();
+    var button = this;
+    var postId = button.getAttribute('data-post-id');
+    var postColum = document.querySelector('.post-column[data-post-id="' + postId + '"]');
+    var postCommentsColumn = document.querySelector('.post-comments-column[data-post-id="' + postId + '"]');
+    var isActive = postCommentsColumn.classList.contains('active');
+
+    if (!isActive) {
+        postColum.classList.add('is-three-quarters');
+        postCommentsColumn.classList.add('active');
+        button.innerHTML = 'Cacher les commentaires';
+    } else {
+        postColum.classList.remove('is-three-quarters');
+        postCommentsColumn.classList.remove('active');
+        button.innerHTML = 'Afficher les commentaires';
     }
 }
 
@@ -25,6 +54,32 @@ function onLikePost(e)
         likeCount.innerHTML = parseInt(likeCount.innerHTML) + 1;
     }
     button.setAttribute('data-state', (state ? '0' : '1'))
+}
+
+function getCommentHtml(comment)
+{
+    var commentHtml = document.querySelector('#comment-template').innerHTML;
+
+    commentHtml = commentHtml.replace('{CONTENT}', comment.content);
+    var date = new Date(comment.created_at);
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    var dateText = date.getHours() + 'h' + date.getMinutes() + ' - ' + date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
+    commentHtml = commentHtml.replace('{DATE}', dateText);
+    return commentHtml;
+}
+
+function afterPostComment(req, res)
+{
+    res.data.comment.created_at = new Date();
+    var message = document.querySelector('.post-comments-column[data-post-id="' + res.data.post.id + '"] .comment-card .card-content .message');
+
+    if (message)
+        message.remove();
+    document.querySelector('.post-comments-column[data-post-id="' + res.data.post.id + '"] .comment-card .card-content').innerHTML += getCommentHtml(res.data.comment);
+    document.querySelector('.post-comments-column[data-post-id="' + res.data.post.id + '"] .ajax-msg').innerHTML = '';
+    document.querySelector('.post-comments-column[data-post-id="' + res.data.post.id + '"] textarea[name="content"]').value = '';
 }
 
 window.onload = function ()
@@ -51,8 +106,20 @@ function getPostHtml(post)
     var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
-    var dateText = date.getHours() + 'h' + date.getMinutes() + ' - ' + date.getDay() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
+    var dateText = date.getHours() + 'h' + date.getMinutes() + ' - ' + date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
     html = html.replace('{CREATED_AT}', dateText);
+
+    // comments
+    var comments = '';
+    for (var i = 0; i < post.comments.length; i++)
+        comments += getCommentHtml(post.comments[i]);
+    if (post.comments.length === 0)
+        comments = '<article class="message is-danger">\n' +
+                '<div class="message-body">' +
+                    'Aucun commentaire pour le moment\n' +
+                '</div>\n' +
+            '</article>';
+    html = html.replace('{COMMENTS}', comments);
 
     return html;
 }
@@ -120,6 +187,10 @@ var infiniteLoad = debounce(function () {
             for (var i = 0; i < posts.length; i++)
                 list.innerHTML += getPostHtml(posts[i]);
             initPostEventListeners();
+
+            var forms = document.querySelectorAll('form[data-ajax]');
+            for (i = 0; i < forms.length; i++)
+                handleForm(forms[i]);
         });
     }
 }, 250);

@@ -10,3 +10,44 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+.comment-card .card-footer {
+    padding: 10px;
+    display: block;
+}
+
+.post-comments-column {
+    display: none;
+}
+
+.post-comments-column.active {
+    display: block;
+}
+
+.comment {
+    margin-top: 10px;
+    position: relative;
+}
+
+.comment .head {
+    font-weight: bold;
+}
+
+.comment .head span {
+    position: absolute;
+    top: 2px;
+    left: 40px;
+}
+
+.comment .head span.date {
+    right: 0;
+    font-weight: 200;
+    font-style: italic;
+    left: inherit;
+    font-size: small;
+}
+
+.comment .head img {
+    border-radius: 50%;
+    width: 30px;
+}

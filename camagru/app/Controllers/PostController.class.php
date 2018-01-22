@@ -82,7 +82,14 @@ class PostController extends Controller
                 'title' => $findPost->title
             ]));
 
-        return $res->sendJSON(['status' => true, 'success' => 'Le commentaire a été ajouté']);
+        return $res->sendJSON(['status' => true, 'success' => 'Le commentaire a été ajouté', 'data' => [
+            'comment' => [
+                'content' => \sanitize($req->getData()['content'])
+            ],
+            'post' => [
+                'id' => $findPost->id
+            ]
+        ]]);
     }
 
     public function get(Request $req, Response $res)
