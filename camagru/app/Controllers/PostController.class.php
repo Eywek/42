@@ -36,8 +36,8 @@ class PostController extends Controller
             return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image valide.']);
 
         // Merge with mask
-        $maskPath = PUBLIC_PATH . 'img' . DS . 'masks' . DS . $req->getData()['mask'];
-        if (!file_exists(PUBLIC_PATH . 'img' . DS . 'masks' . DS . $req->getData()['mask']))
+        $maskPath = PUBLIC_PATH . 'assets' . DS . 'img' . DS . 'masks' . DS . $req->getData()['mask'] . '.png';
+        if (!file_exists($maskPath))
             return $res->sendJSON(['status' => false, 'error' => 'Veuillez rafraichir la page et réessayer.']);
         if (!($result = \mergeImage($img, \imagecreatefromstring(file_get_contents($maskPath)))))
             return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image valide.']);
@@ -48,7 +48,7 @@ class PostController extends Controller
         $post->save();
 
         // Save file
-        file_put_contents(PUBLIC_PATH . 'img' . DS . 'uploads' . DS . 'post-' . $post->id . '.png', $result);
+        file_put_contents(PUBLIC_PATH . 'assets' . DS . 'img' . DS . 'uploads' . DS . 'post-' . $post->id . '.png', $result);
 
         // Success
         return $res->sendJSON(['status' => true, 'success' => 'Le post à bien été ajouté', 'data' => [
@@ -64,13 +64,13 @@ class PostController extends Controller
         if (!UserModel::isLogged())
             throw new \Routing\ForbiddenException();
         if (empty(PostModel::findFirst(['conditions' => [
-            'post_id' => $req->id,
+            'id' => $req->id,
             'user_id' => UserModel::getCurrent()->id
         ]])))
             throw new \Routing\NotFoundException();
 
         PostModel::delete([
-            'post_id' => $req->id,
+            'id' => $req->id,
             'user_id' => UserModel::getCurrent()->id
         ]);
         PostsCommentModel::delete([
@@ -79,6 +79,7 @@ class PostController extends Controller
         PostsLikeModel::delete([
             'post_id' => $req->id
         ]);
+        unlink(PUBLIC_PATH . 'assets' . DS . 'img' . DS . 'uploads' . DS . 'post-' . $req->id . '.png');
 
         return $res->sendJSON(['status' => true, 'success' => 'Le post a bien été supprimé']);
     }
