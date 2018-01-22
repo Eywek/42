@@ -85,9 +85,14 @@ document.querySelector('#takePicture').addEventListener('click', function(e) {
     var mask = document.querySelector('#mask');
     if (!mask.getAttribute('mask-id'))
         return false;
+    var button = this;
     var video = document.querySelector('#webcamVideo video');
     var canvas = document.querySelector('#webcamResult');
     var data;
+
+    button.classList.add('is-loading');
+    document.querySelector('input[name="title"]').disabled = true;
+    document.querySelector('input[name="title"]').parentNode.classList.add('is-loading');
 
     if (video) {
         canvas.width = video.videoWidth;
@@ -113,11 +118,31 @@ document.querySelector('#takePicture').addEventListener('click', function(e) {
 
             history.insertBefore(element.firstChild, history.childNodes[0]);
             initDeleteEvent();
+            button.classList.remove('is-loading');
+            document.querySelector('input[name="title"]').disabled = false;
+            document.querySelector('input[name="title"]').parentNode.classList.remove('is-loading');
+            document.querySelector('input[name="title"]').value = '';
+            document.querySelector('#chooseCaptureType').style.display = 'block';
+            document.querySelector('#capture').style.display = 'none';
+            document.querySelector('input[type="file"]').value = '';
+            document.querySelector('#webcamVideo').innerHTML = '<div id="mask"></div>\n' +
+                '                            <article class="message is-info">\n' +
+                '                                <div class="message-body">\n' +
+                '                                    Chargement en cours...\n' +
+                '                                </div>\n' +
+                '                            </article>\n' +
+                '                            <video style="display: none"></video>';
         } else {
             alert(res.error)
+            button.classList.remove('is-loading');
+            document.querySelector('input[name="title"]').disabled = false;
+            document.querySelector('input[name="title"]').parentNode.classList.remove('is-loading');
         }
     }, function (err) {
         alert('Une erreur est survenue lors de l\'envoie, veuillez réessayer.');
+        button.classList.remove('is-loading');
+        document.querySelector('input[name="title"]').disabled = false;
+        document.querySelector('input[name="title"]').parentNode.classList.remove('is-loading');
     })
 }, false);
 

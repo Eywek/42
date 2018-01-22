@@ -18,7 +18,7 @@ class PostController extends Controller
     {
         if (!UserModel::isLogged())
             throw new \Routing\ForbiddenException();
-        $this->set(['title' => 'Poster une publication', 'posts' => PostModel::find(['conditions' => ['user_id' => UserModel::getCurrent()->id]])]);
+        $this->set(['title' => 'Poster une publication', 'posts' => PostModel::find(['conditions' => ['user_id' => UserModel::getCurrent()->id], 'order' => ['id' => 'DESC']])]);
         if ($req->getMethod() !== 'POST')
             return NULL;
         // Validate title
