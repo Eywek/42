@@ -38,3 +38,31 @@ function url($path = '/')
         $currentUrl = substr($currentUrl, 0, -strlen(substr($currentUrl, strpos($currentUrl, '?path='))));
     return $currentUrl . '?path=' . $path;
 }
+
+function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct) {
+    $cut = imagecreatetruecolor($src_w, $src_h);
+    imagecopy($cut, $dst_im, 0, 0, $dst_x, $dst_y, $src_w, $src_h);
+    imagecopy($cut, $src_im, 0, 0, $src_x, $src_y, $src_w, $src_h);
+    imagecopymerge($dst_im, $cut, $dst_x, $dst_y, 0, 0, $src_w, $src_h, $pct);
+}
+
+function mergeImage($a, $b)
+{
+    // COPY
+    $b = imagescale($b, imagesx($a) / 4);
+    imagecopymerge_alpha($a, $b, imagesx($a) / 2 - imagesx($b) / 2, imagesy($a) / 100 * 10, 0, 0, imagesx($b), imagesy($b), 100);
+
+    // SAVE TO $a
+    imagesavealpha($a, true);
+
+    // SAVE OUTPUT
+    ob_start();
+    imagepng($a);
+    $result =  ob_get_contents();
+    ob_end_clean();
+
+    // DESTROY AND RETURN
+    imagedestroy($a);
+    imagedestroy($b);
+    return $result;
+}

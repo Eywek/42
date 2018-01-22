@@ -11,6 +11,11 @@
 <section class="section">
     <div class="container posts-list" data-current-post-index="<?= count($posts) ?>">
 
+        <?php if (empty($posts)): ?>
+            <div class="notification is-danger">
+                Personne n'a encore rien posté :(.
+            </div>
+        <?php endif; ?>
         <?php foreach ($posts as $post): ?>
 
             <div class="columns is-gapless">
@@ -19,7 +24,7 @@
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                                <img src="<?= $this->url('/assets/img/uploads/post-' . $post->id . '.png') ?>" alt="<?= $post->title ?>">
                             </figure>
                         </div>
                         <div class="card-content">
@@ -126,7 +131,7 @@
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                        <img src="<?= $this->url('/assets/img/uploads/post-{POST_ID}.png') ?>">
                     </figure>
                 </div>
                 <div class="card-content">

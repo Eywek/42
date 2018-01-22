@@ -14,9 +14,73 @@ use Routing\View;
 class PostController extends Controller
 {
 
-    public function post(Request $req, Response $res) // TODO
+    public function post(Request $req, Response $res)
     {
+        if (!UserModel::isLogged())
+            throw new \Routing\ForbiddenException();
+        $this->set(['title' => 'Poster une publication', 'posts' => PostModel::find(['conditions' => ['user_id' => UserModel::getCurrent()->id]])]);
+        if ($req->getMethod() !== 'POST')
+            return NULL;
+        // Validate title
+        $post = new PostModel();
+        if (!$post->validate(['title' => $req->getData()['title']]))
+            return $res->sendJSON(['status' => false, 'error' => $post->getValidationError()]);
+        // Validate image
+        $img = explode(',', $req->getData()['img']);
+        if (count($img) !== 2)
+            return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image valide.']);
+        $img = $img[1];
+        if (base64_decode($img) === false || base64_encode(base64_decode($img)) != $img)
+            return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image valide.']);
+        if (($img = \imagecreatefromstring(base64_decode($img))) === false)
+            return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image valide.']);
 
+        // Merge with mask
+        $maskPath = PUBLIC_PATH . 'img' . DS . 'masks' . DS . $req->getData()['mask'];
+        if (!file_exists(PUBLIC_PATH . 'img' . DS . 'masks' . DS . $req->getData()['mask']))
+            return $res->sendJSON(['status' => false, 'error' => 'Veuillez rafraichir la page et réessayer.']);
+        if (!($result = \mergeImage($img, \imagecreatefromstring(file_get_contents($maskPath)))))
+            return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image valide.']);
+
+        // Save post
+        $post->title = \sanitize($req->getData()['title']);
+        $post->user_id = UserModel::getCurrent()->id;
+        $post->save();
+
+        // Save file
+        file_put_contents(PUBLIC_PATH . 'img' . DS . 'uploads' . DS . 'post-' . $post->id . '.png', $result);
+
+        // Success
+        return $res->sendJSON(['status' => true, 'success' => 'Le post à bien été ajouté', 'data' => [
+            'post' => [
+                'id' => $post->id,
+                'url' => \url('/assets/img/uploads/post-' . $post->id . '.png')
+            ]
+        ]]);
+    }
+
+    public function delete(Request $req, Response $res)
+    {
+        if (!UserModel::isLogged())
+            throw new \Routing\ForbiddenException();
+        if (empty(PostModel::findFirst(['conditions' => [
+            'post_id' => $req->id,
+            'user_id' => UserModel::getCurrent()->id
+        ]])))
+            throw new \Routing\NotFoundException();
+
+        PostModel::delete([
+            'post_id' => $req->id,
+            'user_id' => UserModel::getCurrent()->id
+        ]);
+        PostsCommentModel::delete([
+            'post_id' => $req->id
+        ]);
+        PostsLikeModel::delete([
+            'post_id' => $req->id
+        ]);
+
+        return $res->sendJSON(['status' => true, 'success' => 'Le post a bien été supprimé']);
     }
 
     public function like(Request $req, Response $res)

@@ -51,3 +51,96 @@
     border-radius: 50%;
     width: 30px;
 }
+
+#chooseCaptureType button,
+#chooseCaptureType .file,
+#chooseCaptureType .file-label,
+#chooseCaptureType .file-cta {
+    width: 100%;
+}
+
+#filters {
+    text-align: center;
+}
+
+#filters figure {
+    display: inline-block!important;
+}
+
+figure {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#capture {
+    display: none;
+}
+
+#webcamVideo, #webcamVideo video {
+    width: 100%;
+    display: block;
+}
+
+#webcamResult {
+    display: none;
+}
+
+#webcamVideo {
+    position: relative;
+}
+
+#webcamVideo #mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.post-image {
+    position: relative;
+}
+
+.post-image:after {
+    content: 'x';
+    position: absolute;
+    color: #c0392b;
+    font-size: 100px;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    top: 20%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.post-image:before {
+    content: '';
+    background: #e74c3c;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.post-image:hover {
+    cursor: pointer;
+}
+.post-image:hover:after {
+    opacity: 1;
+}
+.post-image:hover:before {
+    opacity: 0.5;
+}
