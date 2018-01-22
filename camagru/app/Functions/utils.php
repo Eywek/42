@@ -51,8 +51,8 @@ function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, 
 function mergeImage($a, $b)
 {
     // COPY
-    $b = imagescale($b, imagesx($a) / 4);
-    imagecopymerge_alpha($a, $b, imagesx($a) / 2 - imagesx($b) / 2, imagesy($a) / 100 * 10, 0, 0, imagesx($b), imagesy($b), 100);
+    $b = imagescale($b, imagesx($a) / 2.6);
+    imagecopymerge_alpha($a, $b, imagesx($a) / 2 - imagesx($b) / 2, imagesy($a) / 2 - imagesy($b) / 2, 0, 0, imagesx($b), imagesy($b), 100);
 
     // SAVE TO $a
     imagesavealpha($a, true);

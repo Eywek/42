@@ -122,7 +122,7 @@ document.querySelector('#takePicture').addEventListener('click', function(e) {
             document.querySelector('input[name="title"]').disabled = false;
             document.querySelector('input[name="title"]').parentNode.classList.remove('is-loading');
             document.querySelector('input[name="title"]').value = '';
-            document.querySelector('#chooseCaptureType').style.display = 'block';
+            document.querySelector('#chooseCaptureType').style.display = 'flex';
             document.querySelector('#capture').style.display = 'none';
             document.querySelector('input[type="file"]').value = '';
             document.querySelector('#webcamVideo').innerHTML = '<div id="mask"></div>\n' +

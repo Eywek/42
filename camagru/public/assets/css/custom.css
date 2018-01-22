@@ -97,6 +97,7 @@ figure {
     right: 0;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 40% auto;
 }
 
 .post-image {
