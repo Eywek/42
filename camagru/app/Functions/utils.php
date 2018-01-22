@@ -34,8 +34,10 @@ function url($path = '/')
         $path = substr($path, 1);
     if (REWRITE_URL)
         return $currentUrl . $path;
-    if (strpos($currentUrl, '?path=') !== false)
-        $currentUrl = substr($currentUrl, 0, -strlen(substr($currentUrl, strpos($currentUrl, '?path='))));
+    if (strpos($currentUrl, '?path') !== false)
+        $currentUrl = substr($currentUrl, 0, strpos($currentUrl, '?path'));
+    if (strpos($path,'assets/') !== false)
+        return $currentUrl . 'public/' . $path;
     return $currentUrl . '?path=' . $path;
 }
 
