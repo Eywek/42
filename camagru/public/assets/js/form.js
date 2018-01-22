@@ -46,35 +46,39 @@ for (var i = 0; i < forms.length; i++)
 
 function handleForm(form)
 {
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var button = form.querySelector('button[type="submit"]');
-        var callback = form.getAttribute('data-ajax-callback');
+    form.removeEventListener('submit', onFormSubmit);
+    form.addEventListener('submit', onFormSubmit);
+}
 
-        // Disable button
-        button.classList.add('is-loading');
+function onFormSubmit (e) {
+    e.preventDefault();
+    var form = this;
+    var button = form.querySelector('button[type="submit"]');
+    var callback = form.getAttribute('data-ajax-callback');
 
-        // Get inputs
-        var data = serialize(form);
+    // Disable button
+    button.classList.add('is-loading');
 
-        // Disable inputs
-        editInputsState(form, false);
+    // Get inputs
+    var data = serialize(form);
 
-        // Request
-        ajax(form.getAttribute('method'), form.getAttribute('action'), data, function (res) {
-            if (res.status)
-                displayResponseAlert(res.success, true, form);
-            else
-                displayResponseAlert(res.error, false, form);
-            if (res.redirect)
-                document.location = res.redirect;
-            if (res.status && callback)
-                window[callback](data, res);
-        }, function (error) {
-            console.error(error);
-            displayResponseAlert('Une erreur interne est survenue', false, form);
-        });
-    })
+    // Disable inputs
+    editInputsState(form, false);
+
+    // Request
+    ajax(form.getAttribute('method'), form.getAttribute('action'), data, function (res) {
+        if (res.status)
+            displayResponseAlert(res.success, true, form);
+        else
+            displayResponseAlert(res.error, false, form);
+        if (res.redirect)
+            document.location = res.redirect;
+        if (res.status && callback)
+            window[callback](data, res);
+    }, function (error) {
+        console.error(error);
+        displayResponseAlert('Une erreur interne est survenue', false, form);
+    });
 }
 
 function displayResponseAlert(content, state, form)

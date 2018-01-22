@@ -138,7 +138,7 @@ class PostController extends Controller
         ]);
 
         $postAuthorSettings = UsersSettingModel::findFirst(['fields' => ['email_notifications'], 'conditions' => ['user_id' => $findPost->user_id]]);
-        $authorEmail = UsersSettingModel::findFirst(['fields' => ['email'], 'conditions' => ['id' => $findPost->user_id]]);
+        $authorEmail = UserModel::findFirst(['fields' => ['email'], 'conditions' => ['id' => $findPost->user_id]]);
         if ($postAuthorSettings && $postAuthorSettings->email_notifications && $authorEmail)
             \sendMail($authorEmail->email, "Commentaire sur votre publication", new View('Emails/new_comment', [
                 'author' => UserModel::getCurrent()->username,
