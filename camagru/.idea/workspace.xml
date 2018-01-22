@@ -11,12 +11,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="UserController.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-931">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="PostController.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Controllers/PostController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="945">
-              <caret line="141" column="14" lean-forward="false" selection-start-line="141" selection-start-column="14" selection-end-line="141" selection-end-column="14" />
+            <state relative-caret-position="285">
+              <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="email-head.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Views/Templates/email-head.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="200" column="29" lean-forward="true" selection-start-line="200" selection-start-column="29" selection-end-line="200" selection-end-column="29" />
+              <folding>
+                <element signature="e#8220#8226#1#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="email-footer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Views/Templates/email-footer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+              <folding>
+                <element signature="e#1059#1065#1#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -24,18 +58,18 @@
       <file leaf-file-name="signup.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Views/Emails/signup.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+            <state relative-caret-position="420">
+              <caret line="28" column="25" lean-forward="true" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reset_password.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="reset_password.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Views/Emails/reset_password.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="300">
+              <caret line="20" column="47" lean-forward="false" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -44,28 +78,18 @@
       <file leaf-file-name="new_comment.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Views/Emails/new_comment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="4" lean-forward="true" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+            <state relative-caret-position="30">
+              <caret line="2" column="48" lean-forward="false" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="form.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="form.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/assets/js/form.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="810">
               <caret line="54" column="20" lean-forward="false" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="utils.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Functions/utils.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="47" lean-forward="true" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -87,30 +111,6 @@
             <state relative-caret-position="300">
               <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Views/Post/post.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1027">
-              <caret line="87" column="106" lean-forward="true" selection-start-line="87" selection-start-column="46" selection-end-line="87" selection-end-column="106" />
-              <folding>
-                <element signature="e#2137#2158#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Views/Index/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="133" column="94" lean-forward="false" selection-start-line="133" selection-start-column="94" selection-end-line="133" selection-end-column="94" />
-              <folding>
-                <marker date="1516641794000" expanded="true" signature="1602:1651" ph="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -141,8 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Functions/debug.php" />
-        <option value="$PROJECT_DIR$/public/assets/js/navbar.js" />
         <option value="$PROJECT_DIR$/config/database.php" />
         <option value="$PROJECT_DIR$/app/Functions/hash.php" />
         <option value="$PROJECT_DIR$/app/Functions/security.php" />
@@ -165,12 +163,9 @@
         <option value="$PROJECT_DIR$/public/assets/css/modals.css" />
         <option value="$PROJECT_DIR$/public/assets/js/modals.js" />
         <option value="$PROJECT_DIR$/app/Views/Templates/modals.php" />
-        <option value="$PROJECT_DIR$/app/Views/Emails/reset_password.php" />
-        <option value="$PROJECT_DIR$/app/Views/Emails/signup.php" />
         <option value="$PROJECT_DIR$/app/Views/User/profile.php" />
         <option value="$PROJECT_DIR$/app/Models/UsersTokenModel.class.php" />
         <option value="$PROJECT_DIR$/app/Views/User/reset_password.php" />
-        <option value="$PROJECT_DIR$/app/Views/Emails/new_comment.php" />
         <option value="$PROJECT_DIR$/app/Views/Templates/navbar.php" />
         <option value="$PROJECT_DIR$/public/assets/css/custom.html" />
         <option value="$PROJECT_DIR$/app/Views/Templates/footer.php" />
@@ -192,6 +187,11 @@
         <option value="$PROJECT_DIR$/public/index.php" />
         <option value="$PROJECT_DIR$/app/Controllers/PostController.class.php" />
         <option value="$PROJECT_DIR$/public/assets/js/form.js" />
+        <option value="$PROJECT_DIR$/app/Views/Templates/email-footer.php" />
+        <option value="$PROJECT_DIR$/app/Views/Templates/email-head.php" />
+        <option value="$PROJECT_DIR$/app/Views/Emails/signup.php" />
+        <option value="$PROJECT_DIR$/app/Views/Emails/new_comment.php" />
+        <option value="$PROJECT_DIR$/app/Views/Emails/reset_password.php" />
       </list>
     </option>
   </component>
@@ -405,12 +405,12 @@
       <workItem from="1516473369359" duration="7160000" />
       <workItem from="1516537605044" duration="3509000" />
       <workItem from="1516549512507" duration="15588000" />
-      <workItem from="1516616796394" duration="15575000" />
+      <workItem from="1516616796394" duration="16329000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63864000" />
+    <option name="totallyTimeSpent" value="64618000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -448,22 +448,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Functions/debug.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="8" column="25" lean-forward="false" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="32" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Functions/hash.php" />
     <entry file="file://$PROJECT_DIR$/app/Functions/security.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -677,14 +661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="138" column="52" lean-forward="false" selection-start-line="137" selection-start-column="8" selection-end-line="138" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/img/uploads/empty">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -790,42 +766,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Controllers/PostController.class.php">
+    <entry file="file://$PROJECT_DIR$/public/assets/js/form.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="141" column="14" lean-forward="false" selection-start-line="141" selection-start-column="14" selection-end-line="141" selection-end-column="14" />
+        <state relative-caret-position="810">
+          <caret line="54" column="20" lean-forward="false" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Views/Templates/email-footer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="26" lean-forward="true" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+          <folding>
+            <element signature="e#1059#1065#1#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Views/Templates/email-head.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="200" column="29" lean-forward="true" selection-start-line="200" selection-start-column="29" selection-end-line="200" selection-end-column="29" />
+          <folding>
+            <element signature="e#8220#8226#1#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Views/Emails/signup.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+        <state relative-caret-position="420">
+          <caret line="28" column="25" lean-forward="true" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Views/Emails/reset_password.php">
+    <entry file="file://$PROJECT_DIR$/app/Controllers/UserController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="-931">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controllers/PostController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Views/Emails/new_comment.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="4" lean-forward="true" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+        <state relative-caret-position="30">
+          <caret line="2" column="48" lean-forward="false" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/js/form.js">
+    <entry file="file://$PROJECT_DIR$/app/Views/Emails/reset_password.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="54" column="20" lean-forward="false" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+        <state relative-caret-position="300">
+          <caret line="20" column="47" lean-forward="false" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
           <folding />
         </state>
       </provider>
