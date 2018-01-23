@@ -5,7 +5,7 @@ var express = require('express');
 var config = require('../config/config');
 var app = express();
 app.set('view engine', 'pug');
-app.set('views', './views')
+app.set('views', './views');
 
 /*
     ROUTES
@@ -55,6 +55,8 @@ app.post('/find', profileController.find);
 app.get('/view-match', profileController.viewMatch);
 
 // CHAT & NOTIFICATIONS
+var chatController = require('./controllers/ChatController');
+
 app.get('/{username}/chat', chatController.chat);
 
 /*
