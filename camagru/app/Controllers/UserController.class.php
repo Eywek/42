@@ -70,7 +70,7 @@ class UserController
             'username' => $user->username,
             'date' => date('Y-m-d H:i:s'),
             'ip' => getIP(),
-            'url' => '/user/valid-email/' . $token
+            'url' => \url('/user/valid-email/' . $token)
         ]));
 
         // Success message
@@ -138,7 +138,7 @@ class UserController
         if (!UserModel::isLogged())
             throw new \Routing\ForbiddenException();
         // Validate
-        $user = new UserModel();
+        $user = UserModel::getCurrent();
         if (!$user->validate($req->getData(), ['password']))
             return $res->sendJSON(['status' => false, 'error' => $user->getValidationError()]);
         if (!isset($req->getData()['password_confirmation']) || $req->getData()['password'] !== $req->getData()['password_confirmation'])

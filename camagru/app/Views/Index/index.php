@@ -44,12 +44,24 @@
                                 <time class="is-pulled-right"><?= date('H\hi - d M Y', strtotime($post->created_at)) ?></time>
                             </div>
                         </div>
-                        <?php if (\Models\UserModel::isLogged()): ?>
-                            <footer class="card-footer">
-                                <a href="#" class="card-footer-item see-post-comments" data-post-id="<?= $post->id ?>">Voir les commentaires</a>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item see-post-comments" data-post-id="<?= $post->id ?>">Voir les commentaires</a>
+                            <?php if (\Models\UserModel::isLogged()): ?>
                                 <a href="#" class="card-footer-item like-post" data-state="<?= \Models\UserModel::hasLike($post) ? '1' : '0' ?>" data-post-id="<?= $post->id ?>"><?= \Models\UserModel::hasLike($post) ? "Je n'aime plus" : "J'aime" ?></a>
-                            </footer>
-                        <?php endif; ?>
+                            <?php endif; ?>
+                            <a class="button is-info">
+                                <span class="icon">
+                                  <i class="fa fa-twitter"></i>
+                                </span>
+                                <span>Partager sur Twitter</span>
+                            </a>
+                            <a class="button is-primary">
+                                <span class="icon">
+                                  <i class="fa fa-facebook"></i>
+                                </span>
+                                <span>Partager sur Facebook</span>
+                            </a>
+                        </footer>
                     </div>
                 </div>
 
@@ -83,26 +95,28 @@
                                 </article>
                             <?php endif; ?>
                         </div>
-                        <footer class="card-footer">
-                            <form action="<?= $this->url('/posts/' . $post->id . '/comment') ?>" method="post" data-ajax data-ajax-callback="afterPostComment">
-                                <div class="ajax-msg" style="margin-bottom: 5px"></div>
+                        <?php if (\Models\UserModel::isLogged()): ?>
+                            <footer class="card-footer">
+                                <form action="<?= $this->url('/posts/' . $post->id . '/comment') ?>" method="post" data-ajax data-ajax-callback="afterPostComment">
+                                    <div class="ajax-msg" style="margin-bottom: 5px"></div>
 
-                                <div class="field">
-                                    <label class="label">Message</label>
-                                    <div class="control">
-                                        <textarea class="textarea" name="content" placeholder="Votre commentaire"></textarea>
+                                    <div class="field">
+                                        <label class="label">Message</label>
+                                        <div class="control">
+                                            <textarea class="textarea" name="content" placeholder="Votre commentaire"></textarea>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="field is-pulled-right">
-                                    <div class="control">
-                                        <button type="submit" class="button is-link">Commenter</button>
+                                    <div class="field is-pulled-right">
+                                        <div class="control">
+                                            <button type="submit" class="button is-link">Commenter</button>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </form>
-                            <div class="is-clearfix"></div>
-                        </footer>
+                                </form>
+                                <div class="is-clearfix"></div>
+                            </footer>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -151,12 +165,18 @@
                         <time class="is-pulled-right">{CREATED_AT}</time>
                     </div>
                 </div>
-                <?php if (\Models\UserModel::isLogged()): ?>
-                    <footer class="card-footer">
-                        <a href="#" class="card-footer-item see-post-comments" data-post-id="{POST_ID}">Voir les commentaires</a>
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item see-post-comments" data-post-id="{POST_ID}">Voir les commentaires</a>
+                    <?php if (\Models\UserModel::isLogged()): ?>
                         <a href="#" class="card-footer-item like-post" data-state="{LIKE_STATE}" data-post-id="{POST_ID}">{LIKE_TEXT}</a>
-                    </footer>
-                <?php endif; ?>
+                    <?php endif; ?>
+                    <a class="button is-primary">
+                        <span class="icon">
+                          <i class="fab fa-twitter"></i>
+                        </span>
+                        <span>Twitter</span>
+                    </a>
+                </footer>
             </div>
         </div>
 
@@ -170,26 +190,28 @@
                 <div class="card-content">
                     {COMMENTS}
                 </div>
-                <footer class="card-footer">
-                    <form action="<?= $this->url('/posts/{POST_ID}/comment') ?>" method="post" data-ajax data-ajax-callback="afterPostComment" data-ajax-id="{AJAX_ID}">
-                        <div class="ajax-msg" style="margin-bottom: 5px"></div>
+                <?php if (\Models\UserModel::isLogged()): ?>
+                    <footer class="card-footer">
+                        <form action="<?= $this->url('/posts/{POST_ID}/comment') ?>" method="post" data-ajax data-ajax-callback="afterPostComment" data-ajax-id="{AJAX_ID}">
+                            <div class="ajax-msg" style="margin-bottom: 5px"></div>
 
-                        <div class="field">
-                            <label class="label">Message</label>
-                            <div class="control">
-                                <textarea class="textarea" name="content" placeholder="Votre commentaire"></textarea>
+                            <div class="field">
+                                <label class="label">Message</label>
+                                <div class="control">
+                                    <textarea class="textarea" name="content" placeholder="Votre commentaire"></textarea>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="field is-pulled-right">
-                            <div class="control">
-                                <button type="submit" class="button is-link">Commenter</button>
+                            <div class="field is-pulled-right">
+                                <div class="control">
+                                    <button type="submit" class="button is-link">Commenter</button>
+                                </div>
                             </div>
-                        </div>
 
-                    </form>
-                    <div class="is-clearfix"></div>
-                </footer>
+                        </form>
+                        <div class="is-clearfix"></div>
+                    </footer>
+                <?php endif; ?>
             </div>
         </div>
 
