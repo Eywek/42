@@ -49,17 +49,15 @@
                             <?php if (\Models\UserModel::isLogged()): ?>
                                 <a href="#" class="card-footer-item like-post" data-state="<?= \Models\UserModel::hasLike($post) ? '1' : '0' ?>" data-post-id="<?= $post->id ?>"><?= \Models\UserModel::hasLike($post) ? "Je n'aime plus" : "J'aime" ?></a>
                             <?php endif; ?>
-                            <a class="button is-info">
+                            <a class="button is-info share">
                                 <span class="icon">
                                   <i class="fa fa-twitter"></i>
                                 </span>
-                                <span>Partager sur Twitter</span>
                             </a>
-                            <a class="button is-primary">
+                            <a class="button is-link share">
                                 <span class="icon">
                                   <i class="fa fa-facebook"></i>
                                 </span>
-                                <span>Partager sur Facebook</span>
                             </a>
                         </footer>
                     </div>
@@ -127,16 +125,18 @@
     </div>
 </section>
 <script type="text/html" id="comment-template">
-    <div class="comment">
-        <div class="head">
-            <img src="https://www.gravatar.com/avatar/<?= md5(\Models\UserModel::getCurrent()->email) ?>" alt="Gravatar">
-            <span><?= \Models\UserModel::getCurrent()->username ?></span>
-            <span class="date">{DATE}</span>
+    <?php if (\Models\UserModel::isLogged()): ?>
+        <div class="comment">
+            <div class="head">
+                <img src="https://www.gravatar.com/avatar/<?= md5(\Models\UserModel::getCurrent()->email) ?>" alt="Gravatar">
+                <span><?= \Models\UserModel::getCurrent()->username ?></span>
+                <span class="date">{DATE}</span>
+            </div>
+            <p>
+                {CONTENT}
+            </p>
         </div>
-        <p>
-            {CONTENT}
-        </p>
-    </div>
+    <?php endif; ?>
 </script>
 <script type="text/html" id="post-template">
     <div class="columns is-gapless">
@@ -170,11 +170,15 @@
                     <?php if (\Models\UserModel::isLogged()): ?>
                         <a href="#" class="card-footer-item like-post" data-state="{LIKE_STATE}" data-post-id="{POST_ID}">{LIKE_TEXT}</a>
                     <?php endif; ?>
-                    <a class="button is-primary">
+                    <a class="button is-info share">
                         <span class="icon">
-                          <i class="fab fa-twitter"></i>
+                          <i class="fa fa-twitter"></i>
                         </span>
-                        <span>Twitter</span>
+                    </a>
+                    <a class="button is-link share">
+                        <span class="icon">
+                          <i class="fa fa-facebook"></i>
+                        </span>
                     </a>
                 </footer>
             </div>

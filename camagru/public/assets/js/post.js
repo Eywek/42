@@ -132,6 +132,8 @@ document.querySelector('#takePicture').addEventListener('click', function(e) {
                 '                                </div>\n' +
                 '                            </article>\n' +
                 '                            <video style="display: none"></video>';
+            if (document.querySelector('#history .message.is-danger'))
+                document.querySelector('#history .message.is-danger').remove();
         } else {
             alert(res.error)
             button.classList.remove('is-loading');
