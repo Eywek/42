@@ -24,6 +24,11 @@ class Database
         self::$_credentials['password'] = $DB_PASSWORD;
     }
 
+    static public function getPDO()
+    {
+        return self::_getDatabase();
+    }
+
     static private function _getDatabase()
     {
         if (self::$_connection)

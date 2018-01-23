@@ -16,7 +16,7 @@
             <div class="navbar-start">
 
                 <div class="navbar-item">
-                    <a class="button is-primary" href="<?= $this->url('/post') ?>">
+                    <a class="button is-primary <?= \Models\UserModel::isLogged() ? '' : 'toggle-modal' ?>" href="<?= \Models\UserModel::isLogged() ? $this->url('/post') : '#signinModal' ?>">
                         <i class="fa fa-plus"></i>&nbsp;&nbsp;
                         Poster une image
                     </a>

@@ -23,4 +23,10 @@ class IndexController extends Controller
         $this->set(['title' => 'Accueil', 'posts' => $posts]);
     }
 
+    public function setup(Request $req, Response $res)
+    {
+        require CONFIG_PATH . 'setup.php';
+        exit();
+    }
+
 }

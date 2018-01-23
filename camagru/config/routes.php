@@ -1,6 +1,9 @@
 <?php
-$dispatcher->addRoute('GET', '/', \Controllers\IndexController::class);
 
+$dispatcher->addRoute('GET', '/config/setup.php', \Controllers\IndexController::class, 'setup');
+
+
+$dispatcher->addRoute('GET', '/', \Controllers\IndexController::class);
 
 /*
  * USERS
