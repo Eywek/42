@@ -49,14 +49,9 @@
                             <?php if (\Models\UserModel::isLogged()): ?>
                                 <a href="#" class="card-footer-item like-post" data-state="<?= \Models\UserModel::hasLike($post) ? '1' : '0' ?>" data-post-id="<?= $post->id ?>"><?= \Models\UserModel::hasLike($post) ? "Je n'aime plus" : "J'aime" ?></a>
                             <?php endif; ?>
-                            <a class="button is-info share">
+                            <a class="button is-info share" href="https://twitter.com/intent/tweet?hashtags=instagru&original_referer=<?= $this->url('/') ?>&ref_src=&related=&text=<?= $post->title ?>&tw_p=&url=<?= $this->url('/assets/img/uploads/post-' . $post->id . '.png') ?>">
                                 <span class="icon">
                                   <i class="fa fa-twitter"></i>
-                                </span>
-                            </a>
-                            <a class="button is-link share">
-                                <span class="icon">
-                                  <i class="fa fa-facebook"></i>
                                 </span>
                             </a>
                         </footer>
@@ -170,14 +165,9 @@
                     <?php if (\Models\UserModel::isLogged()): ?>
                         <a href="#" class="card-footer-item like-post" data-state="{LIKE_STATE}" data-post-id="{POST_ID}">{LIKE_TEXT}</a>
                     <?php endif; ?>
-                    <a class="button is-info share">
+                    <a class="button is-info share" href="https://twitter.com/intent/tweet?hashtags=instagru&original_referer=<?= $this->url('/') ?>&ref_src=&related=&text={TITLE}&tw_p=&url=<?= $this->url('/assets/img/uploads/post-{POST_ID}.png') ?>">
                         <span class="icon">
                           <i class="fa fa-twitter"></i>
-                        </span>
-                    </a>
-                    <a class="button is-link share">
-                        <span class="icon">
-                          <i class="fa fa-facebook"></i>
                         </span>
                     </a>
                 </footer>

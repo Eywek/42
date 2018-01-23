@@ -9,7 +9,7 @@
             <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>
-                        <p>Bonjour <b><?= $username ?></b>,</p>
+                        <p>Bonjour,</p>
                         <p>Un nouveau commentaire a été posté sur votre post <b><?= $title ?></b> par <b><?= $author ?></b>.</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                             <tbody>

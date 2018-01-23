@@ -70,6 +70,10 @@
                            <a class="add-mask" href="" id="doge"><img src="<?= $this->url('/assets/img/masks/doge.png') ?>"></a>
                        </figure>
 
+                       <figure class="image is-128x128">
+                           <a class="add-mask" href="" id="grumpycat"><img src="<?= $this->url('/assets/img/masks/grumpycat.png') ?>"></a>
+                       </figure>
+
                    </div>
 
                 </div>

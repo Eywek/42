@@ -99,11 +99,11 @@ class UserController
             'username' => $findUser->username,
             'date' => date('Y-m-d H:i:s'),
             'ip' => getIP(),
-            'url' => '/user/reset-password/' . $token
+            'url' => \url('/user/reset-password/' . $token)
         ]));
 
         // Success message
-        return $res->sendJSON(['status' => true, 'success' => 'Vous vous êtes bien inscris, vous avez reçu un mail de confirmation.']);
+        return $res->sendJSON(['status' => true, 'success' => 'Un email de rénitialisation vous a été envoyé.']);
     }
 
     public function resetPassword(Request $req, Response $res)

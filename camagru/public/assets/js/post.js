@@ -65,6 +65,10 @@ document.querySelector('input[type="file"]').addEventListener('change', function
 
     if (!input.files || !input.files[0] || (input.files[0].type).indexOf('image') === -1)
         return false;
+    if (input.files[0].size > 1000000) {// 1 Mo
+        alert('Veuillez fournir une image moins volumineuse.');
+        return false;
+    }
     var reader = new FileReader();
     reader.onload = function (e) {
         document.querySelector('#chooseCaptureType').style.display = 'none';

@@ -8,3 +8,13 @@ for (var i = 0; i < dropdowns.length; i++) {
             dropdown.classList.add('is-active')
     })
 }
+
+document.querySelector('.navbar-burger.burger').addEventListener('click', function (e) {
+    e.preventDefault();
+    var nav = document.querySelector('.navbar-menu#navbar');
+
+    if (window.getComputedStyle(nav).display === 'none')
+        nav.style.display = 'block';
+    else
+        nav.style.display = 'none';
+});

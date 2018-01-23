@@ -32,8 +32,12 @@ class PostController extends Controller
         $img = $img[1];
         if (base64_decode($img) === false || base64_encode(base64_decode($img)) != $img)
             return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image valide.']);
-        if (($img = \imagecreatefromstring(base64_decode($img))) === false)
-            return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image valide.']);
+        try {
+            if (($img = \imagecreatefromstring(base64_decode($img))) === false)
+                return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image valide.']);
+        } catch (\Exception $e) {
+            return $res->sendJSON(['status' => false, 'error' => 'Veuillez fournir une image moins volumineuse.']);
+        }
 
         // Merge with mask
         $maskPath = PUBLIC_PATH . 'assets' . DS . 'img' . DS . 'masks' . DS . $req->getData()['mask'] . '.png';
@@ -79,7 +83,7 @@ class PostController extends Controller
         PostsLikeModel::delete([
             'post_id' => $req->id
         ]);
-        unlink(PUBLIC_PATH . 'assets' . DS . 'img' . DS . 'uploads' . DS . 'post-' . $req->id . '.png');
+        @unlink(PUBLIC_PATH . 'assets' . DS . 'img' . DS . 'uploads' . DS . 'post-' . $req->id . '.png');
 
         return $res->sendJSON(['status' => true, 'success' => 'Le post a bien été supprimé']);
     }

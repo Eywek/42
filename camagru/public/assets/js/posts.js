@@ -96,6 +96,7 @@ function getPostHtml(post)
     var html = document.querySelector('#post-template').innerHTML;
     html = html.replace(new RegExp('{POST_ID}', 'g'), post.id);
     html = html.replace('{TITLE}', post.title);
+    html = html.replace('{TITLE}', post.title);
     html = html.replace('{USERNAME}', post.users[0].username);
     html = html.replace('{LIKES_COUNT}', post.likes.length);
     html = html.replace('{COMMENTS_COUNT}', post.comments.length);
