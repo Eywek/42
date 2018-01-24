@@ -59,9 +59,9 @@ var profileController = require('./controllers/ProfileController');
 var upload = multer({
     fileFilter: function (req, file, cb) {
         if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpeg')
-            cb(undefined, false);
+            return cb(undefined, false);
         if (file.originalname.indexOf('.png') === -1 && file.originalname.indexOf('.jpg') === -1 && file.originalname.indexOf('.jpeg') === -1)
-            cb(undefined, false);
+            return cb(undefined, false);
         cb(undefined, true);
     },
     limits: {
@@ -76,7 +76,7 @@ var upload = multer({
         }
     })
 });
-app.post('/account/add-photo', authMiddleware, function (req, res, next) {
+app.post('/account/photo', authMiddleware, function (req, res, next) {
     // Check if not 5 picture already saved
     require('./models/database').query('SELECT COUNT(`id`) AS `count` FROM `users_uploads` WHERE `user_id` = ?', [req.session.user], function (err, rows) {
         if (err) {
@@ -88,6 +88,8 @@ app.post('/account/add-photo', authMiddleware, function (req, res, next) {
         next();
     })
 }, upload.single('picture'), profileController.uploadPhoto);
+app.delete('/account/photo/:id', authMiddleware, profileController.deletePhoto);
+app.put('/account/photo/:id', authMiddleware, profileController.editPhoto);
 app.post('/account/bio', authMiddleware, profileController.updateBio);
 
 app.get('/:username', authMiddleware, profileController.profile);

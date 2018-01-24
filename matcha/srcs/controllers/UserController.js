@@ -100,7 +100,15 @@ module.exports = {
                 else
                     account = account[0];
 
-                res.render('User/account', {user: user, account: account, title: 'Mon compte'});
+                // Get photos
+                db.query('SELECT `id`, `name`, `is_profile_pic` FROM `users_uploads` WHERE `user_id` = ?', [user.id], function (err, photos) {
+                    if (err) {
+                        console.error(err);
+                        return res.sendStatus(500);
+                    }
+
+                    res.render('User/account', {user: user, account: account, title: 'Mon compte', photos: photos || []});
+                });
             });
         })
     },

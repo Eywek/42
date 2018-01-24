@@ -2,6 +2,26 @@ extends ../layout
 
 block style
     link(rel='stylesheet', href='/assets/css/bootstrap-tagsinput.css')
+    style.
+        .img-thumbnail {
+            margin: 5px;
+        }
+        .photo {
+            display: inline-block;
+            position: relative;
+        }
+        .photo a {
+            position: absolute;
+            top: -5px;
+            right: 0;
+        }
+        .photo a .badge {
+            padding: 10px 12px;
+        }
+        .photo a:nth-child(2) {
+            right: 40px;
+        }
+
 
 block content
     .jumbotron.jumbotron-fluid
@@ -94,7 +114,7 @@ block content
                                 textarea.form-control(name='biography', rows=4) #{account.biography}
                                 small.form-text.text-muted Fournissez une biographie courte et précise
                             .form-group
-                                label Liste d'intérês
+                                label Liste d'intérêts
                                 input.form-control(type='text', name='tags', data-role='tagsinput', value=account.tags)
 
                             button.btn.btn-primary(type='submit')
@@ -110,7 +130,7 @@ block content
                         h4 Mes photos
                         hr
 
-                        form(method='post', action='/account/add-photo', enctype='multipart/form-data' data-ajax)
+                        form(method='post', action='/account/photo', enctype='multipart/form-data' data-ajax, data-ajax-callback='afterPostPhoto')
 
                             .form-group
                                 label Envoyer une photo
@@ -122,6 +142,22 @@ block content
                                 i.fa.fa-share-square
                                 | &nbsp;&nbsp;Envoyer
 
+                        hr
+
+                        h5 Liste de mes photos
+
+                        .photos-list
+                            each photo in photos
+                                .photo
+                                    img.img-thumbnail(src='/uploads/pics/' + photo.name, width=300, height=300)
+                                    if !photo.is_profile_pic
+                                        a.set-profile-pic(href='', data-photo-id=photo.id, data-toggle='tooltip' data-placement='top' title='Enregistrer cette photo comme photo de profil')
+                                            span.badge.badge-pill.badge-primary
+                                                i.fa.fa-thumbtack
+                                    a.remove-pic(href='', data-photo-id=photo.id, data-toggle='tooltip' data-placement='top' title='Supprimer cette photo')
+                                        span.badge.badge-pill.badge-danger
+                                            i.fa.fa-eraser
+
 
 block scripts
     script(type='text/javascript', src='/assets/js/bootstrap-tagsinput.min.js')
@@ -129,3 +165,44 @@ block scripts
         $('input[type="file"]').on('change', function (e) {
             $(this).parent().find('.custom-file-label').html($(this).val());
         })
+        $('[data-toggle="tooltip"]').tooltip({
+            container: 'body'
+        })
+        function initPhotosEvents() {
+            $('.remove-pic').unbind('click');
+            $('.remove-pic').on('click', function (e) {
+                e.preventDefault();
+                var button = $(this);
+                var photoId = button.attr('data-photo-id');
+                var tooltipId = button.attr('aria-describedby');
+                $('#' + tooltipId).remove();
+                button.parent().remove();
+                $.ajax({
+                    method: 'DELETE',
+                    url: '/account/photo/' + photoId
+                })
+            });
+            $('.set-profile-pic').unbind('click');
+            $('.set-profile-pic').on('click', function (e) {
+                e.preventDefault();
+                var button = $(this);
+                var photoId = button.attr('data-photo-id');
+                var tooltipId = button.attr('aria-describedby');
+                $('#' + tooltipId).remove();
+                button.remove();
+                $.ajax({
+                    method: 'PUT',
+                    url: '/account/photo/' + photoId
+                })
+            });
+        }
+        initPhotosEvents();
+        function afterPostPhoto(req, res) {
+            $('input[type="file"]').val('').parent().find('.custom-file-label').html('Choisir un fichier');
+            var html = '<div class="photo"><img class="img-thumbnail" src="/uploads/pics/' + res.data.upload.name + '" width="300" height="300"><a class="set-profile-pic" href="" data-photo-id="' + res.data.upload.id + '" data-toggle="tooltip" data-placement="top" title="" data-original-title="Enregistrer cette photo comme photo de profil"><span class="badge badge-pill badge-primary"><i class="fa fa-thumbtack"></i></span></a><a class="remove-pic" href="" data-photo-id="' + res.data.upload.id + '" data-toggle="tooltip" data-placement="top" title="" data-original-title="Supprimer cette photo"><span class="badge badge-pill badge-danger"><i class="fa fa-eraser"></i></span></a></div>'
+            $('.photos-list').append(html);
+            initPhotosEvents();
+            $('[data-toggle="tooltip"]').tooltip({
+                container: 'body'
+            })
+        }

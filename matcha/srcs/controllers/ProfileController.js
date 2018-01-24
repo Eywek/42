@@ -1,6 +1,8 @@
 var accountModel = require('../models/account');
 var db = require('../models/database');
 var validator = require('../models/validator');
+var path = require('path');
+var fs = require('fs');
 
 module.exports = {
 
@@ -8,18 +10,49 @@ module.exports = {
         if (!req.file)
             return res.json({status: false, error: 'Vous devez fournir une photo.'});
         // Add to database
-        db.query('INSERT INTO `users_uploads` SET `user_id` = ?, `uid` = ?, `created_at` = ?', [
+        db.query('INSERT INTO `users_uploads` SET `user_id` = ?, `name` = ?, `created_at` = ?', [
             req.session.user,
-            req.file.filename.split('.')[0],
+            req.file.filename,
             new Date()
-        ], function (err, rows) {
+        ], function (err, result) {
            if (err) {
                console.error(err);
                return res.json({status: false, error: 'Une erreur interne est survenue.'});
            }
 
-            res.json({status: true, success: 'Votre image a bien été sauvegardé !'});
+            res.json({status: true, success: 'Votre image a bien été sauvegardé !', data: {
+                upload: {
+                    id: result.insertId,
+                    name: req.file.filename
+                }
+            }});
         });
+    },
+
+    deletePhoto: function (req, res) {
+        db.query('SELECT `name` FROM `users_uploads` WHERE `user_id` = ? AND `id` = ?', [req.session.user, req.params.id], function (err, file) {
+            if (err)
+                console.error();
+            db.query('DELETE FROM `users_uploads` WHERE `user_id` = ? AND `id` = ?', [req.session.user, req.params.id], function (err) {
+                if (err)
+                    console.error();
+            });
+            if (file)
+                fs.unlinkSync(path.join(__dirname, '../../public/uploads/pics/', file[0].name))
+        });
+        res.send();
+    },
+
+    editPhoto: function (req, res) {
+        db.query('UPDATE `users_uploads` SET `is_profile_pic` = 0 WHERE `user_id` = ?', [req.session.user, req.params.id], function (err) {
+            if (err)
+                console.error();
+            db.query('UPDATE `users_uploads` SET `is_profile_pic` = 1 WHERE `user_id` = ? AND `id` = ?', [req.session.user, req.params.id], function (err) {
+                if (err)
+                    console.error();
+            });
+        });
+        res.send();
     },
 
     updateBio: function (req, res) {
