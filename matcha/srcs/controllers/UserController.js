@@ -42,7 +42,14 @@ module.exports = {
                     return res.json({status: false, error: 'Ce' + (rows[0].username === req.body.username ? ' pseudo' : 't email') + ' est déjà utilisé.'});
 
                 // Add user to database
-                db.query('INSERT INTO `users` SET `username` = ?, `password` = ?, `email` = ?, `created_at` = ?', [req.body.username, userModel.hashPassword(req.body.password), req.body.email, new Date()], function (err, rows) {
+                db.query('INSERT INTO `users` SET `name` = ?, `last_name` = ?, `username` = ?, `password` = ?, `email` = ?, `created_at` = ?', [
+                    req.body.name,
+                    req.body.last_name,
+                    req.body.username,
+                    userModel.hashPassword(req.body.password),
+                    req.body.email,
+                    new Date()
+                ], function (err, rows) {
                     if (err) {
                         console.error(err);
                         return res.json({status: false, error: 'Une erreur interne est survenue.'});
@@ -77,7 +84,24 @@ module.exports = {
                 return res.sendStatus(500);
             }
 
-            res.render('User/account', {user: user, title: 'Mon compte'});
+            // Get bio
+            db.query('SELECT `biography`, `tags`, `gender`, `sexual_orientation` FROM `users_accounts` WHERE `user_id` = ?', [user.id], function (err, account) {
+                if (err) {
+                    console.error(err);
+                    return res.sendStatus(500);
+                }
+                if (!account || account.length === 0)
+                    account = {
+                        biography: '',
+                        tags: '',
+                        gender: '',
+                        sexual_orientation: ''
+                    };
+                else
+                    account = account[0];
+
+                res.render('User/account', {user: user, account: account, title: 'Mon compte'});
+            });
         })
     },
 
@@ -88,7 +112,13 @@ module.exports = {
                 return res.json({status: false, error: err});
 
             // Save data
-            db.query('UPDATE `users` SET `username` = ?, `email` = ? WHERE `id` = ?', [req.body.username, req.body.email, req.session.user], function (err, rows) {
+            db.query('UPDATE `users` SET `name` = ?, `last_name` = ?, `username` = ?, `email` = ? WHERE `id` = ?', [
+                req.body.name,
+                req.body.last_name,
+                req.body.username,
+                req.body.email,
+                req.session.user
+            ], function (err, rows) {
                 if (err) {
                     console.error(err);
                     return res.json({status: false, error: 'Une erreur interne est survenue.'});
@@ -97,7 +127,7 @@ module.exports = {
                 // Send success message
                 return res.json({status: true, success: 'Votre compte a bien été modifié.'});
             })
-        }, ['username', 'email'], [req.session.user]);
+        }, ['name', 'last_name', 'username', 'email'], [req.session.user]);
     },
 
     editPassword: function (req, res) {
@@ -175,7 +205,7 @@ module.exports = {
 
     resetPassword: function (req, res) {
         // Check if token is valid
-        db.query("SELECT `users_tokens`.`id`, `user_id`, `username` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = 'RESET_PW' AND `used_at` IS NULL LIMIT 1", [req.params.token], function (err, rows) {
+        db.query("SELECT `users_tokens`.`id`, `user_id`, `name` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = 'RESET_PW' AND `used_at` IS NULL LIMIT 1", [req.params.token], function (err, rows) {
             if (err) {
                 console.error(err);
                 return res.json({status: false, error: 'Une erreur interne est survenue.'});
@@ -185,7 +215,7 @@ module.exports = {
 
             // Render if GET
             if (req.method === 'GET')
-                return res.render('User/reset_password', {title: 'Rénitialisation de mot de passe', username: rows[0].username});
+                return res.render('User/reset_password', {title: 'Rénitialisation de mot de passe', name: rows[0].name});
 
             // Check if form is filled
             validator(userModel, req.body, function (err, status) {

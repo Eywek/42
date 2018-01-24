@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var config = require('../config/config');
 var path = require('path');
+var multer  = require('multer');
 var moment = require('moment');
 moment.locale('fr');
 var app = express();
@@ -55,7 +56,38 @@ app.post('/account/password', authMiddleware, userController.editPassword);
 // MATCHING
 var profileController = require('./controllers/ProfileController');
 
-app.post('/account/add-photo', authMiddleware, profileController.uploadPhoto);
+var upload = multer({
+    fileFilter: function (req, file, cb) {
+        if (file.mimetype !== 'image/png' && file.mimetype !== 'image/jpeg')
+            cb(undefined, false);
+        if (file.originalname.indexOf('.png') === -1 && file.originalname.indexOf('.jpg') === -1 && file.originalname.indexOf('.jpeg') === -1)
+            cb(undefined, false);
+        cb(undefined, true);
+    },
+    limits: {
+        fieldSize: '2MB'
+    },
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, path.join(__dirname, '../public/uploads/pics/'))
+        },
+        filename: function (req, file, cb) {
+            cb(null, require('uuid/v4')() + '.' + (file.mimetype === 'image/png' ? 'png' : 'jpg'))
+        }
+    })
+});
+app.post('/account/add-photo', authMiddleware, function (req, res, next) {
+    // Check if not 5 picture already saved
+    require('./models/database').query('SELECT COUNT(`id`) AS `count` FROM `users_uploads` WHERE `user_id` = ?', [req.session.user], function (err, rows) {
+        if (err) {
+            console.error(err);
+            return res.json({status: false, error: 'Une erreur interne est survenue.'});
+        }
+        if (rows && rows.length > 0 && rows[0].count >= 5)
+            return res.json({status: false, error: 'Vous ne pouvez avoir que 5 photos maximum sur notre service.'});
+        next();
+    })
+}, upload.single('picture'), profileController.uploadPhoto);
 app.post('/account/bio', authMiddleware, profileController.updateBio);
 
 app.get('/:username', authMiddleware, profileController.profile);

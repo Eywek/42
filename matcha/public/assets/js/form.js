@@ -13,7 +13,11 @@ function initFormEvents()
         button.addClass('disabled');
 
         // Get inputs
-        var data = serialize(this);
+        var data;
+        if (form.attr('enctype') === 'multipart/form-data')
+            data = (window.FormData) ? new FormData(form[0]) : null;
+        else
+            data = JSON.stringify(serialize(this));
 
         // Disable inputs
         editInputsState(form, false);
@@ -22,9 +26,10 @@ function initFormEvents()
         $.ajax({
             method: form.attr('method'),
             url: form.attr('action'),
-            data: JSON.stringify(data),
-            contentType: 'application/json',
+            data: data,
             dataType: 'json',
+            contentType: (form.attr('enctype') === 'multipart/form-data') ? false : 'application/json',
+            processData: (form.attr('enctype') === 'multipart/form-data') ? false : undefined,
             success: function (res) {
                 if (res.status)
                     displayResponseAlert(res.success, true, form);

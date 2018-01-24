@@ -64,6 +64,17 @@ module.exports = function (model, data, next, requireds, uniqueBypassIds) {
                         return cb("Le champ " + name + " doit être uniquement alphanumérique.");
                     cb();
                     break;
+                case 'alpha':
+                    if (!data[name].match(/^[a-zA-Z ]+$/))
+                        return cb("Le champ " + name + " doit être uniquement alphabétique.");
+                    cb();
+                    break;
+                case 'in':
+                    var values = value.split(',');
+                    if (values.indexOf(data[name]) === -1)
+                        return cb("Le champ " + name + " doit uniquement avoir une des valeurs suivantes: " + value + ".");
+                    cb();
+                    break;
             }
         }, function (err) {
             if (err)

@@ -1,9 +1,12 @@
 extends ../layout
 
+block style
+    link(rel='stylesheet', href='/assets/css/bootstrap-tagsinput.css')
+
 block content
     .jumbotron.jumbotron-fluid
         .container
-            h1.display-4 #{user.username}
+            h1.display-4 #{user.name}
             p.lead
                 | Vous êtes inscris #{moment(user.created_at).fromNow()}
     .container
@@ -16,6 +19,12 @@ block content
 
                         form(data-ajax, method='post', action='/account')
                             .form-group
+                                label Prénom
+                                input.form-control(type='text', value=user.name, name='name')
+                            .form-group
+                                label Nom
+                                input.form-control(type='text', value=user.last_name, name='last_name')
+                            .form-group
                                 label Nom d'utilisateur
                                 input.form-control(type='text', value=user.username, name='username')
                                 small.form-text.text-muted Votre pseudo est affiché aux autres utilisateurs
@@ -26,7 +35,7 @@ block content
 
                             button.btn.btn-primary(type='submit')
                                 i.fa.fa-save
-                                | &nbsp;Sauvegarder
+                                | &nbsp;&nbsp;Sauvegarder
 
 
             .col-md-6
@@ -46,4 +55,77 @@ block content
 
                             button.btn.btn-primary(type='submit')
                                 i.fa.fa-save
-                                | &nbsp;Sauvegarder
+                                | &nbsp;&nbsp;Sauvegarder
+
+        hr
+        .row.mt-2
+            .col-md-12
+
+                .card
+                    .card-body
+                        h4 Modifier mon profil
+                        hr
+
+                        if (account.gender.length === 0)
+                            .alert.alert-warning
+                                h4 Remplissez votre profil
+                                | Pour accéder complètement aux fonctionnalités du site, veuillez remplir les informations ci-dessous.
+
+                        form(data-ajax, method='post', action='/account/bio')
+
+                            .row
+                                .col-md-6
+                                    .form-group
+                                        label Sexe
+                                        select.form-control(name='gender')
+                                            option(value='men', selected=account.gender === 'men') Homme
+                                            option(value='women', selected=account.gender === 'women') Femme
+                                            option(value='other', selected=account.gender === 'other') Autre
+                                .col-md-6
+                                    .form-group
+                                        label Orientation sexuelle
+                                        select.form-control(name='sexual_orientation')
+                                            option(value='hetero', selected=account.sexual_orientation === 'hetero') Hétérosexuel
+                                            option(value='homo', selected=account.sexual_orientation === 'homo') Homosexuel
+                                            option(value='bi', selected=account.sexual_orientation === 'bi') Bisexuel
+
+                            .form-group
+                                label Biographie
+                                textarea.form-control(name='biography', rows=4) #{account.biography}
+                                small.form-text.text-muted Fournissez une biographie courte et précise
+                            .form-group
+                                label Liste d'intérês
+                                input.form-control(type='text', name='tags', data-role='tagsinput', value=account.tags)
+
+                            button.btn.btn-primary(type='submit')
+                                i.fa.fa-save
+                                | &nbsp;&nbsp;Sauvegarder
+
+        hr
+        .row.mt-2
+            .col-md-12
+
+                .card
+                    .card-body
+                        h4 Mes photos
+                        hr
+
+                        form(method='post', action='/account/add-photo', enctype='multipart/form-data' data-ajax)
+
+                            .form-group
+                                label Envoyer une photo
+                                .custom-file
+                                    input#file.custom-file-input(type='file', name='picture')
+                                    label.custom-file-label(for='file') Choisir un fichier
+
+                            button.btn.btn-primary(type='submit')
+                                i.fa.fa-share-square
+                                | &nbsp;&nbsp;Envoyer
+
+
+block scripts
+    script(type='text/javascript', src='/assets/js/bootstrap-tagsinput.min.js')
+    script(type='text/javascript').
+        $('input[type="file"]').on('change', function (e) {
+            $(this).parent().find('.custom-file-label').html($(this).val());
+        })

@@ -8,7 +8,9 @@ module.exports = {
     fields: {
         'username': 'required:alpha_num:unique:min=3:max=20',
         'email': 'required:email:unique',
-        'password': 'required:password'
+        'password': 'required:password',
+        'name': 'required:alpha:min=2:max=50',
+        'last_name': 'required:alpha:min=2:max=50'
     },
 
     login: function (username, password, next) {
