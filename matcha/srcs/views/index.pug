@@ -48,4 +48,62 @@ block content
             label.sr-only(for='inputPassword') Mot de passe
             input#inputPassword.form-control(type='password', placeholder='Mot de passe', name='password', required='')
 
+            button.btn.btn-block.btn-link(type='button', data-target='#lostPassword', data-toggle='modal')
+                em
+                    small J'ai oublié mon mot de passe
+
             button.btn.btn-lg.btn-primary.btn-block(type='submit') Se connecter
+            button.btn.btn-success.btn-block.btn-lg(data-target='#signup', type='button', data-toggle='modal') Je veux m'inscrire
+
+
+    .modal.fade#lostPassword(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title J'ai perdu mon mot de passe
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                form(method='post', action='/account/lost-password', data-ajax)
+                    .modal-body
+
+                        .ajax-msg
+                            .alert.alert-info
+                                em Un email de rénitialisation va vous être envoyé pour vous permettre de changer votre mot de passe.
+
+                        .form-group
+                            label Email
+                            input.form-control(type='email', placeholder="L'email de votre compte", name='email')
+
+                    .modal-footer
+                        button.btn.btn-primary(type='submit') Envoyer le mail
+
+    .modal.fade#signup(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title S'inscire
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                form(method='post', action='/signup', data-ajax)
+                    .modal-body
+
+                        .ajax-msg
+
+                        .form-group
+                            label Nom d'utilisateur
+                            input.form-control(type='text', name='username')
+                            small.form-text.text-muted Votre pseudo est affiché aux autres utilisateurs
+                        .form-group
+                            label Email
+                            input.form-control(type='email', name='email')
+                            small.form-text.text-muted Votre email restera confidentiel
+                        .form-group
+                            label Mot de passe
+                            input.form-control(type='password', name='password')
+                            small.form-text.text-muted Votre mot de passe doit être sécurisé
+                        .form-group
+                            label Confirmation du mot de passe
+                            input.form-control(type='password', name='password_confirmation')
+
+                    .modal-footer
+                        button.btn.btn-primary(type='submit') S'inscire

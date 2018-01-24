@@ -39,9 +39,6 @@ app.all('/', require('./controllers/IndexController').index);
 // USERS
 var userController = require('./controllers/UserController');
 
-app.get('/signup', function (req, res) {
-    res.render('user/signup', { title: 'Rejoignez-nous' });
-});
 app.post('/signin', userController.signin);
 app.post('/signup', userController.signup);
 app.post('/account/lost-password', userController.lostPassword);

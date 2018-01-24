@@ -3,6 +3,7 @@ var userModel = require('../models/user');
 var validator = require('../models/validator');
 var sendmail = require('sendmail')();
 var pug = require('pug');
+var path = require('path');
 
 module.exports = {
 
@@ -138,7 +139,7 @@ module.exports = {
 
             // Generate token
             var token = require('uuid/v4')();
-            db.query("INSERT INTO `users_tokens` SET `type` = 'EMAIL', `token` = ?, `user_id` = ?, `created_at` = ?", [
+            db.query("INSERT INTO `users_tokens` SET `type` = 'RESET_PW', `token` = ?, `user_id` = ?, `created_at` = ?", [
                 token,
                 user[0].id,
                 new Date()
@@ -153,11 +154,11 @@ module.exports = {
                     from: 'no-reply@matcha.com',
                     to: user[0].email,
                     subject: 'Rénitialisation de mot de passe',
-                    html: pug.renderFile('../views/Emails/reset_password', {
+                    html: pug.renderFile(path.join(__dirname, '../views/Emails/reset_password.pug'), {
                         username: user[0].username,
                         ip: req.ip,
                         date: new Date(),
-                        token: token
+                        url: '/account/reset-password/' + token
                     })
                 }, function(err, reply) {
                     if (err) {
@@ -174,7 +175,7 @@ module.exports = {
 
     resetPassword: function (req, res) {
         // Check if token is valid
-        db.query("SELECT `users_tokens`.`id`, `user_id`, `username` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = 'EMAIL' AND `used_at` IS NULL LIMIT 1", [req.params.token], function (err, rows) {
+        db.query("SELECT `users_tokens`.`id`, `user_id`, `username` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = 'RESET_PW' AND `used_at` IS NULL LIMIT 1", [req.params.token], function (err, rows) {
             if (err) {
                 console.error(err);
                 return res.json({status: false, error: 'Une erreur interne est survenue.'});
