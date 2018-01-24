@@ -6,7 +6,7 @@ module.exports = {
     table: 'users',
 
     fields: {
-        'username': 'required:alpha_num:unique:min=3:max=30',
+        'username': 'required:alpha_num:unique:min=3:max=20',
         'email': 'required:email:unique',
         'password': 'required:password'
     },
@@ -20,7 +20,7 @@ module.exports = {
 
             if (!rows || rows.length === 0)
                 return next("Vos identifiants sont invalides.");
-            return next(rows[0].id);
+            return next(undefined, rows[0].id);
         });
     },
 

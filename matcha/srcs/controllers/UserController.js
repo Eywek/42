@@ -8,13 +8,13 @@ module.exports = {
 
     signin: function (req, res) {
         // Check if form is filled
-        if (!req.body.username || !req.body.password)
-            res.json({status: false, error: 'Veuillez remplir tous les champs.'});
+        if (!req.body.username || req.body.username.length === 0 || !req.body.password || req.body.password.length === 0)
+            return res.json({status: false, error: 'Veuillez remplir tous les champs.'});
 
         // Find user with this username and password
         userModel.login(req.body.username, req.body.password, function (err, userId) {
             if (err)
-                res.json({status: false, error: err});
+                return res.json({status: false, error: err});
 
             // Connect it
             req.session.user = userId;
@@ -29,7 +29,7 @@ module.exports = {
             if (!status)
                 return res.json({status: false, error: err});
             // Check if password_confirmation === password
-            if (req.body.password !== req.body.passwordConfirmation)
+            if (req.body.password !== req.body.password_confirmation)
                 return res.json({status: false, error: 'Les mot de passes ne correspondent pas.'});
             // Check if username or email is not already used
             db.query('SELECT `username` FROM `users` WHERE `username` = ? OR `email` = ? LIMIT 1', [req.body.username, req.body.email], function (err, rows) {
@@ -106,7 +106,7 @@ module.exports = {
                 return res.json({status: false, error: err});
 
             // Check if password_confirmation === password
-            if (req.body.password !== req.body.passwordConfirmation)
+            if (req.body.password !== req.body.password_confirmation)
                 return res.json({status: false, error: 'Les mot de passes ne correspondent pas.'});
 
             // Save data
@@ -133,7 +133,7 @@ module.exports = {
                 console.error(err);
                 return res.json({status: false, error: 'Une erreur interne est survenue.'});
             }
-            if (!rows || rows.length === 0)
+            if (!user || user.length === 0)
                 return res.json({status: false, error: 'Aucun utilisateur avec cet email n\'a été trouvé.'});
 
             // Generate token
@@ -174,11 +174,13 @@ module.exports = {
 
     resetPassword: function (req, res) {
         // Check if token is valid
-        db.query("SELECT `id`, `user_id`, `username` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = 'EMAIL' AND `used_at` IS NULL LIMIT 1", function (err, rows) {
+        db.query("SELECT `users_tokens`.`id`, `user_id`, `username` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = 'EMAIL' AND `used_at` IS NULL LIMIT 1", [req.params.token], function (err, rows) {
             if (err) {
                 console.error(err);
                 return res.json({status: false, error: 'Une erreur interne est survenue.'});
             }
+            if (!rows || rows.length === 0)
+                return res.sendStatus(404);
 
             // Render if GET
             if (req.method === 'GET')
@@ -190,11 +192,11 @@ module.exports = {
                     return res.json({status: false, error: err});
 
                 // Check if password_confirmation === password
-                if (req.body.password !== req.body.passwordConfirmation)
+                if (req.body.password !== req.body.password_confirmation)
                     return res.json({status: false, error: 'Les mot de passes ne correspondent pas.'});
 
                 // Edit data
-                db.query('UPDATE `users` SET `password` = ? WHERE `user_id` = ?', [userModel.hashPassword(req.body.password), rows[0].user_id], function (err, user) {
+                db.query('UPDATE `users` SET `password` = ? WHERE `id` = ?', [userModel.hashPassword(req.body.password), rows[0].user_id], function (err, user) {
                     if (err) {
                         console.error(err);
                         return res.json({status: false, error: 'Une erreur interne est survenue.'});

@@ -2,16 +2,13 @@ var db = require('./database');
 var async = require('async');
 
 module.exports = function (model, data, next, requireds, uniqueBypassIds) {
-    var types;
     var value;
 
-    for (name in model.fields) {
-        types = data[name];
+    async.eachOfSeries(model.fields, function (types, name, callback) {
         if (requireds !== undefined && requireds.indexOf(name) === -1)
-            continue;
+            return callback();
 
         types = types.split(':');
-
         async.eachSeries(types, function (type, cb) {
             if (type.indexOf('=') !== -1) {
                 type = type.split('=');
@@ -21,7 +18,7 @@ module.exports = function (model, data, next, requireds, uniqueBypassIds) {
 
             switch (type) {
                 case 'required':
-                    if (data[type] === undefined || data[type].length === 0)
+                    if (data[name] === undefined || data[name].length === 0)
                         return cb("Le champ " + name + " ne peut pas être vide.");
                     cb();
                     break;
@@ -33,7 +30,7 @@ module.exports = function (model, data, next, requireds, uniqueBypassIds) {
                        }
                        if (rows && rows.length > 0)
                            return cb("La valeur du champ " + name + " est déjà utilisée.");
-                        cb();
+                       cb();
                     });
                     break;
                 case 'email':
@@ -71,7 +68,9 @@ module.exports = function (model, data, next, requireds, uniqueBypassIds) {
         }, function (err) {
             if (err)
                 return next(err, false);
-            return next(undefined, true);
+            return callback();
         })
-    }
+    }, function () {
+        next(undefined, true);
+    });
 };

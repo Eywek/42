@@ -38,10 +38,8 @@ app.get('/sign', function (req, res) {
 app.post('/signin', userController.signin);
 app.post('/signup', userController.signup);
 app.post('/account/lost-password', userController.lostPassword);
-app.get('/account/reset-password', function (req, res) {
-    res.render('user/reset_password', { title: 'Rénitialisation du mot de passe' });
-});
-app.post('/account/reset-password', userController.resetPassword);
+app.get('/account/reset-password/:token', userController.resetPassword);
+app.post('/account/reset-password/:token', userController.resetPassword);
 //app.get('/account/valid', userController.validAccount);
 
 app.get('/signout', authMiddleware, userController.signout);
@@ -56,11 +54,11 @@ var profileController = require('./controllers/ProfileController');
 app.post('/account/add-photo', authMiddleware, profileController.uploadPhoto);
 app.post('/account/bio', authMiddleware, profileController.updateBio);
 
-app.get('/{username}', authMiddleware, profileController.profile);
-app.get('/{username}/like', authMiddleware, profileController.like);
-app.get('/{username}/unlike', authMiddleware, profileController.unlike);
-app.get('/{username}/block', authMiddleware, profileController.block);
-app.get('/{username}/report', authMiddleware, profileController.report);
+app.get('/:username', authMiddleware, profileController.profile);
+app.get('/:username/like', authMiddleware, profileController.like);
+app.get('/:username/unlike', authMiddleware, profileController.unlike);
+app.get('/:username/block', authMiddleware, profileController.block);
+app.get('/:username/report', authMiddleware, profileController.report);
 
 app.get('/find', authMiddleware, function (req, res) {
    res.render('profile/find', { title: 'Rechercher un utilisateur' });
@@ -72,7 +70,7 @@ app.get('/view-match', authMiddleware, profileController.viewMatch);
 // CHAT & NOTIFICATIONS
 var chatController = require('./controllers/ChatController');
 
-app.get('/{username}/chat', authMiddleware, chatController.chat);
+app.get('/:username/chat', authMiddleware, chatController.chat);
 
 /*
     LAUNCH
