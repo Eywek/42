@@ -31,7 +31,7 @@ module.exports = {
     },
 
     get: function (userId, next) {
-      db.query('SELECT * FROM `users` WHERE user_id = ?', [userId], function (err, rows) {
+      db.query('SELECT * FROM `users` WHERE `id` = ?', [userId], function (err, rows) {
           if (err)
               return next(err);
           if (!rows || rows.length === 0)

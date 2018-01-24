@@ -1,5 +1,7 @@
 module.exports = function (req, res, next) {
     if (req.session.user)
         return next();
-    return res.sendStatus(403);
+    if (req.xhr)
+        return res.json({status: false, error: 'Vous devez vous connecter pour effectuer cette action.'});
+    res.redirect('/');
 };

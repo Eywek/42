@@ -70,13 +70,13 @@ module.exports = {
 
     account: function (req, res) {
         // Get user infos
-        userModel.getCurrent(function (err, user) {
+        userModel.get(req.session.user, function (err, user) {
             if (err) {
                 console.error(err);
                 return res.sendStatus(500);
             }
 
-            res.render('User/account', {user: user});
+            res.render('User/account', {user: user, title: 'Mon compte'});
         })
     },
 
