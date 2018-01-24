@@ -4,8 +4,13 @@
   "description": "",
   "main": "srcs/index.js",
   "dependencies": {
+    "async": "^2.6.0",
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "pug": "^2.0.0-rc.4"
+    "mysql": "^2.15.0",
+    "pug": "^2.0.0-rc.4",
+    "sendmail": "^1.2.0",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {},
   "scripts": {

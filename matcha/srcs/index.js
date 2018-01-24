@@ -2,16 +2,29 @@
     SETUP
  */
 var express = require('express');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 var config = require('../config/config');
 var path = require('path');
 var app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '../', 'public')));
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.set('trust proxy', 1);
+app.use(session({
+    secret: 'wMnGuvBetLR27y48Y5y36fN8NM49Vp',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 
 /*
     ROUTES
  */
+
+var authMiddleware = require('./middlewares/auth');
 
 // HOME
 app.all('/', require('./controllers/IndexController').index);
@@ -29,37 +42,37 @@ app.get('/account/reset-password', function (req, res) {
     res.render('user/reset_password', { title: 'Rénitialisation du mot de passe' });
 });
 app.post('/account/reset-password', userController.resetPassword);
-app.get('/account/valid', userController.validAccount);
+//app.get('/account/valid', userController.validAccount);
 
-app.get('/signout', userController.signout);
+app.get('/signout', authMiddleware, userController.signout);
 
-app.get('/account', userController.account);
-app.post('/account', userController.editAccount);
-app.post('/account/password', userController.editPassword);
+app.get('/account', authMiddleware, userController.account);
+app.post('/account', authMiddleware, userController.editAccount);
+app.post('/account/password', authMiddleware, userController.editPassword);
 
 // MATCHING
 var profileController = require('./controllers/ProfileController');
 
-app.post('/account/add-photo', profileController.uploadPhoto);
-app.post('/account/bio', profileController.updateBio);
+app.post('/account/add-photo', authMiddleware, profileController.uploadPhoto);
+app.post('/account/bio', authMiddleware, profileController.updateBio);
 
-app.get('/{username}', profileController.profile);
-app.get('/{username}/like', profileController.like);
-app.get('/{username}/unlike', profileController.unlike);
-app.get('/{username}/block', profileController.block);
-app.get('/{username}/report', profileController.report);
+app.get('/{username}', authMiddleware, profileController.profile);
+app.get('/{username}/like', authMiddleware, profileController.like);
+app.get('/{username}/unlike', authMiddleware, profileController.unlike);
+app.get('/{username}/block', authMiddleware, profileController.block);
+app.get('/{username}/report', authMiddleware, profileController.report);
 
-app.get('/find', function (req, res) {
+app.get('/find', authMiddleware, function (req, res) {
    res.render('profile/find', { title: 'Rechercher un utilisateur' });
 });
-app.post('/find', profileController.find);
+app.post('/find', authMiddleware, profileController.find);
 
-app.get('/view-match', profileController.viewMatch);
+app.get('/view-match', authMiddleware, profileController.viewMatch);
 
 // CHAT & NOTIFICATIONS
 var chatController = require('./controllers/ChatController');
 
-app.get('/{username}/chat', chatController.chat);
+app.get('/{username}/chat', authMiddleware, chatController.chat);
 
 /*
     LAUNCH
