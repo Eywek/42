@@ -1,5 +1,6 @@
 var db = require('./database');
-var https = require('https');
+var request = require('request');
+var async = require('async');
 
 module.exports = {
 
@@ -28,18 +29,34 @@ module.exports = {
     },
 
     getLocation: function (ip, next) {
+        ip = '92.147.244.173';
         if (ip === '::1' || ip === '127.0.0.1')
             return next(undefined, '17e Arrondissement, Paris, France');
-        https.get("https://ipinfo.io/" + ip + "/json", function(res) {
-            var bodyChunks = [];
-            res.on('data', function(chunk) {
-                bodyChunks.push(chunk);
-            }).on('end', function() {
-                var data = JSON.parse(Buffer.concat(bodyChunks));
-                next(undefined, data.city + ', ' + data.region + ', ' + data.country);
-            }).on('error', function (err) {
-                next(err);
-            })
+        async.parallel([
+
+            function (cb) {
+                request("https://ipinfo.io/" + ip + "/json", function (err, response, body) {
+                    if (err)
+                        return cb(err);
+                    cb(undefined, JSON.parse(body));
+                });
+            },
+
+            function (cb) {
+                request("http://country.io/names.json", function (err, response, body) {
+                    if (err)
+                        return cb(err);
+                    cb(undefined, JSON.parse(body));
+                });
+            }
+
+        ], function (err, results) {
+            if (err)
+                return next(err);
+            var location = results[0];
+            var countries = results[1];
+
+            next(undefined, location.city + ', ' + location.region + ', ' + (countries[location.country] || location.country));
         });
     }
 };

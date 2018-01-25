@@ -196,7 +196,6 @@ module.exports = {
             '`users_uploads`.`name` AS `profile_pic` ' +
             'FROM `users_accounts` ' +
             'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
-            'INNER JOIN `users_accounts` ON `users_accounts`.`user_id` = `users`.`id` ' +
             'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` ' +
             'WHERE ';
         var values = [];
@@ -216,7 +215,8 @@ module.exports = {
             values.push(popularity[0], popularity[1]);
         }
         if (req.body.location) {
-            sql += ''; // TODO
+            sql += 'AND `users_accounts`.`location` LIKE ? ';
+            values.push('%' + req.body.location + '%');
         }
         if (req.body.tags) {
             sql += 'AND `users_accounts`.`tags` LIKE ? ';

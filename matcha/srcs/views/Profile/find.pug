@@ -92,6 +92,7 @@ block scripts
         </div>
     script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js')
     script(type='text/javascript', src='/assets/js/bootstrap-tagsinput.min.js')
+    script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?key=' + googleApiKey + '&libraries=places')
     script(type='text/javascript').
         function generateUserHtml(user) {
             var html = $('#user-template').html();
@@ -119,3 +120,5 @@ block scripts
 
             $('.results').html(html);
         }
+
+        new google.maps.places.Autocomplete(document.querySelector('input[name="location"]'), {});
