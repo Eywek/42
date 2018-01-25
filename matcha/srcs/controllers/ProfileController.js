@@ -72,41 +72,61 @@ module.exports = {
                    return res.json({status: false, error: 'Une erreur interne est survenue'});
                }
 
-               var fields = '`biography` = ?, `gender` = ?, `sexual_orientation` = ?, `tags` = ?';
+               var fields = '`biography` = ?, `gender` = ?, `sexual_orientation` = ?, `tags` = ?, `age` = ?, `location` = ?';
                if (rows && rows.length > 0)
                    reqSql = 'UPDATE ' + accountModel.table + ' SET ' + fields + ' WHERE `user_id` = ?';
                else
                    reqSql = 'INSERT INTO ' + accountModel.table + ' SET ' + fields + ', `user_id` = ?';
+               if (!req.body.location)
+                   accountModel.getLocation(req.ip, function (err, location) {
+                       if (err) {
+                           console.error(err);
+                           return res.json({status: false, error: 'Une erreur interne est survenue'});
+                       }
+                       next(location);
+                   });
+               else
+                   next(req.body.location);
 
-               // Save data
-                db.query(reqSql, [
-                    req.body.biography,
-                    req.body.gender,
-                    req.body.sexual_orientation,
-                    req.body.tags,
-                    req.session.user
-                ], function (err, rows) {
-                    if (err) {
-                        console.error(err);
-                        return res.json({status: false, error: 'Une erreur interne est survenue.'});
-                    }
+               function next(location) {
+                   // Save data
+                   db.query(reqSql, [
+                       req.body.biography,
+                       req.body.gender,
+                       req.body.sexual_orientation,
+                       req.body.tags,
+                       parseInt(req.body.age),
+                       location,
+                       req.session.user
+                   ], function (err, rows) {
+                       if (err) {
+                           console.error(err);
+                           return res.json({status: false, error: 'Une erreur interne est survenue.'});
+                       }
 
-                    // Send success message
-                    return res.json({status: true, success: 'Votre compte a bien été modifié.'});
-                })
+                       // Send success message
+                       return res.json({status: true, success: 'Votre compte a bien été modifié.'});
+                   })
+               }
             });
         });
     },
 
     profile: function (req, res) {
         // Find user
-        db.query('SELECT `users`.`id`, `users`.`username`, `users`.`name`, `users`.`created_at`, ' +
-            '`users_accounts`.`biography`, `users_accounts`.`tags`, `users_accounts`.`gender`, `users_accounts`.`sexual_orientation`, ' +
-            '`users_blockeds`.`id` AS `blocked` ' +
+        db.query('SELECT `users`.`id`, `users`.`username`, `users`.`name`, `users`.`last_login`, `users`.`created_at`, ' +
+            '`users_accounts`.`biography`, `users_accounts`.`tags`, `users_accounts`.`gender`, `users_accounts`.`sexual_orientation`, `users_accounts`.`location`, ' +
+            '`users_blockeds`.`id` AS `blocked`, ' +
+            '`active_users`.`user_id` AS `active`, ' +
+            '`likes`.`id` AS `liked`, ' +
+            '`likes_from`.`id` AS `liked_you` ' +
             'FROM `users` ' +
             'INNER JOIN `users_accounts` ON `users`.`id` = `users_accounts`.`user_id` ' +
             'LEFT JOIN `users_blockeds` ON `users_blockeds`.`blocker_id` = ? AND `users_blockeds`.`user_id` = `users`.`id` ' +
-            'WHERE `users`.`username` = ?', [req.session.user, req.params.username], function (err, rows) {
+            'LEFT JOIN `active_users` ON `active_users`.`user_id` = `users`.`id` ' +
+            'LEFT JOIN `likes` ON `likes`.`liked_id` = `users`.`id` AND `likes`.`user_id` = ? ' +
+            'LEFT JOIN `likes` AS `likes_from` ON `likes_from`.`liked_id` = ? AND `likes_from`.`user_id` = `users`.`id`' +
+            'WHERE `users`.`username` = ?', [req.session.user, req.session.user, req.session.user, req.params.username], function (err, rows) {
             if (err) {
                 console.error(err);
                 return res.sendStatus(500);
@@ -125,30 +145,126 @@ module.exports = {
                     uploads = [];
 
                 user.uploads = uploads;
-                user.profile_pic = _.findWhere(user.uploads, {is_profile_pic: 1}) || '/assets/img/default_profile_pic.png';
-                if (typeof user.profile_pic === 'object')
-                    user.profile_pic = '/uploads/pics/' + user.profile_pic.name;
+                accountModel.computePopularity(user, function (err, popularity) {
+                    if (err)
+                        res.sendStatus(500);
+                    user.popularity = popularity;
+                    user.profile_pic = _.findWhere(user.uploads, {is_profile_pic: 1}) || '/assets/img/default_profile_pic.png';
+                    if (typeof user.profile_pic === 'object')
+                        user.profile_pic = '/uploads/pics/' + user.profile_pic.name;
 
-                // View
-                res.render('Profile/profile', {user: user, title: user.username});
+                    // Get visitors if it's own account
+                    if (req.session.user !== user.id) {
+                        db.query('INSERT INTO `users_visits` SET `visited_id` = ?, `visitor_id` = ?', [user.id, req.session.user], function (err) {
+                            if (err)
+                                console.error(err);
+                        });
+                        return res.render('Profile/profile', {user: user, title: user.username});
+                    }
+
+                    db.query('SELECT `users`.`username`, `users_uploads`.`name` AS `profile_pic` ' +
+                        'FROM `users_visits` ' +
+                        'INNER JOIN `users` ON `users`.`id` = `users_visits`.`visitor_id` ' +
+                        'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
+                        'WHERE `users_visits`.`visited_id` = ? ' +
+                        'GROUP BY `users`.`id`' +
+                        'ORDER BY `users_visits`.`id` DESC LIMIT 15', [user.id], function (err, visitors) {
+                        if (err)
+                            console.error(err);
+                        if (!visitors)
+                            visitors = [];
+                        user.visitors = visitors.map(function (visitor) {
+                            if (visitor.profile_pic)
+                                visitor.profile_pic = '/uploads/pics/' + visitor.profile_pic;
+                            else
+                                visitor.profile_pic = '/assets/img/default_profile_pic.png';
+                            return visitor;
+                        });
+
+                        return res.render('Profile/profile', {user: user, title: user.username});
+                    })
+                });
             });
         });
     },
 
     find: function (req, res) {
+        var sqlPopularity = accountModel.sqlPopularity.replace('?', '`users`.`id`');
+        var sql = 'SELECT `users`.`username`, `users`.`id`, ' +
+            '`users_accounts`.`age`, `users_accounts`.`tags`, `users_accounts`.`location`, ' +
+            '(' + sqlPopularity + ') AS `popularity`, ' +
+            '`users_uploads`.`name` AS `profile_pic` ' +
+            'FROM `users_accounts` ' +
+            'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
+            'INNER JOIN `users_accounts` ON `users_accounts`.`user_id` = `users`.`id` ' +
+            'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` ' +
+            'WHERE ';
+        var values = [];
 
+        if (req.body.age) {
+            sql += '`users_accounts`.`age` >= ? AND `users_accounts`.`age` <= ? ';
+            var age = req.body.age.split(',');
+            if (age.length !== 2 || parseInt(age[0]) != age[0] || parseInt(age[1]) != age[1])
+                return res.json({status: false, error: 'L\'âge est invalide.'});
+            values.push(age[0], age[1]);
+        }
+        if (req.body.popularity) {
+            sql += 'AND (' + sqlPopularity + ') >= ? AND (' + sqlPopularity + ') <= ? ';
+            var popularity = req.body.popularity.split(',');
+            if (popularity.length !== 2 || parseInt(popularity[0]) != popularity[0] || parseInt(popularity[1]) != popularity[1])
+                return res.json({status: false, error: 'La popularité invalide.'});
+            values.push(popularity[0], popularity[1]);
+        }
+        if (req.body.location) {
+            sql += ''; // TODO
+        }
+        if (req.body.tags) {
+            sql += 'AND `users_accounts`.`tags` LIKE ? ';
+            if (!req.body.tags.match(/^([A-Za-z0-9 \-_]+,?)+$/))
+                return res.json({status: false, error: 'Vos tags sont invalides.'});
+            var tags = req.body.tags.split(',');
+            values.push('%' + tags.join(',%') + '%');
+        }
+
+        db.query(sql, values, function (err, rows) {
+           if (err) {
+               console.error(err);
+               return res.json({status: false, error: 'Une erreur est survenue'});
+           }
+           return res.json({status: true, success: rows.length + ' utilisateurs trouvés.', data: rows});
+        });
     },
 
     viewMatch: function (req, res) {
 
     },
 
-    like: function (req, res) {
-
-    },
-
-    unlike: function (req, res) {
-
+    like: function (req, res) { // TODO: Send notification to liked_id
+        db.query('SELECT `id` FROM `users` WHERE `username` = ?', [req.params.username], function (err, user) {
+           if (err) {
+               console.error(err);
+               return res.sendStatus(500);
+           }
+           if (!user || user.length === 0)
+               return res.sendStatus(404);
+            db.query('DELETE FROM `likes` WHERE `user_id` = ? AND `liked_id` = ?', [req.session.user, user[0].id], function (err, rows) {
+                if (err) {
+                    console.error(err);
+                    return res.sendStatus(500);
+                }
+                // unlike
+                if (rows.affectedRows > 0)
+                    return res.send();
+                // like
+                db.query('INSERT INTO `likes` SET `user_id` = ?, `liked_id` = ?', [req.session.user, user[0].id], function (err) {
+                    if (err) {
+                        console.error(err);
+                        return res.sendStatus(500);
+                    }
+                    res.send();
+                })
+            });
+        });
     },
 
     block: function (req, res) {

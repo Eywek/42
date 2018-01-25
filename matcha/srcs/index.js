@@ -10,6 +10,10 @@ var multer  = require('multer');
 var moment = require('moment');
 moment.locale('fr');
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+var db = require('./models/database');
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '../', 'public')));
@@ -24,7 +28,9 @@ app.use(session({
 }));
 app.use(function (req, res, next) {
    res.locals.isLogged = (req.session.user !== undefined);
+   res.locals.userId = req.session.user;
    res.locals.moment = moment;
+   res.locals.googleApiKey = config.googleApiKey;
    next();
 });
 
@@ -78,7 +84,7 @@ var upload = multer({
 });
 app.post('/account/photo', authMiddleware, function (req, res, next) {
     // Check if not 5 picture already saved
-    require('./models/database').query('SELECT COUNT(`id`) AS `count` FROM `users_uploads` WHERE `user_id` = ?', [req.session.user], function (err, rows) {
+    db.query('SELECT COUNT(`id`) AS `count` FROM `users_uploads` WHERE `user_id` = ?', [req.session.user], function (err, rows) {
         if (err) {
             console.error(err);
             return res.json({status: false, error: 'Une erreur interne est survenue.'});
@@ -91,12 +97,6 @@ app.post('/account/photo', authMiddleware, function (req, res, next) {
 app.delete('/account/photo/:id', authMiddleware, profileController.deletePhoto);
 app.put('/account/photo/:id', authMiddleware, profileController.editPhoto);
 app.post('/account/bio', authMiddleware, profileController.updateBio);
-
-app.get('/:username', authMiddleware, profileController.profile);
-app.get('/:username/like', authMiddleware, profileController.like);
-app.get('/:username/unlike', authMiddleware, profileController.unlike);
-app.get('/:username/block', authMiddleware, profileController.block);
-app.get('/:username/report', authMiddleware, profileController.report);
 
 app.get('/find', authMiddleware, function (req, res) {
    res.render('profile/find', { title: 'Rechercher un utilisateur' });
@@ -111,7 +111,36 @@ var chatController = require('./controllers/ChatController');
 app.get('/chat', authMiddleware, chatController.index);
 app.get('/:username/chat', authMiddleware, chatController.chat);
 
+// ACCOUNTS
+app.get('/:username', authMiddleware, profileController.profile);
+app.get('/:username/like', authMiddleware, profileController.like);
+app.get('/:username/block', authMiddleware, profileController.block);
+app.get('/:username/report', authMiddleware, profileController.report);
+
+/*
+    WEBSOCKET
+ */
+
+db.query('DELETE FROM `active_users` WHERE 1=1;', function (err) {
+   if (err)
+       console.error(err);
+});
+io.on('connection', function(socket) {
+    socket.on('user-active', function(data) {
+        db.query('INSERT INTO `active_users` SET `socket_id` = ?, `user_id` = ?', [socket.id, data.userId], function (err) {
+            if (err)
+                console.error(err);
+        });
+    });
+    socket.on('disconnect', function() {
+        db.query('DELETE FROM `active_users` WHERE `socket_id` = ?', [socket.id], function (err) {
+            if (err)
+                console.error(err);
+        });
+    });
+});
+
 /*
     LAUNCH
  */
-app.listen(config.port);
+server.listen(config.port);

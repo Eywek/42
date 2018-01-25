@@ -22,7 +22,12 @@ module.exports = {
 
             if (!rows || rows.length === 0)
                 return next("Vos identifiants sont invalides.");
-            return next(undefined, rows[0].id);
+            next(undefined, rows[0].id);
+
+            db.query('UPDATE `users` SET `last_login` = ? WHERE `id` = ?', [new Date(), rows[0].id], function (err) {
+                if (err)
+                    console.error(err);
+            })
         });
     },
 

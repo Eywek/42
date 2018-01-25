@@ -37,7 +37,7 @@ block content
                         h4 Modifier mes informations principales
                         hr
 
-                        form(data-ajax, method='post', action='/account')
+                        form(data-ajax, method='post', action='/account', data-ajax-callback='afterInfosUpdate')
                             .form-group
                                 label Prénom
                                 input.form-control(type='text', value=user.name, name='name')
@@ -94,20 +94,25 @@ block content
                         form(data-ajax, method='post', action='/account/bio')
 
                             .row
-                                .col-md-6
+                                .col-md-4
                                     .form-group
                                         label Sexe
                                         select.form-control(name='gender')
                                             option(value='men', selected=account.gender === 'men') Homme
                                             option(value='women', selected=account.gender === 'women') Femme
                                             option(value='other', selected=account.gender === 'other') Autre
-                                .col-md-6
+                                .col-md-4
                                     .form-group
                                         label Orientation sexuelle
                                         select.form-control(name='sexual_orientation')
                                             option(value='hetero', selected=account.sexual_orientation === 'hetero') Hétérosexuel
                                             option(value='homo', selected=account.sexual_orientation === 'homo') Homosexuel
                                             option(value='bi', selected=account.sexual_orientation === 'bi') Bisexuel
+
+                                .col-md-4
+                                    .form-group
+                                        label Âge
+                                        input.form-control(type='number', step='1', name='age', value=account.age)
 
                             .form-group
                                 label Biographie
@@ -116,10 +121,16 @@ block content
                             .form-group
                                 label Liste d'intérêts
                                 input.form-control(type='text', name='tags', data-role='tagsinput', value=account.tags)
+                            .form-group
+                                label Localisation
+                                input.form-control(type='text', name='location', value=account.location)
 
                             button.btn.btn-primary(type='submit')
                                 i.fa.fa-save
                                 | &nbsp;&nbsp;Sauvegarder
+                            a.btn.btn-outline-success.ml-2.profile-link(href='/' + user.username)
+                                i.fa.fa-user
+                                | &nbsp; Voir mon profil
 
         hr
         .row.mt-2
@@ -161,6 +172,7 @@ block content
 
 block scripts
     script(type='text/javascript', src='/assets/js/bootstrap-tagsinput.min.js')
+    script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?key=' + googleApiKey + '&libraries=places')
     script(type='text/javascript').
         $('input[type="file"]').on('change', function (e) {
             $(this).parent().find('.custom-file-label').html($(this).val());
@@ -206,3 +218,8 @@ block scripts
                 container: 'body'
             })
         }
+        function afterInfosUpdate(req, res) {
+            $('.profile-link').attr('href', '/' + $('input[name="username"]').val());
+        }
+
+        new google.maps.places.Autocomplete(document.querySelector('input[name="location"]'), {});

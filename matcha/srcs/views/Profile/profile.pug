@@ -2,6 +2,9 @@ extends ../layout
 
 block style
     style.
+        .img-thumbnail {
+            margin: 5px;
+        }
         [data-toggle="tooltip"] {
             cursor: pointer;
         }
@@ -9,7 +12,16 @@ block style
             font-weight: 200;
             margin-left: 10px;
         }
-        
+        span.online {
+            width: 20px;
+            height: 20px;
+            display: block!important;
+            border-radius: 50%;
+            position: absolute;
+            right: -5px;
+            top: -10px;
+        }
+
 block content
     .container.mt-5
 
@@ -22,6 +34,8 @@ block content
 
                 .card
                     img.card-img-top(src=user.profile_pic, alt='Photo de profil')
+                    if user.active
+                        span.badge.badge-success.online(data-toggle='tooltip', data-placement='top', title='Connecté')
                     .card-body
                         h5.card-title.mb-2 #{user.name}
                             span.badge.badge-info.username
@@ -31,7 +45,7 @@ block content
                         p.card-text
                             span(data-toggle='tooltip', title='Localisation', data-placement='top')
                                 i.fa.fa-map-marker
-                                | &nbsp; Paris // TODO
+                                | &nbsp; #{user.location}
                             br
                             span(data-toggle='tooltip', title='Sexe', data-placement='top')
                                 if user.gender === 'men'
@@ -56,25 +70,50 @@ block content
                             br
                             span(data-toggle='tooltip', title='Score de popularité', data-placement='top')
                                 i.fa.fa-star
-                                | &nbsp; 300 // TODO
-                        a.btn.btn-danger.btn-block(href='#')
-                            i.fa.fa-heart
-                            | &nbsp; J'aime
+                                | &nbsp; #{user.popularity}
+                            if !user.active
+                                br
+                                span(data-toggle='tooltip', title='Dernière connexion', data-placement='top')
+                                    i.fa.fa-sign-in-alt
+                                    | &nbsp; #{moment(user.last_login).fromNow()}
+                        if user.uploads.length > 0 && user.id !== userId
+                            a.btn.btn-danger.btn-block.like(href='#', data-like-status=user.liked ? '1' : '0')
+                                i.fa.fa-heart
+                                if user.liked
+                                    | &nbsp;&nbsp;
+                                    span.text Je n'aime plus
+                                else
+                                    | &nbsp;&nbsp;
+                                    span.text J'aime
+                            if user.liked_you
+                                p.text-danger.text-center
+                                    small
+                                        em Cet utilisateur aime votre profil.
+
+                if user.id === userId && user.visitors.length > 0
+                    .card.mt-2
+                        .card-body
+                            h5 Mes visiteurs récents
+                            hr
+
+                            each visit in user.visitors
+                                img.img-thumbnail(src=visit.profile_pic, width=50, height=50, data-toggle='tooltip', data-placement='top', title=visit.username)
 
 
             .col-md-9
 
                 .card
-                    .card-header
-                        ul.nav.justify-content-end
-                            li.nav-item
-                                a.nav-link.btn.btn-danger.active.block-user(data-toggle='tooltip', title="Ne plus voir l'utilisateur", data-placement='top')
-                                    if user.blocked
-                                        | Débloquer
-                                    else
-                                        | Bloquer
-                            li.nav-item
-                                a.nav-link.report-user(data-toggle='tooltip', title="Report l'utilisateur comme un faux compte", data-placement='top') Report
+                    if user.id !== userId
+                        .card-header
+                            ul.nav.justify-content-end
+                                li.nav-item
+                                    a.nav-link.btn.btn-danger.active.block-user(data-toggle='tooltip', title="Ne plus voir l'utilisateur", data-placement='top')
+                                        if user.blocked
+                                            | Débloquer
+                                        else
+                                            | Bloquer
+                                li.nav-item
+                                    a.nav-link.report-user(data-toggle='tooltip', title="Report l'utilisateur comme un faux compte", data-placement='top') Report
                     .card-body
                         h5.card-title Biographie
                         p.card-text #{user.biography}
@@ -82,6 +121,19 @@ block content
                         h5.card-title Centres d'intérêts
                         each tag in user.tags.split(',')
                             span.badge.badge-primary.ml-1.mr-1.p-2 #{tag}
+
+                hr
+
+                .card
+                    .card-body
+                        h3 Ses photos
+                        hr
+
+                        each photo in user.uploads
+                            if !photo.is_profile_pic
+                                img.img-thumbnail(src='/uploads/pics/' + photo.name, width=300, height=300)
+
+
 
 block scripts
     script(type='text/javascript').
@@ -102,3 +154,15 @@ block scripts
             $('#' + $(this).attr('aria-describedby')).remove();
             $(this).remove();
         });
+        $('.like').on('click', function (e) {
+            e.preventDefault();
+            var button = $(this);
+            var status = parseInt(button.attr('data-like-status'));
+
+            $.get('/#{user.username}/like', function () {});
+            if (status)
+                button.find('.text').html("J'aime");
+            else
+                button.find('.text').html("Je n'aime plus");
+            button.attr('data-like-status', status ? '0' : '1');
+        })

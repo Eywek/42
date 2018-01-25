@@ -1,0 +1,121 @@
+extends ../layout
+
+block style
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css')
+    link(rel='stylesheet', href='/assets/css/bootstrap-tagsinput.css')
+    style.
+        .tooltip.tooltip-main {
+            opacity: 1;
+        }
+        .slider-selection {
+            background: #007bff;
+        }
+        .slider {
+            margin-top: 30px;
+            display: block;
+        }
+        .slider.slider-horizontal {
+            width: 100%;
+        }
+        .user {
+            position: relative;
+            margin-top: 70px;
+            min-height: 90px;
+        }
+        .user img {
+            border-radius: 50%;
+            width: 55%;
+            margin-top: -61px;
+        }
+        .user h3 {
+            margin-top: 5px;
+        }
+        .user {
+            text-align: center;
+        }
+
+
+block content
+    .container.mt-5
+        .card
+            .card-body
+                h2 #{title}
+                hr
+
+                form(method='post', action='', data-ajax, data-ajax-callback='usersFound')
+
+                    .row.text-center
+                        .col-md-6
+                            .form-group
+                                label Âge
+                                input(type='text', name='age', data-provide='slider', data-slider-min='18' data-slider-max='90' data-slider-step='1' data-slider-value='[0,90]')
+
+                        .col-md-6
+                            .form-group
+                                label Score popularité
+                                input(type='text', name='popularity', data-provide='slider', data-slider-min='0' data-slider-max='1000' data-slider-step='5' data-slider-value='[0,1000]')
+
+                    .form-group
+                        label Localisation
+                        input.form-control(type='text', name='location')
+
+                    .form-group
+                        label Liste d'intérêts
+                        input.form-control(type='text', name='tags', data-role='tagsinput')
+
+                    button.btn.btn-primary(type='submit')
+                        i.fa.fa-search
+                        | &nbsp;&nbsp;Rechercher
+
+        .mt-2
+            hr
+            .results
+
+
+
+
+block scripts
+    script(type='text/html')#user-template.
+        <div class="col-md-3">
+            <div class="card user" data-user-age="{AGE}" data-user-location="{LOCATION}" data-user-popularity="{POPULARITY}" data-user-tags="{TAGS}">
+                <div class="card-body">
+                    <img class="img-thumbnail" src="{PROFILE_PIC}">
+                    <div class="cleafix"></div>
+                    <h3>{USERNAME}</h3>
+                    <hr>
+                    <a class="btn btn-primary" href="/{USERNAME}">
+                        <i class="fa fa-user"></i>
+                        &nbsp;&nbsp;Voir le profil
+                    </a>
+                </div>
+            </div>
+        </div>
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js')
+    script(type='text/javascript', src='/assets/js/bootstrap-tagsinput.min.js')
+    script(type='text/javascript').
+        function generateUserHtml(user) {
+            var html = $('#user-template').html();
+
+            html = html.replace(/{USERNAME}/g, user.username);
+            if (user.profile_pic)
+                user.profile_pic = '/uploads/pics/' + user.profile_pic;
+            html = html.replace('{PROFILE_PIC}', user.profile_pic || '/assets/img/default_profile_pic.png');
+            html = html.replace('{AGE}', user.age);
+            html = html.replace('{LOCATION}', user.location);
+            html = html.replace('{TAGS}', user.tags);
+            html = html.replace('{POPULARITY}', user.popularity)
+
+            return html;
+        }
+
+        function usersFound(req, res) {
+            var users = res.data;
+            if (users.length === 0)
+                return $('.results').html('');
+            var html = '<div class="row">';
+            for (var i = 0; i < users.length; i++)
+                html += generateUserHtml(users[i]);
+            html += '</div>';
+
+            $('.results').html(html);
+        }

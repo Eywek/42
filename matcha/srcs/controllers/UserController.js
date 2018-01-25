@@ -85,7 +85,7 @@ module.exports = {
             }
 
             // Get bio
-            db.query('SELECT `biography`, `tags`, `gender`, `sexual_orientation` FROM `users_accounts` WHERE `user_id` = ?', [user.id], function (err, account) {
+            db.query('SELECT `biography`, `tags`, `gender`, `sexual_orientation`, `age`, `location` FROM `users_accounts` WHERE `user_id` = ?', [user.id], function (err, account) {
                 if (err) {
                     console.error(err);
                     return res.sendStatus(500);
@@ -95,7 +95,9 @@ module.exports = {
                         biography: '',
                         tags: '',
                         gender: '',
-                        sexual_orientation: ''
+                        sexual_orientation: '',
+                        age: '',
+                        location: ''
                     };
                 else
                     account = account[0];

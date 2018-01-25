@@ -75,6 +75,17 @@ module.exports = function (model, data, next, requireds, uniqueBypassIds) {
                         return cb("Le champ " + name + " doit uniquement avoir une des valeurs suivantes: " + value + ".");
                     cb();
                     break;
+                case 'number':
+                    if (!data[name].match(/^[0-9]+$/))
+                        return cb("Le champ " + name + " doit être un nombre valide.");
+                    cb();
+                    break;
+                case 'between':
+                    var values = value.split(',');
+                    if (parseInt(data[name]) < parseInt(values[0]) || parseInt(data[name]) > parseInt(values[1]))
+                        return cb("Le champ " + name + " doit être compris entre " + values[0] + " et " + values[1] + ".");
+                    cb();
+                    break;
             }
         }, function (err) {
             if (err)

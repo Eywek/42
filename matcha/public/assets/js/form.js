@@ -94,6 +94,7 @@ function serialize(form)
                     case 'hidden':
                     case 'password':
                     case 'email':
+                    case 'number':
                     case 'submit':
                         data[form.elements[i].name] = (form.elements[i].value);
                         break;
