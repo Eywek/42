@@ -39,8 +39,8 @@
       <file leaf-file-name="account.pug" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/views/User/account.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="174" column="4" lean-forward="false" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="123" />
+            <state relative-caret-position="273">
+              <caret line="102" column="46" lean-forward="false" selection-start-line="102" selection-start-column="46" selection-end-line="102" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -87,18 +87,17 @@
       <file leaf-file-name="ProfileController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="113" column="0" lean-forward="true" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+            <state relative-caret-position="37">
+              <caret line="227" column="28" lean-forward="false" selection-start-line="227" selection-start-column="28" selection-end-line="227" selection-end-column="28" />
               <folding>
                 <element signature="e#278#1052#0" expanded="false" />
                 <element signature="e#1092#1664#0" expanded="false" />
                 <element signature="e#1702#2170#0" expanded="false" />
                 <element signature="e#2208#4659#0" expanded="false" />
                 <element signature="e#4695#8884#0" expanded="false" />
-                <element signature="e#8917#11257#0" expanded="false" />
-                <element signature="e#12238#13357#0" expanded="false" />
-                <element signature="e#13391#14586#0" expanded="false" />
-                <element signature="e#14625#14955#0" expanded="false" />
+                <element signature="e#14137#15256#0" expanded="false" />
+                <element signature="e#15290#16485#0" expanded="false" />
+                <element signature="e#16524#16854#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -127,9 +126,8 @@
       <file leaf-file-name="account.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/models/account.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
-              <caret line="48" column="34" lean-forward="false" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
+            <state relative-caret-position="150">
+              <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -187,12 +185,12 @@
         <option value="$PROJECT_DIR$/srcs/index.js" />
         <option value="$PROJECT_DIR$/config/config.js" />
         <option value="$PROJECT_DIR$/srcs/controllers/UserController.js" />
-        <option value="$PROJECT_DIR$/srcs/views/User/account.pug" />
-        <option value="$PROJECT_DIR$/srcs/models/account.js" />
         <option value="$PROJECT_DIR$/srcs/views/Profile/find.pug" />
         <option value="$PROJECT_DIR$/srcs/views/layout.pug" />
-        <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
         <option value="$PROJECT_DIR$/srcs/views/Profile/view-match.pug" />
+        <option value="$PROJECT_DIR$/srcs/models/account.js" />
+        <option value="$PROJECT_DIR$/srcs/views/User/account.pug" />
+        <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
       </list>
     </option>
   </component>
@@ -366,12 +364,12 @@
       <workItem from="1516714730644" duration="240000" />
       <workItem from="1516717151458" duration="3661000" />
       <workItem from="1516786876243" duration="23241000" />
-      <workItem from="1516874205510" duration="18924000" />
+      <workItem from="1516874205510" duration="20294000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46066000" />
+    <option name="totallyTimeSpent" value="47436000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -403,7 +401,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -460,10 +458,9 @@
             <element signature="e#1702#2170#0" expanded="false" />
             <element signature="e#2208#4659#0" expanded="false" />
             <element signature="e#4695#8884#0" expanded="false" />
-            <element signature="e#8917#11257#0" expanded="false" />
-            <element signature="e#12238#13357#0" expanded="false" />
-            <element signature="e#13391#14586#0" expanded="false" />
-            <element signature="e#14625#14955#0" expanded="false" />
+            <element signature="e#14137#15256#0" expanded="false" />
+            <element signature="e#15290#16485#0" expanded="false" />
+            <element signature="e#16524#16854#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -537,10 +534,9 @@
             <element signature="e#1702#2170#0" expanded="false" />
             <element signature="e#2208#4659#0" expanded="false" />
             <element signature="e#4695#8884#0" expanded="false" />
-            <element signature="e#8917#11257#0" expanded="false" />
-            <element signature="e#12238#13357#0" expanded="false" />
-            <element signature="e#13391#14586#0" expanded="false" />
-            <element signature="e#14625#14955#0" expanded="false" />
+            <element signature="e#14137#15256#0" expanded="false" />
+            <element signature="e#15290#16485#0" expanded="false" />
+            <element signature="e#16524#16854#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -752,31 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/User/account.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="174" column="4" lean-forward="false" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="123" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/models/account.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
-          <caret line="48" column="34" lean-forward="false" selection-start-line="48" selection-start-column="34" selection-end-line="48" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="67" lean-forward="false" selection-start-line="16" selection-start-column="67" selection-end-line="16" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -793,6 +764,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/models/account.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/views/User/account.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="102" column="46" lean-forward="false" selection-start-line="102" selection-start-column="46" selection-end-line="102" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="67" lean-forward="false" selection-start-line="16" selection-start-column="67" selection-end-line="16" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/views/Profile/view-match.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -803,18 +798,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="113" column="0" lean-forward="true" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+        <state relative-caret-position="37">
+          <caret line="227" column="28" lean-forward="false" selection-start-line="227" selection-start-column="28" selection-end-line="227" selection-end-column="28" />
           <folding>
             <element signature="e#278#1052#0" expanded="false" />
             <element signature="e#1092#1664#0" expanded="false" />
             <element signature="e#1702#2170#0" expanded="false" />
             <element signature="e#2208#4659#0" expanded="false" />
             <element signature="e#4695#8884#0" expanded="false" />
-            <element signature="e#8917#11257#0" expanded="false" />
-            <element signature="e#12238#13357#0" expanded="false" />
-            <element signature="e#13391#14586#0" expanded="false" />
-            <element signature="e#14625#14955#0" expanded="false" />
+            <element signature="e#14137#15256#0" expanded="false" />
+            <element signature="e#15290#16485#0" expanded="false" />
+            <element signature="e#16524#16854#0" expanded="false" />
           </folding>
         </state>
       </provider>

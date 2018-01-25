@@ -196,7 +196,7 @@ module.exports = {
             '`users_uploads`.`name` AS `profile_pic` ' +
             'FROM `users_accounts` ' +
             'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
-            'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` ' +
+            'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
             'WHERE ';
         var values = [];
 
@@ -225,6 +225,7 @@ module.exports = {
             var tags = req.body.tags.split(',');
             values.push('%' + tags.join(',%') + '%');
         }
+        // TODO: Not blocked
 
         db.query(sql, values, function (err, rows) {
            if (err) {
@@ -236,26 +237,63 @@ module.exports = {
     },
 
     viewMatch: function (req, res) {
-        db.query('SELECT `users_accounts`.`sexual_orientation`, `users_accounts`.`location`, `users_accounts`.`tags` ' +
+        db.query('SELECT `users_accounts`.`sexual_orientation`, `users_accounts`.`gender`, `users_accounts`.`location`, `users_accounts`.`age`, `users_accounts`.`tags` ' +
             'FROM `users_accounts` ' +
             'WHERE `users_accounts`.`user_id` = ?', [req.session.user], function (err, user) {
-           if (err) {
-               console.error(err);
-               return res.sendStatus(500);
-           }
-           if (!user || user.length === 0)
-               return res.render('Profile/view-match', {title: 'Suggestions', users: [], user: false});
+            if (err) {
+                console.error(err);
+                return res.sendStatus(500);
+            }
+            if (!user || user.length === 0)
+                return res.render('Profile/view-match', {title: 'Suggestions', users: [], user: false});
+            user = user[0];
+            var values = [];
+            var where = '';
 
-           db.query('SELECT * ' +
+            // Sexe
+            if (user.sexual_orientation === 'hetero' || user.sexual_orientation === 'homo') {
+                where += '`users_accounts`.`gender` = ? AND (`users_accounts`.`sexual_orientation` = ? OR `users_accounts`.`sexual_orientation` = \'bi\')';
+                if (user.sexual_orientation === 'hetero')
+                    values.push(user.gender === 'men' ? 'women' : 'men');
+                else
+                    values.push(user.gender === 'men' ? 'men' : 'women');
+                values.push(user.sexual_orientation);
+            }
+
+            // TODO: Not blocked
+
+            // Not him
+            where += ' AND `users_accounts`.`user_id` != ?';
+            values.push(req.session.user);
+
+            var sqlPopularity = accountModel.sqlPopularity.replace('?', '`users`.`id`');
+            db.query('SELECT `users_accounts`.`tags`, `users_accounts`.`location`, `users_accounts`.`age`, ' +
+               '(' + sqlPopularity + ') AS `popularity`, ' +
+               '`users`.`username`, ' +
+               '`users_uploads`.`name` AS `profile_pic` ' +
                'FROM `users_accounts` ' +
-               'WHERE 1=1', [], function (err, users) {
-               if (err) {
-                   console.error(err);
-                   return res.sendStatus(500);
-               }
+               'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
+               'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
+               'WHERE ' + where, values, function (err, users) {
+                if (err) {
+                    console.error(err);
+                    return res.sendStatus(500);
+                }
 
-               res.render('Profile/view-match', {title: 'Suggestions', users: users, user: true});
-           })
+                // TODO: Match with location
+
+                // TODO: Match with tags
+
+                // TODO: Match with popularity
+
+                res.render('Profile/view-match', {title: 'Suggestions', users: users.map(function (user) {
+                    if (user.profile_pic)
+                        user.profile_pic = '/uploads/pics/' + user.profile_pic;
+                    else
+                        user.profile_pic = '/assets/img/default_profile_pic.png';
+                    return user;
+                }), user: true});
+            })
         });
     },
 

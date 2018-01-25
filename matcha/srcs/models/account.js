@@ -8,7 +8,7 @@ module.exports = {
 
     fields: {
         'biography': 'required:max=500',
-        'gender': 'required:in=men,women,other',
+        'gender': 'required:in=men,women',
         'sexual_orientation': 'required:in=hetero,homo,bi',
         'tags': 'required:max=500',
         'age': 'required:number:between=18,90'
