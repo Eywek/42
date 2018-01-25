@@ -13,6 +13,9 @@ block style
 block content
     .container.mt-5
 
+        if user.blocked
+            .alert.alert-danger Vous avez bloqué cet utilisateur.
+
         .row
 
             .col-md-3
@@ -65,7 +68,11 @@ block content
                     .card-header
                         ul.nav.justify-content-end
                             li.nav-item
-                                a.nav-link.btn.btn-danger.active.block-user(data-toggle='tooltip', title="Ne plus voir l'utilisateur", data-placement='top') Bloquer
+                                a.nav-link.btn.btn-danger.active.block-user(data-toggle='tooltip', title="Ne plus voir l'utilisateur", data-placement='top')
+                                    if user.blocked
+                                        | Débloquer
+                                    else
+                                        | Bloquer
                             li.nav-item
                                 a.nav-link.report-user(data-toggle='tooltip', title="Report l'utilisateur comme un faux compte", data-placement='top') Report
                     .card-body
@@ -84,11 +91,14 @@ block scripts
         $('.block-user').on('click', function (e) {
             e.preventDefault();
 
-            $.get('/#{user.username}/block', function () {});
+            $.get('/#{user.username}/block', function () {
+                document.location = '/#{user.username}';
+            });
         });
         $('.report-user').on('click', function (e) {
             e.preventDefault();
 
-            $.get('/#{user.username}/report', function () {
-            });
+            $.get('/#{user.username}/report', function () {});
+            $('#' + $(this).attr('aria-describedby')).remove();
+            $(this).remove();
         });

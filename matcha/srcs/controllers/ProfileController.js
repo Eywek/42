@@ -101,10 +101,12 @@ module.exports = {
     profile: function (req, res) {
         // Find user
         db.query('SELECT `users`.`id`, `users`.`username`, `users`.`name`, `users`.`created_at`, ' +
-            '`users_accounts`.`biography`, `users_accounts`.`tags`, `users_accounts`.`gender`, `users_accounts`.`sexual_orientation`' +
+            '`users_accounts`.`biography`, `users_accounts`.`tags`, `users_accounts`.`gender`, `users_accounts`.`sexual_orientation`, ' +
+            '`users_blockeds`.`id` AS `blocked` ' +
             'FROM `users` ' +
             'INNER JOIN `users_accounts` ON `users`.`id` = `users_accounts`.`user_id` ' +
-            'WHERE `users`.`username` = ?', [req.params.username], function (err, rows) {
+            'LEFT JOIN `users_blockeds` ON `users_blockeds`.`blocker_id` = ? AND `users_blockeds`.`user_id` = `users`.`id` ' +
+            'WHERE `users`.`username` = ?', [req.session.user, req.params.username], function (err, rows) {
             if (err) {
                 console.error(err);
                 return res.sendStatus(500);
@@ -150,11 +152,44 @@ module.exports = {
     },
 
     block: function (req, res) {
-        
+        var sql;
+        db.query('SELECT `id` FROM `users` WHERE `username` = ?', [req.params.username], function (err, user) {
+            if (err) {
+                console.error(err);
+                return res.sendStatus(500);
+            }
+            if (!user || user.length === 0)
+                return res.sendStatus(404);
+
+            db.query('SELECT `id` FROM `users_blockeds` WHERE `blocker_id` = ? AND `user_id` = ?', [req.session.user, user[0].id], function (err, rows) {
+                if (err) {
+                    console.error(err);
+                    return res.sendStatus(500);
+                }
+                if (rows && rows.length > 0)
+                    sql = 'DELETE FROM `users_blockeds` WHERE `blocker_id` = ? AND `user_id` = ?';
+                else
+                    sql = 'INSERT INTO `users_blockeds` SET `blocker_id` = ?, `user_id` = ?';
+
+                db.query(sql, [req.session.user, user[0].id], function (err) {
+                    if (err) {
+                        console.error(err);
+                        return res.sendStatus(500);
+                    }
+
+                    res.send();
+                })
+            })
+        })
     },
     
     report: function (req, res) {
-        
+        db.query('INSERT INTO `users_reports` (`user_id`, `report_id`) ' +
+            'SELECT `users`.`id` AS `user_id`, ? FROM `users` WHERE `users`.`username` = ? LIMIT 1', [req.session.user, req.params.username], function (err) {
+            if (err)
+                console.error(err);
+        });
+        res.send();
     }
 
 };
