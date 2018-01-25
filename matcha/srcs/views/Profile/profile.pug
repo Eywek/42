@@ -1,0 +1,94 @@
+extends ../layout
+
+block style
+    style.
+        [data-toggle="tooltip"] {
+            cursor: pointer;
+        }
+        span.username {
+            font-weight: 200;
+            margin-left: 10px;
+        }
+        
+block content
+    .container.mt-5
+
+        .row
+
+            .col-md-3
+
+                .card
+                    img.card-img-top(src=user.profile_pic, alt='Photo de profil')
+                    .card-body
+                        h5.card-title.mb-2 #{user.name}
+                            span.badge.badge-info.username
+                                small
+                                    strong aka
+                                | &nbsp;#{user.username}
+                        p.card-text
+                            span(data-toggle='tooltip', title='Localisation', data-placement='top')
+                                i.fa.fa-map-marker
+                                | &nbsp; Paris // TODO
+                            br
+                            span(data-toggle='tooltip', title='Sexe', data-placement='top')
+                                if user.gender === 'men'
+                                    i.fa.fa-male
+                                    | &nbsp;&nbsp; Homme
+                                else if user.gender === 'women'
+                                    i.fa.fa-female
+                                        | &nbsp;&nbsp; Femme
+                                else
+                                    i.fa.fa-genderless
+                                        | &nbsp; Autre
+                            br
+                            span(data-toggle='tooltip', title='Orientation sexuelle', data-placement='top')
+                                i.fa.fa-transgender
+                                | &nbsp;&nbsp;&nbsp;
+                                if user.sexual_orientation === 'hetero'
+                                    | Hétérosexuel
+                                else if user.sexual_orientation === 'homo'
+                                    | Homosexuel
+                                else
+                                    | Bisexuel
+                            br
+                            span(data-toggle='tooltip', title='Score de popularité', data-placement='top')
+                                i.fa.fa-star
+                                | &nbsp; 300 // TODO
+                        a.btn.btn-danger.btn-block(href='#')
+                            i.fa.fa-heart
+                            | &nbsp; J'aime
+
+
+            .col-md-9
+
+                .card
+                    .card-header
+                        ul.nav.justify-content-end
+                            li.nav-item
+                                a.nav-link.btn.btn-danger.active.block-user(data-toggle='tooltip', title="Ne plus voir l'utilisateur", data-placement='top') Bloquer
+                            li.nav-item
+                                a.nav-link.report-user(data-toggle='tooltip', title="Report l'utilisateur comme un faux compte", data-placement='top') Report
+                    .card-body
+                        h5.card-title Biographie
+                        p.card-text #{user.biography}
+                        hr
+                        h5.card-title Centres d'intérêts
+                        each tag in user.tags.split(',')
+                            span.badge.badge-primary.ml-1.mr-1.p-2 #{tag}
+
+block scripts
+    script(type='text/javascript').
+        $('[data-toggle="tooltip"]').tooltip({
+            container: 'body'
+        });
+        $('.block-user').on('click', function (e) {
+            e.preventDefault();
+
+            $.get('/#{user.username}/block', function () {});
+        });
+        $('.report-user').on('click', function (e) {
+            e.preventDefault();
+
+            $.get('/#{user.username}/report', function () {
+            });
+        });

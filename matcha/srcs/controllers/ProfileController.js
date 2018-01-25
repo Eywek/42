@@ -3,6 +3,7 @@ var db = require('../models/database');
 var validator = require('../models/validator');
 var path = require('path');
 var fs = require('fs');
+var _ = require('underscore');
 
 module.exports = {
 
@@ -98,7 +99,38 @@ module.exports = {
     },
 
     profile: function (req, res) {
+        // Find user
+        db.query('SELECT `users`.`id`, `users`.`username`, `users`.`name`, `users`.`created_at`, ' +
+            '`users_accounts`.`biography`, `users_accounts`.`tags`, `users_accounts`.`gender`, `users_accounts`.`sexual_orientation`' +
+            'FROM `users` ' +
+            'INNER JOIN `users_accounts` ON `users`.`id` = `users_accounts`.`user_id` ' +
+            'WHERE `users`.`username` = ?', [req.params.username], function (err, rows) {
+            if (err) {
+                console.error(err);
+                return res.sendStatus(500);
+            }
+            if (!rows || rows.length === 0)
+                return res.sendStatus(404);
+            var user = rows[0];
 
+            // Uploads
+            db.query('SELECT `name`, `is_profile_pic` FROM `users_uploads` WHERE `user_id` = ?', [user.id], function (err, uploads) {
+                if (err) {
+                    console.error(err);
+                    return res.sendStatus(500);
+                }
+                if (!uploads)
+                    uploads = [];
+
+                user.uploads = uploads;
+                user.profile_pic = _.findWhere(user.uploads, {is_profile_pic: 1}) || '/assets/img/default_profile_pic.png';
+                if (typeof user.profile_pic === 'object')
+                    user.profile_pic = '/uploads/pics/' + user.profile_pic.name;
+
+                // View
+                res.render('Profile/profile', {user: user, title: user.username});
+            });
+        });
     },
 
     find: function (req, res) {
@@ -121,7 +153,7 @@ module.exports = {
         
     },
     
-    report: function (res, res) {
+    report: function (req, res) {
         
     }
 
