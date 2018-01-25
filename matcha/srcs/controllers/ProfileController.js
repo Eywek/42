@@ -236,7 +236,27 @@ module.exports = {
     },
 
     viewMatch: function (req, res) {
+        db.query('SELECT `users_accounts`.`sexual_orientation`, `users_accounts`.`location`, `users_accounts`.`tags` ' +
+            'FROM `users_accounts` ' +
+            'WHERE `users_accounts`.`user_id` = ?', [req.session.user], function (err, user) {
+           if (err) {
+               console.error(err);
+               return res.sendStatus(500);
+           }
+           if (!user || user.length === 0)
+               return res.render('Profile/view-match', {title: 'Suggestions', users: [], user: false});
 
+           db.query('SELECT * ' +
+               'FROM `users_accounts` ' +
+               'WHERE 1=1', [], function (err, users) {
+               if (err) {
+                   console.error(err);
+                   return res.sendStatus(500);
+               }
+
+               res.render('Profile/view-match', {title: 'Suggestions', users: users, user: true});
+           })
+        });
     },
 
     like: function (req, res) { // TODO: Send notification to liked_id
