@@ -38,7 +38,7 @@ html(lang='en')
             script(type='text/javascript').
                 var socket = io();
                 socket.emit('user-active', {userId: '#{userId}'});
-                socket.on('message', function (data) {
-                   console.log(data);
+                socket.on('new-notification', function (data) {
+                   console.log('Notification received', data);
                 });
         block scripts

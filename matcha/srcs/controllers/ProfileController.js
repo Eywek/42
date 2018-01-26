@@ -1,4 +1,5 @@
 var accountModel = require('../models/account');
+var userModel = require('../models/user');
 var db = require('../models/database');
 var validator = require('../models/validator');
 var path = require('path');
@@ -7,6 +8,7 @@ var _ = require('underscore');
 var async = require('async');
 var request = require('request');
 var config = require('../../config/config');
+var notification = require('../models/notification');
 
 module.exports = {
 
@@ -115,7 +117,7 @@ module.exports = {
         });
     },
 
-    profile: function (req, res) {
+    profile: function (req, res, io) {
         // Find user
         db.query('SELECT `users`.`id`, `users`.`username`, `users`.`name`, `users`.`last_login`, `users`.`created_at`, ' +
             '`users_accounts`.`biography`, `users_accounts`.`tags`, `users_accounts`.`gender`, `users_accounts`.`sexual_orientation`, `users_accounts`.`location`, ' +
@@ -162,6 +164,11 @@ module.exports = {
                             if (err)
                                 console.error(err);
                         });
+
+                        userModel.get(req.session.user, function (err, userFound) {
+                            if (userFound)
+                                notification.send(user.id, '<a href="/' + userFound.username +'">' + userFound.username + '</a> vient de visiter votre profil !', io, userFound.id);
+                        });
                         return res.render('Profile/profile', {user: user, title: user.username});
                     }
 
@@ -187,7 +194,7 @@ module.exports = {
                         });
 
                         return res.render('Profile/profile', {user: user, title: user.username});
-                    })
+                    });
                 });
             });
         });
@@ -351,7 +358,7 @@ module.exports = {
         });
     },
 
-    like: function (req, res) { // TODO: Send notification to liked_id
+    like: function (req, res, io) {
         db.query('SELECT `id` FROM `users` WHERE `username` = ?', [req.params.username], function (err, user) {
            if (err) {
                console.error(err);
@@ -365,14 +372,40 @@ module.exports = {
                     return res.sendStatus(500);
                 }
                 // unlike
-                if (rows.affectedRows > 0)
+                if (rows.affectedRows > 0) {
+                    db.query('SELECT `id` FROM `likes` WHERE `user_id` = ? AND `liked_id` = ?', [user[0].id, req.session.user], function (err, data) {
+                        if (err)
+                            return console.error(err);
+                        if (!data || !data.length)
+                            return;
+                        userModel.get(req.session.user, function (err, userFound) {
+                            if (userFound)
+                                notification.send(user[0].id, '<a href="/' + userFound.username +'">' + userFound.username + '</a> n\'aimes plus votre profil !', io, userFound.id);
+                        });
+                    });
                     return res.send();
+                }
                 // like
                 db.query('INSERT INTO `likes` SET `user_id` = ?, `liked_id` = ?', [req.session.user, user[0].id], function (err) {
                     if (err) {
                         console.error(err);
                         return res.sendStatus(500);
                     }
+                    db.query('SELECT `id` FROM `likes` WHERE `user_id` = ? AND `liked_id` = ?', [user[0].id, req.session.user], function (err, data) {
+                        if (err)
+                            return console.error(err);
+                        if (!data || !data.length) {
+                            userModel.get(req.session.user, function (err, userFound) {
+                                if (userFound)
+                                    notification.send(user[0].id, '<a href="/' + userFound.username +'">' + userFound.username + '</a> vient d\'aimer votre profil !', io, userFound.id);
+                            });
+                            return;
+                        }
+                        userModel.get(req.session.user, function (err, userFound) {
+                            if (userFound)
+                                notification.send(user[0].id, '<a href="/' + userFound.username +'">' + userFound.username + '</a> vient d\'aimer votre profil également !', io, userFound.id);
+                        });
+                    });
                     res.send();
                 })
             });

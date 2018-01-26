@@ -17,8 +17,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="104" column="33" lean-forward="false" selection-start-line="104" selection-start-column="33" selection-end-line="104" selection-end-column="33" />
+            <state relative-caret-position="1072">
+              <caret line="152" column="44" lean-forward="false" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -29,57 +29,8 @@
       <file leaf-file-name="layout.pug" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="account.pug" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/srcs/views/User/account.pug">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14">
-              <caret line="102" column="46" lean-forward="false" selection-start-line="102" selection-start-column="46" selection-end-line="102" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/srcs/controllers/UserController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="78" column="33" lean-forward="false" selection-start-line="78" selection-start-column="33" selection-end-line="78" selection-end-column="33" />
-              <folding>
-                <element signature="e#276#962#0" expanded="false" />
-                <element signature="e#997#3261#0" expanded="false" />
-                <element signature="e#3297#3408#0" expanded="false" />
-                <element signature="e#3444#4888#0" expanded="false" />
-                <element signature="e#4928#5877#0" expanded="false" />
-                <element signature="e#5918#6884#0" expanded="false" />
-                <element signature="e#6925#9102#0" expanded="false" />
-                <element signature="e#9144#11773#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="find.pug" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/srcs/views/Profile/find.pug">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1215">
-              <caret line="382" column="18" lean-forward="false" selection-start-line="382" selection-start-column="12" selection-end-line="382" selection-end-column="18" />
+            <state relative-caret-position="615">
+              <caret line="41" column="56" lean-forward="false" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -88,49 +39,37 @@
       <file leaf-file-name="ProfileController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="117" column="33" lean-forward="false" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
+            <state relative-caret-position="722">
+              <caret line="383" column="27" lean-forward="true" selection-start-line="383" selection-start-column="27" selection-end-line="383" selection-end-column="27" />
               <folding>
-                <element signature="e#387#1161#0" expanded="false" />
-                <element signature="e#1201#1773#0" expanded="false" />
-                <element signature="e#1811#2279#0" expanded="false" />
-                <element signature="e#2317#4768#0" expanded="false" />
-                <element signature="e#4804#9125#0" expanded="false" />
-                <element signature="e#9158#13264#0" expanded="false" />
-                <element signature="e#13302#17790#0" expanded="false" />
-                <element signature="e#17823#18942#0" expanded="false" />
-                <element signature="e#18976#20171#0" expanded="false" />
-                <element signature="e#20210#20540#0" expanded="false" />
+                <element signature="e#484#1258#0" expanded="false" />
+                <element signature="e#1298#1870#0" expanded="false" />
+                <element signature="e#1908#2376#0" expanded="false" />
+                <element signature="e#2414#4865#0" expanded="false" />
+                <element signature="e#9597#13703#0" expanded="false" />
+                <element signature="e#13741#18229#0" expanded="false" />
+                <element signature="e#21164#22359#0" expanded="false" />
+                <element signature="e#22398#22728#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.pug" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/srcs/views/Profile/profile.pug">
+      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/srcs/models/user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="772">
-              <caret line="146" column="19" lean-forward="false" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
+            <state relative-caret-position="0">
+              <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view-match.pug" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/srcs/views/Profile/view-match.pug">
+      <file leaf-file-name="notification.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/srcs/models/notification.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2716">
-              <caret line="219" column="54" lean-forward="false" selection-start-line="219" selection-start-column="54" selection-end-line="219" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="account.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/srcs/models/account.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="74" lean-forward="false" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+            <state relative-caret-position="615">
+              <caret line="41" column="69" lean-forward="true" selection-start-line="41" selection-start-column="69" selection-end-line="41" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -141,8 +80,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Pug File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -196,10 +135,11 @@
         <option value="$PROJECT_DIR$/srcs/views/Profile/view-match.pug" />
         <option value="$PROJECT_DIR$/srcs/views/Profile/find.pug" />
         <option value="$PROJECT_DIR$/srcs/models/account.js" />
-        <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
+        <option value="$PROJECT_DIR$/srcs/views/Profile/profile.pug" />
         <option value="$PROJECT_DIR$/srcs/views/layout.pug" />
         <option value="$PROJECT_DIR$/srcs/index.js" />
-        <option value="$PROJECT_DIR$/srcs/views/Profile/profile.pug" />
+        <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
+        <option value="$PROJECT_DIR$/srcs/models/notification.js" />
       </list>
     </option>
   </component>
@@ -374,12 +314,12 @@
       <workItem from="1516717151458" duration="3661000" />
       <workItem from="1516786876243" duration="23241000" />
       <workItem from="1516874205510" duration="20371000" />
-      <workItem from="1516960636182" duration="12686000" />
+      <workItem from="1516960636182" duration="15168000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60199000" />
+    <option name="totallyTimeSpent" value="62681000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -416,14 +356,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/find.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="9" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="34" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/views/Profile/view-match.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -445,16 +377,14 @@
         <state relative-caret-position="4155">
           <caret line="277" column="26" lean-forward="true" selection-start-line="227" selection-start-column="28" selection-end-line="277" selection-end-column="26" />
           <folding>
-            <element signature="e#387#1161#0" expanded="false" />
-            <element signature="e#1201#1773#0" expanded="false" />
-            <element signature="e#1811#2279#0" expanded="false" />
-            <element signature="e#2317#4768#0" expanded="false" />
-            <element signature="e#4804#9125#0" expanded="false" />
-            <element signature="e#9158#13264#0" expanded="false" />
-            <element signature="e#13302#17790#0" expanded="false" />
-            <element signature="e#17823#18942#0" expanded="false" />
-            <element signature="e#18976#20171#0" expanded="false" />
-            <element signature="e#20210#20540#0" expanded="false" />
+            <element signature="e#484#1258#0" expanded="false" />
+            <element signature="e#1298#1870#0" expanded="false" />
+            <element signature="e#1908#2376#0" expanded="false" />
+            <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#9597#13703#0" expanded="false" />
+            <element signature="e#13741#18229#0" expanded="false" />
+            <element signature="e#21164#22359#0" expanded="false" />
+            <element signature="e#22398#22728#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -515,16 +445,14 @@
         <state relative-caret-position="345">
           <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
           <folding>
-            <element signature="e#387#1161#0" expanded="false" />
-            <element signature="e#1201#1773#0" expanded="false" />
-            <element signature="e#1811#2279#0" expanded="false" />
-            <element signature="e#2317#4768#0" expanded="false" />
-            <element signature="e#4804#9125#0" expanded="false" />
-            <element signature="e#9158#13264#0" expanded="false" />
-            <element signature="e#13302#17790#0" expanded="false" />
-            <element signature="e#17823#18942#0" expanded="false" />
-            <element signature="e#18976#20171#0" expanded="false" />
-            <element signature="e#20210#20540#0" expanded="false" />
+            <element signature="e#484#1258#0" expanded="false" />
+            <element signature="e#1298#1870#0" expanded="false" />
+            <element signature="e#1908#2376#0" expanded="false" />
+            <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#9597#13703#0" expanded="false" />
+            <element signature="e#13741#18229#0" expanded="false" />
+            <element signature="e#21164#22359#0" expanded="false" />
+            <element signature="e#22398#22728#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -548,6 +476,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1125">
           <caret line="75" column="25" lean-forward="false" selection-start-line="75" selection-start-column="25" selection-end-line="75" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -587,16 +516,14 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="6" />
           <folding>
-            <element signature="e#387#1161#0" expanded="false" />
-            <element signature="e#1201#1773#0" expanded="false" />
-            <element signature="e#1811#2279#0" expanded="false" />
-            <element signature="e#2317#4768#0" expanded="false" />
-            <element signature="e#4804#9125#0" expanded="false" />
-            <element signature="e#9158#13264#0" expanded="false" />
-            <element signature="e#13302#17790#0" expanded="false" />
-            <element signature="e#17823#18942#0" expanded="false" />
-            <element signature="e#18976#20171#0" expanded="false" />
-            <element signature="e#20210#20540#0" expanded="false" />
+            <element signature="e#484#1258#0" expanded="false" />
+            <element signature="e#1298#1870#0" expanded="false" />
+            <element signature="e#1908#2376#0" expanded="false" />
+            <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#9597#13703#0" expanded="false" />
+            <element signature="e#13741#18229#0" expanded="false" />
+            <element signature="e#21164#22359#0" expanded="false" />
+            <element signature="e#22398#22728#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -637,6 +564,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -744,17 +672,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/models/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/models/validator.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1147">
           <caret line="82" column="31" lean-forward="false" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -766,26 +688,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/view-match.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2716">
-          <caret line="219" column="54" lean-forward="false" selection-start-line="219" selection-start-column="54" selection-end-line="219" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/find.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1215">
-          <caret line="382" column="18" lean-forward="false" selection-start-line="382" selection-start-column="12" selection-end-line="382" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/views/User/account.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="102" column="46" lean-forward="false" selection-start-line="102" selection-start-column="46" selection-end-line="102" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -807,22 +721,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
+    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/find.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="117" column="33" lean-forward="false" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
-          <folding>
-            <element signature="e#387#1161#0" expanded="false" />
-            <element signature="e#1201#1773#0" expanded="false" />
-            <element signature="e#1811#2279#0" expanded="false" />
-            <element signature="e#2317#4768#0" expanded="false" />
-            <element signature="e#4804#9125#0" expanded="false" />
-            <element signature="e#9158#13264#0" expanded="false" />
-            <element signature="e#13302#17790#0" expanded="false" />
-            <element signature="e#17823#18942#0" expanded="false" />
-            <element signature="e#18976#20171#0" expanded="false" />
-            <element signature="e#20210#20540#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="1215">
+          <caret line="382" column="18" lean-forward="false" selection-start-line="382" selection-start-column="12" selection-end-line="382" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/profile.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="121" column="56" lean-forward="true" selection-start-line="121" selection-start-column="56" selection-end-line="121" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/view-match.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2716">
+          <caret line="219" column="54" lean-forward="false" selection-start-line="219" selection-start-column="54" selection-end-line="219" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -834,36 +753,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/User/account.pug">
+    <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="102" column="46" lean-forward="false" selection-start-line="102" selection-start-column="46" selection-end-line="102" selection-end-column="46" />
+        <state relative-caret-position="615">
+          <caret line="41" column="56" lean-forward="false" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/srcs/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="104" column="33" lean-forward="false" selection-start-line="104" selection-start-column="33" selection-end-line="104" selection-end-column="33" />
+        <state relative-caret-position="1072">
+          <caret line="152" column="44" lean-forward="false" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
+    <entry file="file://$PROJECT_DIR$/srcs/models/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="19" lean-forward="false" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+        <state relative-caret-position="0">
+          <caret line="0" column="28" lean-forward="false" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/profile.pug">
+    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="146" column="19" lean-forward="false" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
+        <state relative-caret-position="722">
+          <caret line="383" column="27" lean-forward="true" selection-start-line="383" selection-start-column="27" selection-end-line="383" selection-end-column="27" />
+          <folding>
+            <element signature="e#484#1258#0" expanded="false" />
+            <element signature="e#1298#1870#0" expanded="false" />
+            <element signature="e#1908#2376#0" expanded="false" />
+            <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#9597#13703#0" expanded="false" />
+            <element signature="e#13741#18229#0" expanded="false" />
+            <element signature="e#21164#22359#0" expanded="false" />
+            <element signature="e#22398#22728#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/models/notification.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="69" lean-forward="true" selection-start-line="41" selection-start-column="69" selection-end-line="41" selection-end-column="69" />
           <folding />
         </state>
       </provider>

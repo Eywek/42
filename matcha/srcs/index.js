@@ -35,6 +35,33 @@ app.use(function (req, res, next) {
 });
 
 /*
+    WEBSOCKET
+ */
+
+db.query('DELETE FROM `active_users` WHERE 1=1;', function (err) {
+    if (err)
+        console.error(err);
+});
+var activeUsers = {};
+io.on('connection', function(socket) {
+    socket.on('user-active', function(data) {
+        db.query('INSERT INTO `active_users` SET `socket_id` = ?, `user_id` = ?', [socket.id, data.userId], function (err) {
+            if (err)
+                console.error(err);
+        });
+        activeUsers[socket.id] = data.userId;
+        io.sockets.emit('user-active', data.userId);
+    });
+    socket.on('disconnect', function() {
+        db.query('DELETE FROM `active_users` WHERE `socket_id` = ?', [socket.id], function (err) {
+            if (err)
+                console.error(err);
+        });
+        io.sockets.emit('user-disconnect', activeUsers[socket.id]);
+    });
+});
+
+/*
     ROUTES
  */
 
@@ -122,37 +149,14 @@ app.get('/chat', authMiddleware, chatController.index);
 app.get('/:username/chat', authMiddleware, chatController.chat);
 
 // ACCOUNTS
-app.get('/:username', authMiddleware, profileController.profile);
-app.get('/:username/like', authMiddleware, profileController.like);
+app.get('/:username', authMiddleware, function (req, res) {
+    profileController.profile(req, res, io);
+});
+app.get('/:username/like', authMiddleware, function (req, res) {
+    profileController.like(req, res, io);
+});
 app.get('/:username/block', authMiddleware, profileController.block);
 app.get('/:username/report', authMiddleware, profileController.report);
-
-/*
-    WEBSOCKET
- */
-
-db.query('DELETE FROM `active_users` WHERE 1=1;', function (err) {
-   if (err)
-       console.error(err);
-});
-var activeUsers = {};
-io.on('connection', function(socket) {
-    socket.on('user-active', function(data) {
-        db.query('INSERT INTO `active_users` SET `socket_id` = ?, `user_id` = ?', [socket.id, data.userId], function (err) {
-            if (err)
-                console.error(err);
-        });
-        activeUsers[socket.id] = data.userId;
-        io.sockets.emit('user-active', data.userId);
-    });
-    socket.on('disconnect', function() {
-        db.query('DELETE FROM `active_users` WHERE `socket_id` = ?', [socket.id], function (err) {
-            if (err)
-                console.error(err);
-        });
-        io.sockets.emit('user-disconnect', activeUsers[socket.id]);
-    });
-});
 
 /*
     LAUNCH
