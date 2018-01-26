@@ -259,15 +259,7 @@ block scripts
                     return 0;
 
                 async.sortBy(users, function (user, callback) {
-                    new google.maps.DistanceMatrixService().getDistanceMatrix({
-                        origins: [userLocation],
-                        destinations: [user.location],
-                        travelMode: 'DRIVING'
-                    }, function (response, status) {
-                        if (status !== 'OK')
-                            return callback(undefined, 0);
-                        return callback(undefined, response.rows[0].elements[0].distance.value);
-                    });
+                    callback(undefined, user.distance);
                 }, function (err, sortedUsers) {
                     if (type === 'desc')
                         sortedUsers.reverse();
@@ -357,19 +349,10 @@ block scripts
             var value = input.val().split(',');
             var userLocation = '#{user.location}';
             if (userLocation.length === 0)
-                return 0;
+                return next(0);
 
             async.filter(optionnalUsers || users, function (user, callback) {
-                new google.maps.DistanceMatrixService().getDistanceMatrix({
-                    origins: [userLocation],
-                    destinations: [user.location],
-                    travelMode: 'DRIVING'
-                }, function (response, status) {
-                    if (status !== 'OK')
-                        return callback(undefined, true);
-                    var distance = response.rows[0].elements[0].distance.value / 1000; // meters to kilometers
-                    return callback(undefined, distance >= value[0] && distance <= value[1]);
-                });
+                return callback(undefined, user.distance >= value[0] && user.distance <= value[1]);
             }, function (err, filteredUsers) {
                 next(filteredUsers);
             });
@@ -379,7 +362,7 @@ block scripts
             var value = input.val().split(',');
             var userTags = '#{user.tags}'.split(',');
             if (userTags.length === 0)
-                return;
+                return next();
 
             next(_.filter(optionnalUsers || users, function (user) {
                 var diff = _.difference(user.tags.split(','), userTags).length;

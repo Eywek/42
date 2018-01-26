@@ -4,6 +4,9 @@ var validator = require('../models/validator');
 var path = require('path');
 var fs = require('fs');
 var _ = require('underscore');
+var async = require('async');
+var request = require('request');
+var config = require('../../config/config');
 
 module.exports = {
 
@@ -189,53 +192,79 @@ module.exports = {
     },
 
     find: function (req, res) {
-        var sqlPopularity = accountModel.sqlPopularity.replace('?', '`users`.`id`');
-        var sql = 'SELECT `users`.`username`, `users`.`id`, ' +
-            '`users_accounts`.`age`, `users_accounts`.`tags`, `users_accounts`.`location`, ' +
-            '(' + sqlPopularity + ') AS `popularity`, ' +
-            '`users_uploads`.`name` AS `profile_pic` ' +
+        db.query('SELECT `users_accounts`.`sexual_orientation`, `users_accounts`.`gender`, `users_accounts`.`location`, `users_accounts`.`age`, `users_accounts`.`tags` ' +
             'FROM `users_accounts` ' +
-            'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
-            'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
-            'LEFT JOIN `users_blockeds` ON `users_blockeds`.`user_id` = `users`.`id` OR `users_blockeds`.`blocker_id` = `users`.`id`' +
-            'WHERE ';
-        var values = [];
+            'WHERE `users_accounts`.`user_id` = ?', [req.session.user], function (err, user) {
+            if (err) {
+                console.error(err);
+                return res.sendStatus(500);
+            }
+            if (!user || user.length === 0)
+                user = {location: 'France'};
+            else
+                user = user[0];
 
-        if (req.body.age) {
-            sql += '`users_accounts`.`age` >= ? AND `users_accounts`.`age` <= ? ';
-            var age = req.body.age.split(',');
-            if (age.length !== 2 || parseInt(age[0]) != age[0] || parseInt(age[1]) != age[1])
-                return res.json({status: false, error: 'L\'âge est invalide.'});
-            values.push(age[0], age[1]);
-        }
-        if (req.body.popularity) {
-            sql += 'AND (' + sqlPopularity + ') >= ? AND (' + sqlPopularity + ') <= ? ';
-            var popularity = req.body.popularity.split(',');
-            if (popularity.length !== 2 || parseInt(popularity[0]) != popularity[0] || parseInt(popularity[1]) != popularity[1])
-                return res.json({status: false, error: 'La popularité invalide.'});
-            values.push(popularity[0], popularity[1]);
-        }
-        if (req.body.location) {
-            sql += 'AND `users_accounts`.`location` LIKE ? ';
-            values.push('%' + req.body.location + '%');
-        }
-        if (req.body.tags) {
-            sql += 'AND `users_accounts`.`tags` LIKE ? ';
-            if (!req.body.tags.match(/^([A-Za-z0-9 \-_]+,?)+$/))
-                return res.json({status: false, error: 'Vos tags sont invalides.'});
-            var tags = req.body.tags.split(',');
-            values.push('%' + tags.join(',%') + '%');
-        }
-        sql += 'AND `users_blockeds`.`user_id` IS NULL ';
-        sql += 'AND `users_accounts`.`user_id` != ?';
-        values.push(req.session.user);
+            var sqlPopularity = accountModel.sqlPopularity.replace('?', '`users`.`id`');
+            var sql = 'SELECT `users`.`username`, `users`.`id`, ' +
+                '`users_accounts`.`age`, `users_accounts`.`tags`, `users_accounts`.`location`, ' +
+                '(' + sqlPopularity + ') AS `popularity`, ' +
+                '`users_uploads`.`name` AS `profile_pic` ' +
+                'FROM `users_accounts` ' +
+                'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
+                'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
+                'LEFT JOIN `users_blockeds` ON `users_blockeds`.`user_id` = `users`.`id` OR `users_blockeds`.`blocker_id` = `users`.`id`' +
+                'WHERE ';
+            var values = [];
 
-        db.query(sql, values, function (err, rows) {
-           if (err) {
-               console.error(err);
-               return res.json({status: false, error: 'Une erreur est survenue'});
-           }
-           return res.json({status: true, success: rows.length + ' utilisateurs trouvés.', data: rows});
+            if (req.body.age) {
+                sql += '`users_accounts`.`age` >= ? AND `users_accounts`.`age` <= ? ';
+                var age = req.body.age.split(',');
+                if (age.length !== 2 || parseInt(age[0]) != age[0] || parseInt(age[1]) != age[1])
+                    return res.json({status: false, error: 'L\'âge est invalide.'});
+                values.push(age[0], age[1]);
+            }
+            if (req.body.popularity) {
+                sql += 'AND (' + sqlPopularity + ') >= ? AND (' + sqlPopularity + ') <= ? ';
+                var popularity = req.body.popularity.split(',');
+                if (popularity.length !== 2 || parseInt(popularity[0]) != popularity[0] || parseInt(popularity[1]) != popularity[1])
+                    return res.json({status: false, error: 'La popularité invalide.'});
+                values.push(popularity[0], popularity[1]);
+            }
+            if (req.body.location) {
+                sql += 'AND `users_accounts`.`location` LIKE ? ';
+                values.push('%' + req.body.location + '%');
+            }
+            if (req.body.tags) {
+                sql += 'AND `users_accounts`.`tags` LIKE ? ';
+                if (!req.body.tags.match(/^([A-Za-z0-9 \-_]+,?)+$/))
+                    return res.json({status: false, error: 'Vos tags sont invalides.'});
+                var tags = req.body.tags.split(',');
+                values.push('%' + tags.join(',%') + '%');
+            }
+            sql += 'AND `users_blockeds`.`user_id` IS NULL ';
+            sql += 'AND `users_accounts`.`user_id` != ?';
+            values.push(req.session.user);
+
+            db.query(sql, values, function (err, rows) {
+                if (err) {
+                    console.error(err);
+                    return res.json({status: false, error: 'Une erreur est survenue'});
+                }
+
+                async.eachOf(rows, function (match, key, next) {
+                    request("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" + user.location + "&destinations=" + match.location + "&key=" + config.googleApiKey, function (err, response, body) {
+                        var distance = 0;
+                        if (err)
+                            console.error(err);
+                        else
+                            distance = JSON.parse(body).rows[0].elements[0].distance.value;
+                        rows[key].distance = distance / 1000;
+                        next();
+                    });
+                }, function () {
+                    return res.json({status: true, success: rows.length + ' utilisateurs trouvés.', data: rows});
+                });
+            });
         });
     },
 
@@ -263,10 +292,13 @@ module.exports = {
                 values.push(user.sexual_orientation);
             }
 
-            // TODO: Not blocked
-
+            // Not blocked
+            where += (where.length > 0 ? 'AND' : '') + ' `users_blockeds`.`user_id` IS NULL ';
             // Not him
             where += ' AND `users_accounts`.`user_id` != ?';
+            values.push(req.session.user);
+            // Not already liked
+            where += ' AND `likes`.`liked_id` IS NULL ';
             values.push(req.session.user);
 
             var sqlPopularity = accountModel.sqlPopularity.replace('?', '`users`.`id`');
@@ -277,25 +309,43 @@ module.exports = {
                'FROM `users_accounts` ' +
                'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
                'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
+               'LEFT JOIN `users_blockeds` ON `users_blockeds`.`user_id` = `users`.`id` OR `users_blockeds`.`blocker_id` = `users`.`id`' +
+               'LEFT JOIN `likes` ON `likes`.`user_id` = ? AND `likes`.`liked_id` = `users`.`id`' +
                'WHERE ' + where, values, function (err, users) {
                 if (err) {
                     console.error(err);
                     return res.sendStatus(500);
                 }
 
-                // TODO: Match with location
+                // Do weighting
+                async.eachOf(users, function (match, key, next) {
+                    // Match
+                    var tagsDiff = _.difference(match.tags.split(','), user.tags.split(',')).length;
+                    var ageDiff = user.age - match.age;
+                    request("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" + user.location + "&destinations=" + match.location + "&key=" + config.googleApiKey, function (err, response, body) {
+                        var distance = 0;
+                        if (err)
+                            console.error(err);
+                        else
+                            distance = JSON.parse(body).rows[0].elements[0].distance.value;
+                        users[key].weight = tagsDiff * -0.5 + distance * -0.8 + match.popularity * 0.3 + (ageDiff * (Math.abs(ageDiff) > 5 ? -0.8 : -0.3)); // location / tags / popularity / age
+                        users[key].distance = distance / 1000;
 
-                // TODO: Match with tags
+                        // Display
+                        if (match.profile_pic)
+                            users[key].profile_pic = '/uploads/pics/' + match.profile_pic;
+                        else
+                            users[key].profile_pic = '/assets/img/default_profile_pic.png';
+                        users[key].username = match.username.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-                // TODO: Match with popularity
-
-                res.render('Profile/view-match', {title: 'Suggestions', users: users.map(function (user) {
-                    if (user.profile_pic)
-                        user.profile_pic = '/uploads/pics/' + user.profile_pic;
-                    else
-                        user.profile_pic = '/assets/img/default_profile_pic.png';
-                    return user;
-                }), user: true});
+                        // next
+                        next();
+                    });
+                }, function () {
+                    res.render('Profile/view-match', {title: 'Suggestions', users: users.sort(function (a, b) {
+                        return a.weight - b.weight;
+                    }).slice(0, 25), user: user});
+                });
             })
         });
     },

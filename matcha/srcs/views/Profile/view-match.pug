@@ -1,6 +1,25 @@
 extends ../layout
 
 block style
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css')
+    link(rel='stylesheet', href='/assets/css/bootstrap-tagsinput.css')
+    style.
+        .tooltip.tooltip-main {
+            opacity: 1;
+        }
+
+        .slider-selection {
+            background: #007bff;
+        }
+
+        .slider {
+            margin-top: 30px;
+            display: block;
+        }
+
+        .slider.slider-horizontal {
+            width: 100%;
+        }
     style.
         .user {
             position: relative;
@@ -29,12 +48,50 @@ block content
             .alert.alert-danger
                 h3 Profil incomplet
                 | Veuillez renseigner vos informations sur la page de votre compte pour bénéficier des suggestions.
+        else if users.length === 0
+            .alert.alert-warning
+                h3 Aucun profil correspondant
+                | Désolé mais nous n'avons pu trouver personne vous correspondant.
         else
-            .row
+            h3 Résultats
+            hr
+            button.btn.btn-info.order-age(data-order-type='asc')
+                | Âge  
+                i.fa.fa-sort
+            button.btn.btn-info.ml-3.order-popularity(data-order-type='asc')
+                | Popularité  
+                i.fa.fa-sort
+            button.btn.btn-info.ml-3.order-tags(data-order-type='asc')
+                | Intérêts  
+                i.fa.fa-sort
+            button.btn.btn-info.ml-3.order-location(data-order-type='asc')
+                | Localisation  
+                i.fa.fa-sort
+            hr
+            .row.text-center
+                .col-md-3
+                    .form-group
+                        label Âge
+                        input(type='text', name='filter-age', data-slider-min='18', data-slider-max='90', data-slider-step='1', data-slider-value='[18, 90]')
+                .col-md-3
+                    .form-group
+                        label Popularité
+                        input(type='text', name='filter-popularity', data-slider-min='0', data-slider-max='1000', data-slider-step='1', data-slider-value='[0, 1000]')
+                .col-md-3
+                    .form-group
+                        label Localisation
+                        input(type='text', name='filter-location', data-slider-min='0', data-slider-max='500', data-slider-step='1', data-slider-value='[0,500]')
+                .col-md-3
+                    .form-group
+                        label Intérêts
+                        input(type='text', name='filter-tags', data-slider-min='0', data-slider-max=user.tags.split(',').length, data-slider-step='1', data-slider-value="[0," + user.tags.split(',').length + "]")
+            hr
+
+            .row.results
 
                 each user in users
                     .col-md-3
-                        .card.user(data-user-age=user.age, data-user-location=user.location, data-user-popularity=user.popularity, data-user-tags=user.tags)
+                        .card.user
                             .card-body
                                 img.img-thumbnail(src=user.profile_pic)
                                 .cleafix
@@ -43,3 +100,228 @@ block content
                                 a.btn.btn-primary(href='/' + user.username)
                                     i.fa.fa-user
                                     | &nbsp;&nbsp;Voir le profil
+
+block scripts
+    script(type='text/html')#user-template.
+            <div class="col-md-3">
+                <div class="card user">
+                    <div class="card-body">
+                        <img class="img-thumbnail" src="{PROFILE_PIC}">
+                        <div class="cleafix"></div>
+                        <h3>{USERNAME}</h3>
+                        <hr>
+                        <a class="btn btn-primary" href="/{USERNAME}">
+                        <i class="fa fa-user"></i>
+                        &nbsp;&nbsp;Voir le profil
+                        </a>
+                    </div>
+                </div>
+            </div>
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js')
+    script(type='text/javascript', src='/assets/js/bootstrap-tagsinput.min.js')
+    script(type='text/javascript', src='http://underscorejs.org/underscore-min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/async/2.6.0/async.min.js')
+    script(type='text/javascript').
+        function generateUserHtml(user) {
+            var html = $('#user-template').html();
+
+            html = html.replace(/{USERNAME}/g, user.username);
+            html = html.replace('{PROFILE_PIC}', user.profile_pic);
+
+            return html;
+        }
+
+        var users = JSON.parse('!{JSON.stringify(users)}');
+        $('input[name="filter-age"]').bootstrapSlider({
+            formatter: function (numbers) {
+                if (typeof numbers === 'object')
+                    return 'Entre ' + numbers[0] + ' ans et ' + numbers[1] + ' ans';
+                return numbers;
+            }
+        });
+        $('input[name="filter-popularity"]').bootstrapSlider();
+        $('input[name="filter-location"]').bootstrapSlider({
+            formatter: function (numbers) {
+                if (typeof numbers === 'object')
+                    return 'Entre ' + numbers[0] + ' km et ' + numbers[1] + ' km';
+                return numbers;
+            }
+        });
+        $('input[name="filter-tags"]').bootstrapSlider({
+            formatter: function (numbers) {
+                if (typeof numbers === 'object')
+                    return 'Entre ' + numbers[0] + ' tags et ' + numbers[1] + ' intérêts en commun';
+                return numbers;
+            }
+        });
+        initOrderFiltersEvents();
+
+        function initOrderFiltersEvents()
+        {
+            $('.order-age').unbind('click').on('click', function (e) {
+                var button = $(this);
+                var type = button.attr('data-order-type');
+
+                var sortedUsers = _.sortBy(users, 'age');
+                if (type === 'desc')
+                    sortedUsers.reverse();
+
+                var html = '';
+                for (var i = 0; i < sortedUsers.length; i++)
+                    html += generateUserHtml(sortedUsers[i]);
+                $('.results').html(html);
+                button.attr('data-order-type', (type === 'asc' ? 'desc' : 'asc'))
+            });
+            $('.order-popularity').unbind('click').on('click', function (e) {
+                var button = $(this);
+                var type = button.attr('data-order-type');
+
+                var sortedUsers = _.sortBy(users, 'popularity');
+                if (type === 'desc')
+                    sortedUsers.reverse();
+
+                var html = '';
+                for (var i = 0; i < sortedUsers.length; i++)
+                    html += generateUserHtml(sortedUsers[i]);
+                $('.results').html(html);
+                button.attr('data-order-type', (type === 'asc' ? 'desc' : 'asc'))
+            });
+            $('.order-tags').unbind('click').on('click', function (e) {
+                var button = $(this);
+                var type = button.attr('data-order-type');
+                var userTags = '#{user.tags}'.split(',');
+                if (userTags.length === 0)
+                    return 0;
+
+                var sortedUsers = users.sort(function (a, b) {
+                    var aTags = a.tags.split(',');
+                    var bTags = b.tags.split(',');
+
+                    if (type === 'asc')
+                        return _.difference(aTags, userTags).length - _.difference(bTags, userTags).length;
+                    else
+                        return _.difference(bTags, userTags).length - _.difference(aTags, userTags).length;
+                });
+
+                var html = '';
+                for (var i = 0; i < sortedUsers.length; i++)
+                    html += generateUserHtml(sortedUsers[i]);
+                $('.results').html(html);
+                button.attr('data-order-type', (type === 'asc' ? 'desc' : 'asc'))
+            });
+            $('.order-location').unbind('click').on('click', function (e) {
+                var button = $(this);
+                var type = button.attr('data-order-type');
+                var userLocation = '#{user.location}';
+                if (userLocation.length === 0)
+                    return 0;
+
+                async.sortBy(users, function (user, callback) {
+                    callback(undefined, user.distance);
+                }, function (err, sortedUsers) {
+                    if (type === 'desc')
+                        sortedUsers.reverse();
+                    var html = '';
+                    for (var i = 0; i < sortedUsers.length; i++)
+                        html += generateUserHtml(sortedUsers[i]);
+                    $('.results').html(html);
+                    button.attr('data-order-type', (type === 'asc' ? 'desc' : 'asc'))
+                });
+            });
+
+            $('input[name="filter-age"]').unbind('change').on('change', function (e) {
+                filterAge($(this), function (filteredUsers) {
+                    filterPopularity($('input[name="filter-popularity"]'), function (filteredUsers) {
+                        filterLocation($('input[name="filter-location"]'), function (filteredUsers) {
+                            filterTags($('input[name="filter-tags"]'), function (filteredUsers) {
+                                var html = '';
+                                for (var i = 0; i < filteredUsers.length; i++)
+                                    html += generateUserHtml(filteredUsers[i]);
+                                $('.results').html(html);
+                            }, filteredUsers)
+                        }, filteredUsers)
+                    }, filteredUsers)
+                })
+            });
+            $('input[name="filter-popularity"]').unbind('change').on('change', function (e) {
+                filterPopularity($(this), function (filteredUsers) {
+                    filterAge($('input[name="filter-age"]'), function (filteredUsers) {
+                        filterLocation($('input[name="filter-location"]'), function (filteredUsers) {
+                            filterTags($('input[name="filter-tags"]'), function (filteredUsers) {
+                                var html = '';
+                                for (var i = 0; i < filteredUsers.length; i++)
+                                    html += generateUserHtml(filteredUsers[i]);
+                                $('.results').html(html);
+                            }, filteredUsers)
+                        }, filteredUsers)
+                    }, filteredUsers)
+                })
+            });
+            $('input[name="filter-location"]').unbind('change').on('change', function (e) {
+                filterLocation($(this), function (filteredUsers) {
+                    filterPopularity($('input[name="filter-popularity"]'), function (filteredUsers) {
+                        filterAge($('input[name="filter-age"]'), function (filteredUsers) {
+                            filterTags($('input[name="filter-tags"]'), function (filteredUsers) {
+                                var html = '';
+                                for (var i = 0; i < filteredUsers.length; i++)
+                                    html += generateUserHtml(filteredUsers[i]);
+                                $('.results').html(html);
+                            }, filteredUsers)
+                        }, filteredUsers)
+                    }, filteredUsers)
+                })
+            });
+            $('input[name="filter-tags"]').unbind('change').on('change', function (e) {
+                filterTags($(this), function (filteredUsers) {
+                    filterPopularity($('input[name="filter-popularity"]'), function (filteredUsers) {
+                        filterLocation($('input[name="filter-location"]'), function (filteredUsers) {
+                            filterAge($('input[name="filter-age"]'), function (filteredUsers) {
+                                var html = '';
+                                for (var i = 0; i < filteredUsers.length; i++)
+                                    html += generateUserHtml(filteredUsers[i]);
+                                $('.results').html(html);
+                            }, filteredUsers)
+                        }, filteredUsers)
+                    }, filteredUsers)
+                })
+            });
+        }
+        function filterAge(input, next, optionnalUsers)
+        {
+            var value = input.val().split(',');
+
+            next(_.filter(optionnalUsers || users, function (user) {
+                return user.age >= value[0] && user.age <= value[1];
+            }));
+        }
+        function filterPopularity(input, next, optionnalUsers)
+        {
+            var value = input.val().split(',');
+
+            next(_.filter(optionnalUsers || users, function (user) {
+                return user.popularity >= value[0] && user.popularity <= value[1];
+            }));
+        }
+        function filterLocation(input, next, optionnalUsers)
+        {
+            var value = input.val().split(',');
+
+            next(_.filter(optionnalUsers || users, function (user) {
+                return user.distance >= value[0] && user.distance <= value[1];
+            }));
+        }
+        function filterTags(input, next, optionnalUsers)
+        {
+            var value = input.val().split(',');
+            var userTags = '#{user.tags}'.split(',');
+            if (userTags.length === 0)
+                return next();
+
+            next(_.filter(optionnalUsers || users, function (user) {
+                var diff = _.difference(user.tags.split(','), userTags).length;
+                var commonsCount = userTags.length - diff;
+                if (commonsCount < 0)
+                    commonsCount = 0;
+                return commonsCount >= value[0] && commonsCount <= value[1];
+            }));
+        }
