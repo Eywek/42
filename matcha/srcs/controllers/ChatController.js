@@ -31,22 +31,35 @@ module.exports = {
                     console.error(err);
                     return res.sendStatus(500);
                 }
+                // Group
                 conversations = _.groupBy(conversations, function (message) {
                     if (message.to_id === req.session.user)
                         return message.from_id;
                     return message.to_id;
                 });
-                console.log(conversations);
+                // Add missing conversations
+                for (var i = 0; i < users.length; i++) {
+                    if (!conversations[users[i].id])
+                        conversations[users[i].id] = [];
+                }
+                // Fix profile pic
+                users = users.map(function (user) {
+                    if (user.profile_pic)
+                        user.profile_pic = '/uploads/pics/' + user.profile_pic;
+                    else
+                        user.profile_pic = '/assets/img/default_profile_pic.png';
+                    return user;
+                });
+                // Users by id
+                var usersById = {};
+                for (i = 0; i < users.length; i++)
+                    usersById[users[i].id] = users[i];
+
+                // TODO: Sort conversations by last messages
 
                 res.render('Chat/chat', {
                     title: 'Messagerie',
-                    users: users.map(function (user) {
-                        if (user.profile_pic)
-                            user.profile_pic = '/uploads/pics/' + user.profile_pic;
-                        else
-                            user.profile_pic = '/assets/img/default_profile_pic.png';
-                        return user;
-                    }),
+                    usersById: usersById,
                     conversations: conversations
                 });
             });

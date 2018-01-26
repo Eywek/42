@@ -2,7 +2,7 @@ extends ../layout
 
 block style
     style.
-        [data-toggle="tooltip"] {
+        [data-toggle="tooltip"], .user[data-user-id] {
             cursor: pointer;
         }
         span.online {
@@ -11,8 +11,15 @@ block style
             display: block!important;
             border-radius: 50%;
             position: absolute;
-            right: -5px;
-            top: -10px;
+            right: 15px;
+            top: 23px;
+        }
+        .new-message {
+            color: #007bff;
+            position: absolute;
+            font-size: 10px;
+            bottom: 10px;
+            left: 88px;
         }
         .card.message {
             width: auto;
@@ -59,7 +66,7 @@ block style
 block content
     .container.mt-5
 
-        if users.length === 0
+        if conversations.length === 0
             .alert.alert-danger
                 h3 Personne de disponible !
                 | Vous n'avez pas encore aimé de profil en retour ou ils ne vous aiment pas en retour. Il vous faut patienter !
@@ -67,10 +74,13 @@ block content
             .row
                 .col-md-3
                     ul.list-group
-                        each user, i in users
-                            li.list-group-item(class=i === 0 ? 'active' : '', data-user-id=user.id)
+                        - var i = 0;
+                        each conversation, key in conversations
+                            - var user = usersById[key];
+                            li.list-group-item.user(class=i++ === 0 ? 'active' : '', data-user-id=user.id)
                                 img.rounded(src=user.profile_pic, width=50, height=50)
                                 span.h4.ml-3 #{user.name}
+                                span.new-message
                                 .online-badge
                                     if user.active
                                         span.badge.badge-success.online(data-toggle='tooltip', data-placement='top', title='Connecté')
@@ -78,7 +88,7 @@ block content
                     .card.chat
                         .card-body
 
-                            - var i = 0;
+                            - i = 0;
                             each conversation, key in conversations
                                 .messages(data-user-id=key, class=i++ === 0 ? 'active' : '')
                                     each message, j in conversation
@@ -127,16 +137,18 @@ block scripts
             socket.on('new-chat-message', function (message) {
                 var currentUserId = $('.messages.active').attr('data-user-id');
 
-                // CURRENT CONVERSATION
-                if (parseInt(currentUserId) === parseInt(message.from)) {
-                    $('.messages').append($('#messageTemplate').html().replace('{CONTENT}', message.message).replace('{OFFSET}', ''));
-                    // SCROLL
-                    var element = document.querySelector('.messages');
-                    element.scrollTop = element.scrollHeight;
-                    return;
-                }
+                // TODO: Add user / messages if not already in DOM
 
-                // TODO: OTHER CONVERSATION
+                // ADD MESSAGE
+                $('.messages[data-user-id="' + message.from + '"]').append($('#messageTemplate').html().replace('{CONTENT}', message.message).replace('{OFFSET}', ''));
+
+                // SCROLL
+                var element = document.querySelector('.messages');
+                element.scrollTop = element.scrollHeight;
+
+                // OTHER CONVERSATION
+                if (parseInt(currentUserId) !== parseInt(message.from))
+                    $('.user[data-user-id="' + message.from + '"]').find('.new-message').html('Nouveau message');
             });
         });
         $('[data-toggle="tooltip"]').tooltip({
@@ -157,8 +169,25 @@ block scripts
             // ADD TO HTML
             $('.messages').append($('#messageTemplate').html().replace('{CONTENT}', message.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')).replace('{OFFSET}', 'offset-md-7'));
             // SCROLL
-            var element = document.querySelector('.messages');
+            var element = document.querySelector('.messages.active');
             element.scrollTop = element.scrollHeight;
             // REMOVE INPUT CONTENT
             $('.reply input[name="reply"]').val('');
         })
+        $('.user[data-user-id]').on('click', function (e) {
+            e.preventDefault();
+            var element = $(this);
+            var userId = element.attr('data-user-id');
+
+            $('.messages').removeClass('active');
+            $('.messages[data-user-id="' + userId + '"]').addClass('active');
+            $('.user').removeClass('active');
+            element.addClass('active');
+
+            // SCROLL
+            var element = document.querySelector('.messages[data-user-id="' + userId + '"]');
+            element.scrollTop = element.scrollHeight;
+        });
+        // SCROLL
+        var element = document.querySelector('.messages');
+        element.scrollTop = element.scrollHeight;
