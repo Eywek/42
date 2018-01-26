@@ -227,6 +227,8 @@ module.exports = {
         }
         // TODO: Not blocked
 
+        // TODO: Not him
+
         db.query(sql, values, function (err, rows) {
            if (err) {
                console.error(err);

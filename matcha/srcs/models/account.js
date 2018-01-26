@@ -29,7 +29,6 @@ module.exports = {
     },
 
     getLocation: function (ip, next) {
-        ip = '92.147.244.173';
         if (ip === '::1' || ip === '127.0.0.1')
             return next(undefined, '17e Arrondissement, Paris, France');
         async.parallel([

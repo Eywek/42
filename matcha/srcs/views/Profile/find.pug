@@ -75,9 +75,34 @@ block content
 
 
 block scripts
+    script(type='text/html')#order-template.
+        <h3>Résultats</h3>
+        <hr>
+        <button class="btn btn-info order-age" data-order-type="asc">
+            Âge&nbsp;&nbsp;<i class="fa fa-sort"></i>
+        </button>
+        <button class="btn btn-info ml-3 order-popularity" data-order-type="asc">
+            Popularité&nbsp;&nbsp;<i class="fa fa-sort"></i>
+        </button>
+        <button class="btn btn-info ml-3 order-tags" data-order-type="asc">
+            Intérêts&nbsp;&nbsp;<i class="fa fa-sort"></i>
+        </button>
+        <button class="btn btn-info ml-3 order-location" data-order-type="asc">
+            Localisation&nbsp;&nbsp;<i class="fa fa-sort"></i>
+        </button>
+        <hr>
+        <div class="row text-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Âge</label>
+                    <input type="text" name="filter-age" data-provide="slider" data-slider-min="{AGE_MIN}" data-slider-max="{AGE_MAX}" data-slider-step="1" data-slider-value="[{AGE_MIN},{AGE_MAX}]">
+                </div>
+            </div>
+        </div>
+        <hr>
     script(type='text/html')#user-template.
         <div class="col-md-3">
-            <div class="card user" data-user-age="{AGE}" data-user-location="{LOCATION}" data-user-popularity="{POPULARITY}" data-user-tags="{TAGS}">
+            <div class="card user">
                 <div class="card-body">
                     <img class="img-thumbnail" src="{PROFILE_PIC}">
                     <div class="cleafix"></div>
@@ -93,32 +118,124 @@ block scripts
     script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js')
     script(type='text/javascript', src='/assets/js/bootstrap-tagsinput.min.js')
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?key=' + googleApiKey + '&libraries=places')
+    script(type='text/javascript', src='http://underscorejs.org/underscore-min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/async/2.6.0/async.min.js')
     script(type='text/javascript').
         function generateUserHtml(user) {
             var html = $('#user-template').html();
 
             html = html.replace(/{USERNAME}/g, user.username);
             if (user.profile_pic)
-                user.profile_pic = '/uploads/pics/' + user.profile_pic;
-            html = html.replace('{PROFILE_PIC}', user.profile_pic || '/assets/img/default_profile_pic.png');
-            html = html.replace('{AGE}', user.age);
-            html = html.replace('{LOCATION}', user.location);
-            html = html.replace('{TAGS}', user.tags);
-            html = html.replace('{POPULARITY}', user.popularity)
+                html = html.replace('{PROFILE_PIC}', '/uploads/pics/' + user.profile_pic);
+            else
+                html = html.replace('{PROFILE_PIC}', '/assets/img/default_profile_pic.png');
 
             return html;
         }
 
-        function usersFound(req, res) {
-            var users = res.data;
-            if (users.length === 0)
+        var users = [];
+        function usersFound(req, res)
+        {
+            if (res.data.length === 0)
                 return $('.results').html('');
-            var html = '<div class="row">';
-            for (var i = 0; i < users.length; i++)
-                html += generateUserHtml(users[i]);
+
+            var html = $('#order-template').html();
+            var ageValue = $('input[name="age"]').val().split(',');
+            html = html.replace(/{AGE_MIN}/g, ageValue[0]);
+            html = html.replace(/{AGE_MAX}/g, ageValue[1]);
+
+            users = res.data;
+
+            html += '<div class="row result-row">';
+            for (var i = 0; i < res.data.length; i++)
+                html += generateUserHtml(res.data[i]);
             html += '</div>';
 
             $('.results').html(html);
+            $('input[name="filter-age"]').bootstrapSlider();
+            initOrderEvents();
+        }
+
+        function initOrderEvents()
+        {
+            $('.order-age').unbind('click').on('click', function (e) {
+                var button = $(this);
+                var type = button.attr('data-order-type');
+
+                var sortedUsers = _.sortBy(users, 'age');
+                if (type === 'desc')
+                    sortedUsers.reverse();
+
+                var html = '';
+                for (var i = 0; i < sortedUsers.length; i++)
+                    html += generateUserHtml(sortedUsers[i]);
+                $('.results .result-row').html(html);
+                button.attr('data-order-type', (type === 'asc' ? 'desc' : 'asc'))
+            });
+            $('.order-popularity').unbind('click').on('click', function (e) {
+                var button = $(this);
+                var type = button.attr('data-order-type');
+
+                var sortedUsers = _.sortBy(users, 'popularity');
+                if (type === 'desc')
+                    sortedUsers.reverse();
+
+                var html = '';
+                for (var i = 0; i < sortedUsers.length; i++)
+                    html += generateUserHtml(sortedUsers[i]);
+                $('.results .result-row').html(html);
+                button.attr('data-order-type', (type === 'asc' ? 'desc' : 'asc'))
+            });
+            $('.order-tags').unbind('click').on('click', function (e) {
+                var button = $(this);
+                var type = button.attr('data-order-type');
+                var userTags = '#{user.tags}'.split(',');
+                if (userTags.length === 0)
+                    return 0;
+
+                var sortedUsers = users.sort(function (a, b) {
+                    var aTags = a.tags.split(',');
+                    var bTags = b.tags.split(',');
+
+                    if (type === 'asc')
+                        return _.difference(aTags, userTags).length - _.difference(bTags, userTags).length;
+                    else
+                        return _.difference(bTags, userTags).length - _.difference(aTags, userTags).length;
+                });
+
+                var html = '';
+                for (var i = 0; i < sortedUsers.length; i++)
+                    html += generateUserHtml(sortedUsers[i]);
+                $('.results .result-row').html(html);
+                button.attr('data-order-type', (type === 'asc' ? 'desc' : 'asc'))
+            });
+            $('.order-location').unbind('click').on('click', function (e) {
+                var button = $(this);
+                var type = button.attr('data-order-type');
+                var userLocation = '#{user.location}';
+                if (userLocation.length === 0)
+                    return 0;
+
+                async.sortBy(users, function (user, callback) {
+                    new google.maps.DistanceMatrixService().getDistanceMatrix({
+                        origins: [userLocation],
+                        destinations: [user.location],
+                        travelMode: 'DRIVING'
+                    }, function (response, status) {
+                        if (status !== 'OK')
+                            return callback(undefined, 0);
+                        return callback(undefined, response.rows[0].elements[0].distance.value);
+                    });
+                }, function (err, sortedUsers) {
+                    if (type === 'desc')
+                        sortedUsers.reverse();
+                    var html = '';
+                    for (var i = 0; i < sortedUsers.length; i++)
+                        html += generateUserHtml(sortedUsers[i]);
+                    $('.results .result-row').html(html);
+                    button.attr('data-order-type', (type === 'asc' ? 'desc' : 'asc'))
+                });
+            });
         }
 
         new google.maps.places.Autocomplete(document.querySelector('input[name="location"]'), {});

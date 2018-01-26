@@ -99,7 +99,17 @@ app.put('/account/photo/:id', authMiddleware, profileController.editPhoto);
 app.post('/account/bio', authMiddleware, profileController.updateBio);
 
 app.get('/find', authMiddleware, function (req, res) {
-   res.render('profile/find', { title: 'Rechercher un utilisateur' });
+    db.query('SELECT `users_accounts`.`tags`, `users_accounts`.`location` FROM `users_accounts` WHERE `users_accounts`.`user_id` = ?', [req.session.user], function (err, account) {
+       if (err) {
+           console.error(err);
+           return res.sendStatus(500);
+       }
+       if (!account || account.length === 0)
+           account = {tags: '', location: ''};
+       else
+           account = account[0];
+       res.render('profile/find', { title: 'Rechercher un utilisateur', user: account });
+    });
 });
 app.post('/find', authMiddleware, profileController.find);
 
