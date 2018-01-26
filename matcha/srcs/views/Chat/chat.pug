@@ -1,0 +1,105 @@
+extends ../layout
+
+block style
+    style.
+        [data-toggle="tooltip"] {
+            cursor: pointer;
+        }
+        span.online {
+            width: 20px;
+            height: 20px;
+            display: block!important;
+            border-radius: 50%;
+            position: absolute;
+            right: -5px;
+            top: -10px;
+        }
+        .card.message {
+            width: auto;
+        }
+        .card.message .card-body {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .col-md-5.offset-md-7 .card.message {
+            background: #007bff;
+            color: #ffffff;
+        }
+        .chat {
+            min-height: 75vh;
+            max-height: 75vh;
+            overflow: hidden;
+        }
+        .card.chat .card-body {
+            position: relative;
+        }
+        .card.chat .card-body .reply {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+        }
+
+
+block content
+    .container.mt-5
+
+        if users.length === 0
+            .alert.alert-danger
+                h3 Personne de disponible !
+                | Vous n'avez pas encore aimé de profil en retour ou ils ne vous aiment pas en retour. Il vous faut patienter !
+        else
+            .row
+                .col-md-3
+                    ul.list-group
+                        each user, i in users
+                            li.list-group-item(class=i === 0 ? 'active' : '', data-user-id=user.id)
+                                img.rounded(src=user.profile_pic, width=50, height=50)
+                                span.h4.ml-3 #{user.name}
+                                .online-badge
+                                    if user.active
+                                        span.badge.badge-success.online(data-toggle='tooltip', data-placement='top', title='Connecté')
+                .col-md-9
+                    .card.chat
+                        .card-body
+
+                            .row
+                                .col-md-5
+                                    .card.message
+                                        .card-body
+                                            | Salut ! Ça va ?
+                            .row.mt-2
+                                .col-md-5.offset-md-7
+                                    .card.message
+                                        .card-body
+                                            | Salut ! Très bien et toi ?
+
+                            .reply
+                                hr
+                                .form-group
+                                    .input-group
+                                        input.form-control(type='text', name='reply', placeholder='Votre réponse')
+                                        .input-group-append
+                                            button.btn.btn-primary Envoyer
+
+block scripts
+    script(type='text/javascript').
+        socket.on('connect', function () {
+            socket.on('user-active', function (userId) {
+                var element = $('li[data-user-id="' + userId + '"]')
+                if (element && !element.find('.online-badge').find('.badge').length)
+                    element.find('.online-badge').html('<span class="badge badge-success online" data-toggle="tooltip" data-placement="top" title="" data-original-title="Connecté"></span>');
+                $('[data-toggle="tooltip"]').tooltip({
+                    container: 'body'
+                });
+            });
+            socket.on('user-disconnect', function (userId) {
+                var element = $('li[data-user-id="' + userId + '"]')
+                if (element && element.find('.online-badge').find('.badge').length)
+                    element.find('.online-badge').find('.badge').remove();
+            });
+        });
+        $('[data-toggle="tooltip"]').tooltip({
+            container: 'body'
+        });

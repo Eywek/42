@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
    res.locals.notifications = [];
     if (!res.locals.isLogged)
         return next();
-    db.query('SELECT `notifications`.`id`, `notifications`.`content` FROM `notifications` WHERE `user_id` = ? AND `seen` = 0 ORDER BY `id` DESC', [req.session.user], function (err, notifications) {
+    db.query('SELECT `notifications`.`id`, `notifications`.`content` FROM `notifications` WHERE `user_id` = ? AND `seen` = 0', [req.session.user], function (err, notifications) {
        if (err) {
            console.error(err);
            return next();

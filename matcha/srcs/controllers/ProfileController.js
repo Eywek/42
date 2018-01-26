@@ -213,7 +213,7 @@ module.exports = {
             else
                 user = user[0];
 
-            var sqlPopularity = accountModel.sqlPopularity.replace('?', '`users`.`id`');
+            var sqlPopularity = accountModel.sqlPopularity.replace(/\?/g, '`users`.`id`');
             var sql = 'SELECT `users`.`username`, `users`.`id`, ' +
                 '`users_accounts`.`age`, `users_accounts`.`tags`, `users_accounts`.`location`, ' +
                 '(' + sqlPopularity + ') AS `popularity`, ' +
@@ -309,7 +309,7 @@ module.exports = {
             // Not already liked
             where += ' AND `likes`.`liked_id` IS NULL ';
 
-            var sqlPopularity = accountModel.sqlPopularity.replace('?', '`users`.`id`');
+            var sqlPopularity = accountModel.sqlPopularity.replace(/\?/g, '`users`.`id`');
             db.query('SELECT `users_accounts`.`tags`, `users_accounts`.`location`, `users_accounts`.`age`, ' +
                '(' + sqlPopularity + ') AS `popularity`, ' +
                '`users`.`username`, ' +

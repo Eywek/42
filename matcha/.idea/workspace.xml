@@ -17,7 +17,7 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
+            <state relative-caret-position="269">
               <caret line="36" column="124" lean-forward="false" selection-start-line="36" selection-start-column="124" selection-end-line="36" selection-end-column="124" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -26,48 +26,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.pug" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
+      <file leaf-file-name="ChatController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/srcs/controllers/ChatController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1005">
-              <caret line="67" column="53" lean-forward="false" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
+            <state relative-caret-position="180">
+              <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProfileController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
+      <file leaf-file-name="chat.pug" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/srcs/views/Chat/chat.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2123">
-              <caret line="405" column="150" lean-forward="false" selection-start-line="405" selection-start-column="150" selection-end-line="405" selection-end-column="150" />
-              <folding>
-                <element signature="e#484#1258#0" expanded="false" />
-                <element signature="e#1298#1870#0" expanded="false" />
-                <element signature="e#1908#2376#0" expanded="false" />
-                <element signature="e#2414#4865#0" expanded="false" />
-                <marker date="1516985384000" expanded="false" signature="21356:22551" ph="{...}" />
-                <marker date="1516985384000" expanded="false" signature="22590:22920" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/srcs/models/user.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="50" column="113" lean-forward="false" selection-start-line="50" selection-start-column="113" selection-end-line="50" selection-end-column="113" />
+            <state relative-caret-position="1170">
+              <caret line="83" column="74" lean-forward="false" selection-start-line="83" selection-start-column="74" selection-end-line="83" selection-end-column="74" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="notification.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/srcs/models/notification.js">
+      <file leaf-file-name="profile.pug" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/srcs/views/Profile/profile.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="49" column="50" lean-forward="false" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+            <state relative-caret-position="570">
+              <caret line="38" column="122" lean-forward="true" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="122" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="account.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/srcs/models/account.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -78,8 +71,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Pug File" />
         <option value="JavaScript File" />
+        <option value="Pug File" />
       </list>
     </option>
   </component>
@@ -101,6 +94,7 @@
       <find>80</find>
       <find>notification</find>
       <find>user.htmlentities</find>
+      <find>sqlPopu</find>
     </findStrings>
     <replaceStrings>
       <replace>let</replace>
@@ -119,7 +113,6 @@
         <option value="$PROJECT_DIR$/srcs/models/database.js" />
         <option value="$PROJECT_DIR$/srcs/controllers/IndexController.js" />
         <option value="$PROJECT_DIR$/srcs/views/User/account.js" />
-        <option value="$PROJECT_DIR$/srcs/controllers/ChatController.js" />
         <option value="$PROJECT_DIR$/srcs/middlewares/auth.js" />
         <option value="$PROJECT_DIR$/srcs/views/Emails/reset_password.pug" />
         <option value="$PROJECT_DIR$/srcs/views/User/reset_password.pug" />
@@ -133,14 +126,16 @@
         <option value="$PROJECT_DIR$/srcs/controllers/UserController.js" />
         <option value="$PROJECT_DIR$/srcs/views/User/account.pug" />
         <option value="$PROJECT_DIR$/srcs/views/Profile/find.pug" />
-        <option value="$PROJECT_DIR$/srcs/models/account.js" />
         <option value="$PROJECT_DIR$/srcs/views/Profile/profile.pug" />
         <option value="$PROJECT_DIR$/srcs/views/Profile/view-match.pug" />
         <option value="$PROJECT_DIR$/srcs/models/notification.js" />
         <option value="$PROJECT_DIR$/srcs/models/user.js" />
+        <option value="$PROJECT_DIR$/srcs/views/layout.pug" />
+        <option value="$PROJECT_DIR$/srcs/models/account.js" />
         <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
         <option value="$PROJECT_DIR$/srcs/index.js" />
-        <option value="$PROJECT_DIR$/srcs/views/layout.pug" />
+        <option value="$PROJECT_DIR$/srcs/controllers/ChatController.js" />
+        <option value="$PROJECT_DIR$/srcs/views/Chat/chat.pug" />
       </list>
     </option>
   </component>
@@ -258,6 +253,13 @@
               <item name="matcha" type="462c0819:PsiDirectoryNode" />
               <item name="srcs" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="Chat" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
+              <item name="matcha" type="462c0819:PsiDirectoryNode" />
+              <item name="srcs" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="Emails" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -316,12 +318,12 @@
       <workItem from="1516786876243" duration="23241000" />
       <workItem from="1516874205510" duration="20371000" />
       <workItem from="1516960636182" duration="15952000" />
-      <workItem from="1516984058725" duration="1790000" />
+      <workItem from="1516984058725" duration="4050000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65255000" />
+    <option name="totallyTimeSpent" value="67515000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -358,14 +360,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/view-match.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="10" lean-forward="false" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -383,8 +377,8 @@
             <element signature="e#1298#1870#0" expanded="false" />
             <element signature="e#1908#2376#0" expanded="false" />
             <element signature="e#2414#4865#0" expanded="false" />
-            <marker date="1516985384000" expanded="false" signature="21356:22551" ph="{...}" />
-            <marker date="1516985384000" expanded="false" signature="22590:22920" ph="{...}" />
+            <element signature="e#21360#22555#0" expanded="false" />
+            <element signature="e#22594#22924#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -393,6 +387,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -410,6 +405,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2175">
           <caret line="145" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -446,8 +442,8 @@
             <element signature="e#1298#1870#0" expanded="false" />
             <element signature="e#1908#2376#0" expanded="false" />
             <element signature="e#2414#4865#0" expanded="false" />
-            <marker date="1516985384000" expanded="false" signature="21356:22551" ph="{...}" />
-            <marker date="1516985384000" expanded="false" signature="22590:22920" ph="{...}" />
+            <element signature="e#21360#22555#0" expanded="false" />
+            <element signature="e#22594#22924#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -463,6 +459,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -484,6 +481,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -513,8 +511,8 @@
             <element signature="e#1298#1870#0" expanded="false" />
             <element signature="e#1908#2376#0" expanded="false" />
             <element signature="e#2414#4865#0" expanded="false" />
-            <marker date="1516985384000" expanded="false" signature="21356:22551" ph="{...}" />
-            <marker date="1516985384000" expanded="false" signature="22590:22920" ph="{...}" />
+            <element signature="e#21360#22555#0" expanded="false" />
+            <element signature="e#22594#22924#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -566,13 +564,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/models/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/controllers/IndexController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -584,6 +575,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
           <caret line="352" column="50" lean-forward="true" selection-start-line="352" selection-start-column="50" selection-end-line="352" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -591,13 +583,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/controllers/ChatController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -634,6 +619,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -681,55 +667,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/User/account.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="102" column="46" lean-forward="false" selection-start-line="102" selection-start-column="46" selection-end-line="102" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/views/Profile/find.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1215">
           <caret line="382" column="18" lean-forward="false" selection-start-line="382" selection-start-column="12" selection-end-line="382" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/profile.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="121" column="56" lean-forward="true" selection-start-line="121" selection-start-column="56" selection-end-line="121" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/models/account.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="74" lean-forward="false" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/view-match.pug">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="811">
-          <caret line="122" column="4" lean-forward="false" selection-start-line="122" selection-start-column="4" selection-end-line="122" selection-end-column="105" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/models/notification.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="50" lean-forward="false" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/models/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="50" column="113" lean-forward="false" selection-start-line="50" selection-start-column="113" selection-end-line="50" selection-end-column="113" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -750,24 +691,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
+    <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2123">
-          <caret line="405" column="150" lean-forward="false" selection-start-line="405" selection-start-column="150" selection-end-line="405" selection-end-column="150" />
-          <folding>
-            <element signature="e#484#1258#0" expanded="false" />
-            <element signature="e#1298#1870#0" expanded="false" />
-            <element signature="e#1908#2376#0" expanded="false" />
-            <element signature="e#2414#4865#0" expanded="false" />
-            <marker date="1516985384000" expanded="false" signature="21356:22551" ph="{...}" />
-            <marker date="1516985384000" expanded="false" signature="22590:22920" ph="{...}" />
-          </folding>
+        <state relative-caret-position="1005">
+          <caret line="67" column="53" lean-forward="false" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/models/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="50" column="113" lean-forward="false" selection-start-line="50" selection-start-column="113" selection-end-line="50" selection-end-column="113" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/models/notification.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="50" lean-forward="false" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/models/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/models/account.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/srcs/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
+        <state relative-caret-position="269">
           <caret line="36" column="124" lean-forward="false" selection-start-line="36" selection-start-column="124" selection-end-line="36" selection-end-column="124" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -775,10 +741,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
+    <entry file="file://$PROJECT_DIR$/srcs/views/User/account.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="67" column="53" lean-forward="false" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
+        <state relative-caret-position="1514">
+          <caret line="102" column="46" lean-forward="false" selection-start-line="102" selection-start-column="46" selection-end-line="102" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/view-match.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1830">
+          <caret line="122" column="4" lean-forward="false" selection-start-line="122" selection-start-column="4" selection-end-line="122" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/views/Profile/profile.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="122" lean-forward="true" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="122" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="124" column="54" lean-forward="true" selection-start-line="124" selection-start-column="12" selection-end-line="124" selection-end-column="54" />
+          <folding>
+            <element signature="e#484#1258#0" expanded="false" />
+            <element signature="e#1298#1870#0" expanded="false" />
+            <element signature="e#1908#2376#0" expanded="false" />
+            <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#21360#22555#0" expanded="false" />
+            <element signature="e#22594#22924#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/controllers/ChatController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/views/Chat/chat.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1170">
+          <caret line="83" column="74" lean-forward="false" selection-start-line="83" selection-start-column="74" selection-end-line="83" selection-end-column="74" />
           <folding />
         </state>
       </provider>
