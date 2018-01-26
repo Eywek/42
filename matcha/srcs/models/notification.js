@@ -47,7 +47,7 @@ module.exports = {
     },
 
     read: function (notificationId) {
-        db.query('UPDATE `notifications` SET `read` = 1 WHERE `id` = ?', [notificationId], function (err) {
+        db.query('UPDATE `notifications` SET `seen` = 1 WHERE `id` = ?', [notificationId], function (err) {
             if (err)
                 return console.error(err);
         })

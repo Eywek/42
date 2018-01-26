@@ -45,5 +45,9 @@ module.exports = {
               return next(new Error('Utilisateur non trouvé.'));
           return next(undefined, rows[0]);
       })
+    },
+
+    htmlentities: function (content) {
+        return content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 };

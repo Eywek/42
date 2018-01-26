@@ -167,7 +167,7 @@ module.exports = {
 
                         userModel.get(req.session.user, function (err, userFound) {
                             if (userFound)
-                                notification.send(user.id, '<a href="/' + userFound.username +'">' + userFound.username + '</a> vient de visiter votre profil !', io, userFound.id);
+                                notification.send(user.id, '<a href="/' + userModel.htmlentities(userFound.username) +'">' + userModel.htmlentities(userFound.username) + '</a> vient de visiter votre profil !', io, userFound.id);
                         });
                         return res.render('Profile/profile', {user: user, title: user.username});
                     }
@@ -380,7 +380,7 @@ module.exports = {
                             return;
                         userModel.get(req.session.user, function (err, userFound) {
                             if (userFound)
-                                notification.send(user[0].id, '<a href="/' + userFound.username +'">' + userFound.username + '</a> n\'aimes plus votre profil !', io, userFound.id);
+                                notification.send(user[0].id, '<a href="/' + userModel.htmlentities(userFound.username) +'">' + userModel.htmlentities(userFound.username) + '</a> n\'aimes plus votre profil !', io, userFound.id);
                         });
                     });
                     return res.send();
@@ -397,13 +397,13 @@ module.exports = {
                         if (!data || !data.length) {
                             userModel.get(req.session.user, function (err, userFound) {
                                 if (userFound)
-                                    notification.send(user[0].id, '<a href="/' + userFound.username +'">' + userFound.username + '</a> vient d\'aimer votre profil !', io, userFound.id);
+                                    notification.send(user[0].id, '<a href="/' + userModel.htmlentities(userFound.username) +'">' + userModel.htmlentities(userFound.username) + '</a> vient d\'aimer votre profil !', io, userFound.id);
                             });
                             return;
                         }
                         userModel.get(req.session.user, function (err, userFound) {
                             if (userFound)
-                                notification.send(user[0].id, '<a href="/' + userFound.username +'">' + userFound.username + '</a> vient d\'aimer votre profil également !', io, userFound.id);
+                                notification.send(user[0].id, '<a href="/' + userModel.htmlentities(userFound.username) +'">' + userModel.htmlentities(userFound.username) + '</a> vient d\'aimer votre profil également !', io, userFound.id);
                         });
                     });
                     res.send();

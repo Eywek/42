@@ -31,7 +31,17 @@ app.use(function (req, res, next) {
    res.locals.userId = req.session.user;
    res.locals.moment = moment;
    res.locals.googleApiKey = config.googleApiKey;
-   next();
+   res.locals.notifications = [];
+    if (!res.locals.isLogged)
+        return next();
+    db.query('SELECT `notifications`.`id`, `notifications`.`content` FROM `notifications` WHERE `user_id` = ? AND `seen` = 0 ORDER BY `id` DESC', [req.session.user], function (err, notifications) {
+       if (err) {
+           console.error(err);
+           return next();
+       }
+       res.locals.notifications = notifications;
+       next();
+    });
 });
 
 /*
@@ -157,6 +167,12 @@ app.get('/:username/like', authMiddleware, function (req, res) {
 });
 app.get('/:username/block', authMiddleware, profileController.block);
 app.get('/:username/report', authMiddleware, profileController.report);
+
+// NOTIFICATIONS
+app.get('/notifications/:id/seen', authMiddleware, function (req, res) {
+    require('./models/notification').read(req.params.id);
+    res.send();
+});
 
 /*
     LAUNCH
