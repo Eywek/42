@@ -48,7 +48,7 @@ block content
                         .col-md-6
                             .form-group
                                 label Âge
-                                input(type='text', name='age', data-provide='slider', data-slider-min='18' data-slider-max='90' data-slider-step='1' data-slider-value='[0,90]')
+                                input(type='text', name='age', data-slider-min='18' data-slider-max='90' data-slider-step='1' data-slider-value='[0,90]')
 
                         .col-md-6
                             .form-group
@@ -92,10 +92,28 @@ block scripts
         </button>
         <hr>
         <div class="row text-center">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label>Âge</label>
                     <input type="text" name="filter-age" data-provide="slider" data-slider-min="{AGE_MIN}" data-slider-max="{AGE_MAX}" data-slider-step="1" data-slider-value="[{AGE_MIN},{AGE_MAX}]">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Popularité</label>
+                    <input type="text" name="filter-popularity" data-provide="slider" data-slider-min="{POPULARITY_MIN}" data-slider-max="{POPULARITY_MAX}" data-slider-step="1" data-slider-value="[{POPULARITY_MIN},{POPULARITY_MAX}]">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Localisation</label>
+                    <input type="text" name="filter-location" data-provide="slider" data-slider-min="0" data-slider-max="500" data-slider-step="1" data-slider-value="[0,500]">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Intérêts</label>
+                    <input type="text" name="filter-tags" data-provide="slider" data-slider-min="0" data-slider-max="#{user.tags.split(',').length}" data-slider-step="1" data-slider-value="[0,#{user.tags.split(',').length}]">
                 </div>
             </div>
         </div>
@@ -141,8 +159,11 @@ block scripts
 
             var html = $('#order-template').html();
             var ageValue = $('input[name="age"]').val().split(',');
+            var popularityValue = $('input[name="popularity"]').val().split(',');
             html = html.replace(/{AGE_MIN}/g, ageValue[0]);
             html = html.replace(/{AGE_MAX}/g, ageValue[1]);
+            html = html.replace(/{POPULARITY_MIN}/g, popularityValue[0]);
+            html = html.replace(/{POPULARITY_MAX}/g, popularityValue[1]);
 
             users = res.data;
 
@@ -152,11 +173,32 @@ block scripts
             html += '</div>';
 
             $('.results').html(html);
-            $('input[name="filter-age"]').bootstrapSlider();
-            initOrderEvents();
+            $('input[name="filter-age"]').bootstrapSlider({
+                formatter: function (numbers) {
+                    if (typeof numbers === 'object')
+                        return 'Entre ' + numbers[0] + ' ans et ' + numbers[1] + ' ans';
+                    return numbers;
+                }
+            });
+            $('input[name="filter-popularity"]').bootstrapSlider();
+            $('input[name="filter-location"]').bootstrapSlider({
+                formatter: function (numbers) {
+                    if (typeof numbers === 'object')
+                        return 'Entre ' + numbers[0] + ' km et ' + numbers[1] + ' km';
+                    return numbers;
+                }
+            });
+            $('input[name="filter-tags"]').bootstrapSlider({
+                formatter: function (numbers) {
+                    if (typeof numbers === 'object')
+                        return 'Entre ' + numbers[0] + ' tags et ' + numbers[1] + ' intérêts en commun';
+                    return numbers;
+                }
+            });
+            initOrderFiltersEvents();
         }
 
-        function initOrderEvents()
+        function initOrderFiltersEvents()
         {
             $('.order-age').unbind('click').on('click', function (e) {
                 var button = $(this);
@@ -236,6 +278,123 @@ block scripts
                     button.attr('data-order-type', (type === 'asc' ? 'desc' : 'asc'))
                 });
             });
+
+            $('input[name="filter-age"]').unbind('change').on('change', function (e) {
+                filterAge($(this), function (filteredUsers) {
+                    filterPopularity($('input[name="filter-popularity"]'), function (filteredUsers) {
+                        filterLocation($('input[name="filter-location"]'), function (filteredUsers) {
+                            filterTags($('input[name="filter-tags"]'), function (filteredUsers) {
+                                var html = '';
+                                for (var i = 0; i < filteredUsers.length; i++)
+                                    html += generateUserHtml(filteredUsers[i]);
+                                $('.results .result-row').html(html);
+                            }, filteredUsers)
+                        }, filteredUsers)
+                    }, filteredUsers)
+                })
+            });
+            $('input[name="filter-popularity"]').unbind('change').on('change', function (e) {
+                filterPopularity($(this), function (filteredUsers) {
+                    filterAge($('input[name="filter-age"]'), function (filteredUsers) {
+                        filterLocation($('input[name="filter-location"]'), function (filteredUsers) {
+                            filterTags($('input[name="filter-tags"]'), function (filteredUsers) {
+                                var html = '';
+                                for (var i = 0; i < filteredUsers.length; i++)
+                                    html += generateUserHtml(filteredUsers[i]);
+                                $('.results .result-row').html(html);
+                            }, filteredUsers)
+                        }, filteredUsers)
+                    }, filteredUsers)
+                })
+            });
+            $('input[name="filter-location"]').unbind('change').on('change', function (e) {
+                filterLocation($(this), function (filteredUsers) {
+                    filterPopularity($('input[name="filter-popularity"]'), function (filteredUsers) {
+                        filterAge($('input[name="filter-age"]'), function (filteredUsers) {
+                            filterTags($('input[name="filter-tags"]'), function (filteredUsers) {
+                                var html = '';
+                                for (var i = 0; i < filteredUsers.length; i++)
+                                    html += generateUserHtml(filteredUsers[i]);
+                                $('.results .result-row').html(html);
+                            }, filteredUsers)
+                        }, filteredUsers)
+                    }, filteredUsers)
+                })
+            });
+            $('input[name="filter-tags"]').unbind('change').on('change', function (e) {
+                filterTags($(this), function (filteredUsers) {
+                    filterPopularity($('input[name="filter-popularity"]'), function (filteredUsers) {
+                        filterLocation($('input[name="filter-location"]'), function (filteredUsers) {
+                            filterAge($('input[name="filter-age"]'), function (filteredUsers) {
+                                var html = '';
+                                for (var i = 0; i < filteredUsers.length; i++)
+                                    html += generateUserHtml(filteredUsers[i]);
+                                $('.results .result-row').html(html);
+                            }, filteredUsers)
+                        }, filteredUsers)
+                    }, filteredUsers)
+                })
+            });
+        }
+        function filterAge(input, next, optionnalUsers)
+        {
+            var value = input.val().split(',');
+
+            next(_.filter(optionnalUsers || users, function (user) {
+                return user.age >= value[0] && user.age <= value[1];
+            }));
+        }
+        function filterPopularity(input, next, optionnalUsers)
+        {
+            var value = input.val().split(',');
+
+            next(_.filter(optionnalUsers || users, function (user) {
+                return user.popularity >= value[0] && user.popularity <= value[1];
+            }));
+        }
+        function filterLocation(input, next, optionnalUsers)
+        {
+            var value = input.val().split(',');
+            var userLocation = '#{user.location}';
+            if (userLocation.length === 0)
+                return 0;
+
+            async.filter(optionnalUsers || users, function (user, callback) {
+                new google.maps.DistanceMatrixService().getDistanceMatrix({
+                    origins: [userLocation],
+                    destinations: [user.location],
+                    travelMode: 'DRIVING'
+                }, function (response, status) {
+                    if (status !== 'OK')
+                        return callback(undefined, true);
+                    var distance = response.rows[0].elements[0].distance.value / 1000; // meters to kilometers
+                    return callback(undefined, distance >= value[0] && distance <= value[1]);
+                });
+            }, function (err, filteredUsers) {
+                next(filteredUsers);
+            });
+        }
+        function filterTags(input, next, optionnalUsers)
+        {
+            var value = input.val().split(',');
+            var userTags = '#{user.tags}'.split(',');
+            if (userTags.length === 0)
+                return;
+
+            next(_.filter(optionnalUsers || users, function (user) {
+                var diff = _.difference(user.tags.split(','), userTags).length;
+                var commonsCount = userTags.length - diff;
+                if (commonsCount < 0)
+                    commonsCount = 0;
+                return commonsCount >= value[0] && commonsCount <= value[1];
+            }));
         }
 
+        $('input[name="age"]').bootstrapSlider({
+            formatter: function (numbers) {
+                if (typeof numbers === 'object')
+                    return 'Entre ' + numbers[0] + ' ans et ' + numbers[1] + ' ans';
+                return numbers;
+            }
+        });
         new google.maps.places.Autocomplete(document.querySelector('input[name="location"]'), {});
