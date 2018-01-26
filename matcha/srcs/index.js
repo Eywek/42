@@ -135,18 +135,22 @@ db.query('DELETE FROM `active_users` WHERE 1=1;', function (err) {
    if (err)
        console.error(err);
 });
+var activeUsers = {};
 io.on('connection', function(socket) {
     socket.on('user-active', function(data) {
         db.query('INSERT INTO `active_users` SET `socket_id` = ?, `user_id` = ?', [socket.id, data.userId], function (err) {
             if (err)
                 console.error(err);
         });
+        activeUsers[socket.id] = data.userId;
+        io.sockets.emit('user-active', data.userId);
     });
     socket.on('disconnect', function() {
         db.query('DELETE FROM `active_users` WHERE `socket_id` = ?', [socket.id], function (err) {
             if (err)
                 console.error(err);
         });
+        io.sockets.emit('user-disconnect', activeUsers[socket.id]);
     });
 });
 

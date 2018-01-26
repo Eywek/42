@@ -38,4 +38,7 @@ html(lang='en')
             script(type='text/javascript').
                 var socket = io();
                 socket.emit('user-active', {userId: '#{userId}'});
+                socket.on('message', function (data) {
+                   console.log(data);
+                });
         block scripts

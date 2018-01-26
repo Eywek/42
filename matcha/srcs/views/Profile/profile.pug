@@ -34,8 +34,9 @@ block content
 
                 .card
                     img.card-img-top(src=user.profile_pic, alt='Photo de profil')
-                    if user.active
-                        span.badge.badge-success.online(data-toggle='tooltip', data-placement='top', title='Connecté')
+                    .online-badge
+                        if user.active
+                            span.badge.badge-success.online(data-toggle='tooltip', data-placement='top', title='Connecté')
                     .card-body
                         h5.card-title.mb-2 #{user.name}
                             span.badge.badge-info.username
@@ -137,6 +138,19 @@ block content
 
 block scripts
     script(type='text/javascript').
+        socket.on('connect', function () {
+            socket.on('user-active', function (userId) {
+                if (parseInt(userId) === parseInt('#{user.id}') && !$('.online-badge').find('.badge').length)
+                    $('.online-badge').html('<span class="badge badge-success online" data-toggle="tooltip" data-placement="top" title="" data-original-title="Connecté"></span>');
+                $('[data-toggle="tooltip"]').tooltip({
+                    container: 'body'
+                });
+            });
+            socket.on('user-disconnect', function (userId) {
+                if (parseInt(userId) === parseInt('#{user.id}') && $('.online-badge').find('.badge').length)
+                    $('.online-badge').find('.badge').remove();
+            });
+        });
         $('[data-toggle="tooltip"]').tooltip({
             container: 'body'
         });
