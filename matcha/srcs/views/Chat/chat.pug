@@ -38,6 +38,10 @@ block style
             right: 0;
             padding: 10px;
             bottom: 92px;
+            display: none;
+        }
+        .chat .messages.active {
+            display: block;
         }
         .card.chat .card-body {
             position: relative;
@@ -74,17 +78,14 @@ block content
                     .card.chat
                         .card-body
 
-                            .messages(data-current-user-id=users[0].id)
-                                .row
-                                    .col-md-5
-                                        .card.message
-                                            .card-body
-                                                | Salut ! Ça va ?
-                                .row.mt-2
-                                    .col-md-5.offset-md-7
-                                        .card.message
-                                            .card-body
-                                                | Salut ! Très bien et toi ?
+                            - var i = 0;
+                            each conversation, key in conversations
+                                .messages(data-user-id=key, class=i++ === 0 ? 'active' : '')
+                                    each message, j in conversation
+                                        .row(class=j === 0 ? '' : 'mt-2')
+                                            .col-md-5(class=message.from_id === parseInt(key) ? '' : 'offset-md-7')
+                                                .card.message
+                                                    .card-body #{message.message}
 
                             .reply
                                 hr
@@ -124,7 +125,7 @@ block scripts
 
             // CHAT
             socket.on('new-chat-message', function (message) {
-                var currentUserId = $('.messages').attr('data-current-user-id');
+                var currentUserId = $('.messages.active').attr('data-user-id');
 
                 // CURRENT CONVERSATION
                 if (parseInt(currentUserId) === parseInt(message.from)) {
@@ -144,7 +145,7 @@ block scripts
         $('.reply form').on('submit', function (e) {
             e.preventDefault();
             var message = $('.reply input[name="reply"]').val();
-            var to = $('.messages').attr('data-current-user-id');
+            var to = $('.messages.active').attr('data-user-id');
             if (message.length === 0)
                 return;
 

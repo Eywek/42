@@ -26,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.pug" pinned="false" current-in-tab="false">
+      <file leaf-file-name="layout.pug" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="57" column="52" lean-forward="false" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
+            <state relative-caret-position="720">
+              <caret line="48" column="41" lean-forward="true" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -56,8 +56,8 @@
       <file leaf-file-name="ChatController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/controllers/ChatController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="15" lean-forward="true" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
+            <state relative-caret-position="390">
+              <caret line="26" column="106" lean-forward="false" selection-start-line="26" selection-start-column="106" selection-end-line="26" selection-end-column="106" />
               <folding />
             </state>
           </provider>
@@ -73,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chat.pug" pinned="false" current-in-tab="true">
+      <file leaf-file-name="chat.pug" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/views/Chat/chat.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1212">
-              <caret line="126" column="36" lean-forward="false" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
+            <state relative-caret-position="45">
+              <caret line="85" column="93" lean-forward="false" selection-start-line="85" selection-start-column="93" selection-end-line="85" selection-end-column="93" />
               <folding />
             </state>
           </provider>
@@ -122,6 +122,7 @@
       <find>notification</find>
       <find>user.htmlentities</find>
       <find>sqlPopu</find>
+      <find>data-current-user-id</find>
     </findStrings>
     <replaceStrings>
       <replace>let</replace>
@@ -130,6 +131,7 @@
       <replace>badge</replace>
       <replace>.results</replace>
       <replace>userModel.htmlentities</replace>
+      <replace>data-user-id</replace>
     </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -159,10 +161,10 @@
         <option value="$PROJECT_DIR$/srcs/models/account.js" />
         <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
         <option value="$PROJECT_DIR$/srcs/models/notification.js" />
-        <option value="$PROJECT_DIR$/srcs/views/Chat/chat.pug" />
-        <option value="$PROJECT_DIR$/srcs/views/layout.pug" />
         <option value="$PROJECT_DIR$/srcs/index.js" />
         <option value="$PROJECT_DIR$/srcs/controllers/ChatController.js" />
+        <option value="$PROJECT_DIR$/srcs/views/Chat/chat.pug" />
+        <option value="$PROJECT_DIR$/srcs/views/layout.pug" />
       </list>
     </option>
   </component>
@@ -345,12 +347,12 @@
       <workItem from="1516786876243" duration="23241000" />
       <workItem from="1516874205510" duration="20371000" />
       <workItem from="1516960636182" duration="15952000" />
-      <workItem from="1516984058725" duration="7386000" />
+      <workItem from="1516984058725" duration="8740000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70851000" />
+    <option name="totallyTimeSpent" value="72205000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -766,21 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="991">
-          <caret line="169" column="32" lean-forward="true" selection-start-line="169" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
-          <folding>
-            <element signature="e#484#1258#0" expanded="false" />
-            <element signature="e#1298#1870#0" expanded="false" />
-            <element signature="e#1908#2376#0" expanded="false" />
-            <element signature="e#2414#4865#0" expanded="false" />
-            <element signature="e#21360#22555#0" expanded="false" />
-            <element signature="e#22594#22924#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/models/notification.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -799,26 +786,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/controllers/ChatController.js">
+    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="15" lean-forward="true" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
-          <folding />
+        <state relative-caret-position="991">
+          <caret line="169" column="32" lean-forward="true" selection-start-line="169" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+          <folding>
+            <element signature="e#484#1258#0" expanded="false" />
+            <element signature="e#1298#1870#0" expanded="false" />
+            <element signature="e#1908#2376#0" expanded="false" />
+            <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#21360#22555#0" expanded="false" />
+            <element signature="e#22594#22924#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
+    <entry file="file://$PROJECT_DIR$/srcs/controllers/ChatController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="52" lean-forward="false" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
+        <state relative-caret-position="390">
+          <caret line="26" column="106" lean-forward="false" selection-start-line="26" selection-start-column="106" selection-end-line="26" selection-end-column="106" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/srcs/views/Chat/chat.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1212">
-          <caret line="126" column="36" lean-forward="false" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
+        <state relative-caret-position="45">
+          <caret line="85" column="93" lean-forward="false" selection-start-line="85" selection-start-column="93" selection-end-line="85" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="41" lean-forward="true" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
           <folding />
         </state>
       </provider>

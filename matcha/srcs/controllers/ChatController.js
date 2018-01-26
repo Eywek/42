@@ -1,4 +1,5 @@
 var db = require('../models/database');
+var _ = require('underscore');
 
 module.exports = {
 
@@ -17,24 +18,38 @@ module.exports = {
             'INNER JOIN `likes` AS `matchs` ON `matchs`.`liked_id` = `likes`.`user_id` ' +
             'WHERE `likes`.`user_id` = ? AND `matchs`.`user_id` = `likes`.`liked_id`',
         [req.session.user], function (err, users) {
-           if (err) {
-               console.error(err);
-               return res.sendStatus(500);
-           }
+            if (err) {
+                console.error(err);
+                return res.sendStatus(500);
+            }
 
-           res.render('Chat/chat', {
-               title: 'Messagerie',
-               users: users.map(function (user) {
-                   if (user.profile_pic)
-                       user.profile_pic = '/uploads/pics/' + user.profile_pic;
-                   else
-                       user.profile_pic = '/assets/img/default_profile_pic.png';
-                   return user;
-               }),
-               usersCanChat: users.map(function (user) {
-                   return user.id;
-               })
-           });
+            // Get messages
+            db.query('SELECT `conversations`.`message`, `conversations`.`to_id`, `conversations`.`from_id` ' +
+                'FROM `conversations` ' +
+                'WHERE `conversations`.`to_id` = ? OR `conversations`.`from_id` = ?', [req.session.user, req.session.user], function (err, conversations) {
+                if (err) {
+                    console.error(err);
+                    return res.sendStatus(500);
+                }
+                conversations = _.groupBy(conversations, function (message) {
+                    if (message.to_id === req.session.user)
+                        return message.from_id;
+                    return message.to_id;
+                });
+                console.log(conversations);
+
+                res.render('Chat/chat', {
+                    title: 'Messagerie',
+                    users: users.map(function (user) {
+                        if (user.profile_pic)
+                            user.profile_pic = '/uploads/pics/' + user.profile_pic;
+                        else
+                            user.profile_pic = '/assets/img/default_profile_pic.png';
+                        return user;
+                    }),
+                    conversations: conversations
+                });
+            });
         });
     }
 
