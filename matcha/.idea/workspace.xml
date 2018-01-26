@@ -74,7 +74,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="find.pug" pinned="false" current-in-tab="true">
+      <file leaf-file-name="find.pug" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/views/Profile/find.pug">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="608">
@@ -84,20 +84,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProfileController.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ProfileController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="229" column="24" lean-forward="false" selection-start-line="229" selection-start-column="24" selection-end-line="229" selection-end-column="24" />
+            <state relative-caret-position="457">
+              <caret line="258" column="57" lean-forward="true" selection-start-line="258" selection-start-column="57" selection-end-line="258" selection-end-column="57" />
               <folding>
                 <element signature="e#278#1052#0" expanded="false" />
                 <element signature="e#1092#1664#0" expanded="false" />
                 <element signature="e#1702#2170#0" expanded="false" />
                 <element signature="e#2208#4659#0" expanded="false" />
                 <element signature="e#4695#8884#0" expanded="false" />
-                <element signature="e#14163#15282#0" expanded="false" />
-                <element signature="e#15316#16511#0" expanded="false" />
-                <element signature="e#16550#16880#0" expanded="false" />
+                <element signature="e#8917#11548#0" expanded="false" />
+                <element signature="e#14395#15514#0" expanded="false" />
+                <element signature="e#15548#16743#0" expanded="false" />
+                <element signature="e#16782#17112#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -188,10 +189,10 @@
         <option value="$PROJECT_DIR$/srcs/views/layout.pug" />
         <option value="$PROJECT_DIR$/srcs/views/Profile/view-match.pug" />
         <option value="$PROJECT_DIR$/srcs/views/User/account.pug" />
-        <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
         <option value="$PROJECT_DIR$/srcs/index.js" />
         <option value="$PROJECT_DIR$/srcs/models/account.js" />
         <option value="$PROJECT_DIR$/srcs/views/Profile/find.pug" />
+        <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
       </list>
     </option>
   </component>
@@ -366,12 +367,12 @@
       <workItem from="1516717151458" duration="3661000" />
       <workItem from="1516786876243" duration="23241000" />
       <workItem from="1516874205510" duration="20371000" />
-      <workItem from="1516960636182" duration="6029000" />
+      <workItem from="1516960636182" duration="6608000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53542000" />
+    <option name="totallyTimeSpent" value="54121000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -442,9 +443,10 @@
             <element signature="e#1702#2170#0" expanded="false" />
             <element signature="e#2208#4659#0" expanded="false" />
             <element signature="e#4695#8884#0" expanded="false" />
-            <element signature="e#14163#15282#0" expanded="false" />
-            <element signature="e#15316#16511#0" expanded="false" />
-            <element signature="e#16550#16880#0" expanded="false" />
+            <element signature="e#8917#11548#0" expanded="false" />
+            <element signature="e#14395#15514#0" expanded="false" />
+            <element signature="e#15548#16743#0" expanded="false" />
+            <element signature="e#16782#17112#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -509,9 +511,10 @@
             <element signature="e#1702#2170#0" expanded="false" />
             <element signature="e#2208#4659#0" expanded="false" />
             <element signature="e#4695#8884#0" expanded="false" />
-            <element signature="e#14163#15282#0" expanded="false" />
-            <element signature="e#15316#16511#0" expanded="false" />
-            <element signature="e#16550#16880#0" expanded="false" />
+            <element signature="e#8917#11548#0" expanded="false" />
+            <element signature="e#14395#15514#0" expanded="false" />
+            <element signature="e#15548#16743#0" expanded="false" />
+            <element signature="e#16782#17112#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -579,9 +582,10 @@
             <element signature="e#1702#2170#0" expanded="false" />
             <element signature="e#2208#4659#0" expanded="false" />
             <element signature="e#4695#8884#0" expanded="false" />
-            <element signature="e#14163#15282#0" expanded="false" />
-            <element signature="e#15316#16511#0" expanded="false" />
-            <element signature="e#16550#16880#0" expanded="false" />
+            <element signature="e#8917#11548#0" expanded="false" />
+            <element signature="e#14395#15514#0" expanded="false" />
+            <element signature="e#15548#16743#0" expanded="false" />
+            <element signature="e#16782#17112#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -806,23 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="229" column="24" lean-forward="false" selection-start-line="229" selection-start-column="24" selection-end-line="229" selection-end-column="24" />
-          <folding>
-            <element signature="e#278#1052#0" expanded="false" />
-            <element signature="e#1092#1664#0" expanded="false" />
-            <element signature="e#1702#2170#0" expanded="false" />
-            <element signature="e#2208#4659#0" expanded="false" />
-            <element signature="e#4695#8884#0" expanded="false" />
-            <element signature="e#14163#15282#0" expanded="false" />
-            <element signature="e#15316#16511#0" expanded="false" />
-            <element signature="e#16550#16880#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/models/account.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -846,6 +833,24 @@
         <state relative-caret-position="608">
           <caret line="312" column="59" lean-forward="false" selection-start-line="312" selection-start-column="59" selection-end-line="312" selection-end-column="59" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="258" column="57" lean-forward="true" selection-start-line="258" selection-start-column="57" selection-end-line="258" selection-end-column="57" />
+          <folding>
+            <element signature="e#278#1052#0" expanded="false" />
+            <element signature="e#1092#1664#0" expanded="false" />
+            <element signature="e#1702#2170#0" expanded="false" />
+            <element signature="e#2208#4659#0" expanded="false" />
+            <element signature="e#4695#8884#0" expanded="false" />
+            <element signature="e#8917#11548#0" expanded="false" />
+            <element signature="e#14395#15514#0" expanded="false" />
+            <element signature="e#15548#16743#0" expanded="false" />
+            <element signature="e#16782#17112#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

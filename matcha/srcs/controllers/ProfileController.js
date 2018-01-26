@@ -197,6 +197,7 @@ module.exports = {
             'FROM `users_accounts` ' +
             'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
             'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
+            'LEFT JOIN `users_blockeds` ON `users_blockeds`.`user_id` = `users`.`id` OR `users_blockeds`.`blocker_id` = `users`.`id`' +
             'WHERE ';
         var values = [];
 
@@ -225,9 +226,9 @@ module.exports = {
             var tags = req.body.tags.split(',');
             values.push('%' + tags.join(',%') + '%');
         }
-        // TODO: Not blocked
-
-        // TODO: Not him
+        sql += 'AND `users_blockeds`.`user_id` IS NULL ';
+        sql += 'AND `users_accounts`.`user_id` != ?';
+        values.push(req.session.user);
 
         db.query(sql, values, function (err, rows) {
            if (err) {
