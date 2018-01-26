@@ -8,6 +8,10 @@ html(lang='en')
         // Bootstrap core CSS
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
         script(defer='', src='https://use.fontawesome.com/releases/v5.0.4/js/all.js')
+        style.
+            .dropdown-toggle::after {
+                display: none;
+            }
         block style
     body
         .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.bg-white.border-bottom.box-shadow
@@ -17,6 +21,10 @@ html(lang='en')
                     a.p-2.text-dark(href='/view-match') Suggestions
                     a.p-2.text-dark(href='/find') Trouver des profils
                     a.p-2.text-dark(href='/chat') Messagerie
+                    a.p-3.text-dark.notification-bell.dropdown-toggle(href='#', data-toggle='dropdown')
+                        i.far.fa-bell
+                    .dropdown-menu
+                        ul.list-group
                 a.btn.btn-outline-primary(href='/account') Mon compte
                 a.btn.btn-outline-secondary(href='/signout', style="margin-left: 5px") Se déconnecter
 
@@ -37,8 +45,12 @@ html(lang='en')
         if isLogged
             script(type='text/javascript').
                 var socket = io();
+                var notifications = [];
                 socket.emit('user-active', {userId: '#{userId}'});
                 socket.on('new-notification', function (data) {
                    console.log('Notification received', data);
+                   notifications.push(data);
+                   $('.notification-bell').html('<i class="fa fa-bell"></i>');
+                   $('.notification-bell').parent().find('.dropdown-menu ul').prepend('<li class="list-group-item">' + data.content + '</li>');
                 });
         block scripts
