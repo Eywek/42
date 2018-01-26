@@ -165,7 +165,7 @@ module.exports = {
                         return res.render('Profile/profile', {user: user, title: user.username});
                     }
 
-                    db.query('SELECT `users`.`username`, `users_uploads`.`name` AS `profile_pic` ' +
+                    db.query('SELECT MAX(`users_visits`.`id`) AS `id`, `users`.`username`, `users_uploads`.`name` AS `profile_pic` ' +
                         'FROM `users_visits` ' +
                         'INNER JOIN `users` ON `users`.`id` = `users_visits`.`visitor_id` ' +
                         'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
@@ -182,6 +182,8 @@ module.exports = {
                             else
                                 visitor.profile_pic = '/assets/img/default_profile_pic.png';
                             return visitor;
+                        }).sort(function (a, b) {
+                            return b.id - a.id;
                         });
 
                         return res.render('Profile/profile', {user: user, title: user.username});
@@ -279,7 +281,7 @@ module.exports = {
             if (!user || user.length === 0)
                 return res.render('Profile/view-match', {title: 'Suggestions', users: [], user: false});
             user = user[0];
-            var values = [];
+            var values = [req.session.user];
             var where = '';
 
             // Sexe
@@ -293,13 +295,12 @@ module.exports = {
             }
 
             // Not blocked
-            where += (where.length > 0 ? 'AND' : '') + ' `users_blockeds`.`user_id` IS NULL ';
+            where += (where.length > 0 ? ' AND' : '') + ' `users_blockeds`.`user_id` IS NULL ';
             // Not him
             where += ' AND `users_accounts`.`user_id` != ?';
             values.push(req.session.user);
             // Not already liked
             where += ' AND `likes`.`liked_id` IS NULL ';
-            values.push(req.session.user);
 
             var sqlPopularity = accountModel.sqlPopularity.replace('?', '`users`.`id`');
             db.query('SELECT `users_accounts`.`tags`, `users_accounts`.`location`, `users_accounts`.`age`, ' +

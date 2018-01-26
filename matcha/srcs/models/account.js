@@ -14,7 +14,14 @@ module.exports = {
         'age': 'required:number:between=18,90'
     },
 
-    sqlPopularity: "SELECT ? AS `popularity`",
+    sqlPopularity: "SELECT (\n" +
+    "    SELECT COUNT(`likes`.`id`)\n" +
+    "    FROM `likes` \n" +
+    "    INNER JOIN `likes` AS `matchs` ON `matchs`.`liked_id` = `likes`.`user_id`\n" +
+    "    WHERE `likes`.`user_id` = 1 AND `matchs`.`user_id` = `likes`.`liked_id`\n" +
+    ") / (\n" +
+    "    SELECT COUNT(`likes`.`id`) FROM `likes` WHERE `likes`.`user_id` = 1\n" +
+    ") * 1000 AS `popularity`", // percentage  matchs / total likes * 1000
 
     computePopularity: function (user, next) {
         db.query(this.sqlPopularity, [user.id], function (err, result) {
