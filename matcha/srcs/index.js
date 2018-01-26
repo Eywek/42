@@ -55,6 +55,8 @@ db.query('DELETE FROM `active_users` WHERE 1=1;', function (err) {
 var activeUsers = {};
 io.on('connection', function(socket) {
     socket.on('user-active', function(data) {
+        if (!data)
+            return;
         db.query('INSERT INTO `active_users` SET `socket_id` = ?, `user_id` = ?', [socket.id, data.userId], function (err) {
             if (err)
                 console.error(err);
@@ -69,6 +71,67 @@ io.on('connection', function(socket) {
         });
         io.sockets.emit('user-disconnect', activeUsers[socket.id]);
     });
+
+    // CHAT
+    socket.on('new-chat-message', function (message) {
+        if (!message)
+            return;
+        // FIND TARGET
+        db.query('SELECT `users`.`id` FROM `users` WHERE `users`.`id` = ?', [message.to], function (err, target) {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            if (!target || target.length === 0)
+                return;
+            // GET CURRENT USER
+            db.query('SELECT `active_users`.`user_id`, `users`.`username` ' +
+                'FROM `active_users` ' +
+                'INNER JOIN `users` ON `users`.`id` = `active_users`.`user_id` ' +
+                'WHERE `socket_id` = ?', [socket.id], function (err, user) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                if (!user || user.length === 0)
+                    return;
+                user = user[0];
+
+                // SAVE MESSAGE
+                db.query('INSERT INTO `conversations` SET `from_id` = ?, `to_id` = ?, `message` = ?, `created_at` = ?', [
+                    user.user_id,
+                    target[0].id,
+                    message.message,
+                    new Date()
+                ], function (err) {
+                    if (err)
+                        console.error(err);
+                });
+
+                // SEND NOTIFICATION
+                var userModel = require('./models/user');
+                require('./models/notification').send(
+                    target[0].id,
+                    '<a href="/' + userModel.htmlentities(user.username) +'">' + userModel.htmlentities(user.username) + '</a> vient de vous envoyer un message !',
+                    io,
+                    user.user_id,
+                    'chat'
+                );
+                // SEND TO USER WHO RECEIVE THE MESSAGE
+                db.query('SELECT `socket_id` FROM `active_users` WHERE `user_id` = ?', [message.to], function (err, socketId) {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    if (socketId && socketId.length > 0)
+                        io.to(socketId[0].socket_id).emit('new-chat-message', {
+                            from: user.user_id,
+                            message: require('./models/user').htmlentities(message.message)
+                        });
+                })
+            });
+        });
+    })
 });
 
 /*

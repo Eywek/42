@@ -28,7 +28,16 @@ block style
         .chat {
             min-height: 75vh;
             max-height: 75vh;
-            overflow: hidden;
+        }
+        .chat .messages {
+            overflow-y: scroll;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            bottom: 92px;
         }
         .card.chat .card-body {
             position: relative;
@@ -39,6 +48,7 @@ block style
             left: 0;
             right: 0;
             padding: 10px;
+            background: #ffffff;
         }
 
 
@@ -64,28 +74,40 @@ block content
                     .card.chat
                         .card-body
 
-                            .row
-                                .col-md-5
-                                    .card.message
-                                        .card-body
-                                            | Salut ! Ça va ?
-                            .row.mt-2
-                                .col-md-5.offset-md-7
-                                    .card.message
-                                        .card-body
-                                            | Salut ! Très bien et toi ?
+                            .messages(data-current-user-id=users[0].id)
+                                .row
+                                    .col-md-5
+                                        .card.message
+                                            .card-body
+                                                | Salut ! Ça va ?
+                                .row.mt-2
+                                    .col-md-5.offset-md-7
+                                        .card.message
+                                            .card-body
+                                                | Salut ! Très bien et toi ?
 
                             .reply
                                 hr
-                                .form-group
-                                    .input-group
-                                        input.form-control(type='text', name='reply', placeholder='Votre réponse')
-                                        .input-group-append
-                                            button.btn.btn-primary Envoyer
+                                form
+                                    .form-group
+                                        .input-group
+                                            input.form-control(type='text', name='reply', placeholder='Votre réponse', autocomplete='off')
+                                            .input-group-append
+                                                button.btn.btn-primary(type='submit') Envoyer
 
 block scripts
+    script#messageTemplate(type='text/html').
+        <div class="row mt-2">
+            <div class="col-md-5 {OFFSET}">
+                <div class="card message">
+                    <div class="card-body">{CONTENT}</div>
+                </div>
+            </div>
+        </div>
     script(type='text/javascript').
+        IS_CHAT_PAGE = true;
         socket.on('connect', function () {
+            // ONLINE
             socket.on('user-active', function (userId) {
                 var element = $('li[data-user-id="' + userId + '"]')
                 if (element && !element.find('.online-badge').find('.badge').length)
@@ -99,7 +121,43 @@ block scripts
                 if (element && element.find('.online-badge').find('.badge').length)
                     element.find('.online-badge').find('.badge').remove();
             });
+
+            // CHAT
+            socket.on('new-chat-message', function (message) {
+                var currentUserId = $('.messages').attr('data-current-user-id');
+
+                // CURRENT CONVERSATION
+                if (parseInt(currentUserId) === parseInt(message.from)) {
+                    $('.messages').append($('#messageTemplate').html().replace('{CONTENT}', message.message).replace('{OFFSET}', ''));
+                    // SCROLL
+                    var element = document.querySelector('.messages');
+                    element.scrollTop = element.scrollHeight;
+                    return;
+                }
+
+                // TODO: OTHER CONVERSATION
+            });
         });
         $('[data-toggle="tooltip"]').tooltip({
             container: 'body'
         });
+        $('.reply form').on('submit', function (e) {
+            e.preventDefault();
+            var message = $('.reply input[name="reply"]').val();
+            var to = $('.messages').attr('data-current-user-id');
+            if (message.length === 0)
+                return;
+
+            // TELL TO THE SERVER
+            socket.emit('new-chat-message', {
+                to: to,
+                message: message
+            });
+            // ADD TO HTML
+            $('.messages').append($('#messageTemplate').html().replace('{CONTENT}', message.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')).replace('{OFFSET}', 'offset-md-7'));
+            // SCROLL
+            var element = document.querySelector('.messages');
+            element.scrollTop = element.scrollHeight;
+            // REMOVE INPUT CONTENT
+            $('.reply input[name="reply"]').val('');
+        })

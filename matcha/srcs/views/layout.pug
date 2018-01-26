@@ -46,6 +46,7 @@ html(lang='en')
         script(src='/assets/js/form.js')
         if isLogged
             script(type='text/javascript').
+                var IS_CHAT_PAGE = false;
                 var socket = io();
                 var notifications = !{JSON.stringify(notifications)}
                 if (notifications.length > 0)
@@ -54,7 +55,8 @@ html(lang='en')
                     $('.notification-bell').parent().find('.dropdown-menu ul').prepend('<li class="list-group-item">' + notifications[j].content + '</li>');
                 socket.emit('user-active', {userId: '#{userId}'});
                 socket.on('new-notification', function (data) {
-                   console.log('Notification received', data);
+                    if (data.type === 'chat' && IS_CHAT_PAGE)
+                        return;
                    notifications.push(data);
                    toastr.info(data.content);
                    $('.notification-bell').html('<i class="fa fa-bell"></i>');

@@ -3,7 +3,7 @@ var db = require('../models/database');
 
 module.exports = {
 
-    send: function (userId, notification, io, fromId) {
+    send: function (userId, notification, io, fromId, type) {
         async.parallel([
             function (cb) {
                 // Add notification
@@ -41,7 +41,8 @@ module.exports = {
 
             io.to(results[1][0].socket_id).emit('new-notification', {
                 id: id,
-                content: notification
+                content: notification,
+                type: type
             });
         });
     },
