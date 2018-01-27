@@ -73,7 +73,7 @@ block content
         else
             .row
                 .col-md-3
-                    ul.list-group
+                    ul.list-group.users
                         - var i = 0;
                         each conversation, key in conversations
                             - var user = usersById[key];
@@ -137,7 +137,22 @@ block scripts
             socket.on('new-chat-message', function (message) {
                 var currentUserId = $('.messages.active').attr('data-user-id');
 
-                // TODO: Add user / messages if not already in DOM
+                // Add user / messages if not already in DOM
+                if (!$('.user[data-user-id="' + message.from + '"]').length) {
+                   $('.users').prepend('<li class="list-group-item user" data-user-id="' + message.from + '">' +
+                           '<img src="' + message.from_account.profile_pic + '" width="50" height="50">' +
+                           '<span class="h4 ml-3">' + message.from_account.name + '</span>' +
+                           '<span class="new-message"></span>' +
+                           '<div class="online-badge">' +
+                                '<span class="badge badge-success online" data-toggle="tooltip" data-placement="top" title="Connecté"></span>' +
+                           '</div>' +
+                   '</li>');
+                    $('.card.chat .card-body').prepend('<div class="messages" data-user-id="' + message.from + '"></div>');
+                    $('[data-toggle="tooltip"]').tooltip({
+                        container: 'body'
+                    });
+                    initEvents();
+                }
 
                 // ADD MESSAGE
                 $('.messages[data-user-id="' + message.from + '"]').append($('#messageTemplate').html().replace('{CONTENT}', message.message).replace('{OFFSET}', ''));
@@ -154,40 +169,45 @@ block scripts
         $('[data-toggle="tooltip"]').tooltip({
             container: 'body'
         });
-        $('.reply form').on('submit', function (e) {
-            e.preventDefault();
-            var message = $('.reply input[name="reply"]').val();
-            var to = $('.messages.active').attr('data-user-id');
-            if (message.length === 0)
-                return;
+        initEvents();
+        function initEvents()
+        {
+            $('.reply form').unbind('submit').on('submit', function (e) {
+                e.preventDefault();
+                var message = $('.reply input[name="reply"]').val();
+                var to = $('.messages.active').attr('data-user-id');
+                if (message.length === 0)
+                    return;
 
-            // TELL TO THE SERVER
-            socket.emit('new-chat-message', {
-                to: to,
-                message: message
+                // TELL TO THE SERVER
+                socket.emit('new-chat-message', {
+                    to: to,
+                    message: message
+                });
+                // ADD TO HTML
+                $('.messages').append($('#messageTemplate').html().replace('{CONTENT}', message.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')).replace('{OFFSET}', 'offset-md-7'));
+                // SCROLL
+                var element = document.querySelector('.messages.active');
+                element.scrollTop = element.scrollHeight;
+                // REMOVE INPUT CONTENT
+                $('.reply input[name="reply"]').val('');
+            })
+            $('.user[data-user-id]').unbind('click').on('click', function (e) {
+                e.preventDefault();
+                var element = $(this);
+                var userId = element.attr('data-user-id');
+
+                $('.messages').removeClass('active');
+                $('.messages[data-user-id="' + userId + '"]').addClass('active');
+                $('.user').removeClass('active');
+                element.addClass('active');
+                $('.user[data-user-id="' + userId + '"]').find('.new-message').html('');
+
+                // SCROLL
+                var element = document.querySelector('.messages[data-user-id="' + userId + '"]');
+                element.scrollTop = element.scrollHeight;
             });
-            // ADD TO HTML
-            $('.messages').append($('#messageTemplate').html().replace('{CONTENT}', message.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')).replace('{OFFSET}', 'offset-md-7'));
-            // SCROLL
-            var element = document.querySelector('.messages.active');
-            element.scrollTop = element.scrollHeight;
-            // REMOVE INPUT CONTENT
-            $('.reply input[name="reply"]').val('');
-        })
-        $('.user[data-user-id]').on('click', function (e) {
-            e.preventDefault();
-            var element = $(this);
-            var userId = element.attr('data-user-id');
-
-            $('.messages').removeClass('active');
-            $('.messages[data-user-id="' + userId + '"]').addClass('active');
-            $('.user').removeClass('active');
-            element.addClass('active');
-
-            // SCROLL
-            var element = document.querySelector('.messages[data-user-id="' + userId + '"]');
-            element.scrollTop = element.scrollHeight;
-        });
+        }
         // SCROLL
         var element = document.querySelector('.messages');
         element.scrollTop = element.scrollHeight;

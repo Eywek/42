@@ -54,6 +54,11 @@ module.exports = {
                 var usersById = {};
                 for (i = 0; i < users.length; i++)
                     usersById[users[i].id] = users[i];
+                // Remove conversations without not matched users
+                for (key in conversations) {
+                    if (usersById[key] === undefined)
+                        delete conversations[key];
+                }
 
                 // TODO: Sort conversations by last messages
 

@@ -77,7 +77,11 @@ io.on('connection', function(socket) {
         if (!message)
             return;
         // FIND TARGET
-        db.query('SELECT `users`.`id` FROM `users` WHERE `users`.`id` = ?', [message.to], function (err, target) {
+        db.query('SELECT `users`.`id` ' +
+            'FROM `users` ' +
+            'INNER JOIN `likes` ON `likes`.`liked_id` = `users`.`id` AND `likes`.`user_id` = ? ' +
+            'INNER JOIN `likes` AS `match` ON `match`.`user_id` = `users`.`id` AND `match`.`liked_id` = ? ' +
+            'WHERE `users`.`id` = ?', [activeUsers[socket.id], activeUsers[socket.id], message.to], function (err, target) {
             if (err) {
                 console.error(err);
                 return;
@@ -85,9 +89,11 @@ io.on('connection', function(socket) {
             if (!target || target.length === 0)
                 return;
             // GET CURRENT USER
-            db.query('SELECT `active_users`.`user_id`, `users`.`username` ' +
+            db.query('SELECT `active_users`.`user_id`, `users`.`username`, `users`.`name`, ' +
+                '`users_uploads`.`name` AS `profile_pic` ' +
                 'FROM `active_users` ' +
                 'INNER JOIN `users` ON `users`.`id` = `active_users`.`user_id` ' +
+                'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
                 'WHERE `socket_id` = ?', [socket.id], function (err, user) {
                 if (err) {
                     console.error(err);
@@ -126,6 +132,10 @@ io.on('connection', function(socket) {
                     if (socketId && socketId.length > 0)
                         io.to(socketId[0].socket_id).emit('new-chat-message', {
                             from: user.user_id,
+                            from_account: {
+                                name: user.name,
+                                profile_pic: (user.profile_pic ? '/uploads/pics/' + user.profile_pic : '/assets/img/default_profile_pic.png')
+                            },
                             message: require('./models/user').htmlentities(message.message)
                         });
                 })
