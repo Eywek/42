@@ -438,6 +438,7 @@ module.exports = {
                         return res.sendStatus(500);
                     }
 
+                    db.query('DELETE FROM `likes` WHERE `user_id` = ? AND `liked_id` = ?', [req.session.user, user[0].id], function () {});
                     res.send();
                 })
             })

@@ -17,8 +17,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="83" column="86" lean-forward="false" selection-start-line="83" selection-start-column="86" selection-end-line="83" selection-end-column="86" />
+            <state relative-caret-position="200">
+              <caret line="80" column="22" lean-forward="true" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -34,6 +34,25 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ProfileController.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="810">
+              <caret line="438" column="21" lean-forward="true" selection-start-line="438" selection-start-column="21" selection-end-line="438" selection-end-column="21" />
+              <folding>
+                <element signature="e#484#1258#0" expanded="false" />
+                <element signature="e#1298#1870#0" expanded="false" />
+                <element signature="e#1908#2376#0" expanded="false" />
+                <element signature="e#2414#4865#0" expanded="false" />
+                <element signature="e#4905#9612#0" expanded="false" />
+                <element signature="e#9645#13753#0" expanded="false" />
+                <element signature="e#13791#18281#0" expanded="false" />
+                <element signature="e#18318#21326#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="chat.pug" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/views/Chat/chat.pug">
           <provider selected="true" editor-type-id="text-editor">
@@ -44,7 +63,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChatController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChatController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/srcs/controllers/ChatController.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="930">
@@ -133,12 +152,12 @@
         <option value="$PROJECT_DIR$/srcs/views/Profile/view-match.pug" />
         <option value="$PROJECT_DIR$/srcs/models/user.js" />
         <option value="$PROJECT_DIR$/srcs/models/account.js" />
-        <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
         <option value="$PROJECT_DIR$/srcs/models/notification.js" />
         <option value="$PROJECT_DIR$/srcs/views/layout.pug" />
         <option value="$PROJECT_DIR$/srcs/controllers/ChatController.js" />
         <option value="$PROJECT_DIR$/srcs/views/Chat/chat.pug" />
         <option value="$PROJECT_DIR$/srcs/index.js" />
+        <option value="$PROJECT_DIR$/srcs/controllers/ProfileController.js" />
       </list>
     </option>
   </component>
@@ -322,16 +341,15 @@
       <workItem from="1516874205510" duration="20371000" />
       <workItem from="1516960636182" duration="15952000" />
       <workItem from="1516984058725" duration="10434000" />
-      <workItem from="1517045992401" duration="1884000" />
+      <workItem from="1517045992401" duration="2072000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75783000" />
+    <option name="totallyTimeSpent" value="75971000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1183479" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -339,7 +357,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34273234" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34273234" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -381,6 +399,10 @@
             <element signature="e#1298#1870#0" expanded="false" />
             <element signature="e#1908#2376#0" expanded="false" />
             <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#4905#9612#0" expanded="false" />
+            <element signature="e#9645#13753#0" expanded="false" />
+            <element signature="e#13791#18281#0" expanded="false" />
+            <element signature="e#18318#21326#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -440,6 +462,10 @@
             <element signature="e#1298#1870#0" expanded="false" />
             <element signature="e#1908#2376#0" expanded="false" />
             <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#4905#9612#0" expanded="false" />
+            <element signature="e#9645#13753#0" expanded="false" />
+            <element signature="e#13791#18281#0" expanded="false" />
+            <element signature="e#18318#21326#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -503,6 +529,10 @@
             <element signature="e#1298#1870#0" expanded="false" />
             <element signature="e#1908#2376#0" expanded="false" />
             <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#4905#9612#0" expanded="false" />
+            <element signature="e#9645#13753#0" expanded="false" />
+            <element signature="e#13791#18281#0" expanded="false" />
+            <element signature="e#18318#21326#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -736,31 +766,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="857">
-          <caret line="219" column="60" lean-forward="true" selection-start-line="219" selection-start-column="16" selection-end-line="219" selection-end-column="60" />
-          <folding>
-            <element signature="e#484#1258#0" expanded="false" />
-            <element signature="e#1298#1870#0" expanded="false" />
-            <element signature="e#1908#2376#0" expanded="false" />
-            <element signature="e#2414#4865#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/srcs/views/layout.pug">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="825">
           <caret line="55" column="41" lean-forward="false" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/srcs/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="83" column="86" lean-forward="false" selection-start-line="83" selection-start-column="86" selection-end-line="83" selection-end-column="86" />
           <folding />
         </state>
       </provider>
@@ -778,6 +787,31 @@
         <state relative-caret-position="930">
           <caret line="62" column="27" lean-forward="true" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="80" column="22" lean-forward="true" selection-start-line="80" selection-start-column="22" selection-end-line="80" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/srcs/controllers/ProfileController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="438" column="21" lean-forward="true" selection-start-line="438" selection-start-column="21" selection-end-line="438" selection-end-column="21" />
+          <folding>
+            <element signature="e#484#1258#0" expanded="false" />
+            <element signature="e#1298#1870#0" expanded="false" />
+            <element signature="e#1908#2376#0" expanded="false" />
+            <element signature="e#2414#4865#0" expanded="false" />
+            <element signature="e#4905#9612#0" expanded="false" />
+            <element signature="e#9645#13753#0" expanded="false" />
+            <element signature="e#13791#18281#0" expanded="false" />
+            <element signature="e#18318#21326#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
