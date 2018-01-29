@@ -131,7 +131,7 @@ block scripts
             return html;
         }
 
-        var users = JSON.parse('!{JSON.stringify(users)}');
+        var users = !{JSON.stringify(users)};
         $('input[name="filter-age"]').bootstrapSlider({
             formatter: function (numbers) {
                 if (typeof numbers === 'object')

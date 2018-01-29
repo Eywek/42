@@ -43,10 +43,15 @@ block content
                                 small
                                     strong aka
                                 | &nbsp;#{user.username}
+                            | #{user.last_name}
                         p.card-text
                             span(data-toggle='tooltip', title='Localisation', data-placement='top')
                                 i.fa.fa-map-marker
                                 | &nbsp; #{user.location}
+                            br
+                            span(data-toggle='tooltip', title='Âge', data-placement='top')
+                                i.fa.fa-sort-numeric-down
+                                | &nbsp; #{user.age} ans
                             br
                             span(data-toggle='tooltip', title='Sexe', data-placement='top')
                                 if user.gender === 'men'
@@ -71,7 +76,7 @@ block content
                             br
                             span(data-toggle='tooltip', title='Score de popularité', data-placement='top')
                                 i.fa.fa-star
-                                | &nbsp; #{user.popularity}
+                                | &nbsp; #{user.popularity || '0'}
                             if !user.active
                                 br
                                 span(data-toggle='tooltip', title='Dernière connexion', data-placement='top')
@@ -99,6 +104,14 @@ block content
 
                             each visit in user.visitors
                                 img.img-thumbnail(src=visit.profile_pic, width=50, height=50, data-toggle='tooltip', data-placement='top', title=visit.username)
+                if user.id === userId && user.likes.length > 0
+                    .card.mt-2
+                        .card-body
+                            h5 Les personnes qui m'aiment
+                            hr
+
+                            each liker in user.likes
+                                img.img-thumbnail(src=liker.profile_pic, width=50, height=50, data-toggle='tooltip', data-placement='top', title=liker.username)
 
 
             .col-md-9

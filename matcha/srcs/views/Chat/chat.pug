@@ -66,7 +66,7 @@ block style
 block content
     .container.mt-5
 
-        if conversations.length === 0
+        if Object.keys(conversations).length === 0
             .alert.alert-danger
                 h3 Personne de disponible !
                 | Vous n'avez pas encore aimé de profil en retour ou ils ne vous aiment pas en retour. Il vous faut patienter !
@@ -210,4 +210,5 @@ block scripts
         }
         // SCROLL
         var element = document.querySelector('.messages');
-        element.scrollTop = element.scrollHeight;
+        if (element)
+            element.scrollTop = element.scrollHeight;

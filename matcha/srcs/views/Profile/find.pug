@@ -333,7 +333,8 @@ block scripts
             var value = input.val().split(',');
 
             next(_.filter(optionnalUsers || users, function (user) {
-                return user.age >= value[0] && user.age <= value[1];
+                console.log(user.username, user.age, value[0], value[1], user.age >= value[0] && user.age <= value[1])
+                return user.age >= value[0] && user.age < value[1];
             }));
         }
         function filterPopularity(input, next, optionnalUsers)
@@ -341,7 +342,7 @@ block scripts
             var value = input.val().split(',');
 
             next(_.filter(optionnalUsers || users, function (user) {
-                return user.popularity >= value[0] && user.popularity <= value[1];
+                return user.popularity >= value[0] && user.popularity < value[1];
             }));
         }
         function filterLocation(input, next, optionnalUsers)
@@ -349,10 +350,10 @@ block scripts
             var value = input.val().split(',');
             var userLocation = '#{user.location}';
             if (userLocation.length === 0)
-                return next(0);
+                return next(optionnalUsers || users);
 
             async.filter(optionnalUsers || users, function (user, callback) {
-                return callback(undefined, user.distance >= value[0] && user.distance <= value[1]);
+                return callback(undefined, user.distance >= value[0] && user.distance < value[1]);
             }, function (err, filteredUsers) {
                 next(filteredUsers);
             });
@@ -362,14 +363,14 @@ block scripts
             var value = input.val().split(',');
             var userTags = '#{user.tags}'.split(',');
             if (userTags.length === 0)
-                return next();
+                return next(optionnalUsers || users);
 
             next(_.filter(optionnalUsers || users, function (user) {
                 var diff = _.difference(user.tags.split(','), userTags).length;
                 var commonsCount = userTags.length - diff;
                 if (commonsCount < 0)
                     commonsCount = 0;
-                return commonsCount >= value[0] && commonsCount <= value[1];
+                return commonsCount >= value[0] && commonsCount < value[1];
             }));
         }
 

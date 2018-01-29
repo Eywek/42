@@ -189,6 +189,7 @@ module.exports = {
                     return res.json({status: false, error: 'Une erreur interne est survenue.'});
                 }
 
+                var fullUrl = req.protocol + '://' + req.get('host') + '/account/reset-password/' + token;
                 // Send email
                 sendmail({
                     from: 'no-reply@matcha.com',
@@ -198,7 +199,7 @@ module.exports = {
                         username: user[0].username,
                         ip: req.ip,
                         date: new Date(),
-                        url: '/account/reset-password/' + token
+                        url: fullUrl
                     })
                 }, function(err, reply) {
                     if (err) {
@@ -215,7 +216,7 @@ module.exports = {
 
     resetPassword: function (req, res) {
         // Check if token is valid
-        db.query("SELECT `users_tokens`.`id`, `user_id`, `name` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = 'RESET_PW' AND `used_at` IS NULL LIMIT 1", [req.params.token], function (err, rows) {
+        db.query("SELECT `users_tokens`.`id`, `user_id`, `name`, `username` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = 'RESET_PW' AND `used_at` IS NULL LIMIT 1", [req.params.token], function (err, rows) {
             if (err) {
                 console.error(err);
                 return res.json({status: false, error: 'Une erreur interne est survenue.'});
@@ -264,7 +265,5 @@ module.exports = {
             }, ['password']);
         })
     },
-
-    validAccount: function (req, res) {}
 
 };

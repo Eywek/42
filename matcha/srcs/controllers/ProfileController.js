@@ -119,7 +119,7 @@ module.exports = {
 
     profile: function (req, res, io) {
         // Find user
-        db.query('SELECT `users`.`id`, `users`.`username`, `users`.`name`, `users`.`last_login`, `users`.`created_at`, ' +
+        db.query('SELECT `users`.`id`, `users`.`username`, `users_accounts`.`age`, `users`.`last_name`, `users`.`name`, `users`.`last_login`, `users`.`created_at`, ' +
             '`users_accounts`.`biography`, `users_accounts`.`tags`, `users_accounts`.`gender`, `users_accounts`.`sexual_orientation`, `users_accounts`.`location`, ' +
             '`users_blockeds`.`id` AS `blocked`, ' +
             '`active_users`.`user_id` AS `active`, ' +
@@ -193,7 +193,25 @@ module.exports = {
                             return b.id - a.id;
                         });
 
-                        return res.render('Profile/profile', {user: user, title: user.username});
+                        db.query('SELECT `users`.`username`, `users_uploads`.`name` AS `profile_pic` ' +
+                          'FROM `likes` ' +
+                          'INNER JOIN `users` ON `users`.`id` = `likes`.`user_id` ' +
+                          'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
+                          'WHERE `likes`.`liked_id` = ?', [req.session.user], function (err, likes) {
+                          if (err)
+                            console.error(err);
+                          if (!likes)
+                            likes = [];
+                          user.likes = likes.map(function (liker) {
+                            if (liker.profile_pic)
+                              liker.profile_pic = '/uploads/pics/' + liker.profile_pic;
+                            else
+                              liker.profile_pic = '/assets/img/default_profile_pic.png';
+                            return liker;
+                          });
+
+                          return res.render('Profile/profile', {user: user, title: user.username});
+                        })
                     });
                 });
             });
@@ -221,9 +239,9 @@ module.exports = {
                 'FROM `users_accounts` ' +
                 'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
                 'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
-                'LEFT JOIN `users_blockeds` ON `users_blockeds`.`user_id` = `users`.`id` OR `users_blockeds`.`blocker_id` = `users`.`id`' +
+                'LEFT JOIN `users_blockeds` ON (`users_blockeds`.`user_id` = `users`.`id` AND `users_blockeds`.`blocker_id` = ?) OR (`users_blockeds`.`blocker_id` = `users`.`id` AND `users_blockeds`.`user_id` = ?)' +
                 'WHERE ';
-            var values = [];
+            var values = [req.session.user, req.session.user];
 
             if (req.body.age) {
                 sql += '`users_accounts`.`age` >= ? AND `users_accounts`.`age` <= ? ';
@@ -233,11 +251,17 @@ module.exports = {
                 values.push(age[0], age[1]);
             }
             if (req.body.popularity) {
-                sql += 'AND (' + sqlPopularity + ') >= ? AND (' + sqlPopularity + ') <= ? ';
                 var popularity = req.body.popularity.split(',');
                 if (popularity.length !== 2 || parseInt(popularity[0]) != popularity[0] || parseInt(popularity[1]) != popularity[1])
                     return res.json({status: false, error: 'La popularité invalide.'});
-                values.push(popularity[0], popularity[1]);
+                if (popularity[0] > 0) {
+                    sql += 'AND (' + sqlPopularity + ') >= ? '
+                    values.push(popularity[0]);
+                }
+                if (popularity[1] < 90) {
+                    sql += 'AND (' + sqlPopularity + ') <= ? ';
+                    values.push(popularity[1]);
+                }
             }
             if (req.body.location) {
                 sql += 'AND `users_accounts`.`location` LIKE ? ';
@@ -265,8 +289,15 @@ module.exports = {
                         var distance = 0;
                         if (err)
                             console.error(err);
-                        else
-                            distance = JSON.parse(body).rows[0].elements[0].distance.value;
+                        else {
+                            try {
+                              body = JSON.parse(body)
+                              if (body && body.rows && body.rows.length > 0 && body.rows.elements && body.rows.elements.length > 0 && body.rows[0].elements[0].distance)
+                                distance = body.rows[0].elements[0].distance.value;
+                            } catch (e) {
+                                console.error(e)
+                            }
+                        }
                         rows[key].distance = distance / 1000;
                         next();
                     });
@@ -288,7 +319,7 @@ module.exports = {
             if (!user || user.length === 0)
                 return res.render('Profile/view-match', {title: 'Suggestions', users: [], user: false});
             user = user[0];
-            var values = [req.session.user];
+            var values = [req.session.user, req.session.user, req.session.user];
             var where = '';
 
             // Sexe
@@ -317,7 +348,7 @@ module.exports = {
                'FROM `users_accounts` ' +
                'INNER JOIN `users` ON `users`.`id` = `users_accounts`.`user_id` ' +
                'LEFT JOIN `users_uploads` ON `users_uploads`.`user_id` = `users`.`id` AND `users_uploads`.`is_profile_pic` = 1 ' +
-               'LEFT JOIN `users_blockeds` ON `users_blockeds`.`user_id` = `users`.`id` OR `users_blockeds`.`blocker_id` = `users`.`id`' +
+               'LEFT JOIN `users_blockeds` ON (`users_blockeds`.`user_id` = `users`.`id` AND `users_blockeds`.`blocker_id` = ?) OR (`users_blockeds`.`blocker_id` = `users`.`id` AND `users_blockeds`.`user_id` = ?)' +
                'LEFT JOIN `likes` ON `likes`.`user_id` = ? AND `likes`.`liked_id` = `users`.`id`' +
                'WHERE ' + where, values, function (err, users) {
                 if (err) {
@@ -329,30 +360,38 @@ module.exports = {
                 async.eachOf(users, function (match, key, next) {
                     // Match
                     var tagsDiff = _.difference(match.tags.split(','), user.tags.split(',')).length;
-                    var ageDiff = user.age - match.age;
+                    var ageDiff = Math.abs(user.age - match.age);
                     request("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" + user.location + "&destinations=" + match.location + "&key=" + config.googleApiKey, function (err, response, body) {
                         var distance = 0;
                         if (err)
                             console.error(err);
-                        else
-                            distance = JSON.parse(body).rows[0].elements[0].distance.value;
-                        users[key].weight = tagsDiff * -0.5 + distance * -0.8 + match.popularity * 0.3 + (ageDiff * (Math.abs(ageDiff) > 5 ? -0.8 : -0.3)); // location / tags / popularity / age
-                        users[key].distance = distance / 1000;
-
-                        // Display
-                        if (match.profile_pic)
-                            users[key].profile_pic = '/uploads/pics/' + match.profile_pic;
-                        else
-                            users[key].profile_pic = '/assets/img/default_profile_pic.png';
-                        users[key].username = match.username.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-
+                        else {
+                            try {
+                              body = JSON.parse(body)
+                              if (body && body.rows && body.rows.length > 0 && body.rows.elements && body.rows.elements.length > 0 && body.rows[0].elements[0].distance)
+                                distance = body.rows[0].elements[0].distance.value;
+                            } catch (e) {
+                              console.error(e)
+                            }
+                        }
+                        if (!match.popularity)
+                            match.popularity = 0
+                        users[key] = {
+                            weight: tagsDiff * -0.5 + distance * -0.8 + match.popularity * 0.3 + (ageDiff * (ageDiff > 5 ? -0.8 : -0.3)),
+                            distance: distance / 1000,
+                            profile_pic: (match.profile_pic) ? '/uploads/pics/' + match.profile_pic : '/assets/img/default_profile_pic.png',
+                            age: match.age,
+                            username: match.username.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'),
+                            popularity: match.popularity,
+                            tags: match.tags
+                        }
                         // next
                         next();
                     });
                 }, function () {
                     res.render('Profile/view-match', {title: 'Suggestions', users: users.sort(function (a, b) {
                         return a.weight - b.weight;
-                    }).slice(0, 25), user: user});
+                    }).reverse().slice(0, 25), user: user});
                 });
             })
         });
