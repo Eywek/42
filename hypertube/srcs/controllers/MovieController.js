@@ -101,52 +101,92 @@ const streaming = (filename, magnetLink, req, res, onFileWrited) => {
 
     // MULTIPLE STREAMS
     let filePath = path.join(__dirname, '../../files/' + filename + ext)
-    let fileStream = fs.createWriteStream(filePath);
-    let echoStream = new stream.Writable();
-    let responseClosed = false;
-    let fileClosed = false;
+    let fileStream = fs.createWriteStream(filePath)
+    let echoStream = new stream.Writable()
+    let echoStream2 = new stream.Writable()
+    let responseClosed = false
+    let fileClosed = false
+    let echoStream2Done = false
 
     res.on('close', function () {
       console.log('Response closed!')
-      responseClosed = true;
+      responseClosed = true
+      echoStream2Done()
     })
-    let onFileClose = function () {
+    let onFileClose = function (err) {
       console.log('File closed!')
-      fileClosed = true;
+      if (err)
+        console.error(err)
+      fileClosed = true
     }
-    fileStream.on('close', onFileClose).on('error', onFileClose).on('end', () => {
+    fileStream.on('close', onFileClose).on('error', onFileClose).on('finish', () => {
+      console.log('File is now on disk!')
       onFileWrited(filename + ext)
     })
+    let onVideoStreamEnd = function (err) {
+      console.log('Video stream is now closed, close others')
+      if (err)
+        console.error(err)
+      if (!fileClosed)
+        fileStream.close()
+      if (!responseClosed)
+        res.send('')
+    }
+    videoStream.on('close', onVideoStreamEnd).on('error', onVideoStreamEnd).on('end', () => {
+      console.log('Video stream has reached is end')
+    })
 
-    echoStream._write = function (chunk, encoding, done) {
-      console.log('Receiving chunk from read stream...')
-      if (responseClosed && fileClosed) {
-        console.log('Both of streams are closed, closing videoStreaming.');
-        videoStream.close();
-        return;
-      }
+    echoStream2._write = (chunk, encoding, done) => {
+      console.log('Receiving chunk from read stream, write in res...')
+      if (!responseClosed)
+        res.write(chunk, encoding, done)
+      else
+        done()
+    }
+    echoStream2.on('end', () => {
+      console.log('Echo stream 2 has reached is end')
+      res.end()
+    })
 
-      async.parallel([
-        function (cb) {
-          console.log(responseClosed)
-          if (responseClosed)
-            cb()
-          else
-            res.write(chunk, encoding, cb)
-        },
-        function (cb) {
-          if (fileClosed)
-            cb()
-          else {
-            console.log('Writing chunk on file...')
-            fileStream.write(chunk, encoding, cb)
-          }
-        }
-      ], done)
-    };
+    echoStream._write = (chunk, encoding, done) => {
+      console.log('Receiving chunk from read stream, write in file...')
+      echoStream2Done = done
+      if (!fileClosed)
+        fileStream.write(chunk, encoding, done)
+      else
+        done()
+      //console.log('Response closed: ', responseClosed)
+      //if (!responseClosed)
+      //  res.write(chunk, encoding, done)
+      //else
+      //  done()
 
-    //pump(videoStream, echoStream);
+      // async.parallel([
+      //   function (cb) {
+      //     console.log('Writing chunk on res...')
+      //     if (responseClosed)
+      //       cb()
+      //     else
+      //       res.write(chunk, encoding, cb)
+      //   },
+      //   function (cb) {
+      //     console.log('Writing chunk on file...')
+      //     if (fileClosed)
+      //       cb()
+      //     else {
+      //       fileStream.write(chunk, encoding, cb)
+      //     }
+      //   }
+      // ], done)
+    }
+    echoStream.on('finish', () => {
+      console.log('Echo stream has reached is end')
+      fileStream.end()
+    })
+    //pump(videoStream, fileStream)
+    //pump(videoStream, echoStream)
     videoStream.pipe(echoStream)
+    videoStream.pipe(echoStream2)
   })
 }
 const findTorrent = (movieTitle, callback) => {
@@ -168,7 +208,7 @@ const findTorrent = (movieTitle, callback) => {
       }).catch(() => {
         console.log('Found 0 results in kickass-api')
         next(undefined, null)
-      });*/
+      })*/
       next(undefined, null)
     },
 
@@ -187,7 +227,7 @@ const findTorrent = (movieTitle, callback) => {
       })
     }
   ], (err, results) => {
-    console.log(err, results);
+    console.log(err, results)
     if (err) {
       console.error(err)
       return callback()
@@ -198,15 +238,15 @@ const findTorrent = (movieTitle, callback) => {
       console.log('No torrent found')
       return callback()
     }
-    let torrent = {};
+    let torrent = {}
     if (!results[0])
-      torrent = results[1];
+      torrent = results[1]
     else if (!results[1])
-      torrent = results[0];
+      torrent = results[0]
     else if (results[0].seeds > results[1].seeders)
-      torrent = results[0];
+      torrent = results[0]
     else
-      torrent = results[1];
+      torrent = results[1]
 
     console.log('Torrent magnet: ' + torrent.magnetLink || torrent.magnet)
     callback(torrent.magnetLink || torrent.magnet)
@@ -329,7 +369,7 @@ module.exports = {
           start: start,
           end: end
         }).pipe(res)
-        return;
+        return
       }
 
       if (movie.episode)
@@ -349,7 +389,7 @@ module.exports = {
 
         // STREAMING
         pump(videoStream, res)
-        return;
+        return
       }
 
       // DONWLOAD
