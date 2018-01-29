@@ -1,0 +1,108 @@
+extends ../layout
+
+block style
+    style.
+        .img-thumbnail {
+            border-radius: 50%!important;
+        }
+
+
+block content
+    .jumbotron.jumbotron-fluid
+        .container
+            .row
+                .col-md-2
+                    img.rounded.img-thumbnail(src=user.avatar)
+                .col-md-10
+                    h1.display-4 #{user.name}
+                    p.lead
+                        | #{__('You\'ve registered %s', moment(user.created_at).fromNow())}
+    .container
+        .row
+            .col-md-6
+                .card
+                    .card-body
+                        h4 #{__('Edit your data')}
+                        hr
+
+                        form(data-ajax, method='post', action='/account', data-ajax-callback='afterInfosUpdate')
+                            .form-group
+                                label #{__('First name')}
+                                input.form-control(type='text', value=user.name, name='name')
+                            .form-group
+                                label #{__('Last name')}
+                                input.form-control(type='text', value=user.last_name, name='last_name')
+                            .form-group
+                                label #{__('Username')}
+                                input.form-control(type='text', value=user.username, name='username')
+                                small.form-text.text-muted #{__('It will be displayed to other users')}
+                            .form-group
+                                label #{__('Email')}
+                                input.form-control(type='email', value=user.email, name='email')
+                                small.form-text.text-muted #{__('Your email will be safe')}
+
+                            .form-group
+                                label #{__('Language')}
+                                select.form-control.bfh-languages(name='lang', data-language=user.lang)
+
+                            button.btn.btn-primary(type='submit')
+                                i.fa.fa-save
+                                | &nbsp;&nbsp;#{__('Save')}
+
+
+            .col-md-6
+                .card
+                    .card-body
+                        h4 #{__('Edit your password')}
+                        hr
+
+                        form(data-ajax, method='post', action='/account/password')
+                            .form-group
+                                label #{__('Password')}
+                                input.form-control(type='password', name='password')
+                                small.form-text.text-muted #{__('Your password need to be safe')}
+                            .form-group
+                                label #{__('Password confirmation')}
+                                input.form-control(type='password', name='password_confirmation')
+
+                            button.btn.btn-primary(type='submit')
+                                i.fa.fa-save
+                                | &nbsp;&nbsp;#{__('Save')}
+
+
+        hr
+        .row.mt-2
+            .col-md-12
+
+                .card
+                    .card-body
+                        h4 Avatar
+                        hr
+
+                        form(method='post', action='/account/photo', enctype='multipart/form-data' data-ajax, data-ajax-callback='afterPostPhoto')
+
+                            .form-group
+                                label #{__('Send a photo')}
+                                .custom-file
+                                    input#file.custom-file-input(type='file', name='picture')
+                                    label.custom-file-label(for='file') #{__('Choose a file')}
+
+                            button.btn.btn-primary(type='submit')
+                                i.fa.fa-share-square
+                                | &nbsp;&nbsp;#{__('Send')}
+
+                        hr
+
+
+block scripts
+    script(type='text/javascript', src='/assets/js/bootstrap-formhelpers.min.js')
+    script(type='text/javascript').
+        $('input[type="file"]').on('change', function (e) {
+            $(this).parent().find('.custom-file-label').html($(this).val());
+        })
+        $('[data-toggle="tooltip"]').tooltip({
+            container: 'body'
+        })
+        function afterPostPhoto(req, res) {
+            $('input[type="file"]').val('').parent().find('.custom-file-label').html('#{__('Choose a file')}');
+        }
