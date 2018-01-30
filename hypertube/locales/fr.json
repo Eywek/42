@@ -40,5 +40,6 @@
 	"Username or email already used.": "L'email ou le nom d'utilisateur est déjà utilisé.",
 	"Hi %s, you've asked a reset link with IP %s, this is your link: %s": "Bonjour %s, vous avez demandé un lien de rénitialisation de mot de passe avec l'IP %s, le voici: %s",
 	"Language": "Langage",
-	"You need to send a image": "You need to send a image"
+	"You need to send a image": "You need to send a image",
+	"Vos identifiants sont invalides.": "Vos identifiants sont invalides."
 }

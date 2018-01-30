@@ -106,12 +106,10 @@ const streaming = (filename, magnetLink, req, res, onFileWrited) => {
     let echoStream2 = new stream.Writable()
     let responseClosed = false
     let fileClosed = false
-    let echoStream2Done = false
 
     res.on('close', function () {
       console.log('Response closed!')
       responseClosed = true
-      echoStream2Done()
     })
     let onFileClose = function (err) {
       console.log('File closed!')
@@ -138,10 +136,14 @@ const streaming = (filename, magnetLink, req, res, onFileWrited) => {
 
     echoStream2._write = (chunk, encoding, done) => {
       console.log('Receiving chunk from read stream, write in res...')
-      if (!responseClosed)
-        res.write(chunk, encoding, done)
-      else
-        done()
+      if (responseClosed)
+        return done()
+      let checker = setInterval(() => {
+        if (responseClosed)
+          done()
+        clearInterval(checker)
+      }, 50)
+      res.write(chunk, encoding, done)
     }
     echoStream2.on('end', () => {
       console.log('Echo stream 2 has reached is end')
