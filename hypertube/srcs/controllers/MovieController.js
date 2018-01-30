@@ -102,10 +102,8 @@ const streaming = (filename, magnetLink, req, res, onFileWrited) => {
     // MULTIPLE STREAMS
     let filePath = path.join(__dirname, '../../files/' + filename + ext)
     let fileStream = fs.createWriteStream(filePath)
-    let echoStream = new stream.Writable()
-    let echoStream2 = new stream.Writable()
+    let responseStream = new stream.Writable()
     let responseClosed = false
-    let fileClosed = false
 
     res.on('close', function () {
       console.log('Response closed!')
@@ -115,80 +113,35 @@ const streaming = (filename, magnetLink, req, res, onFileWrited) => {
       console.log('File closed!')
       if (err)
         console.error(err)
-      fileClosed = true
     }
     fileStream.on('close', onFileClose).on('error', onFileClose).on('finish', () => {
       console.log('File is now on disk!')
       onFileWrited(filename + ext)
     })
-    let onVideoStreamEnd = function (err) {
-      console.log('Video stream is now closed, close others')
-      if (err)
-        console.error(err)
-      if (!fileClosed)
-        fileStream.close()
-      if (!responseClosed)
-        res.send('')
-    }
-    videoStream.on('close', onVideoStreamEnd).on('error', onVideoStreamEnd).on('end', () => {
+    videoStream.on('end', () => {
       console.log('Video stream has reached is end')
     })
 
-    echoStream2._write = (chunk, encoding, done) => {
-      console.log('Receiving chunk from read stream, write in res...')
-      if (responseClosed)
-        return done()
+    responseStream._write = (chunk, encoding, done) => {
       let checker = setInterval(() => {
         if (responseClosed)
-          done()
-        clearInterval(checker)
+          cb()
       }, 50)
-      res.write(chunk, encoding, done)
+      let cb = () => {
+        clearInterval(checker)
+        done()
+      }
+      if (responseClosed)
+        return cb()
+      res.write(chunk, encoding, cb)
     }
-    echoStream2.on('end', () => {
-      console.log('Echo stream 2 has reached is end')
+    responseStream.on('end', () => {
+      console.log('Response stream has reached is end')
       res.end()
     })
 
-    echoStream._write = (chunk, encoding, done) => {
-      console.log('Receiving chunk from read stream, write in file...')
-      echoStream2Done = done
-      if (!fileClosed)
-        fileStream.write(chunk, encoding, done)
-      else
-        done()
-      //console.log('Response closed: ', responseClosed)
-      //if (!responseClosed)
-      //  res.write(chunk, encoding, done)
-      //else
-      //  done()
-
-      // async.parallel([
-      //   function (cb) {
-      //     console.log('Writing chunk on res...')
-      //     if (responseClosed)
-      //       cb()
-      //     else
-      //       res.write(chunk, encoding, cb)
-      //   },
-      //   function (cb) {
-      //     console.log('Writing chunk on file...')
-      //     if (fileClosed)
-      //       cb()
-      //     else {
-      //       fileStream.write(chunk, encoding, cb)
-      //     }
-      //   }
-      // ], done)
-    }
-    echoStream.on('finish', () => {
-      console.log('Echo stream has reached is end')
-      fileStream.end()
-    })
-    //pump(videoStream, fileStream)
-    //pump(videoStream, echoStream)
-    videoStream.pipe(echoStream)
-    videoStream.pipe(echoStream2)
+    videoStream.pipe(fileStream)
+    videoStream.pipe(responseStream)
   })
 }
 const findTorrent = (movieTitle, callback) => {
@@ -349,7 +302,7 @@ module.exports = {
 
   stream: (req, res) => {
     // Find torrent
-    db.query('SELECT `movies`.`file`, `movies`.`downloaded`, `movies`.`title`, `movies`.`episode`, `movies`.`season`, `parent`.`title` AS `parent_title` FROM `movies` ' +
+    db.query('SELECT `movies`.`id`, `movies`.`file`, `movies`.`downloaded`, `movies`.`title`, `movies`.`episode`, `movies`.`season`, `parent`.`title` AS `parent_title` FROM `movies` ' +
       'LEFT JOIN `movies` AS `parent` ON `parent`.`id` = `movies`.`parent_id` ' +
       'WHERE `movies`.`id` = ?', [req.params.id], (err, rows) => {
       if (err) {
@@ -363,11 +316,11 @@ module.exports = {
 
       if (movie.downloaded) {
         // HEADERS
-        let filePath = path.join(__dirname, '../../files/' + file)
-        let [start, end] = sendHeaders(req, res, fs.statSync(filePath).size, type)
+        let filePath = path.join(__dirname, '../../files/' + movie.file)
+        let [start, end] = sendHeaders(req, res, fs.statSync(filePath).size, path.extname(filePath))
 
         // CREATE STREAM
-        fs.createReadStream(path, {
+        fs.createReadStream(filePath, {
           start: start,
           end: end
         }).pipe(res)
@@ -400,7 +353,12 @@ module.exports = {
         if (!magnetLink)
           return res.sendStatus(404)
         streaming(movie.title, magnetLink, req, res, (filename) => {
-          console.log(filename + ' is saved on disk!')
+          db.query('UPDATE `movies` SET `downloaded` = 1, `file` = ? WHERE `id` = ?', [filename, movie.id], (err) => {
+            if (err)
+              console.error(err)
+            else
+              console.log(filename + ' is downloaded now')
+          })
         })
       })
     })
