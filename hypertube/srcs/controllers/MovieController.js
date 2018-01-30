@@ -13,7 +13,7 @@ const kickass = require('kickass-api')
 
 const insertMovie = (result, next, season, episode, parent_id) => {
   result.poster_path = result.poster_path || ''
-  console.log('Inserting ' + result.name || result.title + (season ? 'S' + season + 'E' + episode + ' parent_id:' + parent_id : ''))
+  console.log('Inserting ' + (result.name ? result.name : result.title) + (season ? ' S' + season + 'E' + episode + ' parent_id:' + parent_id : ''))
   db.query('INSERT INTO `movies` SET `parent_id` = ?, `title` = ?, media_id = ?, media_type = ?, poster_path = ?, backdrop_path = ?, vote_average = ?, date = ?, overview = ?, season = ?, episode = ?, created_at = ?', [
     parent_id,
     result.name || result.title,
@@ -211,7 +211,8 @@ const findTorrent = (movieTitle, callback) => {
 module.exports = {
 
   view: (req, res) => {
-    db.query('SELECT `id`, `file`, `downloaded`, `title`, `media_id` FROM `movies` WHERE `title` = ?', [req.params.title], (err, rows) => {
+    let searchQuery = 'SELECT * FROM `movies` WHERE `title` = ?'
+    db.query(searchQuery, [req.params.title], (err, rows) => {
       if (err) {
         console.error(err)
         return res.sendStatus(500)
@@ -221,7 +222,9 @@ module.exports = {
           res.render('Movie/view', {title: movie.title, movie: movie})
         }
 
-        if (movie.movie_type === 'movie')
+        movie.type = (movie.downloaded ? path.extname(movie.file) : 'webm')
+
+        if (movie.media_type === 'movie')
           return render()
         movie.seasons = {}
         // GET SEASONS
@@ -273,7 +276,7 @@ module.exports = {
         if (err)
           return res.sendStatus(500)
         insertMovie(results.results[0], (err, rows) => {
-          db.query('SELECT `id`, `file`, `downloaded`, `title`, `media_id` FROM `movies` WHERE `title` = ?', [rows.insertId], (err, rows) => {
+          db.query(searchQuery, [rows.insertId], (err, rows) => {
             if (err) {
               console.error(err)
               return res.sendStatus(500)
@@ -286,17 +289,28 @@ module.exports = {
   },
 
   search: (req, res) => {
+    if (!req.body.query)
+      return res.json({status: false, error: res.__('Please, fill the form')})
     mdb.searchMulti({
       query: req.body.query
     }, (err, results) => {
       if (err)
-        return res.json({status: false, error: err})
+        return res.json({status: false, error: (err.response && err.response.text) ? err.response.text : res.__('Internal error')})
 
       // RENDER
-      res.json({status: true, results: results})
+      res.json({status: true, success: res.__('Find %s results', results.results.length || 0),  results: results.results || []})
 
       // SAVE INTO DB
-      async.each(results.results, insertMovie, () => {})
+      async.each(results.results, (result, next) => {
+        db.query('SELECT `id` FROM `movies` WHERE `media_id` = ?', [result.id], (err, rows) => {
+          if (err)
+            console.error(err)
+          if (!rows || rows.length === 0)
+            insertMovie(result, next)
+          else
+            next()
+        })
+      }, () => {})
     })
   },
 
@@ -310,8 +324,10 @@ module.exports = {
         return res.sendStatus(500)
       }
 
-      if (!rows || rows.length === 0)
+      if (!rows || rows.length === 0) {
+        console.log('Film #' + req.params.id + ' not found')
         return res.sendStatus(404)
+      }
       let movie = rows[0]
 
       if (movie.downloaded) {

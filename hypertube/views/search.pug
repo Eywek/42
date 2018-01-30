@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    .container.mt-4
+        .row
+            .col-md-12
+                .card
+                    .card-body
+                        h2 Rechercher un film ou une série
+                        hr
+
+                        form(method='post', action='', data-ajax, data-ajax-callback='afterSearch')
+                            .form-group
+                                input.form-control(type='text', name='query')
+                            button.btn.btn-primary(type='submit') Rechercher
+
+        hr
+
+        .row.results.mt-4
+
+block scripts
+    script#template(type='text/html').
+        <div class="col-md-4 mt-3">
+            <div class="card">
+                <img class="card-img-top" src="{POSTER_PATH}">
+                <div class="card-body">
+                    <h5 class="card-title">{NAME}</h5>
+                    <p class="card-text">
+                        {OVERVIEW}
+                    </p>
+                    <a class="btn btn-info btn-block" href="/{NAME}">{VIEW_BTN}</a>
+                </div>
+            </div>
+        </div>
+    script(type='text/javascript').
+        var afterSearch = function (req, res) {
+          var html;
+          var content = ''
+          var results = res.results;
+
+          for (var i = 0; i < results.length; i++) {
+            html = $('#template').html()
+            html = html.replace(/{NAME}/g, results[i].name || results[i].title)
+            html = html.replace('{POSTER_PATH}', results[i].poster_path ? 'http://image.tmdb.org/t/p/w780/' + results[i].poster_path : '')
+            html = html.replace('{OVERVIEW}', results[i].overview.substr(0, results[i].overview.indexOf('.')))
+            html = html.replace('{VIEW_BTN}', results[i].media_type === 'movie' ? '#{__('View the movie')}' : '#{__('View the tv show')}')
+            content += html
+          }
+          $('.results').html(content)
+        }
