@@ -90,7 +90,7 @@ const insert = (result, next, season, episode, parent_id) => {
     result.id,
     result.file,
     result.magnet,
-    (season ? 'tv' : result.media_type),
+    (result.media_type || 'tv'),
     result.poster_path,
     result.backdrop_path || result.poster_path,
     result.vote_average,
