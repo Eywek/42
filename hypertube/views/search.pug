@@ -39,6 +39,8 @@ block scripts
           var results = res.results;
 
           for (var i = 0; i < results.length; i++) {
+            if (!results[i])
+              continue
             html = $('#template').html()
             html = html.replace(/{NAME}/g, results[i].name || results[i].title)
             html = html.replace('{POSTER_PATH}', results[i].poster_path ? 'http://image.tmdb.org/t/p/w780/' + results[i].poster_path : '')

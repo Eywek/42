@@ -9,30 +9,8 @@ const stream = require('stream')
 const thepiratebay = require('thepiratebay')
 const path = require('path')
 const fs = require('fs')
-const kickass = require('kickass-api')
+const movieModel = require('../models/movie')
 
-const insertMovie = (result, next, season, episode, parent_id) => {
-  result.poster_path = result.poster_path || ''
-  console.log('Inserting ' + (result.name ? result.name : result.title) + (season ? ' S' + season + 'E' + episode + ' parent_id:' + parent_id : ''))
-  db.query('INSERT INTO `movies` SET `parent_id` = ?, `title` = ?, media_id = ?, media_type = ?, poster_path = ?, backdrop_path = ?, vote_average = ?, date = ?, overview = ?, season = ?, episode = ?, created_at = ?', [
-    parent_id,
-    result.name || result.title,
-    result.id,
-    (season ? 'tv' : result.media_type),
-    result.poster_path,
-    result.backdrop_path || result.poster_path,
-    result.vote_average,
-    result.release_date || result.first_air_date || result.air_date,
-    result.overview,
-    season,
-    episode,
-    new Date()
-  ], (err, rows) => {
-    if (err)
-      console.error(err)
-    next(err, rows)
-  })
-}
 const sendHeaders = function (req, res, size, type) {
   let range = req.headers.range
   let positions = range.replace(/bytes=/, "").split("-")
@@ -147,25 +125,24 @@ const streaming = (filename, magnetLink, req, res, onFileWrited) => {
 const findTorrent = (movieTitle, callback) => {
   // Find torrent
   console.log('Try to find torrent for ' + movieTitle + '...')
-  async.parallel([
-    (next) => {
-      /*console.log('Search in kickass-api...')
-      kickass.search({
-        query: movieTitle,
-        sort_by: 'seeders',
-        order: 'desc',
-      }).then((results) => {
-        console.log('Found ' + results.length + ' results in kickass-api')
-        if (results.length > 0)
-          next(undefined, results[0])
-        else
-          next(undefined, null)
-      }).catch(() => {
-        console.log('Found 0 results in kickass-api')
-        next(undefined, null)
-      })*/
-      next(undefined, null)
-    },
+  async.race([
+    // (next) => {
+    //   console.log('Search in kickass-api...')
+    //   kickass.search({
+    //     query: movieTitle,
+    //     sort_by: 'seeders',
+    //     order: 'desc',
+    //   }).then((results) => {
+    //     console.log('Found ' + results.length + ' results in kickass-api')
+    //     if (results.length > 0)
+    //       next(undefined, results[0])
+    //     else
+    //       next(undefined, null)
+    //   }).catch(() => {
+    //     console.log('Found 0 results in kickass-api')
+    //     next(undefined, null)
+    //   })
+    // },
 
     (next) => {
       console.log('Search in thepiratebay...')
@@ -181,110 +158,30 @@ const findTorrent = (movieTitle, callback) => {
         next(undefined, results[0])
       })
     }
-  ], (err, results) => {
-    console.log(err, results)
+  ], (err, result) => {
     if (err) {
       console.error(err)
       return callback()
     }
 
     // Torrent
-    if (!results[0] && !results[1]) {
+    if (!result) {
       console.log('No torrent found')
       return callback()
     }
-    let torrent = {}
-    if (!results[0])
-      torrent = results[1]
-    else if (!results[1])
-      torrent = results[0]
-    else if (results[0].seeds > results[1].seeders)
-      torrent = results[0]
-    else
-      torrent = results[1]
-
+    let torrent = result
     console.log('Torrent magnet: ' + torrent.magnetLink || torrent.magnet)
-    callback(torrent.magnetLink || torrent.magnet)
+    callback(torrent.magnetLink || torrent.magnet, 'test.mp4') // TODO
   })
 }
 
 module.exports = {
 
   view: (req, res) => {
-    let searchQuery = 'SELECT * FROM `movies` WHERE `title` = ?'
-    db.query(searchQuery, [req.params.title], (err, rows) => {
-      if (err) {
-        console.error(err)
-        return res.sendStatus(500)
-      }
-      let next = (movie) => {
-        let render = () => {
-          res.render('Movie/view', {title: movie.title, movie: movie})
-        }
-
-        movie.type = (movie.downloaded ? path.extname(movie.file) : 'webm')
-
-        if (movie.media_type === 'movie')
-          return render()
-        movie.seasons = {}
-        // GET SEASONS
-        mdb.tvInfo({
-          id: movie.media_id
-        }, (err, result) => {
-          if (err) {
-            console.error(err)
-            return res.sendStatus(500)
-          }
-
-          // GET EPISODES
-          async.each(result.seasons, (season, cb) => {
-            mdb.tvSeasonInfo({
-              id: movie.media_id,
-              season_number: season.season_number
-            }, (err, results) => {
-              if (err) {
-                console.error(err)
-                return res.sendStatus(500)
-              }
-
-              // SAVE INTO DB
-              async.each(results.episodes, (result, next) => {
-                db.query('SELECT `id` FROM `movies` WHERE `parent_id` = ? AND `season` = ? AND `episode` = ?', [movie.id, season.season_number, result.episode_number], function (err, rows) {
-                  if (err)
-                    console.error(err)
-                  if (!rows || rows.length === 0)
-                    insertMovie(result, next, season.season_number, result.episode_number, movie.id)
-                })
-              }, () => {})
-              movie.seasons[season.season_number] = results.episodes
-              cb()
-            })
-          }, () => {
-            render()
-          })
-        })
-      }
-
-      // ALREADY SAVED
-      if (rows && rows.length > 0)
-        return next(rows[0])
-
-      // FIND MOVIE
-      mdb.searchMulti({
-        query: req.body.query
-      }, (err, results) => {
-        if (err)
-          return res.sendStatus(500)
-        insertMovie(results.results[0], (err, rows) => {
-          db.query(searchQuery, [rows.insertId], (err, rows) => {
-            if (err) {
-              console.error(err)
-              return res.sendStatus(500)
-            }
-            next(rows[0])
-          })
-        })
-      })
+    movieModel.get(req.params.title, (movie) => {
+      if (!movie)
+        return res.sendStatus(404)
+      res.render('Movie/view', {title: movie.title, movie: movie})
     })
   },
 
@@ -297,20 +194,38 @@ module.exports = {
       if (err)
         return res.json({status: false, error: (err.response && err.response.text) ? err.response.text : res.__('Internal error')})
 
-      // RENDER
-      res.json({status: true, success: res.__('Find %s results', results.results.length || 0),  results: results.results || []})
-
-      // SAVE INTO DB
-      async.each(results.results, (result, next) => {
-        db.query('SELECT `id` FROM `movies` WHERE `media_id` = ?', [result.id], (err, rows) => {
+      let movies = results.results || []
+      async.eachOf(movies, (movie, i, next) => {
+        db.query('SELECT `id` FROM `movies` WHERE `media_id` = ?', [movie.id], (err, rows) => {
           if (err)
             console.error(err)
-          if (!rows || rows.length === 0)
-            insertMovie(result, next)
-          else
+          if (rows && rows.length > 0)
+            return next()
+          if (movie.media_type === 'tv') {
+            movieModel.insert(movie, () => {})
+            return next()
+          }
+          // Try to find torrent if a movie
+          if (!movie.title)
+            movie.title = movie.name
+          findTorrent(movie.title, (magnet, file) => {
+            if (!magnet) { // torrent not found
+              delete movies[i]
+              movies.length--
+              return next()
+            }
+            movie.magnet = magnet
+            let ext = path.extname(file)
+            movie.file = movie.title + (ext === 'mp4' || ext === 'webm' ? ext : 'webm')
+            movies[i] = movie
+            if (!rows || rows.length === 0)
+              movieModel.insert(movie, () => {})
             next()
+          })
         })
-      }, () => {})
+      }, () => {
+        res.json({status: true, success: res.__('Find %s results', movies.length),  results: movies})
+      })
     })
   },
 

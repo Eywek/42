@@ -14,38 +14,93 @@ block style
                 background-position-y: 8%;
             }
     style.
-        /*video {*/
-            /*width: 100%;*/
-            /*height: auto;*/
-        /*}*/
+        .movie-desc {
+            position: relative;
+        }
+        .movie-footer {
+            position: absolute;
+            bottom: 20px;
+            width: 96%;
+        }
+        .episode .card-header {
+            padding: 5px;
+            text-align: center;
+        }
+        .episode h5 button {
+            color: #000;
+        }
 
-        /*.video-js {*/
-            /*position: relative !important;*/
-            /*width: 100% !important;*/
-            /*height: auto !important;*/
-        /*}*/
-        /*.vjs-poster {*/
-            /*position: absolute !important;*/
-            /*left: 0;*/
-            /*right: 0;*/
-            /*top: 0;*/
-            /*bottom: 0;*/
-        /*}*/
+        .btn-group-justified {
+            display: flex;
+        }
+        .btn-group-justified .btn {
+            flex-grow: 1;
+            outline: none!important;
+        }
 
 block content
     .row
         .col-md-12
             .banner
             .container.mt-3
-                h1 #{movie.title}
+                .card
+                    .card-body
+                        .row
+                            .col-md-3
+                                img.img-fluid(src='http://image.tmdb.org/t/p/original/' + movie.poster_path)
+                            .col-md-9.movie-desc
+                                h1 #{movie.title}
+                                hr
+                                p #{movie.overview}
+                                .movie-footer
+                                    hr
+                                    .row.text-center
+                                        .col-md-4
+                                            b Note:
+                                            h4
+                                                .badge.badge-info #{movie.vote_average} / 10
+                                        .col-md-4
+                                            b Année de production
+                                            h4
+                                                .badge.badge-primary #{new Date(movie.date).getFullYear()}
+                                        if movie.media_type === 'tv'
+                                            .col-md-4
+                                                b Saisons
+                                                h4
+                                                    .badge.badge-info #{Object.keys(movie.seasons).length}
+
                 hr
                 .card
                     .card-body
-                        video.video-js(controls='', preload='none', poster='http://image.tmdb.org/t/p/original/' + movie.backdrop_path, data-setup='{"fluid": true}')
-                            source(src='/' + movie.id + '/stream', type="video/" + movie.type)
-                            p.vjs-no-js
-                                | To view this video please enable JavaScript, and consider upgrading to a web browser that
-                                a(href='http://videojs.com/html5-video-support/', target='_blank') supports HTML5 video
+                        if movie.media_type === 'movie'
+                            video.video-js(controls='', preload='none', poster='http://image.tmdb.org/t/p/original/' + movie.backdrop_path, data-setup='{"fluid": true}')
+                                source(src='/' + movie.id + '/stream', type="video/" + movie.type)
+                                p.vjs-no-js
+                                    | To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                    a(href='http://videojs.com/html5-video-support/', target='_blank') supports HTML5 video
+                        else
+                            #accordionSeasons
+                                .btn-group.btn-group-justified#accordionSeasons
+                                    each episodes, season in movie.seasons
+                                        a.btn.btn-primary(data-toggle='collapse', href='#season-' + season)
+                                            | #{__('Season %s', season)}
+                                each episodes, season in movie.seasons
+                                    .collapse(id='season-' + season, data-parent='#accordionSeasons')
+                                        .card.card-body
+                                            #accordion
+                                                - var i = 0
+                                                each episode in episodes
+                                                    .card.episode
+                                                        .card-header
+                                                            h5.mb-0
+                                                                button.btn.btn-link(data-toggle='collapse', data-target='#season-' + season + '-episode-' + episode.id) #{__('Episode %s', ++i)} - #{episode.title}
+                                                        .collapse(data-parent='#accordion', id='season-' + season + '-episode-' + episode.id)
+                                                            .card-body
+                                                                video.video-js(controls='', preload='none', poster='http://image.tmdb.org/t/p/original/' + movie.backdrop_path, data-setup='{"fluid": true}')
+                                                                    source(src='/' + episode.id + '/stream', type="video/" + episode.type)
+                                                                    p.vjs-no-js
+                                                                        | To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                                                        a(href='http://videojs.com/html5-video-support/', target='_blank') supports HTML5 video
 
 
 block scripts

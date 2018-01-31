@@ -33,6 +33,7 @@
     "sendmail": "^1.2.0",
     "thepiratebay": "^1.4.6",
     "torrent-stream": "^1.0.3",
+    "underscore": "^1.8.3",
     "uuid": "^3.2.1"
   }
 }
