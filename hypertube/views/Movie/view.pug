@@ -90,17 +90,18 @@ block content
                                             #accordion
                                                 - var i = 0
                                                 each episode in episodes
-                                                    .card.episode
-                                                        .card-header
-                                                            h5.mb-0
-                                                                button.btn.btn-link(data-toggle='collapse', data-target='#season-' + season + '-episode-' + episode.id) #{__('Episode %s', ++i)} - #{episode.title}
-                                                        .collapse(data-parent='#accordion', id='season-' + season + '-episode-' + episode.id)
-                                                            .card-body
-                                                                video.video-js(controls='', preload='none', poster='http://image.tmdb.org/t/p/original/' + movie.backdrop_path, data-setup='{"fluid": true}')
-                                                                    source(src='/' + episode.id + '/stream', type="video/" + episode.type)
-                                                                    p.vjs-no-js
-                                                                        | To view this video please enable JavaScript, and consider upgrading to a web browser that
-                                                                        a(href='http://videojs.com/html5-video-support/', target='_blank') supports HTML5 video
+                                                    if new Date(episode.date) <= new Date()
+                                                        .card.episode
+                                                            .card-header
+                                                                h5.mb-0
+                                                                    button.btn.btn-link(data-toggle='collapse', data-target='#season-' + season + '-episode-' + episode.id) #{__('Episode %s', ++i)} - #{episode.title}
+                                                            .collapse(data-parent='#accordion', id='season-' + season + '-episode-' + episode.id)
+                                                                .card-body
+                                                                    video.video-js(controls='', preload='none', poster='http://image.tmdb.org/t/p/original/' + movie.backdrop_path, data-setup='{"fluid": true}')
+                                                                        source(src='/' + episode.id + '/stream', type="video/webm")
+                                                                        p.vjs-no-js
+                                                                            | To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                                                            a(href='http://videojs.com/html5-video-support/', target='_blank') supports HTML5 video
 
 
 block scripts

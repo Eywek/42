@@ -231,7 +231,7 @@ module.exports = {
 
   stream: (req, res) => {
     // Find torrent
-    db.query('SELECT `movies`.`id`, `movies`.`file`, `movies`.`downloaded`, `movies`.`title`, `movies`.`episode`, `movies`.`season`, `parent`.`title` AS `parent_title` FROM `movies` ' +
+    db.query('SELECT `movies`.`id`, `movies`.`file`, `movies`.`downloaded`, `movies`.`title`, `movies`.`episode`, `movies`.`magnet`, `movies`.`season`, `parent`.`title` AS `parent_title` FROM `movies` ' +
       'LEFT JOIN `movies` AS `parent` ON `parent`.`id` = `movies`.`parent_id` ' +
       'WHERE `movies`.`id` = ?', [req.params.id], (err, rows) => {
       if (err) {
@@ -278,11 +278,7 @@ module.exports = {
         return
       }
 
-      // DONWLOAD
-      findTorrent(movie.title, (magnetLink) => {
-        console.log(movie.title, magnetLink)
-        if (!magnetLink)
-          return res.sendStatus(404)
+      let stream = (magnetLink) => {
         streaming(movie.title, magnetLink, req, res, (filename) => {
           db.query('UPDATE `movies` SET `downloaded` = 1, `file` = ? WHERE `id` = ?', [filename, movie.id], (err) => {
             if (err)
@@ -291,6 +287,17 @@ module.exports = {
               console.log(filename + ' is downloaded now')
           })
         })
+      }
+
+      // ALREADY TORRENT SAVED
+      if (movie.magnet)
+        return stream(movie.magnet)
+
+      // DONWLOAD
+      findTorrent(movie.title, (magnetLink) => {
+        if (!magnetLink)
+          return res.sendStatus(404)
+        stream(magnetLink)
       })
     })
   },

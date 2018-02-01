@@ -22,7 +22,8 @@ const insertNewEpisodes = (media_id, db_id, season, episodesAlreadySaved, callba
         file: null,
         downloaded: null,
         episode: episode.episode_number,
-        season: season
+        season: season,
+        date: episode.air_date
       }
       if (episodesAlreadySaved[episode.episode_number]) // already saved
         return cb(undefined, returnEpisode)
@@ -36,7 +37,7 @@ const insertNewEpisodes = (media_id, db_id, season, episodesAlreadySaved, callba
 
 const getEpisodesFromSeasons = (media, db_id, next) => {
   seasons = {}
-  db.query('SELECT `id`, `title`, `file`, `downloaded`, `episode`, `season` FROM `movies` WHERE `parent_id` = ? ORDER BY season,episode', [db_id], (err, episodes) => {
+  db.query('SELECT `id`, `title`, `file`, `downloaded`, `episode`, `season`, `date` FROM `movies` WHERE `parent_id` = ? ORDER BY season,episode', [db_id], (err, episodes) => {
     if (err) {
       console.error(err)
       return next({})
@@ -121,7 +122,7 @@ module.exports = {
       if (!movie || movie.length === 0)
         return next()
       movie = movie[0]
-      movie.type = movie.downloaded ? path.extname(movie.file) : 'webm' // TODO: Not only webm (if torrent is mp4)
+      movie.type = movie.downloaded ? path.extname(movie.file) : 'webm'
 
       // GET MORE INFOS
       if (movie.media_type === 'movie') {
