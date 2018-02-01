@@ -7,6 +7,19 @@ const moment = require('moment')
 const multer = require('multer')
 const i18n = require("i18n")
 const app = express()
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const userModel = require('./srcs/models/user')
+
+passport.use(new LocalStrategy((username, password, done) => {
+  // Find user with this username and password
+  userModel.login(username, password, (err, userId) => {
+    if (err)
+      return done(undefined, false, i18n.__(err))
+    done(undefined, {id: userId})
+  })
+}))
+app.use(passport.initialize())
 
 i18n.configure({
   locales:['en', 'fr'],
@@ -38,7 +51,16 @@ app.use(function (req, res, next) {
 const userController = require('./srcs/controllers/UserController')
 const authMiddleware = require('./srcs/middlewares/auth')
 
-app.post('/signin', userController.signin)
+app.post('/signin', (req, res, next) => {
+  passport.authenticate('local', { session: false }, (err, user, info) => {
+    if (err)
+      return next(err)
+    if (!user)
+      return res.json({status: false, error: info})
+    req.session.user = user.id
+    return res.json({status: true, success: res.__("You're now logged"), redirect: '/account'})
+  })(req, res, next)
+})
 app.post('/signup', userController.signup)
 app.post('/account/lost-password', userController.lostPassword)
 app.get('/account/reset-password/:token', userController.resetPassword)
@@ -78,14 +100,13 @@ app.get('/', (req, res) => {
     return res.redirect('/account')
   res.render('home', {title: 'Hypertube'})
 })
-app.get('/search', authMiddleware, (req, res) => {
-  res.render('search', {title: i18n.__('Find')})
-})
 app.post('/search', authMiddleware, movieController.search)
 app.get('/library', authMiddleware, (req, res) => {
   res.render('library', {title: i18n.__('Library')})
 })
+app.get('/library/:limit(\\d+)/:offset(\\d+)', authMiddleware, movieController.library)
 app.get('/:title', authMiddleware, movieController.view)
+app.post('/:title/comment', authMiddleware, movieController.comment)
 app.get('/:id/stream', authMiddleware, movieController.stream)
 
 

@@ -37,6 +37,9 @@ block style
             flex-grow: 1;
             outline: none!important;
         }
+        #comments {
+            width: 100%;
+        }
 
 block content
     .row
@@ -102,8 +105,71 @@ block content
                                                                         p.vjs-no-js
                                                                             | To view this video please enable JavaScript, and consider upgrading to a web browser that
                                                                             a(href='http://videojs.com/html5-video-support/', target='_blank') supports HTML5 video
+                hr
+
+                h3 #{__('Comments')}
+
+                .row
+                    #comments
+                        each comment in comments
+                            .col-md-12.mb-2.mt-2
+                                .card
+                                    .card-body
+                                        .row
+                                            .col-md-2
+                                                img.img-fluid(src=comment.user_avatar)
+                                            .col-md-10
+                                                h5 #{comment.username}
+                                                hr
+                                                p #{comment.content}
+                                    .card-footer
+                                        small
+                                            em.float-right #{moment(comment.created_at).fromNow()}
+                    .col-md-12
+                        hr
+                        .card
+                            .card-body
+                                form(method='post', action='/' + movie.title + '/comment', data-ajax, data-ajax-callback='afterPostComment')
+                                    .form-group
+                                        label #{__('Content')}
+                                        textarea.form-control(name='content')
+                                    button.btn.btn-primary.float-right(type='submit') #{__('Send')}
+
+
 
 
 block scripts
     script(src='http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js')
     script(src='http://vjs.zencdn.net/6.6.0/video.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment-with-locales.min.js')
+    script#commentTemplate(type='text/html').
+        <div class="col-md-12 mb-2 mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="#{user.avatar}" class="img-fluid">
+                        </div>
+                        <div class="col-md-10">
+                            <h5>#{user.username}</h5>
+                            <hr>
+                            <p>{CONTENT}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <small><em class="float-right">{CREATED_DATE}</em></small>
+                </div>
+            </div>
+        </div>
+    script(type='text/javascript').
+        function afterPostComment() {
+          var textarea = $('textarea[name="content"]')
+          var content = textarea.val().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+          textarea.val('')
+          var html = $('#commentTemplate').html()
+          html = html.replace('{CONTENT}', content)
+          html = html.replace('{CREATED_DATE}', moment(new Date()).fromNow())
+
+          $('#comments').append(html)
+        }

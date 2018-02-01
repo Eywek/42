@@ -8,23 +8,6 @@ const fs = require('fs')
 
 module.exports = {
 
-  signin: function (req, res) {
-    // Check if form is filled
-    if (!req.body.username || req.body.username.length === 0 || !req.body.password || req.body.password.length === 0)
-      return res.json({status: false, error: res.__("Please, fill the form")})
-
-    // Find user with this username and password
-    userModel.login(req.body.username, req.body.password, function (err, userId) {
-      if (err)
-        return res.json({status: false, error: res.__(err)})
-
-      // Connect it
-      req.session.user = userId
-      // Send success message
-      res.json({status: true, success: res.__("You're now logged"), redirect: '/'})
-    })
-  },
-
   signup: function (req, res) {
     // Check if form is filled
     validator(userModel, req.body, function (err, status) {

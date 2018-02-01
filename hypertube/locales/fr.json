@@ -46,5 +46,10 @@
 	"View the movie": "Voir le film",
 	"View the tv show": "Voir la série",
 	"Season %s": "Season %s",
-	"Episode %s": "Episode %s"
+	"Episode %s": "Episode %s",
+	"Search a movie or tv show": "Search a movie or tv show",
+	"Comments": "Comments",
+	"Content": "Content",
+	"The content of the comment need to have minimum 10 characters.": "Le contenu de votre commentaire doit faire au minimum de 10 caractères.",
+	"Comment has been added!": "Le commentaire a bien été ajouté."
 }
