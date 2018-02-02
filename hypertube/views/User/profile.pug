@@ -1,0 +1,52 @@
+extends ../layout
+
+block style
+    style.
+        .img-thumbnail {
+            margin: 5px;
+        }
+        [data-toggle="tooltip"] {
+            cursor: pointer;
+        }
+        span.username {
+            font-weight: 200;
+            margin-left: 10px;
+        }
+
+block content
+    .container.mt-5
+
+        .row
+
+            .col-md-3
+
+                .card
+                    img.card-img-top(src=user.profile_pic)
+                    .card-body
+                        h5.card-title.mb-2 #{user.name}
+                            span.badge.badge-info.username
+                                small
+                                    strong aka
+                                | &nbsp;#{user.username}
+                            | &nbsp;&nbsp;#{user.last_name}
+                        p.card-text
+                            span(data-toggle='tooltip', title=__('Language'), data-placement='top')
+                                i.fa.fa-globe
+                                | &nbsp; #{user.lang}
+
+            .col-md-9
+
+                .card
+                    .card-body
+                        h3 #{__('His movies')}
+                        hr
+
+                        each movie in user.movies
+                            a(href='/' + (movie.parent_title ? movie.parent_title : movie.title))
+                                img.img-thumbnail(src='http://image.tmdb.org/t/p/original' + (movie.parent_poster_path ? movie.parent_poster_path : movie.poster_path), width=150, data-toggle='tooltip', title=(movie.parent_title ? movie.parent_title : movie.title), data-placement='top')
+
+block scripts
+    script(type='text/javascript').
+      $('[data-toggle="tooltip"]').tooltip({
+        container: 'body'
+      })

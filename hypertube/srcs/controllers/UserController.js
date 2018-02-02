@@ -5,10 +5,16 @@ const sendmail = require('sendmail')()
 const pug = require('pug')
 const path = require('path')
 const fs = require('fs')
+const getFullLanguage = (lang) => {
+  let content
+  if ((content = JSON.parse(fs.readFileSync(path.join(__dirname, '../../locales/languages.json')))[lang]))
+    return content.name || lang
+  return lang
+}
 
 module.exports = {
 
-  signup: function (req, res) {
+  signup: (req, res) => {
     // Check if form is filled
     validator(userModel, req.body, function (err, status) {
       if (!status)
@@ -56,14 +62,14 @@ module.exports = {
     }, [], [], res.__)
   },
 
-  signout: function (req, res) {
+  signout: (req, res) => {
     // Log out
     req.session.user = undefined
     // Redirect
     res.redirect('/')
   },
 
-  account: function (req, res) {
+  account: (req, res) => {
     // Get user infos
     userModel.get(req.session.user, function (err, user) {
       if (err) {
@@ -77,7 +83,7 @@ module.exports = {
     })
   },
 
-  editAccount: function (req, res) {
+  editAccount: (req, res) => {
     // Check if form is filled
     validator(userModel, req.body, function (err, status) {
       if (!status)
@@ -103,7 +109,7 @@ module.exports = {
     }, ['name', 'last_name', 'username', 'email'], [req.session.user], res.__)
   },
 
-  editPassword: function (req, res) {
+  editPassword: (req, res) => {
     // Check if form is filled
     validator(userModel, req.body, function (err, status) {
       if (!status)
@@ -126,7 +132,7 @@ module.exports = {
     }, ['password'], [], res.__)
   },
 
-  lostPassword: function (req, res) {
+  lostPassword: (req, res) => {
     // Check if form is filled
     if (!req.body.email || req.body.email.length === 0)
       return res.json({status: false, error: res.__("Please, fill the form")})
@@ -178,7 +184,7 @@ module.exports = {
     })
   },
 
-  resetPassword: function (req, res) {
+  resetPassword: (req, res) => {
     // Check if token is valid
     db.query('SELECT `users_tokens`.`id`, `user_id`, `name`, `users`.`username` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = \'RESET_PW\' AND `used_at` IS NULL LIMIT 1', [req.params.token], function (err, rows) {
       if (err) {
@@ -230,10 +236,42 @@ module.exports = {
     })
   },
 
-  uploadAvatar: function (req, res) {
+  uploadAvatar: (req, res) => {
     if (!req.file)
       return res.json({status: false, error: res.__('You need to send a image')})
     res.json({status: true, success: res.__('Your avatar is now saved!')})
+  },
+
+  profile: (req, res) => {
+    db.query('SELECT `users`.`id`, `users`.`name`, `users`.`last_name`, `users`.`username`, `users`.`lang` ' +
+      'FROM `users` ' +
+      'WHERE `users`.`username` = ?', [req.params.username], (err, rows) => {
+      if (err) {
+        console.error(err)
+        return res.sendStatus(500)
+      }
+      if (!rows || rows.length === 0)
+        res.sendStatus(404)
+      let user = rows[0]
+      // Get movies
+      db.query('SELECT `movies`.`title`, `parent`.`title` AS `parent_title`, `movies`.`poster_path`, `parent`.`poster_path` AS `parent_poster_path` ' +
+        'FROM `views` ' +
+        'INNER JOIN `movies` ON `movies`.`id` = `views`.`movie_id` ' +
+        'LEFT JOIN `movies` AS `parent` ON `parent`.`id` = `movies`.`parent_id` ' +
+        'WHERE `views`.`user_id` = ? ' +
+        'GROUP BY `movies`.`id`' +
+        'ORDER BY `views`.`id` DESC', [user.id], (err, rows) => {
+        let movies = []
+        if (err)
+          console.error(err)
+        if (rows && rows.length > 0)
+          movies = rows
+        user.lang = getFullLanguage(user.lang)
+        user.movies = movies
+        user.profile_pic = fs.existsSync(path.join(__dirname, '../../public/uploads/' + user.id + '.png')) ? '/uploads/' + user.id + '.png' : '/assets/img/default_profile_pic.png'
+        res.render('User/profile', {title: user.username, user:user})
+      })
+    })
   }
 
 }

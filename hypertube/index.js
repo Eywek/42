@@ -228,6 +228,7 @@ let upload = multer({
   })
 })
 app.post('/account/photo', authMiddleware, upload.single('picture'), userController.uploadAvatar)
+app.get('/user/:username', authMiddleware, userController.profile)
 
 // GLOBAL ROUTES
 const movieController = require('./srcs/controllers/MovieController')

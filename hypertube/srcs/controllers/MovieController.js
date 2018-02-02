@@ -420,7 +420,7 @@ module.exports = {
       'FROM `movies` ' +
       'LEFT JOIN `views` ON `views`.`movie_id` = `movies`.`id` AND `views`.`user_id` = ? ' +
       'WHERE `parent_id` IS NULL ' +
-      'ORDER BY ' + order.join(', ') + ' ' +
+      ((order.length > 0) ? 'ORDER BY ' + order.join(', ') + ' ' : '') +
       'LIMIT ' + req.params.limit + ' OFFSET ' + req.params.offset, [req.session.user], (err, movies) => {
       if (err) {
         console.error(err)
@@ -452,6 +452,6 @@ module.exports = {
         return res.json({status: true, success: res.__('Comment has been added!')})
       })
     })
-  }
+  },
 
 }

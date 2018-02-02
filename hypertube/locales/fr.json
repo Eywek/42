@@ -76,5 +76,8 @@
 	"Display movies": "Display movies",
 	"Display tv shows": "Display tv shows",
 	"Between {0} and {1}": "Between {0} and {1}",
-	"Between {0} / 10 and {1} / 10": "Between {0} / 10 and {1} / 10"
+	"Between {0} / 10 and {1} / 10": "Between {0} / 10 and {1} / 10",
+	"His movies": "Ses films",
+	"%s minutes": "%s minutes",
+	"Runtime": "Durée"
 }

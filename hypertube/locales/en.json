@@ -42,5 +42,7 @@
 	"The field %s cannot be null.": "The field %s cannot be null.",
 	"Note": "Note",
 	"Production year": "Production year",
-	"Find %s results": "Find %s results"
+	"Find %s results": "Find %s results",
+	"Comment has been added!": "Comment has been added!",
+	"The content of the comment need to have minimum 10 characters.": "The content of the comment need to have minimum 10 characters."
 }

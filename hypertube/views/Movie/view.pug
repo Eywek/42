@@ -60,7 +60,6 @@ block content
                                     if movie.credits.cast.length > 0
                                         hr
                                         .row
-                                            - console.log(movie.credits)
                                             each actor in movie.credits.cast.splice(0, 6)
                                                 .col-md-2
                                                     .card
@@ -72,16 +71,21 @@ block content
                                                                 em #{actor.character}
                                     hr
                                     .row.text-center
-                                        .col-md-4
+                                        .col-md-3
                                             b #{__('Note')}:
                                             h4
                                                 .badge.badge-info #{movie.vote_average} / 10
-                                        .col-md-4
+                                        .col-md-3
                                             b #{__('Production year')}
                                             h4
                                                 .badge.badge-primary #{new Date(movie.date).getFullYear()}
+                                        if movie.time
+                                            .col-md-3
+                                                b #{__('Runtime')}
+                                                    h4
+                                                        .badge.badge-info #{__('%s minutes', movie.time)}
                                         if movie.media_type === 'tv'
-                                            .col-md-4
+                                            .col-md-3
                                                 b #{__('Seasons')}
                                                 h4
                                                     .badge.badge-info #{Object.keys(movie.seasons).length}
@@ -134,7 +138,8 @@ block content
                                     .card-body
                                         .row
                                             .col-md-2
-                                                img.img-fluid(src=comment.user_avatar)
+                                                a(href='/user/' + comment.username)
+                                                    img.img-fluid(src=comment.user_avatar)
                                             .col-md-10
                                                 h5 #{comment.username}
                                                 hr
@@ -146,7 +151,7 @@ block content
                         hr
                         .card
                             .card-body
-                                form(method='post', action='/' + movie.title + '/comment', data-ajax, data-ajax-callback='afterPostComment')
+                                form(method='post', action='/' + movie.original + '/comment', data-ajax, data-ajax-callback='afterPostComment')
                                     .form-group
                                         label #{__('Content')}
                                         textarea.form-control(name='content')
@@ -165,7 +170,7 @@ block scripts
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <img src="#{user.avatar}" class="img-fluid">
+                            <a href="/user/#{user.username}"><img src="#{user.avatar}" class="img-fluid"></a>
                         </div>
                         <div class="col-md-10">
                             <h5>#{user.username}</h5>

@@ -136,7 +136,9 @@ module.exports = {
               console.error(err)
               return next()
             }
-            movie.title = media.title
+            movie.time = media.runtime
+            movie.original = media.original_title || media.original_name
+            movie.title = media.title || media.name
             movie.overview = media.overview
             movie.created_by = media.created_by
             movie.in_production = media.in_production
@@ -149,7 +151,9 @@ module.exports = {
               console.error(err)
               return next()
             }
-            movie.title = media.title
+            movie.time = media.episode_run_time[0]
+            movie.original = media.original_title || media.original_name
+            movie.title = media.title || media.name
             movie.overview = media.overview
             movie.created_by = media.created_by
             movie.in_production = media.in_production
