@@ -25,5 +25,22 @@
 	"Send a photo": "Send a photo",
 	"Choose a file": "Choose a file",
 	"Send": "Send",
-	"Vos identifiants sont invalides.": "Vos identifiants sont invalides."
+	"Vos identifiants sont invalides.": "Vos identifiants sont invalides.",
+	"Log in with 42": "Log in with 42",
+	"Log in with Github": "Log in with Github",
+	"Log in with Twitter": "Log in with Twitter",
+	"Log in with Google": "Log in with Google",
+	"You're now logged": "You're now logged",
+	"You've registered %s": "You've registered %s",
+	"Language": "Language",
+	"Your account is now updated!": "Your account is now updated!",
+	"Search a movie or tv show": "Search a movie or tv show",
+	"View the movie": "View the movie",
+	"View the tv show": "View the tv show",
+	"Comments": "Comments",
+	"Content": "Content",
+	"The field %s cannot be null.": "The field %s cannot be null.",
+	"Note": "Note",
+	"Production year": "Production year",
+	"Find %s results": "Find %s results"
 }

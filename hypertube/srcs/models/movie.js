@@ -5,10 +5,11 @@ const path = require('path')
 const async = require('async')
 const _ = require('underscore')
 
-const insertNewEpisodes = (media_id, db_id, season, episodesAlreadySaved, callback) => {
+const insertNewEpisodes = (media_id, db_id, season, episodesAlreadySaved, lang, callback) => {
   mdb.tvSeasonInfo({
     id: media_id,
-    season_number: season
+    season_number: season,
+    language: lang
   }, (err, infos) => {
     if (err) {
       console.error(err)
@@ -35,7 +36,7 @@ const insertNewEpisodes = (media_id, db_id, season, episodesAlreadySaved, callba
   })
 }
 
-const getEpisodesFromSeasons = (media, db_id, next) => {
+const getEpisodesFromSeasons = (media, db_id, lang, next) => {
   seasons = {}
   db.query('SELECT `id`, `title`, `file`, `downloaded`, `episode`, `season`, `date` FROM `movies` WHERE `parent_id` = ? ORDER BY season,episode', [db_id], (err, episodes) => {
     if (err) {
@@ -58,7 +59,7 @@ const getEpisodesFromSeasons = (media, db_id, next) => {
       let episodesAlreadySaved = {}
       for (let i = 0; i < seasons[season].length; i++)
         episodesAlreadySaved[seasons[season][i].episode] = seasons[season][i].id
-      insertNewEpisodes(media.id, db_id, season, episodesAlreadySaved, (err, results) => {
+      insertNewEpisodes(media.id, db_id, season, episodesAlreadySaved, lang, (err, results) => {
         if (err)
           return callback()
         seasons[season] = results
@@ -69,7 +70,7 @@ const getEpisodesFromSeasons = (media, db_id, next) => {
         return next(seasons)
       // Add new seasons
       async.eachSeries(_.difference(Object.keys(seasons), media.seasons.map((season) => { return season.season_number })), (season, callback) => {
-        insertNewEpisodes(media.id, db_id, season, {}, (err, results) => {
+        insertNewEpisodes(media.id, db_id, season, {}, lang, (err, results) => {
           if (err)
             return callback()
           seasons[season] = results
@@ -85,9 +86,9 @@ const getEpisodesFromSeasons = (media, db_id, next) => {
 const insert = (result, next, season, episode, parent_id) => {
   result.poster_path = result.poster_path || ''
   console.log('Inserting ' + (result.name ? result.name : result.title) + (season ? ' S' + season + 'E' + episode + ' parent_id:' + parent_id : ''))
-  db.query('INSERT INTO `movies` SET `parent_id` = ?, `title` = ?, media_id = ?, file = ?, magnet = ?, media_type = ?, poster_path = ?, backdrop_path = ?, vote_average = ?, date = ?, overview = ?, season = ?, episode = ?, created_at = ?', [
+  db.query('INSERT INTO `movies` SET `parent_id` = ?, `title` = ?, media_id = ?, file = ?, magnet = ?, media_type = ?, poster_path = ?, backdrop_path = ?, vote_average = ?, date = ?, season = ?, episode = ?, created_at = ?', [
     parent_id,
-    result.name || result.title,
+    result.original_title || result.original_name || result.name || result.title,
     result.id,
     result.file,
     result.magnet,
@@ -96,7 +97,6 @@ const insert = (result, next, season, episode, parent_id) => {
     result.backdrop_path || result.poster_path,
     result.vote_average,
     result.release_date || result.first_air_date || result.air_date,
-    result.overview,
     season,
     episode,
     new Date()
@@ -109,9 +109,9 @@ const insert = (result, next, season, episode, parent_id) => {
 
 module.exports = {
 
-  get: (title, next) => {
+  get: (title, lang, next) => {
     // GET IN DATABASE
-    db.query('SELECT `id`, `media_id`, `title`, `file`, `downloaded`, `vote_average`, `media_type`, `poster_path`, `backdrop_path`, `date`, `overview` ' +
+    db.query('SELECT `id`, `media_id`, `title`, `file`, `downloaded`, `vote_average`, `media_type`, `poster_path`, `backdrop_path`, `date` ' +
       'FROM `movies` ' +
       'WHERE `movies`.`title` = ? ' +
       'LIMIT 1', [title], (err, movie) => {
@@ -124,33 +124,43 @@ module.exports = {
       movie = movie[0]
       movie.type = movie.downloaded ? path.extname(movie.file) : 'webm'
 
-      // GET MORE INFOS
-      if (movie.media_type === 'movie') {
-        mdb.movieInfo({id: movie.media_id}, (err, media) => {
-          if (err) {
-            console.error(err)
-            return next()
-          }
-          movie.created_by = media.created_by
-          movie.in_production = media.in_production
-          return next(movie)
-        })
-      } else {
-        movie.seasons = {}
-        mdb.tvInfo({id: movie.media_id}, (err, media) => {
-          if (err) {
-            console.error(err)
-            return next()
-          }
-          movie.created_by = media.created_by
-          movie.in_production = media.in_production
+      mdb[(movie.media_type === 'tv' ? 'tv' : 'movie') + 'Credits']({id: movie.media_id}, (err, credits) => {
+        if (err)
+          console.error(err)
+        movie.credits = credits || {cast: [], crew: []}
 
-          getEpisodesFromSeasons(media, movie.id, (seasons) => {
-            movie.seasons = seasons
+        // GET MORE INFOS
+        if (movie.media_type === 'movie') {
+          mdb.movieInfo({id: movie.media_id, language: lang}, (err, media) => {
+            if (err) {
+              console.error(err)
+              return next()
+            }
+            movie.title = media.title
+            movie.overview = media.overview
+            movie.created_by = media.created_by
+            movie.in_production = media.in_production
             return next(movie)
           })
-        })
-      }
+        } else {
+          movie.seasons = {}
+          mdb.tvInfo({id: movie.media_id, language: lang}, (err, media) => {
+            if (err) {
+              console.error(err)
+              return next()
+            }
+            movie.title = media.title
+            movie.overview = media.overview
+            movie.created_by = media.created_by
+            movie.in_production = media.in_production
+
+            getEpisodesFromSeasons(media, movie.id, lang, (seasons) => {
+              movie.seasons = seasons
+              return next(movie)
+            })
+          })
+        }
+      })
     })
   },
 

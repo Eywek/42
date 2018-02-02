@@ -19,7 +19,7 @@ block content
                         | #{__('You\'ve registered %s', moment(user.created_at).fromNow())}
     .container
         .row
-            .col-md-6
+            div(class=user.password ? 'col-md-6' : 'col-md-12')
                 .card
                     .card-body
                         h4 #{__('Edit your data')}
@@ -50,24 +50,25 @@ block content
                                 | &nbsp;&nbsp;#{__('Save')}
 
 
-            .col-md-6
-                .card
-                    .card-body
-                        h4 #{__('Edit your password')}
-                        hr
+            if user.password
+                .col-md-6
+                    .card
+                        .card-body
+                            h4 #{__('Edit your password')}
+                            hr
 
-                        form(data-ajax, method='post', action='/account/password')
-                            .form-group
-                                label #{__('Password')}
-                                input.form-control(type='password', name='password')
-                                small.form-text.text-muted #{__('Your password need to be safe')}
-                            .form-group
-                                label #{__('Password confirmation')}
-                                input.form-control(type='password', name='password_confirmation')
+                            form(data-ajax, method='post', action='/account/password')
+                                .form-group
+                                    label #{__('Password')}
+                                    input.form-control(type='password', name='password')
+                                    small.form-text.text-muted #{__('Your password need to be safe')}
+                                .form-group
+                                    label #{__('Password confirmation')}
+                                    input.form-control(type='password', name='password_confirmation')
 
-                            button.btn.btn-primary(type='submit')
-                                i.fa.fa-save
-                                | &nbsp;&nbsp;#{__('Save')}
+                                button.btn.btn-primary(type='submit')
+                                    i.fa.fa-save
+                                    | &nbsp;&nbsp;#{__('Save')}
 
 
         hr

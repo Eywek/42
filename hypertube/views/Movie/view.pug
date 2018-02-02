@@ -17,11 +17,11 @@ block style
         .movie-desc {
             position: relative;
         }
-        .movie-footer {
-            position: absolute;
-            bottom: 20px;
-            width: 96%;
-        }
+        /*.movie-footer {*/
+            /*position: absolute;*/
+            /*bottom: 20px;*/
+            /*width: 96%;*/
+        /*}*/
         .episode .card-header {
             padding: 5px;
             text-align: center;
@@ -55,20 +55,34 @@ block content
                                 h1 #{movie.title}
                                 hr
                                 p #{movie.overview}
+                                .clearfix
                                 .movie-footer
+                                    if movie.credits.cast.length > 0
+                                        hr
+                                        .row
+                                            - console.log(movie.credits)
+                                            each actor in movie.credits.cast.splice(0, 6)
+                                                .col-md-2
+                                                    .card
+                                                        img.card-img(src='http://image.tmdb.org/t/p/original/' + actor.profile_path)
+                                                        .card-body(style='padding:5px')
+                                                            p.text-center
+                                                                b #{actor.name}
+                                                                br
+                                                                em #{actor.character}
                                     hr
                                     .row.text-center
                                         .col-md-4
-                                            b Note:
+                                            b #{__('Note')}:
                                             h4
                                                 .badge.badge-info #{movie.vote_average} / 10
                                         .col-md-4
-                                            b Année de production
+                                            b #{__('Production year')}
                                             h4
                                                 .badge.badge-primary #{new Date(movie.date).getFullYear()}
                                         if movie.media_type === 'tv'
                                             .col-md-4
-                                                b Saisons
+                                                b #{__('Seasons')}
                                                 h4
                                                     .badge.badge-info #{Object.keys(movie.seasons).length}
 
@@ -78,6 +92,9 @@ block content
                         if movie.media_type === 'movie'
                             video.video-js(controls='', preload='none', poster='http://image.tmdb.org/t/p/original/' + movie.backdrop_path, data-setup='{"fluid": true}')
                                 source(src='/' + movie.id + '/stream', type="video/" + movie.type)
+                                track(src='/' + movie.id + '/subtitles/en', kind='subtitles', srclang='en', label='English')
+                                if current_user.language !== 'en'
+                                    track(src='/' + movie.id + '/subtitles/' + current_user.language, kind='subtitles', srclang=current_user.language, default)
                                 p.vjs-no-js
                                     | To view this video please enable JavaScript, and consider upgrading to a web browser that
                                     a(href='http://videojs.com/html5-video-support/', target='_blank') supports HTML5 video
@@ -97,7 +114,7 @@ block content
                                                         .card.episode
                                                             .card-header
                                                                 h5.mb-0
-                                                                    button.btn.btn-link(data-toggle='collapse', data-target='#season-' + season + '-episode-' + episode.id) #{__('Episode %s', ++i)} - #{episode.title}
+                                                                    button.btn.btn-link.btn-episode(data-toggle='collapse', data-id=episode.id, data-target='#season-' + season + '-episode-' + episode.id) #{__('Episode %s', ++i)} - #{episode.title}
                                                             .collapse(data-parent='#accordion', id='season-' + season + '-episode-' + episode.id)
                                                                 .card-body
                                                                     video.video-js(controls='', preload='none', poster='http://image.tmdb.org/t/p/original/' + movie.backdrop_path, data-setup='{"fluid": true}')
@@ -173,3 +190,27 @@ block scripts
 
           $('#comments').append(html)
         }
+        $('.btn-episode').on('click', function () {
+          var btn = $(this)
+          var element = btn.attr('data-target')
+
+          videojs($(element).find('video')[0]).addRemoteTextTrack({
+            kind: "subtitle",
+            lang: "en",
+            label: "English",
+            src: '/' + btn.attr('data-id') + '/subtitles/en'
+          }, true)
+        })
+    if current_user.language !== 'en'
+        script(type='text/javascript').
+          $('.btn-episode').on('click', function () {
+            var btn = $(this)
+            var element = btn.attr('data-target')
+
+            videojs($(element).find('video')[0]).addRemoteTextTrack({
+              kind: "subtitle",
+              lang: "#{current_user.language}",
+              label: "#{current_user.language}",
+              src: '/' + btn.attr('data-id') + '/subtitles/#{current_user.language}',
+            }, true)
+          })

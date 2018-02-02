@@ -12,6 +12,9 @@ const fs = require('fs')
 const movieModel = require('../models/movie')
 const TorrentSearchApi = require('torrent-search-api')
 const torrentSearch = new TorrentSearchApi()
+const srt2vtt = require('srt-to-vtt')
+const opensubtitles = require("subtitler")
+const request = require('request')
 torrentSearch.enableProvider('Torrent9')
 
 const sendHeaders = function (req, res, size, type) {
@@ -184,11 +187,17 @@ const findTorrent = (movieTitle, callback) => {
     callback(magnet)
   })
 }
+const getFullLanguage = (lang) => {
+  let content
+  if ((content = JSON.parse(fs.readFileSync(path.join(__dirname, '../../locales/languages.json')))[lang]))
+    return content.name || lang
+  return lang
+}
 
 module.exports = {
 
   view: (req, res) => {
-    movieModel.get(req.params.title, (movie) => {
+    movieModel.get(req.params.title, req.user.language, (movie) => {
       if (!movie)
         return res.sendStatus(404)
       db.query('SELECT `comments`.`content`, `users`.`username`, `users`.`id` AS `user_id`, `comments`.`created_at` ' +
@@ -224,20 +233,23 @@ module.exports = {
     if (!req.body.query)
       return res.json({status: false, error: res.__('Please, fill the form')})
     mdb.searchMulti({
-      query: req.body.query
+      query: req.body.query,
+      language: req.user.language
     }, (err, results) => {
       if (err)
         return res.json({status: false, error: (err.response && err.response.text) ? err.response.text : res.__('Internal error')})
 
       let movies = results.results.slice(0, 3) || []
+      let total = movies.length
       async.eachOf(movies, (movie, i, next) => {
         db.query('SELECT `movies`.`id`, `views`.`id` AS `viewed` FROM `movies` ' +
-          'INNER JOIN `views` ON `views`.`movie_id` = `movies`.`id` ' +
+          'LEFT JOIN `views` ON `views`.`movie_id` = `movies`.`id` ' +
           'WHERE `media_id` = ?', [movie.id], (err, rows) => {
           if (err)
             console.error(err)
 
           movies[i] = {
+            original: movie.original_name || movie.original_title || movie.name || movie.title,
             title: movie.name || movie.title,
             media_type: movie.media_type,
             overview: movie.overview,
@@ -254,14 +266,16 @@ module.exports = {
             return next()
           }
           // Try to find torrent if a movie
-          if (!movie.title)
-            movie.title = movie.name
-          findTorrent(movie.title, (magnet) => {
+          if (!movie.original_title)
+            movie.original_title = movie.original_name || movie.title || movie.name
+          findTorrent(movie.original_title, (magnet) => {
             if (!magnet) { // torrent not found
-              delete movies[i]
-              movies.length--
+              console.log('Torrent not found for ', movie.original_title)
+              movies[i] = null
+              total--
               return next()
             }
+            console.log('Torrent found for ', movie.original_title)
             movie.magnet = magnet
             if (!rows || rows.length === 0)
               movieModel.insert(movie, () => {})
@@ -269,7 +283,7 @@ module.exports = {
           })
         })
       }, () => {
-        res.json({status: true, success: res.__('Find %s results', movies.length),  results: movies})
+        res.json({status: true, success: res.__('Find %s results', total),  results: movies})
       })
     })
   },
@@ -349,12 +363,64 @@ module.exports = {
     })
   },
 
-  library: (req, res) => {
-    db.query('SELECT `title`, `media_type`, `overview`, `poster_path`, `date`, `vote_average`, `views`.`id` AS `viewed` ' +
+  subtitles: (req, res) => {
+    // Find torrent
+    db.query('SELECT `movies`.`title`, `movies`.`episode`, `movies`.`season`, `parent`.`title` AS `parent_title` FROM `movies` ' +
+      'LEFT JOIN `movies` AS `parent` ON `parent`.`id` = `movies`.`parent_id` ' +
+      'WHERE `movies`.`id` = ?', [req.params.id], (err, rows) => {
+      if (err) {
+        console.error(err)
+        return res.sendStatus(500)
+      }
+
+      if (!rows || rows.length === 0)
+        return res.sendStatus(404)
+      let movie = rows[0]
+
+      const lang = getFullLanguage(req.params.lang)
+      if (movie.episode)
+        movie.title = movie.parent_title + ' S' + (movie.season.toString().length === 1 ? '0' + movie.season : movie.season) + 'E' + (movie.episode.toString().length === 1 ? '0' + movie.episode : movie.episode)
+      console.log('Downloading subtitles (' + lang + ') for ' + movie.title + ' ...')
+      opensubtitles.api.login().then((token) => {
+        opensubtitles.api.searchForTitle(token, lang, movie.title).then((results) => {
+
+          console.log(results.length + ' subtitles found')
+          if (results.length === 0)
+            res.sendStatus(404)
+          let subtitle = results.filter((result) => {
+            return result.LanguageName === lang
+          }).splice(0, 1)[0]
+          let file = subtitle.SubDownloadLink.slice(0, -3)
+
+          res.writeHead(200, {
+            "Content-Type": "text/vtt"
+          })
+
+          let filename = path.join(__dirname, '../../files/' + movie.title + '-' + lang + '-' + Math.round(Math.random() * 100) +  '.srt')
+          let writeStream = fs.createWriteStream(filename)
+          writeStream.on('finish', () => {
+            let readStream = fs.createReadStream(filename)
+            readStream.on('end', () => {
+              fs.unlinkSync(filename)
+            })
+            readStream.pipe(srt2vtt()).pipe(res)
+          })
+          request.get(file).pipe(writeStream)
+        })
+      })
+    })
+  },
+
+  library: (req, res) => { // `views` DESC, `date` DESC, `vote_average` DESC
+    let order = []
+    for (let key in req.body.order)
+      if (['views', 'date', 'vote_average'].indexOf(key) !== -1 && ['ASC', 'DESC'].indexOf(req.body.order[key]) !== -1)
+        order.push('`' + key + '` ' + req.body.order[key])
+    db.query('SELECT `title`, `title` AS `original`, `media_type`, `poster_path`, `date`, `vote_average`, `views`.`id` AS `viewed` ' +
       'FROM `movies` ' +
       'LEFT JOIN `views` ON `views`.`movie_id` = `movies`.`id` AND `views`.`user_id` = ? ' +
       'WHERE `parent_id` IS NULL ' +
-      'ORDER BY `views` DESC,`created_at` DESC ' +
+      'ORDER BY ' + order.join(', ') + ' ' +
       'LIMIT ' + req.params.limit + ' OFFSET ' + req.params.offset, [req.session.user], (err, movies) => {
       if (err) {
         console.error(err)

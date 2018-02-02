@@ -12,7 +12,7 @@ module.exports = {
     // Check if form is filled
     validator(userModel, req.body, function (err, status) {
       if (!status)
-        return res.json({status: false, error: res.__(err)})
+        return res.json({status: false, error: err})
       // Check if password_confirmation === password
       if (req.body.password !== req.body.password_confirmation)
         return res.json({status: false, error: res.__("Password doesn't match")})
@@ -53,7 +53,7 @@ module.exports = {
           })
         })
       })
-    })
+    }, [], [], res.__)
   },
 
   signout: function (req, res) {
@@ -81,7 +81,7 @@ module.exports = {
     // Check if form is filled
     validator(userModel, req.body, function (err, status) {
       if (!status)
-        return res.json({status: false, error: res.__(err)})
+        return res.json({status: false, error: err})
 
       // Save data
       db.query('UPDATE `users` SET `name` = ?, `last_name` = ?, `username` = ?, `email` = ?, `lang` = ? WHERE `id` = ?', [
@@ -100,14 +100,14 @@ module.exports = {
         // Send success message
         return res.json({status: true, success: res.__('Your account is now updated!')})
       })
-    }, ['name', 'last_name', 'username', 'email'], [req.session.user])
+    }, ['name', 'last_name', 'username', 'email'], [req.session.user], res.__)
   },
 
   editPassword: function (req, res) {
     // Check if form is filled
     validator(userModel, req.body, function (err, status) {
       if (!status)
-        return res.json({status: false, error: res.__(err)})
+        return res.json({status: false, error: err})
 
       // Check if password_confirmation === password
       if (req.body.password !== req.body.password_confirmation)
@@ -123,7 +123,7 @@ module.exports = {
         // Send success message
         return res.json({status: true, success: res.__("Your account is now updated!")})
       })
-    }, ['password'])
+    }, ['password'], [], res.__)
   },
 
   lostPassword: function (req, res) {
@@ -153,15 +153,17 @@ module.exports = {
         }
 
         // Send email
+        let fullUrl = req.protocol + '://' + req.get('host') + '/account/reset-password/' + token
         sendmail({
-          from: 'no-reply@matcha.com',
+          from: 'Hypertube <no-reply@hypertube.com>',
           to: user[0].email,
           subject: 'Rénitialisation de mot de passe',
-          html: pug.renderFile(path.join(__dirname, '../views/Emails/reset_password.pug'), {
+          html: pug.renderFile(path.join(__dirname, '../../views/Emails/reset_password.pug'), {
             username: user[0].username,
             ip: req.ip,
             date: new Date(),
-            url: '/account/reset-password/' + token
+            url: fullUrl,
+            __: res.__
           })
         }, function (err, reply) {
           if (err) {
@@ -178,7 +180,7 @@ module.exports = {
 
   resetPassword: function (req, res) {
     // Check if token is valid
-    db.query('SELECT `users_tokens`.`id`, `user_id`, `name` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = \'RESET_PW\' AND `used_at` IS NULL LIMIT 1', [req.params.token], function (err, rows) {
+    db.query('SELECT `users_tokens`.`id`, `user_id`, `name`, `users`.`username` FROM `users_tokens` INNER JOIN `users` ON `users`.`id` = `users_tokens`.`user_id` WHERE `token` = ? AND type = \'RESET_PW\' AND `used_at` IS NULL LIMIT 1', [req.params.token], function (err, rows) {
       if (err) {
         console.error(err)
         return res.json({status: false, error: res.__('Internal error')})
@@ -193,7 +195,7 @@ module.exports = {
       // Check if form is filled
       validator(userModel, req.body, function (err, status) {
         if (!status)
-          return res.json({status: false, error: res.__(err)})
+          return res.json({status: false, error: err})
 
         // Check if password_confirmation === password
         if (req.body.password !== req.body.password_confirmation)
@@ -224,7 +226,7 @@ module.exports = {
             })
           })
         })
-      }, ['password'])
+      }, ['password'], [], res.__)
     })
   },
 

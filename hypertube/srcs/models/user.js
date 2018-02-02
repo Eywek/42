@@ -18,11 +18,11 @@ module.exports = {
         db.query('SELECT `id` FROM `users` WHERE `username` = ? AND `password` = ? LIMIT 1', [username, this.hashPassword(password)], function (err, rows) {
             if (err) {
                 console.error(err);
-                return next('Une erreur interne est survenue.')
+                return next('Internal error')
             }
 
             if (!rows || rows.length === 0)
-                return next("Vos identifiants sont invalides.");
+                return next("Invalid credentials");
             next(undefined, rows[0].id);
         });
     },

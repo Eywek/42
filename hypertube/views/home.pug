@@ -34,6 +34,11 @@ block style
             border-top-right-radius: 0;
         }
 
+        .icon {
+            width: 22px;
+            margin-left: -38px;
+        }
+
 
 block content
     .container
@@ -54,6 +59,19 @@ block content
 
             button.btn.btn-lg.btn-primary.btn-block(type='submit') #{__('Log in')}
             button.btn.btn-success.btn-block.btn-lg(data-target='#signup', type='button', data-toggle='modal') #{__('Sign up')}
+            hr
+            a.btn.btn-lg.btn-secondary.btn-block(href='/signin/42')
+                img.icon(src='/assets/img/logo_42.png')
+                | &nbsp;&nbsp;#{__('Log in with 42')}
+            a.btn.btn-lg.btn-light.btn-block(href='/signin/github')
+                i.fab.fa-github
+                | &nbsp;&nbsp;#{__('Log in with Github')}
+            a.btn.btn-lg.btn-info.btn-block(href='/signin/twitter')
+                i.fab.fa-twitter
+                | &nbsp;&nbsp;#{__('Log in with Twitter')}
+            a.btn.btn-lg.btn-danger.btn-block(href='/signin/google')
+                i.fab.fa-google
+                | &nbsp;&nbsp;#{__('Log in with Google')}
 
 
     .modal.fade#lostPassword(tabindex='-1', role='dialog')
