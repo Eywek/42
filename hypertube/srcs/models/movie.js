@@ -38,7 +38,7 @@ const insertNewEpisodes = (media_id, db_id, season, episodesAlreadySaved, lang, 
 
 const getEpisodesFromSeasons = (media, db_id, lang, next) => {
   seasons = {}
-  db.query('SELECT `id`, `title`, `file`, `downloaded`, `episode`, `season`, `date` FROM `movies` WHERE `parent_id` = ? ORDER BY season,episode', [db_id], (err, episodes) => {
+  db.query('SELECT `id`, `title`, `file`, `downloaded`, `episode`, `season` FROM `movies` WHERE `parent_id` = ? ORDER BY season,episode', [db_id], (err, episodes) => {
     if (err) {
       console.error(err)
       return next({})
@@ -86,17 +86,12 @@ const getEpisodesFromSeasons = (media, db_id, lang, next) => {
 const insert = (result, next, season, episode, parent_id) => {
   result.poster_path = result.poster_path || ''
   console.log('Inserting ' + (result.name ? result.name : result.title) + (season ? ' S' + season + 'E' + episode + ' parent_id:' + parent_id : ''))
-  db.query('INSERT INTO `movies` SET `parent_id` = ?, `title` = ?, media_id = ?, file = ?, magnet = ?, media_type = ?, poster_path = ?, backdrop_path = ?, vote_average = ?, date = ?, season = ?, episode = ?, created_at = ?', [
+  db.query('INSERT INTO `movies` SET `parent_id` = ?, `title` = ?, media_id = ?, file = ?, media_type = ?, season = ?, episode = ?, created_at = ?', [
     parent_id,
     result.original_title || result.original_name || result.name || result.title,
     result.id,
     result.file,
-    result.magnet,
     (result.media_type || 'tv'),
-    result.poster_path,
-    result.backdrop_path || result.poster_path,
-    result.vote_average,
-    result.release_date || result.first_air_date || result.air_date,
     season,
     episode,
     new Date()
@@ -111,7 +106,7 @@ module.exports = {
 
   get: (title, lang, next) => {
     // GET IN DATABASE
-    db.query('SELECT `id`, `media_id`, `title`, `file`, `downloaded`, `vote_average`, `media_type`, `poster_path`, `backdrop_path`, `date` ' +
+    db.query('SELECT `id`, `media_id`, `media_type` ' +
       'FROM `movies` ' +
       'WHERE `movies`.`title` = ? ' +
       'LIMIT 1', [title], (err, movie) => {
@@ -119,10 +114,36 @@ module.exports = {
         console.error(err)
         return next()
       }
-      if (!movie || movie.length === 0)
-        return next()
-      movie = movie[0]
-      movie.type = movie.downloaded ? path.extname(movie.file) : 'webm'
+      if (movie && movie.length > 0)
+        return cb(movie[0])
+      // Insert it
+      mdb.searchMulti({query: title}, (err, movie) => {
+        if (err) {
+          console.error(err)
+          return next()
+        }
+        if (!movie || !movie.results)
+          return next()
+        db.query('INSERT INTO `movies` SET `title` = ?, `media_id` = ?, `media_type` = ?, `created_at` = ?', [
+          movie.results[0].original_title || movie.results[0].original_name,
+          movie.results[0].id,
+          movie.results[0].media_type,
+          new Date()
+        ], (err, insert) => {
+          if (err) {
+            console.error(err)
+            return next()
+          }
+          cb({
+            media_id: movie.results[0].id,
+            media_type: movie.results[0].media_type,
+            id: insert.insertId
+          })
+        })
+      })
+    })
+    let cb = (movie) => {
+      movie.type = 'webm'
 
       mdb[(movie.media_type === 'tv' ? 'tv' : 'movie') + 'Credits']({id: movie.media_id}, (err, credits) => {
         if (err)
@@ -142,6 +163,10 @@ module.exports = {
             movie.overview = media.overview
             movie.created_by = media.created_by
             movie.in_production = media.in_production
+            movie.poster_path = media.poster_path
+            movie.backdrop_path = media.backdrop_path
+            movie.vote_average = media.vote_average
+            movie.date = media.release_date
             return next(movie)
           })
         } else {
@@ -157,7 +182,10 @@ module.exports = {
             movie.overview = media.overview
             movie.created_by = media.created_by
             movie.in_production = media.in_production
-
+            movie.poster_path = media.poster_path
+            movie.backdrop_path = media.backdrop_path
+            movie.vote_average = media.vote_average
+            movie.date = media.first_air_date
             getEpisodesFromSeasons(media, movie.id, lang, (seasons) => {
               movie.seasons = seasons
               return next(movie)
@@ -165,7 +193,7 @@ module.exports = {
           })
         }
       })
-    })
+    }
   },
 
   insert: insert

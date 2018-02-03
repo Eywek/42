@@ -79,5 +79,9 @@
 	"Between {0} / 10 and {1} / 10": "Between {0} / 10 and {1} / 10",
 	"His movies": "Ses films",
 	"%s minutes": "%s minutes",
-	"Runtime": "Durée"
+	"Runtime": "Durée",
+	"Delete": "Delete",
+	"Like": "Like",
+	"Unlike": "Unlike",
+	"No torrent found": "Aucun torrent trouvé."
 }

@@ -126,9 +126,11 @@ const streaming = (filename, magnetLink, req, res, onFileWrited) => {
     })
 
     if (needConvert) {
+      console.log('Pumping to res and file...')
       pump(videoStream, fileStream)
       pump(convert(file), responseStream)
     } else {
+      console.log('Piping to res and file...')
       videoStream.pipe(fileStream)
       videoStream.pipe(responseStream)
     }
@@ -200,7 +202,7 @@ module.exports = {
     movieModel.get(req.params.title, req.user.language, (movie) => {
       if (!movie)
         return res.sendStatus(404)
-      db.query('SELECT `comments`.`content`, `users`.`username`, `users`.`id` AS `user_id`, `comments`.`created_at` ' +
+      db.query('SELECT `comments`.`content`, `comments`.`id`, `users`.`username`, `users`.`id` AS `user_id`, `comments`.`created_at` ' +
         'FROM `comments` ' +
         'INNER JOIN `users` ON `users`.`id` = `comments`.`user_id` ' +
         'WHERE `movie_id` = ?', [movie.id], (err, comments) => {
@@ -209,7 +211,10 @@ module.exports = {
         if (!comments)
           comments = []
 
-        db.query('SELECT `users`.`id`, `users`.`username` FROM `users` WHERE `users`.`id` = ?', [req.session.user], (err, user) => {
+        db.query('SELECT `users`.`id`, `users`.`username`, `likes`.`id` AS `liked` ' +
+          'FROM `users` ' +
+          'LEFT JOIN `likes` ON `likes`.`user_id` = `users`.`id` AND `movie_id` = ? ' +
+          'WHERE `users`.`id` = ?', [movie.id, req.session.user], (err, user) => {
           if (err) {
             console.error(err)
             return res.sendStatus(500)
@@ -222,7 +227,8 @@ module.exports = {
             return comment
           }), user: {
             username: user[0].username,
-            avatar: fs.existsSync(path.join(__dirname, '../../public/uploads/' + user[0].id + '.png')) ? '/uploads/' + user[0].id + '.png' : '/assets/img/default_profile_pic.png'
+            avatar: fs.existsSync(path.join(__dirname, '../../public/uploads/' + user[0].id + '.png')) ? '/uploads/' + user[0].id + '.png' : '/assets/img/default_profile_pic.png',
+            liked: user[0].liked
           }})
         })
       })
@@ -244,7 +250,7 @@ module.exports = {
       async.eachOf(movies, (movie, i, next) => {
         db.query('SELECT `movies`.`id`, `views`.`id` AS `viewed` FROM `movies` ' +
           'LEFT JOIN `views` ON `views`.`movie_id` = `movies`.`id` ' +
-          'WHERE `media_id` = ?', [movie.id], (err, rows) => {
+          'WHERE `movies`.`media_id` = ?', [movie.id], (err, rows) => {
           if (err)
             console.error(err)
 
@@ -268,19 +274,9 @@ module.exports = {
           // Try to find torrent if a movie
           if (!movie.original_title)
             movie.original_title = movie.original_name || movie.title || movie.name
-          findTorrent(movie.original_title, (magnet) => {
-            if (!magnet) { // torrent not found
-              console.log('Torrent not found for ', movie.original_title)
-              movies[i] = null
-              total--
-              return next()
-            }
-            console.log('Torrent found for ', movie.original_title)
-            movie.magnet = magnet
-            if (!rows || rows.length === 0)
-              movieModel.insert(movie, () => {})
-            next()
-          })
+          if (!rows || rows.length === 0)
+            movieModel.insert(movie, () => {})
+          next()
         })
       }, () => {
         res.json({status: true, success: res.__('Find %s results', total),  results: movies})
@@ -290,7 +286,7 @@ module.exports = {
 
   stream: (req, res) => {
     // Find torrent
-    db.query('SELECT `movies`.`id`, `movies`.`file`, `movies`.`downloaded`, `movies`.`title`, `movies`.`episode`, `movies`.`magnet`, `movies`.`season`, `parent`.`title` AS `parent_title` FROM `movies` ' +
+    db.query('SELECT `movies`.`id`, `movies`.`file`, `movies`.`downloaded`, `movies`.`media_id`, `movies`.`title`, `movies`.`episode`, `movies`.`season`, `parent`.`title` AS `parent_title` FROM `movies` ' +
       'LEFT JOIN `movies` AS `parent` ON `parent`.`id` = `movies`.`parent_id` ' +
       'WHERE `movies`.`id` = ?', [req.params.id], (err, rows) => {
       if (err) {
@@ -320,7 +316,7 @@ module.exports = {
       if (movie.episode)
         movie.title = movie.parent_title + ' S' + (movie.season.toString().length === 1 ? '0' + movie.season : movie.season) + 'E' + (movie.episode.toString().length === 1 ? '0' + movie.episode : movie.episode)
       db.query('UPDATE `movies` SET `views` = `views` + 1 WHERE `id` = ?', [movie.id], () => {})
-      db.query('INSERT INTO `views` SET `movie_id` = ?, `user_id` = ?', [movie.id, req.session.user], () => {})
+      db.query('INSERT INTO `views` SET `media_id` = ?, `movie_id` = ?, `user_id` = ?, `created_at` = ?', [movie.media_id, movie.id, req.session.user, new Date()], () => {})
 
       // IF DOWNLOADING
       if (downloadingStreams[movie.title]) {
@@ -349,10 +345,6 @@ module.exports = {
           })
         })
       }
-
-      // ALREADY TORRENT SAVED
-      if (movie.magnet)
-        return stream(movie.magnet)
 
       // DONWLOAD
       findTorrent(movie.title, (magnetLink) => {
@@ -411,20 +403,68 @@ module.exports = {
     })
   },
 
-  library: (req, res) => { // `views` DESC, `date` DESC, `vote_average` DESC
-    let order = []
-    for (let key in req.body.order)
-      if (['views', 'date', 'vote_average'].indexOf(key) !== -1 && ['ASC', 'DESC'].indexOf(req.body.order[key]) !== -1)
-        order.push('`' + key + '` ' + req.body.order[key])
-    db.query('SELECT `title`, `title` AS `original`, `media_type`, `poster_path`, `date`, `vote_average`, `views`.`id` AS `viewed` ' +
-      'FROM `movies` ' +
-      'LEFT JOIN `views` ON `views`.`movie_id` = `movies`.`id` AND `views`.`user_id` = ? ' +
-      'WHERE `parent_id` IS NULL ' +
-      ((order.length > 0) ? 'ORDER BY ' + order.join(', ') + ' ' : '') +
-      'LIMIT ' + req.params.limit + ' OFFSET ' + req.params.offset, [req.session.user], (err, movies) => {
-      if (err) {
+  library: (req, res) => { // `date` DESC, `vote_average` DESC
+    let order = ''
+    if (req.body.order.vote_average)
+      order = 'vote_average.' + (req.body.order.vote_average === 'DESC' ? 'desc' : 'asc')
+    if (req.body.order.date)
+      order = 'primary_release_date.' + (req.body.order.date === 'DESC' ? 'desc' : 'asc')
+
+    async.parallel([
+      (cb) => {
+        mdb.discoverMovie({
+          language: req.user.language,
+          sort_by: order,
+          page: parseInt(req.params.page),
+          'release_date.lte': new Date(),
+          'release_date.gte': new Date('1900-01-01 00:00:00')
+        }, (err, movies) => {
+          cb(err, movies)
+        })
+      },
+      (cb) => {
+        mdb.discoverTv({
+          language: req.user.language,
+          sort_by: order.replace('primary_release_date', 'first_air_date'),
+          page: parseInt(req.params.page),
+          'first_air_date.lte': new Date(),
+          'first_air_date.gte': new Date('1900-01-01 00:00:00')
+        }, (err, movies) => {
+          cb(err, movies)
+        })
+      }
+    ], (err, results) => {
+      if (err)
         console.error(err)
-        return res.sendStatus(500)
+      let movies = []
+      if (!results[0] || !results[0].results)
+        results[0] = {results: []}
+      if (!results[1] || !results[1].results)
+        results[1] = {results: []}
+
+      for (let i = 0; i < results[0].results.length; i++) {
+        if (results[0].results[i])
+          movies.push({
+            title: results[0].results[i].title,
+            original: results[0].results[i].original_title,
+            media_type: 'movie',
+            poster_path: results[0].results[i].poster_path,
+            date: results[0].results[i].release_date,
+            media_id: results[0].results[i].id,
+            vote_average: results[0].results[i].vote_average,
+          })
+      }
+      for (let i = 0; i < results[1].results.length; i++) {
+        if (results[1].results[i])
+          movies.push({
+            title: results[1].results[i].name,
+            original: results[1].results[i].original_name,
+            media_type: 'tv',
+            poster_path: results[1].results[i].poster_path,
+            date: results[1].results[i].first_air_date,
+            media_id: results[1].results[i].id,
+            vote_average: results[1].results[i].vote_average,
+          })
       }
       res.json({status: true, movies: movies})
     })
@@ -446,12 +486,47 @@ module.exports = {
         req.session.user,
         rows[0].id,
         new Date()
-      ], (err) => {
+      ], (err, rows) => {
         if (err)
           console.error(err)
-        return res.json({status: true, success: res.__('Comment has been added!')})
+        return res.json({status: true, success: res.__('Comment has been added!'), data: {comment: {id: rows.insertId}}})
       })
     })
+  },
+
+  deleteComment: (req, res) => {
+    db.query('DELETE FROM `comments` WHERE `id` = ? AND `user_id` = ?', [req.params.comment_id, req.session.user], (err) => {
+      if (err)
+        console.error(err)
+    })
+    res.send()
+  },
+
+  like: (req, res) => {
+    db.query('SELECT `movies`.`id`, `likes`.`id` AS `like_id` ' +
+      'FROM `movies` ' +
+      'LEFT JOIN `likes` ON `likes`.`movie_id` = `movies`.`id` AND `likes`.`user_id` = ? ' +
+      'WHERE `movies`.`title` = ? ', [req.session.user, req.params.title], (err, rows) => {
+      if (err)
+        return console.error(err)
+      if (!rows || rows.length === 0)
+        return
+
+      if (rows[0].like_id)
+        db.query('DELETE FROM `likes` WHERE `id` = ?', [rows[0].like_id], (err) => {
+          if (err)
+            return console.error(err)
+        })
+      else
+        db.query('INSERT INTO `likes` SET `user_id` = ?, `movie_id` = ?', [
+          req.session.user,
+          rows[0].id
+        ], (err) => {
+          if (err)
+            return console.error(err)
+        })
+    })
+    return res.send()
   },
 
 }

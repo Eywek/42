@@ -15,7 +15,9 @@ const GitHubStrategy = require('passport-github').Strategy
 const TwitterStrategy = require('passport-twitter').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const db = require('./srcs/models/database')
+const deleteWorker = require('./srcs/workers/delete')
 
+deleteWorker.start()
 const logOrInsert = (profile, type, cb) => {
   db.query("SELECT `user_id` FROM `users_oauth` WHERE `oauth_id` = ? AND `oauth_type` = ?", [profile.id, type], (err, rows) => {
     if (err)
@@ -72,7 +74,7 @@ passport.use(new GitHubStrategy({
       first_name: profile.displayName,
       last_name: '',
       username: profile.username,
-      email: ''
+      email: profile._json.email || ''
     }, 'GITHUB', cb)
   }
 ))
@@ -114,7 +116,7 @@ passport.use(new GoogleStrategy({
       first_name: profile.name.givenName,
       last_name: profile.name.familyName,
       username: profile.displayName,
-      email: ''
+      email: (profile._json.emails && profile._json.emails[0]) ? profile._json.emails[0].value : ''
     }, 'GOOGLE', cb)
   }
 ))
@@ -151,8 +153,10 @@ app.use(function (req, res, next) {
   db.query('SELECT `lang` FROM `users` WHERE `id` = ?', [req.session.user], (err, user) => {
     if (err)
       console.error(err)
-    if (!user || user.length === 0)
-      return res.redirect('/signout')
+    if (!user || user.length === 0) {
+      req.session.user = undefined
+      return res.redirect('/')
+    }
     res.locals.current_user = req.user = {language: user[0].lang}
     i18n.setLocale(req.user.language)
     i18n.init()
@@ -186,7 +190,7 @@ app.get('/signin/42', passport.authenticate('42'))
 app.get('/signin/42/callback',(req, res, next) => {
   login(req, res, next, '42', true)
 })
-app.get('/signin/github', passport.authenticate('github'))
+app.get('/signin/github', passport.authenticate('github', { scope: ['read:user', 'user:email'] }))
 app.get('/signin/github/callback',(req, res, next) => {
   login(req, res, next, 'github', true)
 })
@@ -194,7 +198,7 @@ app.get('/signin/twitter', passport.authenticate('twitter'))
 app.get('/signin/twitter/callback',(req, res, next) => {
   login(req, res, next, 'twitter', true)
 })
-app.get('/signin/google', passport.authenticate('google', { scope: ['profile'] }))
+app.get('/signin/google', passport.authenticate('google', { scope: ['profile', 'https://www.googleapis.com/auth/plus.profile.emails.read'] }))
 app.get('/signin/google/callback',(req, res, next) => {
   login(req, res, next, 'google', true)
 })
@@ -240,15 +244,23 @@ app.get('/', (req, res) => {
 })
 app.post('/search', authMiddleware, movieController.search)
 app.get('/library', authMiddleware, (req, res) => {
-  db.query('SELECT YEAR(`date`) AS `oldest_date` FROM `movies` ORDER BY YEAR(`date`) ASC LIMIT 1', (err, rows) => {
+  db.query('SELECT `media_id` FROM `views` WHERE `user_id` = ?', [req.session.user], (err, views) => {
     if (err)
       console.error(err)
-    res.render('library', {title: i18n.__('Library'), oldest_date: rows && rows[0] ? rows[0].oldest_date : '1990'})
+    if (!views)
+      views = []
+    else
+      views = views.map((view) => {
+        return view.media_id
+      })
+    res.render('library', {title: i18n.__('Library'), oldest_date: '1900', viewedMovies: views})
   })
 })
-app.post('/library/:limit(\\d+)/:offset(\\d+)', authMiddleware, movieController.library)
+app.post('/library/:page(\\d+)', authMiddleware, movieController.library)
 app.get('/:title', authMiddleware, movieController.view)
 app.post('/:title/comment', authMiddleware, movieController.comment)
+app.get('/:title/like', authMiddleware, movieController.like)
+app.delete('/comment/:comment_id', authMiddleware, movieController.deleteComment)
 app.get('/:id/stream', authMiddleware, movieController.stream)
 app.get('/:id/subtitles/:lang([A-Za-z]{2})', authMiddleware, movieController.subtitles)
 

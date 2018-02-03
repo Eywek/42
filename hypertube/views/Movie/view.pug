@@ -55,6 +55,15 @@ block content
                                 h1 #{movie.title}
                                 hr
                                 p #{movie.overview}
+                                hr
+                                button.btn.btn-danger.like(data-like-status=user.liked ? '1' : '0')
+                                    i.fa.fa-heart
+                                    | &nbsp;&nbsp;
+                                    span.text
+                                        if user.liked
+                                            | #{__('Unlike')}
+                                        else
+                                            | #{__('Like')}
                                 .clearfix
                                 .movie-footer
                                     if movie.credits.cast.length > 0
@@ -63,7 +72,8 @@ block content
                                             each actor in movie.credits.cast.splice(0, 6)
                                                 .col-md-2
                                                     .card
-                                                        img.card-img(src='http://image.tmdb.org/t/p/original/' + actor.profile_path)
+                                                        if actor.profile_path
+                                                            img.card-img(src='http://image.tmdb.org/t/p/original/' + actor.profile_path)
                                                         .card-body(style='padding:5px')
                                                             p.text-center
                                                                 b #{actor.name}
@@ -114,18 +124,17 @@ block content
                                             #accordion
                                                 - var i = 0
                                                 each episode in episodes
-                                                    if new Date(episode.date) <= new Date()
-                                                        .card.episode
-                                                            .card-header
-                                                                h5.mb-0
-                                                                    button.btn.btn-link.btn-episode(data-toggle='collapse', data-id=episode.id, data-target='#season-' + season + '-episode-' + episode.id) #{__('Episode %s', ++i)} - #{episode.title}
-                                                            .collapse(data-parent='#accordion', id='season-' + season + '-episode-' + episode.id)
-                                                                .card-body
-                                                                    video.video-js(controls='', preload='none', poster='http://image.tmdb.org/t/p/original/' + movie.backdrop_path, data-setup='{"fluid": true}')
-                                                                        source(src='/' + episode.id + '/stream', type="video/webm")
-                                                                        p.vjs-no-js
-                                                                            | To view this video please enable JavaScript, and consider upgrading to a web browser that
-                                                                            a(href='http://videojs.com/html5-video-support/', target='_blank') supports HTML5 video
+                                                    .card.episode
+                                                        .card-header
+                                                            h5.mb-0
+                                                                button.btn.btn-link.btn-episode(data-toggle='collapse', data-id=episode.id, data-target='#season-' + season + '-episode-' + episode.id) #{__('Episode %s', ++i)} - #{episode.title}
+                                                        .collapse(data-parent='#accordion', id='season-' + season + '-episode-' + episode.id)
+                                                            .card-body
+                                                                video.video-js(controls='', preload='none', poster='http://image.tmdb.org/t/p/original/' + movie.backdrop_path, data-setup='{"fluid": true}')
+                                                                    source(src='/' + episode.id + '/stream', type="video/webm")
+                                                                    p.vjs-no-js
+                                                                        | To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                                                        a(href='http://videojs.com/html5-video-support/', target='_blank') supports HTML5 video
                 hr
 
                 h3 #{__('Comments')}
@@ -145,6 +154,8 @@ block content
                                                 hr
                                                 p #{comment.content}
                                     .card-footer
+                                        if comment.user_id === userId
+                                            button.btn.btn-danger.delete-comment(data-comment-id=comment.id, type='button') #{__('Delete')}
                                         small
                                             em.float-right #{moment(comment.created_at).fromNow()}
                     .col-md-12
@@ -180,20 +191,23 @@ block scripts
                     </div>
                 </div>
                 <div class="card-footer">
+                    <button class="btn btn-danger delete-comment" data-comment-id="{COMMENT_ID}" data-type="button">#{__('Delete')}</button>
                     <small><em class="float-right">{CREATED_DATE}</em></small>
                 </div>
             </div>
         </div>
     script(type='text/javascript').
-        function afterPostComment() {
+        function afterPostComment(req, res) {
           var textarea = $('textarea[name="content"]')
           var content = textarea.val().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
           textarea.val('')
           var html = $('#commentTemplate').html()
           html = html.replace('{CONTENT}', content)
+          html = html.replace('{COMMENT_ID}', res.data.comment.id)
           html = html.replace('{CREATED_DATE}', moment(new Date()).fromNow())
 
           $('#comments').append(html)
+          initDeleteCommentEvent()
         }
         $('.btn-episode').on('click', function () {
           var btn = $(this)
@@ -206,6 +220,35 @@ block scripts
             src: '/' + btn.attr('data-id') + '/subtitles/en'
           }, true)
         })
+        function initDeleteCommentEvent() {
+          $('.delete-comment').unbind('click').on('click', function (e) {
+            e.preventDefault()
+            var button = $(this)
+            var id = button.attr('data-comment-id')
+
+            $.ajax({method: 'DELETE', url: '/comment/' + id})
+            button.parent().parent().parent().slideUp(250)
+          })
+        }
+        initDeleteCommentEvent()
+        $('.like').on('click', function (e) {
+          e.preventDefault()
+          var button = $(this)
+          var state = button.attr('data-like-status')
+          var text = state === '0' ? '#{__('Unlike')}' : '#{__('Like')}'
+
+          button.find('.text').html(text)
+          $.get('/#{movie.original}/like')
+          button.attr('data-like-status', state === '1' ? '0' : '1')
+        })
+
+        var elements = $('body').find('video')
+        for (var i = 0; i < elements.length; i++)
+            videojs(elements[i]).on('error', function () {
+              var el = this.el()
+              $(el).parent().append('<div class="alert alert-danger">#{__('No torrent found')}</div>')
+              el.remove()
+            })
     if current_user.language !== 'en'
         script(type='text/javascript').
           $('.btn-episode').on('click', function () {

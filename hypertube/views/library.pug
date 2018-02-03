@@ -45,9 +45,6 @@ block content
         hr
         h2 #{__('Library')}
         hr
-        button.btn.btn-info.order(data-order-type='DESC', data-order-key='views')
-            | #{__('Views')}&nbsp;&nbsp;
-            i.fa.fa-sort
         button.btn.btn-info.ml-3.order(data-order-type='DESC', data-order-key='date')
             | #{__('Production year')}&nbsp;&nbsp;
             i.fa.fa-sort
@@ -109,6 +106,7 @@ block scripts
             }
         })
 
+        var views = #{JSON.stringify(viewedMovies)}
         function generateMovieHTML(movie) {
           var html = $('#template').html()
           html = html.replace(/{NAME}/g, movie.title)
@@ -117,7 +115,7 @@ block scripts
           html = html.replace('{VIEW_BTN}', movie.media_type === 'movie' ? '#{__('View the movie')}' : '#{__('View the tv show')}')
           html = html.replace('{DATE}', new Date(movie.date).getFullYear())
           html = html.replace('{VOTE_AVERAGE}', movie.vote_average)
-          html = html.replace('{STYLE}', movie.viewed ? 'style="opacity:0.6"' : '')
+          html = html.replace('{STYLE}', views.indexOf(movie.media_id) !== -1 ? 'style="opacity:0.6"' : '')
           return html
         }
 
@@ -133,7 +131,7 @@ block scripts
           $('.results').html(content)
         }
 
-        var offset = 0
+        var page = 1
         var content = $('#content')
         var deviceAgent = navigator.userAgent.toLowerCase()
         var agentID = deviceAgent.match(/(iphone|ipod|ipad)/)
@@ -144,9 +142,7 @@ block scripts
         var noteRange = [0, 10]
         var dateRange = [parseInt('#{oldest_date}'), (new Date).getFullYear()]
         var orderBy = {
-          'views': 'DESC',
-          'date': 'DESC',
-          'vote_average': 'DESC'
+          'date': 'DESC'
         }
 
         var refreshFilters = function () {
@@ -174,7 +170,7 @@ block scripts
           content.find('.hidden').fadeIn(400)
         }
         var loadContent = function () {
-          $.post('/library/6/' + offset, {order: orderBy}, function (res) {
+          $.post('/library/' + page, {order: orderBy}, function (res) {
             var data = ''
 
             if (res.movies.length === 0) {
@@ -189,14 +185,14 @@ block scripts
             }
             content.append(data)
             content.find('.hidden').fadeIn(400)
-            offset += 6
+            page++
           })
         }
         loadContent()
         $(window).scroll(function () {
           if (isEnd)
             return
-          if (($(window).scrollTop() + $(window).height()) === $(document).height() || agentID && ($(window).scrollTop() + $(window).height()) + 150 > $(document).height()) {
+          if (($(window).scrollTop() + $(window).height()) === $(document).height() || agentID && ($(window).scrollTop() + $(window).height()) + 350 > $(document).height()) {
             loadContent()
           }
         })
@@ -222,7 +218,8 @@ block scripts
           orderBy = {}
           orderBy[key] = type
           btn.attr('data-order-type', (type === 'DESC') ? 'ASC' : 'DESC')
-          offset = 0
+          page = 1
           content.html('')
+          movies = []
           loadContent()
         })
