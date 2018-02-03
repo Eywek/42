@@ -122,7 +122,7 @@ module.exports = {
           console.error(err)
           return next()
         }
-        if (!movie || !movie.results)
+        if (!movie || !movie.results || movie.results.length === 0)
           return next()
         db.query('INSERT INTO `movies` SET `title` = ?, `media_id` = ?, `media_type` = ?, `created_at` = ?', [
           movie.results[0].original_title || movie.results[0].original_name,

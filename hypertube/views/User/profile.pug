@@ -43,7 +43,7 @@ block content
 
                         each movie in user.movies
                             a(href='/' + (movie.parent_title ? movie.parent_title : movie.title))
-                                img.img-thumbnail(src='http://image.tmdb.org/t/p/original' + (movie.parent_poster_path ? movie.parent_poster_path : movie.poster_path), width=150, data-toggle='tooltip', title=(movie.parent_title ? movie.parent_title : movie.title), data-placement='top')
+                                img.img-thumbnail(src='http://image.tmdb.org/t/p/original' + movie.poster_path, width=150, data-toggle='tooltip', title=(movie.parent_title ? movie.parent_title : movie.title), data-placement='top')
 
 block scripts
     script(type='text/javascript').

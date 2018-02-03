@@ -1,10 +1,22 @@
 const db = require('../models/database')
 const userModel = require('../models/user')
 const validator = require('../models/validator')
-const sendmail = require('sendmail')()
+const mailer = require('nodemailer')
+var mailTransport = mailer.createTransport({
+  auth: {
+    user: "postmaster@keymetrics.io",
+    pass: "2hlw2f2x4wd2"
+  },
+  port: 465,
+  host: "smtp.mailgun.org",
+  secure: true
+})
 const pug = require('pug')
 const path = require('path')
 const fs = require('fs')
+const async = require('async')
+const config = require('../../config/config')
+const mdb = require('moviedb')(config.movieDbAPIKey)
 const getFullLanguage = (lang) => {
   let content
   if ((content = JSON.parse(fs.readFileSync(path.join(__dirname, '../../locales/languages.json')))[lang]))
@@ -59,7 +71,7 @@ module.exports = {
           })
         })
       })
-    }, [], [], res.__)
+    }, ['name', 'last_name', 'username', 'email', 'password'], false, res.__)
   },
 
   signout: (req, res) => {
@@ -129,7 +141,7 @@ module.exports = {
         // Send success message
         return res.json({status: true, success: res.__("Your account is now updated!")})
       })
-    }, ['password'], [], res.__)
+    }, ['password'], false, res.__)
   },
 
   lostPassword: (req, res) => {
@@ -160,7 +172,7 @@ module.exports = {
 
         // Send email
         let fullUrl = req.protocol + '://' + req.get('host') + '/account/reset-password/' + token
-        sendmail({
+        let mailOptions = {
           from: 'Hypertube <no-reply@hypertube.com>',
           to: user[0].email,
           subject: 'Rénitialisation de mot de passe',
@@ -171,15 +183,18 @@ module.exports = {
             url: fullUrl,
             __: res.__
           })
-        }, function (err, reply) {
+        };
+
+        // send mail with defined transport object
+        mailTransport.sendMail(mailOptions, (err) => {
           if (err) {
             console.error(err)
-            return/* res.json({status: false, error: res.__("Internal error on email send.")})*/
+            return res.json({status: false, error: res.__("Internal error on email send.")})
           }
 
           // Send success message
           res.json({status: true, success: res.__("Reset email has been sent!")})
-        })
+        });
       })
     })
   },
@@ -232,13 +247,13 @@ module.exports = {
             })
           })
         })
-      }, ['password'], [], res.__)
+      }, ['password'], false, res.__)
     })
   },
 
   uploadAvatar: (req, res) => {
     if (!req.file)
-      return res.json({status: false, error: res.__('You need to send a image')})
+      return res.json({status: false, error: res.__('You need to send a image (png)')})
     res.json({status: true, success: res.__('Your avatar is now saved!')})
   },
 
@@ -251,10 +266,10 @@ module.exports = {
         return res.sendStatus(500)
       }
       if (!rows || rows.length === 0)
-        res.sendStatus(404)
+        return res.sendStatus(404)
       let user = rows[0]
       // Get movies
-      db.query('SELECT `movies`.`title`, `parent`.`title` AS `parent_title`, `movies`.`poster_path`, `parent`.`poster_path` AS `parent_poster_path` ' +
+      db.query('SELECT `movies`.`title`, `parent`.`title` AS `parent_title`, `movies`.`media_type`, `movies`.`media_id`, `parent`.`media_id` AS `parent_media_id` ' +
         'FROM `views` ' +
         'INNER JOIN `movies` ON `movies`.`id` = `views`.`movie_id` ' +
         'LEFT JOIN `movies` AS `parent` ON `parent`.`id` = `movies`.`parent_id` ' +
@@ -269,7 +284,17 @@ module.exports = {
         user.lang = getFullLanguage(user.lang)
         user.movies = movies
         user.profile_pic = fs.existsSync(path.join(__dirname, '../../public/uploads/' + user.id + '.png')) ? '/uploads/' + user.id + '.png' : '/assets/img/default_profile_pic.png'
-        res.render('User/profile', {title: user.username, user:user})
+        async.eachOf(user.movies, (movie, key, cb) => {
+          let method = (movie.media_type === 'tv') ? 'tvInfo' : 'movieInfo'
+          mdb[method]({id: (movie.parent_media_id ? movie.parent_media_id : movie.media_id)}, (err, infos) => {
+            if (err)
+              console.error(err)
+            user.movies[key].poster_path = infos.poster_path
+            cb()
+          })
+        }, () => {
+          res.render('User/profile', {title: user.username, user:user})
+        })
       })
     })
   }

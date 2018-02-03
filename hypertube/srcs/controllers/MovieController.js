@@ -33,7 +33,9 @@ const sendHeaders = function (req, res, size, type) {
   })
   return [start, end]
 }
-const convert = function (file) {
+const convert = function (file, thread) {
+  if (!thread)
+    thread = 8
   console.log('Start converting file...')
   return new ffmpeg(file.createReadStream())
     .videoCodec('libvpx')
@@ -42,7 +44,7 @@ const convert = function (file) {
     .audioBitrate(128)
     .videoBitrate(1024)
     .outputOptions([
-      '-threads 8',
+      '-threads ' + thread,
       '-deadline realtime',
       '-error-resilient 1'
     ])
@@ -50,7 +52,6 @@ const convert = function (file) {
       console.log('File is now webm !')
     })
     .on('error', function (err) {
-      console.log('Error', err)
     })
 }
 let downloadingStreams = {}
@@ -77,7 +78,7 @@ const streaming = (filename, magnetLink, req, res, onFileWrited) => {
     downloadingStreams[filename] = file
 
     // HEADER
-    //sendHeaders(req, res, file.length, type)
+    //sendHeaders(req, res, file.length, (ext !== '.webm' && ext !== '.mp4') ? 'webm' : ext.substr(1))
 
     // CONVERT
     let needConvert = (ext !== '.webm' && ext !== '.mp4')
@@ -128,7 +129,7 @@ const streaming = (filename, magnetLink, req, res, onFileWrited) => {
     if (needConvert) {
       console.log('Pumping to res and file...')
       pump(videoStream, fileStream)
-      pump(convert(file), responseStream)
+      pump(convert(file, 2), responseStream)
     } else {
       console.log('Piping to res and file...')
       videoStream.pipe(fileStream)
@@ -303,7 +304,7 @@ module.exports = {
       if (movie.downloaded) {
         // HEADERS
         let filePath = path.join(__dirname, '../../files/' + movie.file)
-        let [start, end] = sendHeaders(req, res, fs.statSync(filePath).size, path.extname(filePath))
+        let [start, end] = sendHeaders(req, res, fs.statSync(filePath).size, path.extname(filePath).substr(1))
 
         // CREATE STREAM
         fs.createReadStream(filePath, {
@@ -325,7 +326,7 @@ module.exports = {
         console.log('Already downloading, streaming download...')
 
         // HEADER
-        //sendHeaders(req, res, file.length, type)
+        //sendHeaders(req, res, file.length, (ext !== '.webm' && ext !== '.mp4') ? 'webm' : ext.substr(1))
 
         // CONVERTING
         let videoStream = (ext !== '.webm' && ext !== '.mp4') ? convert(file) : file.createReadStream()
@@ -408,27 +409,35 @@ module.exports = {
     if (req.body.order.vote_average)
       order = 'vote_average.' + (req.body.order.vote_average === 'DESC' ? 'desc' : 'asc')
     if (req.body.order.date)
-      order = 'primary_release_date.' + (req.body.order.date === 'DESC' ? 'desc' : 'asc')
+      order = 'release_date.' + (req.body.order.date === 'DESC' ? 'desc' : 'asc')
 
     async.parallel([
       (cb) => {
+        if (req.body.noMovie == 'true')
+          return cb(undefined, [])
         mdb.discoverMovie({
           language: req.user.language,
           sort_by: order,
           page: parseInt(req.params.page),
-          'release_date.lte': new Date(),
-          'release_date.gte': new Date('1900-01-01 00:00:00')
+          'release_date.lte': new Date(req.body.releaseDate.max),
+          'release_date.gte': new Date(req.body.releaseDate.min),
+          'vote_average.lte': req.body.note.max,
+          'vote_average.gte': req.body.note.min
         }, (err, movies) => {
           cb(err, movies)
         })
       },
       (cb) => {
+        if (req.body.noTv == 'true')
+          return cb(undefined, [])
         mdb.discoverTv({
           language: req.user.language,
-          sort_by: order.replace('primary_release_date', 'first_air_date'),
+          sort_by: order.replace('release_date', 'air_date'),
           page: parseInt(req.params.page),
-          'first_air_date.lte': new Date(),
-          'first_air_date.gte': new Date('1900-01-01 00:00:00')
+          'air_date.lte': new Date(req.body.releaseDate.max),
+          'air_date.gte': new Date(req.body.releaseDate.min),
+          'vote_average.lte': req.body.note.max,
+          'vote_average.gte': req.body.note.min
         }, (err, movies) => {
           cb(err, movies)
         })
@@ -499,7 +508,7 @@ module.exports = {
       if (err)
         console.error(err)
     })
-    res.send()
+    res.json({})
   },
 
   like: (req, res) => {
@@ -526,7 +535,7 @@ module.exports = {
             return console.error(err)
         })
     })
-    return res.send()
+    res.json({})
   },
 
 }

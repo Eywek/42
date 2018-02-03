@@ -16,6 +16,13 @@ const TwitterStrategy = require('passport-twitter').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const db = require('./srcs/models/database')
 const deleteWorker = require('./srcs/workers/delete')
+const { exec } = require('child_process');
+exec('ffmpeg -h', (error, stdout, stderr) => {
+  if (error) {
+    console.error('ffmpeg is needed!')
+    return process.exit()
+  }
+})
 
 deleteWorker.start()
 const logOrInsert = (profile, type, cb) => {

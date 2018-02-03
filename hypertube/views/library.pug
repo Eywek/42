@@ -91,14 +91,14 @@ block scripts
         </div>
     script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js')
     script(type='text/javascript').
-        $('input[name="filter-date"]').bootstrapSlider({
+        var filterDate = $('input[name="filter-date"]').bootstrapSlider({
             formatter: function (numbers) {
                 if (typeof numbers === 'object')
                     return '#{__('Between {0} and {1}')}'.replace('{0}', numbers[0]).replace('{1}', numbers[1])
                 return numbers
             }
         })
-        $('input[name="filter-note"]').bootstrapSlider({
+        var filterNote = $('input[name="filter-note"]').bootstrapSlider({
             formatter: function (numbers) {
                 if (typeof numbers === 'object')
                   return '#{__('Between {0} / 10 and {1} / 10')}'.replace('{0}', numbers[0]).replace('{1}', numbers[1])
@@ -108,12 +108,17 @@ block scripts
 
         var views = #{JSON.stringify(viewedMovies)}
         function generateMovieHTML(movie) {
+          if (!movie.date || movie.date.length === 0)
+            return ''
           var html = $('#template').html()
           html = html.replace(/{NAME}/g, movie.title)
           html = html.replace(/{LINK}/g, movie.original)
           html = html.replace('{IMG}', movie.poster_path ? '<img class="card-img-top" src="http://image.tmdb.org/t/p/w780' + movie.poster_path + '">' : '')
           html = html.replace('{VIEW_BTN}', movie.media_type === 'movie' ? '#{__('View the movie')}' : '#{__('View the tv show')}')
-          html = html.replace('{DATE}', new Date(movie.date).getFullYear())
+          if (movie.date && new Date(movie.date).getFullYear())
+            html = html.replace('{DATE}', new Date(movie.date).getFullYear())
+          else
+            html = html.replace('{DATE}', '#{__('Date not found')}')
           html = html.replace('{VOTE_AVERAGE}', movie.vote_average)
           html = html.replace('{STYLE}', views.indexOf(movie.media_id) !== -1 ? 'style="opacity:0.6"' : '')
           return html
@@ -151,26 +156,21 @@ block scripts
           noteRange = $('input[name="filter-note"]').val().split(',')
           dateRange = $('input[name="filter-date"]').val().split(',')
         }
-        var display = function (movie) {
-          if (movie.media_type === 'tv' && !displayTv)
-            return false
-          else if (movie.media_type === 'movie' && !displayMovie)
-            return false
-          if (movie.vote_average < noteRange[0] || movie.vote_average > noteRange[1])
-            return false
-          return !(new Date(movie.date).getFullYear() < dateRange[0] || new Date(movie.date).getFullYear() > dateRange[1]);
-        }
         var refreshContent = function () {
-          var data = ''
           refreshFilters()
-          for (var i = 0; i < movies.length; i++)
-            if (display(movies[i]))
-              data += generateMovieHTML(movies[i])
-          content.html(data)
-          content.find('.hidden').fadeIn(400)
+          page = 1
+          content.html('')
+          movies = []
+          loadContent()
         }
         var loadContent = function () {
-          $.post('/library/' + page, {order: orderBy}, function (res) {
+          $.post('/library/' + page, {
+            order: orderBy,
+            releaseDate: {min: dateRange[0], max: dateRange[1]},
+            noMovie: !displayMovie,
+            noTv: !displayTv,
+            note: {min: noteRange[0], max: noteRange[1]}
+          }, function (res) {
             var data = ''
 
             if (res.movies.length === 0) {
@@ -179,8 +179,7 @@ block scripts
             }
             refreshFilters()
             for (var i = 0; i < res.movies.length; i++) {
-              if (display(res.movies[i]))
-                data += generateMovieHTML(res.movies[i])
+              data += generateMovieHTML(res.movies[i])
               movies.push(res.movies[i])
             }
             content.append(data)
@@ -206,7 +205,12 @@ block scripts
             $(this).addClass('active')
           refreshContent()
         })
-        $('input[name="filter-note"], input[name="filter-date"]').on('change', function () {
+        filterNote.on('slideStop', function () {
+            console.log('Update filter note')
+            refreshContent()
+        })
+        filterDate.on('slideStop', function () {
+          console.log('Update filter data')
           refreshContent()
         })
         $('.order').on('click', function (e) {
@@ -218,8 +222,5 @@ block scripts
           orderBy = {}
           orderBy[key] = type
           btn.attr('data-order-type', (type === 'DESC') ? 'ASC' : 'DESC')
-          page = 1
-          content.html('')
-          movies = []
-          loadContent()
+          refreshContent()
         })

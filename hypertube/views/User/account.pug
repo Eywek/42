@@ -25,7 +25,7 @@ block content
                         h4 #{__('Edit your data')}
                         hr
 
-                        form(data-ajax, method='post', action='/account', data-ajax-callback='afterInfosUpdate')
+                        form(data-ajax, method='post', action='/account')
                             .form-group
                                 label #{__('First name')}
                                 input.form-control(type='text', value=user.name, name='name')

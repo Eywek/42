@@ -51,7 +51,7 @@ module.exports = function (model, data, next, requireds, uniqueBypassIds, i18n) 
                     break;
                 case 'min':
                     if (data[name].length < value)
-                        return cb(i18n('The field %s need to contains at least %s characters.', name));
+                        return cb(i18n('The field %s need to contains at least %s characters.', name, value));
                     cb();
                     break;
                 case 'max':

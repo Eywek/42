@@ -40,7 +40,7 @@
 	"Username or email already used.": "L'email ou le nom d'utilisateur est déjà utilisé.",
 	"Hi %s, you've asked a reset link with IP %s, this is your link: %s": "Bonjour %s, vous avez demandé un lien de rénitialisation de mot de passe avec l'IP %s, le voici: %s",
 	"Language": "Langage",
-	"You need to send a image": "Vous devez envoyer une image",
+	"You need to send a image (png)": "Vous devez envoyer une image (png)",
 	"Invalid credentials": "Vos identifiants sont invalides.",
 	"Find %s results": "%s résultats trouvés",
 	"View the movie": "Voir le film",
@@ -83,5 +83,6 @@
 	"Delete": "Delete",
 	"Like": "Like",
 	"Unlike": "Unlike",
-	"No torrent found": "Aucun torrent trouvé."
+	"No torrent found": "Aucun torrent trouvé.",
+	"Date not found": "Date non trouvée"
 }

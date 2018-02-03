@@ -64,5 +64,9 @@
 	"Reset email has been sent!": "Reset email has been sent!",
 	"Reset your password": "Reset your password",
 	"Your password is updated!": "Your password is updated!",
-	"Invalid credentials": "Invalid credentials"
+	"Invalid credentials": "Invalid credentials",
+	"Your avatar is now saved!": "Your avatar is now saved!",
+	"His movies": "His movies",
+	"No users found with this email": "No users found with this email",
+	"Date not found": "Date not found"
 }
