@@ -1,0 +1,1 @@
+Les clés SSH qui sont autorisées se trouvent dans l'home de l'user (/home/<user> ou /root/), dans le dossier .ssh, dans le fichier authorized_keys.

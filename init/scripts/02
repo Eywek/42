@@ -1,0 +1,6 @@
+#!/bin/bash
+apt-get update &> /var/log/update_script.log
+apt-get upgrade -y &> /var/log/update_script.logi
+
+# Add this on crontab -e :
+# 0 4 * * 1 /path/to/file

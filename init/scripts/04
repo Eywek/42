@@ -1,0 +1,11 @@
+#!/bin/bash
+m1="$(md5sum /etc/crontab)"
+m2="8f111d100ea459f68d333d63a8ef2205"
+
+if [ "$m1" != "$m2" ] ; then
+	echo "/etc/crontab has been modified in last 24h" | mail -s "Alert, /etc/crontab eddited" root
+	exit 1
+fi
+
+# Add this on crontab -e :
+# 0 0 * * * /path/to/file

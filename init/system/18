@@ -1,0 +1,1 @@
+iptable -A INPUT -s 10.10.10.10/8 -j ACCEPT
