@@ -1,0 +1,1 @@
+En utilisant la commande nslookup 10.51.1.253 on remarque que ce serveur utilise le protocole DHCP (cf. le nom de domaine). On peut émettre l'hypothèse que c'est un serveur DNS.

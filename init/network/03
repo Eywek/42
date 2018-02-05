@@ -1,0 +1,1 @@
+ifconfig | grep "en1" -A1 | grep "ether" | cut -c 8- | sed 's/.\{1\}$//'
