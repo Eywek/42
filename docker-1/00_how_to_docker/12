@@ -1,0 +1,6 @@
+docker run -d --name spawning-pool \
+			--restart=on-failure \
+			-e MYSQL_ROOT_PASSWORD=Kerrigan \
+			-e "MYSQL_DATABASE=zerglings" \
+			-v hatchery:/var/spool/mysql \
+			mysql
