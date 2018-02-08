@@ -6,7 +6,7 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2018/02/08 14:49:30 by vtouffet         ###   ########.fr        #
+#    Updated: 2018/02/08 17:37:37 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,9 @@ fclean: clean
 	@make -C $(FT_PRINTF_PATH) fclean > /dev/null
 	@make -C $(LIB_PATH) fclean > /dev/null
 	@rm -rf $(NAME) > /dev/null
+
+norme:
+	@norminette srcs/**/*.[ch] libft/*.[ch] ft_printf/**/*.[ch]
 
 re: fclean all
 

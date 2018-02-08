@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:15:40 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 14:27:26 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 17:21:08 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@
 
 # define ERROR_GNL "Une erreur est survenue lors de la lecture.\n"
 # define ERROR_MALLOC "Une erreur de mémoire est survenue.\n"
+# define ERROR_EXEC "Une erreur est survenue lors du lancement du processus.\n"
+# define ERROR_CMD_NOT_FOUND "Commande non trouvée.\n"
 
 #endif
