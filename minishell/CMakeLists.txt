@@ -32,6 +32,7 @@ add_executable(minishell
         libft/ft_atoi_base.c
         libft/ft_bzero.c
         libft/ft_dup.c
+        libft/get_next_line.c
         libft/ft_isalnum.c
         libft/ft_isalpha.c
         libft/ft_isascii.c

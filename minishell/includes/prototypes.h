@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:18:22 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 15:20:22 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 15:20:25 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void    ft_wait_input();
 void    ft_parse_input(char *line);
 void    ft_handle_env(char **env);
 
-void    ft_set_env(const char *name, const char *value);
+int     ft_set_env(const char *name, const char *value);
 char    *ft_get_env(const char *name);
 
 void    ft_cd(const char *content);

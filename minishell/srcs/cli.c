@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 15:23:53 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 15:45:07 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,17 @@ void    ft_wait_input()
 
 void    ft_handle_env(char **env)
 {
-    g_env.shell_env = env;
+    int i;
+    int size;
+
+    size = 0;
+    while (env[size++])
+        ;
+    if (!(g_env.shell_env = malloc(sizeof(char*) * size)))
+        return exit(1);
+    i = -1;
+    while (env[++i])
+        g_env.shell_env[i] = ft_strdup(env[i]);
 }
 
 int     main(int argc, char *argv[], char **env)

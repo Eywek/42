@@ -1,2 +1,3 @@
 objs
 cmake-build-debug
+*.o

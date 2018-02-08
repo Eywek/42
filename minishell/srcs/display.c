@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:24:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 15:25:08 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 15:25:18 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void    ft_display_error(int code)
 
 void    ft_display_prompt()
 {
-    ft_printf("{cyan}%s {blue}>{eoc} ", ft_get_env("USER"));
+    ft_printf("{cyan}%s {blue}>{eoc} ", ft_get_env("PWD"));
 }
