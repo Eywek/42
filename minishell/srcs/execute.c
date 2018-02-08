@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:53:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 17:33:57 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 18:20:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_make_env(void)
 	return (env);
 }
 
-void	proc_signal_handler(int signo)
+static void	proc_signal_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
@@ -43,25 +43,40 @@ void	proc_signal_handler(int signo)
 	}
 }
 
+static char	**ft_generate_args(const char *args)
+{
+	char **tab;
+
+	tab = ft_strsplit(args, ' ');
+	if (tab && tab[0])
+		return (tab);
+	free(tab);
+	if (!(tab = malloc(sizeof(char*) * 2)))
+		ft_display_error(1);
+	if (!(tab[0] = malloc(sizeof(char))))
+		ft_display_error(1);
+	tab[0][0] = 0;
+	tab[1] = 0;
+	return (tab);
+}
+
 void	ft_launch(const char *path, const char *args)
 {
 	char	**env;
-	int		i;
+	char	**tab;
 	pid_t	pid;
 
-	ft_printf("Launch %s with '%s'\n", path, args);
 	env = ft_make_env();
+	tab = ft_generate_args(args);
 	pid = fork();
 	signal(SIGINT, proc_signal_handler);
 	if (pid == 0)
-		execve(path, ft_strsplit(args, ' '), env);
+		execve(path, tab, env);
 	else if (pid < 0)
 		ft_display_error(2);
 	wait(&pid);
-	i = -1;
-	while (env[++i])
-		free(env[i]);
-	free(env);
+	ft_free_tab(env);
+	ft_free_tab(tab);
 }
 
 void	ft_execute(const char *cmd, const char *args)
@@ -78,17 +93,18 @@ void	ft_execute(const char *cmd, const char *args)
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(tmp, cmd);
-		if ((ret = access(path, X_OK)) == 0)
+		if ((ret = access(path, X_OK)) == 0) // TODO: Check if is executable
 			ft_launch(path, args);
 		free(path);
 		free(tmp);
 		free(paths[i]);
-		if (ret == 0)
-			break ;
+		if (ret == 0) {
+			while (paths[++i])
+				free(paths[i]);
+			free(paths);
+			return ;
+		}
 	}
 	free(paths);
-	if (access(cmd, X_OK))
-		ft_launch(cmd, args);
-	else
-		ft_display_error(3);
+	ft_display_error(3);
 }

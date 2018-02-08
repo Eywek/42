@@ -6,14 +6,14 @@
 #    By: vtouffet <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:42 by vtouffet          #+#    #+#              #
-#    Updated: 2018/02/08 17:37:37 by vtouffet         ###   ########.fr        #
+#    Updated: 2018/02/08 17:37:47 by vtouffet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=minishell
 
 SRCS_PATH=./srcs/
-SRCS_FILES=cli.c display.c env.c execute.c \
+SRCS_FILES=cli.c display.c env.c execute.c utils.c \
             builtin/cd.c builtin/echo.c builtin/env.c builtin/exit.c \
             builtin/setenv.c builtin/unsetenv.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))

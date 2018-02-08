@@ -29,6 +29,8 @@ void    ft_launch(const char *path, const char *args);
 void    ft_execute(const char *cmd, const char *args);
 char    **ft_make_env();
 
+void	ft_free_tab(char **tab);
+
 void    ft_cd(const char *content);
 void    ft_echo(const char *content);
 void    ft_env(const char *content);
