@@ -1,0 +1,8 @@
+a.out
+cmake-build-debug
+objs
+libft_printf.a
+main_test.c
+tests
+CMakeLists.txt
+.idea

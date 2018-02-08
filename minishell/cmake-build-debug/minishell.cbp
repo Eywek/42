@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="minishell"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/vtouffet/Work/minishell/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/vtouffet/Work/minishell/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/vtouffet/Work/minishell/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minishell">
+				<Option output="/Users/vtouffet/Work/minishell/cmake-build-debug/minishell" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vtouffet/Work/minishell/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 minishell"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="minishell/fast">
+				<Option output="/Users/vtouffet/Work/minishell/cmake-build-debug/minishell" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vtouffet/Work/minishell/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 minishell/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/vtouffet/Work/minishell/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/vtouffet/Work/minishell/Makefile">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/Makefile">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/includes/core.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/includes/prototypes.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/includes/structs.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/core.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/flags.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/types/arrays.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/types/binary.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/types/chars.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/types/floats.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/types/numbers.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/types/numbers_l.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/types/others.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/types/pointers.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/types/strings.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/utils/bases.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/utils/colors.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/utils/flags.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/utils/floats.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/utils/get_numbers.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/utils/numbers.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/utils/pad.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/utils/wchars.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/ft_printf/srcs/utils/write.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/includes/minishell.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/includes/prototypes.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/includes/structs.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/Makefile">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_atoi.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_atoi_base.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_bzero.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_dup.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_isalnum.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_isalpha.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_isascii.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_isdigit.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_islower.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_isprint.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_isupper.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_itoa.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_itoa_base.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_lstadd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_lstaddend.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_lstdel.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_lstdelone.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_lstiter.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_lstmap.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_lstnew.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_max.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_memalloc.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_memccpy.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_memchr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_memcmp.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_memcpy.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_memdel.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_memmove.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_memset.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_nbrlen.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_putchar.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_putchar_fd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_putendl.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_putendl_fd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_putnbr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_putnbr_fd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_putstr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_putstr_fd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_reverse_tab.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_sort_wordtab.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strcat.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strchr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strclr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strcmp.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strcntfirstchar.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strcntlastchar.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strcpy.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strdel.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strdup.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strequ.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_striter.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_striteri.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strjoin.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strlcat.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strlen.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strmap.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strmapi.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strncat.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strncmp.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strncpy.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strnequ.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strnew.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strnstr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strrchr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strrev.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strsplit.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strsplitchrset.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strstr.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strsub.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_strtrim.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_swap.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_tolower.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/ft_toupper.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/libft/libft.h">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/srcs/builtin/cd.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/srcs/builtin/echo.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/srcs/builtin/env.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/srcs/builtin/exit.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/srcs/builtin/setenv.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/srcs/builtin/unsetenv.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/srcs/cli.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/srcs/display.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/srcs/env.c">
+			<Option target="minishell"/>
+		</Unit>
+		<Unit filename="/Users/vtouffet/Work/minishell/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
