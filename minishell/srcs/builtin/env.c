@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:56 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 15:07:20 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 15:55:35 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void    ft_env(const char *content)
 {
-    int i;
+    t_shell_env *ptr;
 
     (void)content;
-    i = 0;
-    while (g_env.shell_env && g_env.shell_env[i])
-        ft_printf("%s\n", g_env.shell_env[i++]);
+    ptr = g_env.shell_env;
+    while (ptr) {
+        ft_printf("%s=%s\n", ptr->name, ptr->value);
+        ptr = ptr->next;
+    }
 }

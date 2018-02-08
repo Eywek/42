@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:45 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 14:52:50 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:43:05 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,18 @@
 
 void    ft_unsetenv(const char *content)
 {
-    (void)content;
+    t_shell_env *before;
+    t_shell_env *ptr;
+
+    ptr = g_env.shell_env;
+    before = ptr;
+    while (ptr) {
+        if (ft_strcmp(ptr->name, content) == 0) {
+            before->next = ptr->next;
+            free(ptr);
+            return ;
+        }
+        before = ptr;
+        ptr = ptr->next;
+    }
 }

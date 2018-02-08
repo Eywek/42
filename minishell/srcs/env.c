@@ -6,61 +6,64 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 15:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 15:41:48 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:17:19 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void ft_get_kv(char *line, char **key, char **value)
+void                ft_get_kv(char *line, char **key, char **value)
 {
     size_t  equal_pos;
 
     equal_pos = ft_strchr(line, '=') - line;
     *key = ft_strdup(line);
     (*key)[equal_pos] = 0;
-    if (value)
-        *value = line + equal_pos + 1;
+    *value = ft_strdup(line + equal_pos + 1);
 }
 
-int        ft_set_env(const char *name, const char *value)
+static t_shell_env  *ft_add_env_element(const char *name, const char *value)
 {
-    int     i;
-    char    *key;
-    char    *tmp;
+    t_shell_env *ptr;
 
-    i = -1;
-    while (g_env.shell_env[++i]) {
-        ft_get_kv(g_env.shell_env[i], &key, NULL);
-        if (ft_strcmp(key, name) == 0) {
-            tmp = g_env.shell_env[i];
-            g_env.shell_env[i] = ft_strjoin(key, "=");
-            free(tmp);
-            tmp = g_env.shell_env[i];
-            g_env.shell_env[i] = ft_strjoin(g_env.shell_env[i], value);
-            free(key);
-            free(tmp);
-            return (1);
-        }
-        free(key);
+    if (!(ptr = malloc(sizeof(t_shell_env))))
+        ft_display_error(1);
+    ptr->name = (char*)name;
+    ptr->value = (char*)value;
+    ptr->next = NULL;
+    return (ptr);
+}
+
+int                 ft_set_env(const char *name, const char *value)
+{
+    t_shell_env *ptr;
+
+    ptr = g_env.shell_env;
+    if (!ptr) {
+        g_env.shell_env = ft_add_env_element(name, value);
+        return (1);
     }
-    return (0);
+    while (ptr->next) {
+        if (ft_strcmp(ptr->name, name) == 0) {
+            free(ptr->value);
+            ptr->value = ft_strdup(value);
+            return (0);
+        }
+        ptr = ptr->next;
+    }
+    ptr->next = ft_add_env_element(name, value);
+    return (1);
 }
 
-char        *ft_get_env(const char *name)
+char                *ft_get_env(const char *name)
 {
-    int     i;
-    char    *key;
-    char    *value;
+    t_shell_env *ptr;
 
-    i = -1;
-    while (g_env.shell_env[++i]) {
-        ft_get_kv(g_env.shell_env[i], &key, &value);
-        if (ft_strcmp(key, name) == 0) {
-            free(key);
-            return (value);
-        }
-        free(key);
+    ptr = g_env.shell_env;
+    while (ptr) {
+        if (ft_strcmp(ptr->name, name) == 0)
+            return (ptr->value);
+        ptr = ptr->next;
     }
     return (NULL);
 }

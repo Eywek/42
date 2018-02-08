@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:18:22 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 15:20:25 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 15:41:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void    ft_handle_env(char **env);
 
 int     ft_set_env(const char *name, const char *value);
 char    *ft_get_env(const char *name);
+void    ft_get_kv(char *line, char **key, char **value);
 
 void    ft_cd(const char *content);
 void    ft_echo(const char *content);

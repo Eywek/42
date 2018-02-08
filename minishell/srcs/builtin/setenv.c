@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:32 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 15:49:39 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:38:59 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void    ft_setenv(const char *content)
         value = (char*)content + space_pos + 1;
     else
         value = NULL;
-    ft_set_env(key, value);
+    ft_set_env(ft_strdup(key), ft_strdup(value));
+    free(key);
 }

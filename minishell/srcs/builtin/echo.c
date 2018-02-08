@@ -15,4 +15,5 @@
 void    ft_echo(const char *content)
 {
     write(STDIN_FILENO, content, ft_strlen(content));
+    write(STDIN_FILENO, "\n", 1);
 }

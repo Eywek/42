@@ -23,5 +23,6 @@
 # define BUILTINS_COUNT 6
 
 # define ERROR_GNL "Une erreur est survenue lors de la lecture.\n"
+# define ERROR_MALLOC "Une erreur de mémoire est survenue.\n"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 15:45:07 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:10:03 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,15 @@ void    ft_wait_input()
 
 void    ft_handle_env(char **env)
 {
-    int i;
-    int size;
+    int     i;
+    char    *key;
+    char    *value;
 
-    size = 0;
-    while (env[size++])
-        ;
-    if (!(g_env.shell_env = malloc(sizeof(char*) * size)))
-        return exit(1);
     i = -1;
-    while (env[++i])
-        g_env.shell_env[i] = ft_strdup(env[i]);
+    while (env[++i]) {
+        ft_get_kv(env[i], &key, &value);
+        ft_set_env(key, value);
+    }
 }
 
 int     main(int argc, char *argv[], char **env)
