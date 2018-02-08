@@ -6,11 +6,23 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 15:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 16:17:19 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:57:58 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int                 ft_count_env()
+{
+    int         count;
+    t_shell_env *ptr;
+
+    count = 0;
+    ptr = g_env.shell_env;
+    while (ptr && ++count)
+        ptr = ptr->next;
+    return (count);
+}
 
 void                ft_get_kv(char *line, char **key, char **value)
 {

@@ -105,4 +105,4 @@ add_executable(minishell
         libft/libft.h
         libft/Makefile
         srcs/env.c
-        Makefile srcs/cli.c includes/minishell.h includes/prototypes.h includes/structs.h srcs/display.c srcs/builtin/echo.c srcs/builtin/cd.c srcs/builtin/setenv.c srcs/builtin/unsetenv.c srcs/builtin/env.c srcs/builtin/exit.c srcs/env.c)
+        Makefile srcs/cli.c includes/minishell.h includes/prototypes.h includes/structs.h srcs/display.c srcs/builtin/echo.c srcs/builtin/cd.c srcs/builtin/setenv.c srcs/builtin/unsetenv.c srcs/builtin/env.c srcs/builtin/exit.c srcs/env.c srcs/execute.c)

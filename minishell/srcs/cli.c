@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 16:10:03 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:53:08 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@ t_builtin g_builtins[BUILTINS_COUNT] = {
         {"cd", &ft_cd}, {"echo", &ft_echo}, {"env", &ft_env},
         {"exit", &ft_exit}, {"setenv", &ft_setenv}, {"unsetenv", &ft_unsetenv},
 };
-
-void    ft_execute(const char *cmd, const char *args)
-{
-    (void)cmd;
-    (void)args;
-    ft_printf("Try to find executable in $PATH\n");
-}
 
 void    ft_parse_input(char *line)
 {

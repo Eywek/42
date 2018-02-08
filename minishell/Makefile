@@ -13,7 +13,7 @@
 NAME=minishell
 
 SRCS_PATH=./srcs/
-SRCS_FILES=cli.c display.c env.c \
+SRCS_FILES=cli.c display.c env.c execute.c \
             builtin/cd.c builtin/echo.c builtin/env.c builtin/exit.c \
             builtin/setenv.c builtin/unsetenv.c
 SRCS=$(addprefix $(SRCS_PATH), $(SRCS_FILES))
