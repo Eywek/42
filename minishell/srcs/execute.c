@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:53:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 13:15:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 13:15:51 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		ft_execute(const char *cmd, const char *args)
 
 	paths = ft_strsplit(ft_get_env("PATH"), ':');
 	i = -1;
-	while (paths[++i])
+	while (paths && paths[++i])
 	{
 		ret = ft_exec(paths[i], cmd, args);
 		free(paths[i]);

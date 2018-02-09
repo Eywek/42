@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:07:14 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 11:57:25 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 13:22:17 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,11 @@ int		ft_is_exec(char *path)
 	if (!S_ISREG(path_stat.st_mode) && !S_ISLNK(path_stat.st_mode))
 		return (0);
 	return (path_stat.st_mode & S_IXUSR ? 1 : -1);
+}
+
+void	free_env(t_shell_env *el)
+{
+	free(el->name);
+	free(el->value);
+	free(el);
 }

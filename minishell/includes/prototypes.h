@@ -6,12 +6,14 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:18:22 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 11:51:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 13:21:56 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_PROTOTYPES_H
 #define MINISHELL_PROTOTYPES_H
+
+#include "structs.h"
 
 void    ft_display_prompt();
 void    ft_display_error(int code);
@@ -31,6 +33,7 @@ char    **ft_make_env();
 
 void	ft_free_tab(char **tab);
 int		ft_is_exec(char *path);
+void	free_env(t_shell_env *el);
 
 void    ft_cd(const char *content);
 void    ft_echo(const char *content);
