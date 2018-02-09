@@ -51,7 +51,7 @@ void		ft_wait_input(void)
 			ft_display_error(0);
 		if (line && line[0])
 			ft_parse_input(line);
-		free(line);
+		//free(line);
 	}
 }
 

@@ -26,5 +26,6 @@
 # define ERROR_MALLOC "Une erreur de mémoire est survenue.\n"
 # define ERROR_EXEC "Une erreur est survenue lors du lancement du processus.\n"
 # define ERROR_CMD_NOT_FOUND "Commande non trouvée.\n"
+# define ERROR_PERMISSION_DENIED "Permission non accordée.\n"
 
 #endif

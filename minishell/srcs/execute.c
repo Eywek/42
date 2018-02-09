@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:53:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 18:20:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 12:17:45 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,11 @@ static void	proc_signal_handler(int signo)
 	}
 }
 
-static char	**ft_generate_args(const char *args)
+static char	**ft_generate_args(const char *path, const char *args)
 {
 	char **tab;
 
-	tab = ft_strsplit(args, ' ');
-	if (tab && tab[0])
-		return (tab);
-	free(tab);
-	if (!(tab = malloc(sizeof(char*) * 2)))
-		ft_display_error(1);
-	if (!(tab[0] = malloc(sizeof(char))))
-		ft_display_error(1);
-	tab[0][0] = 0;
-	tab[1] = 0;
+	tab = ft_strsplitchrset((char*)args, " ", path);
 	return (tab);
 }
 
@@ -67,7 +58,7 @@ void	ft_launch(const char *path, const char *args)
 	pid_t	pid;
 
 	env = ft_make_env();
-	tab = ft_generate_args(args);
+	tab = ft_generate_args(path, args);
 	pid = fork();
 	signal(SIGINT, proc_signal_handler);
 	if (pid == 0)
@@ -93,12 +84,14 @@ void	ft_execute(const char *cmd, const char *args)
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(tmp, cmd);
-		if ((ret = access(path, X_OK)) == 0) // TODO: Check if is executable
+		if ((ret = ft_is_exec(path)) == 1)
 			ft_launch(path, args);
+		else if (ret == -1)
+			ft_display_error(4);
 		free(path);
 		free(tmp);
 		free(paths[i]);
-		if (ret == 0) {
+		if (ret) {
 			while (paths[++i])
 				free(paths[i]);
 			free(paths);
@@ -106,5 +99,10 @@ void	ft_execute(const char *cmd, const char *args)
 		}
 	}
 	free(paths);
-	ft_display_error(3);
+	if ((ret = ft_is_exec((char*)cmd)) == 1)
+		ft_launch(cmd, args);
+	else if (ret == -1)
+		ft_display_error(4);
+	else
+		ft_display_error(3);
 }

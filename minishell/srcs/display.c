@@ -12,12 +12,13 @@
 
 #include "../includes/minishell.h"
 
-char	*g_errors[4] =
+char	*g_errors[5] =
 {
 	ERROR_GNL,
 	ERROR_MALLOC,
 	ERROR_EXEC,
-	ERROR_CMD_NOT_FOUND
+	ERROR_CMD_NOT_FOUND,
+	ERROR_PERMISSION_DENIED
 };
 
 void	ft_display_error(int code)
