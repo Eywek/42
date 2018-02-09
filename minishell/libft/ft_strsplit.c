@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/19 13:00:53 by vtouffet          #+#    #+#             */
-/*   Updated: 2017/11/10 14:01:59 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 12:14:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 char	**ft_strsplit(char const *s, char c)
 {
 	char	*charset;
+	char	**tab;
 
 	if (!s || !c)
 		return (NULL);
 	if (!(charset = ft_strnew(2)))
 		return (NULL);
 	charset[0] = c;
-	return (ft_strsplitchrset((char*)s, charset, NULL));
+	tab = ft_strsplitchrset((char*)s, charset, NULL);
+	free(charset);
+	return (tab);
 }

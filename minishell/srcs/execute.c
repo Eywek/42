@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:53:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 14:16:25 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 16:55:12 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ char		**ft_make_env(void)
 	char		**env;
 	t_shell_env	*ptr;
 	int			i;
-	char		*tmp;
 
-	if (!(env = malloc(sizeof(char *) * ft_count_env())))
+	if (!(env = malloc(sizeof(char *) * (ft_count_env() + 1))))
 		ft_display_error(1);
 	ptr = g_env.shell_env;
 	i = -1;
 	while (ptr)
 	{
-		tmp = ft_strjoin(ptr->name, "=");
-		env[++i] = ft_strjoin(tmp, ptr->value);
-		free(tmp);
+		if (!(env[++i] = malloc((sizeof(char) * ft_strlen(ptr->name) +
+				ft_strlen(ptr->value) + 2))))
+			ft_display_error(1);
+		ft_strcat(ft_strcat(ft_strcpy(env[i], ptr->name), "="), ptr->value);
 		ptr = ptr->next;
 	}
-	env[i] = 0;
+	env[++i] = 0;
 	return (env);
 }
 

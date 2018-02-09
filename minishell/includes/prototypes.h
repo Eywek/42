@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:18:22 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 13:21:56 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 14:46:31 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void    ft_execute(const char *cmd, const char *args);
 char    **ft_make_env();
 
 void	ft_free_tab(char **tab);
+void	ft_free_env(void);
 int		ft_is_exec(char *path);
-void	free_env(t_shell_env *el);
+void	ft_free_env_el(t_shell_env *el);
 
 void    ft_cd(const char *content);
 void    ft_echo(const char *content);

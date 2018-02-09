@@ -6,12 +6,12 @@
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 11:34:04 by exam              #+#    #+#             */
-/*   Updated: 2018/02/09 14:19:33 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 16:32:15 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
 static int		is_separator(char c, char const *charset)
 {

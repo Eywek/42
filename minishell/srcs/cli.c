@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 13:11:12 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 14:50:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		ft_parse_input(char *line)
 		if (ft_strcmp(g_builtins[i].name, cmd) == 0)
 			return (g_builtins[i].f(line + ft_strlen(g_builtins[i].name) + 1));
 	ft_execute(cmd, (ft_strlen(line) > ft_strlen(cmd) + 1) ?
-					line + ft_strlen(cmd) + 1 : ft_strnew(1));
+					line + ft_strlen(cmd) + 1 : "");
 	free(cmd);
 }
 
@@ -52,7 +52,12 @@ void		ft_wait_input(void)
 			ft_display_error(0);
 		if (line && line[0])
 			ft_parse_input(line);
-		//free(line);
+		free(line);
+		if (g_env.exit)
+		{
+			ft_free_env();
+			exit(g_env.exit_code);
+		}
 	}
 }
 
@@ -74,6 +79,7 @@ int			main(int argc, char *argv[], char **env)
 {
 	(void)argc;
 	(void)argv;
+	ft_memset(&g_env, 0, sizeof(g_env));
 	ft_handle_env(env);
 	ft_wait_input();
 }

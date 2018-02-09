@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:07:14 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 14:08:08 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 16:26:37 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
+void	ft_free_env(void)
+{
+	t_shell_env	*ptr;
+	t_shell_env	*tmp;
+
+	ptr = g_env.shell_env;
+	while (ptr)
+	{
+		tmp = ptr->next;
+		ft_free_env_el(ptr);
+		ptr = tmp;
+	}
+	g_env.shell_env = NULL;
+}
+
 int		ft_is_exec(char *path)
 {
 	struct stat path_stat;
@@ -34,7 +49,7 @@ int		ft_is_exec(char *path)
 	return (path_stat.st_mode & S_IXUSR ? 1 : -1);
 }
 
-void	free_env(t_shell_env *el)
+void	ft_free_env_el(t_shell_env *el)
 {
 	free(el->name);
 	free(el->value);
