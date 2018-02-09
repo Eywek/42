@@ -6,13 +6,13 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:53:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 12:17:45 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 13:15:38 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**ft_make_env(void)
+char		**ft_make_env(void)
 {
 	char		**env;
 	t_shell_env	*ptr;
@@ -43,22 +43,31 @@ static void	proc_signal_handler(int signo)
 	}
 }
 
-static char	**ft_generate_args(const char *path, const char *args)
+static int	ft_exec(char *path, const char *cmd, const char *args)
 {
-	char **tab;
+	char	*tmp;
+	char	*fullpath;
+	int		ret;
 
-	tab = ft_strsplitchrset((char*)args, " ", path);
-	return (tab);
+	tmp = ft_strjoin(path, "/");
+	fullpath = ft_strjoin(tmp, cmd);
+	if ((ret = ft_is_exec(fullpath)) == 1)
+		ft_launch(fullpath, args);
+	else if (ret == -1)
+		ft_display_error(4);
+	free(fullpath);
+	free(tmp);
+	return (ret);
 }
 
-void	ft_launch(const char *path, const char *args)
+void		ft_launch(const char *path, const char *args)
 {
 	char	**env;
 	char	**tab;
 	pid_t	pid;
 
 	env = ft_make_env();
-	tab = ft_generate_args(path, args);
+	tab = ft_strsplitchrset((char*)args, " ", path);
 	pid = fork();
 	signal(SIGINT, proc_signal_handler);
 	if (pid == 0)
@@ -70,28 +79,20 @@ void	ft_launch(const char *path, const char *args)
 	ft_free_tab(tab);
 }
 
-void	ft_execute(const char *cmd, const char *args)
+void		ft_execute(const char *cmd, const char *args)
 {
 	char	**paths;
 	int		i;
-	char	*path;
-	char	*tmp;
 	int		ret;
 
 	paths = ft_strsplit(ft_get_env("PATH"), ':');
 	i = -1;
 	while (paths[++i])
 	{
-		tmp = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(tmp, cmd);
-		if ((ret = ft_is_exec(path)) == 1)
-			ft_launch(path, args);
-		else if (ret == -1)
-			ft_display_error(4);
-		free(path);
-		free(tmp);
+		ret = ft_exec(paths[i], cmd, args);
 		free(paths[i]);
-		if (ret) {
+		if (ret)
+		{
 			while (paths[++i])
 				free(paths[i]);
 			free(paths);

@@ -74,7 +74,7 @@ fclean: clean
 	@rm -rf $(NAME) > /dev/null
 
 norme:
-	@norminette srcs/**/*.[ch] libft/*.[ch] ft_printf/**/*.[ch]
+	@norminette srcs/*/*.[ch] srcs/*.[ch] libft/*.[ch] ft_printf/**/*.[ch]
 
 re: fclean all
 
