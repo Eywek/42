@@ -6,14 +6,20 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 12:11:41 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 14:09:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 17:07:31 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "get_next_line.h"
 
-int	get_next_line(const int fd, char **line)
+static int	ft_free_gnl(char *tmp)
+{
+	ft_strdel(&tmp);
+	return (1);
+}
+
+int			get_next_line(const int fd, char **line)
 {
 	static char	*c[127];
 	char		buffer[BUFF_SIZE_GNL + 1];
@@ -30,7 +36,7 @@ int	get_next_line(const int fd, char **line)
 		c[fd] = ft_strjoin(c[fd], buffer);
 		ft_strdel(&tmp);
 	}
-	if (b == -1 || !*(tmp = c[fd]))
+	if ((b == -1 || !*(tmp = c[fd])) && ft_free_gnl(tmp))
 		return (b == -1 ? -1 : 0);
 	if ((endl = (ft_strchr(c[fd], '\n') > 0)))
 		*line = ft_strsub(c[fd], 0, ft_strchr(c[fd], '\n') - c[fd]);
