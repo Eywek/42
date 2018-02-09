@@ -6,7 +6,7 @@
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 11:34:04 by exam              #+#    #+#             */
-/*   Updated: 2018/02/09 12:18:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 14:19:33 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ static int		count_words(char *str, const char *charset)
 
 	i = 0;
 	count = 0;
-	while (str[i] && is_separator(str[i], charset))
+	while (str && str[i] && is_separator(str[i], charset))
 		++i;
-	if (str[i] && !is_separator(str[i], charset))
+	if (str && str[i] && !is_separator(str[i], charset))
 		count = 1;
-	while (str[i])
+	while (str && str[i])
 	{
-		if (!is_separator(str[i], charset) && is_separator(str[i - 1], charset))
+		if (!is_separator(str[i], charset) && (i > 0 &&
+				is_separator(str[i - 1], charset)))
 			++count;
 		++i;
 	}
@@ -54,7 +55,7 @@ static int		word_size(char *str, char const *charset)
 
 	i = 0;
 	size = 0;
-	while (str[i] && !is_separator(str[i], charset))
+	while (str && str[i] && !is_separator(str[i], charset))
 	{
 		++size;
 		++i;
@@ -77,11 +78,11 @@ char			**ft_strsplitchrset(char *str, const char *charset,
 	index = -1;
 	if (first && (tab[++index] = malloc(sizeof(char) * (ft_strlen(first) + 1))))
 		tab[index] = ft_strdup(first);
-	while (str[++i])
+	while (str && str[++i])
 		if (!is_separator(str[i], charset))
 		{
-			if ((index == -1 || is_separator(str[i - 1], charset))
-				&& (j = 0) == 0)
+			if (((index == -1 || (index == 0 && first)) || (i > 0 &&
+					is_separator(str[i - 1], charset))) && (j = 0) == 0)
 				if (!(tab[++index] = (char*)malloc(sizeof(char) * (word_size(
 						str + i, charset) + 1))))
 					return (NULL);

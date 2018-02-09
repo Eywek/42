@@ -1,3 +1,4 @@
 objs
 cmake-build-debug
 *.o
+minishell.dSYM

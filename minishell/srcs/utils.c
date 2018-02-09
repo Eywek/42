@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:07:14 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 13:22:17 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/09 14:08:08 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int		ft_is_exec(char *path)
 {
 	struct stat path_stat;
 
-	lstat(path, &path_stat);
+	if (lstat(path, &path_stat) == -1)
+		return (0);
 	if (!S_ISREG(path_stat.st_mode) && !S_ISLNK(path_stat.st_mode))
 		return (0);
 	return (path_stat.st_mode & S_IXUSR ? 1 : -1);
