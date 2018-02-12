@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:53:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 15:26:40 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:16:21 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,7 @@ void		ft_launch(const char *path, const char *args)
 		ft_display_error(2);
 	waitpid(pid, &g_env.exit_code, 0);
 	ft_free_tab(env);
-	ft_printf("tab[0] = %s\n", tab[0]);
-	ft_printf("tab[1] = %s\n", tab[1]);
-	//ft_free_tab(tab);
-	free(tab[0]);
-	free(tab);
+	ft_free_tab(tab);
 }
 
 void		ft_execute(const char *cmd, const char *args)
@@ -95,14 +91,10 @@ void		ft_execute(const char *cmd, const char *args)
 	{
 		ret = ft_exec(paths[i], cmd, args);
 		free(paths[i]);
-		ft_printf("free paths[%d]\n", i);
 		if (ret)
 		{
 			while (paths[++i])
-			{
 				free(paths[i]);
-				ft_printf("free paths[%d]\n", i);
-			}
 			free(paths);
 			return ;
 		}

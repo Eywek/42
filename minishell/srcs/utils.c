@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:07:14 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 15:12:30 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 15:13:10 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ void	ft_free_tab(char **tab)
 
 	i = -1;
 	while (tab[++i])
-	{
-		ft_printf("free tab[%d]\n", i);
 		free(tab[i]);
-	}
 	free(tab);
 }
 
