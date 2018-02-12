@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/09 14:50:29 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:55:43 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,22 @@ void		ft_parse_input(char *line)
 	int		i;
 	char	*cmd;
 	char	*space_pos;
+	char	*arg;
 
 	i = -1;
 	if ((space_pos = ft_strchr(line, ' ')))
 		cmd = ft_strsub(line, 0, space_pos - line);
 	else
 		cmd = ft_strdup(line);
+	arg = (ft_strlen(line) > ft_strlen(cmd) + 1) ?
+		  line + ft_strlen(cmd) + 1 : "";
 	while (++i < BUILTINS_COUNT)
 		if (ft_strcmp(g_builtins[i].name, cmd) == 0)
-			return (g_builtins[i].f(line + ft_strlen(g_builtins[i].name) + 1));
-	ft_execute(cmd, (ft_strlen(line) > ft_strlen(cmd) + 1) ?
-					line + ft_strlen(cmd) + 1 : "");
+		{
+			free(cmd);
+			return (g_builtins[i].f(arg));
+		}
+	ft_execute(cmd, arg);
 	free(cmd);
 }
 
@@ -80,6 +85,7 @@ int			main(int argc, char *argv[], char **env)
 	(void)argc;
 	(void)argv;
 	ft_memset(&g_env, 0, sizeof(g_env));
+	g_env.exec_with_env = 1;
 	ft_handle_env(env);
 	ft_wait_input();
 }

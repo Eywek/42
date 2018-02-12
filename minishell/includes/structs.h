@@ -23,6 +23,7 @@ typedef struct			s_env {
 	t_shell_env			*shell_env;
 	int					exit;
 	int					exit_code;
+	int					exec_with_env;
 }						t_env;
 
 typedef struct			s_builtin {

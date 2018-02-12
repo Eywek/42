@@ -6,7 +6,7 @@
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 11:34:04 by exam              #+#    #+#             */
-/*   Updated: 2018/02/09 16:32:15 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 15:06:48 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ static int		word_size(char *str, char const *charset)
 	return (size);
 }
 
+#include "../includes/minishell.h"
 char			**ft_strsplitchrset(char *str, const char *charset,
 									const char *first)
 {
+	ft_printf("split called for '%s'\n", str);
 	char	**tab;
 	int		i;
 	int		j;
@@ -77,15 +79,21 @@ char			**ft_strsplitchrset(char *str, const char *charset,
 	i = -1;
 	index = -1;
 	if (first && (tab[++index] = malloc(sizeof(char) * (ft_strlen(first) + 1))))
+	{
+		ft_printf("malloc tab[%d]\n", index);
 		tab[index] = ft_strdup(first);
+	}
 	while (str && str[++i])
 		if (!is_separator(str[i], charset))
 		{
 			if (((index == -1 || (index == 0 && first)) || (i > 0 &&
 					is_separator(str[i - 1], charset))) && (j = 0) == 0)
-				if (!(tab[++index] = (char*)malloc(sizeof(char) * (word_size(
+			{
+				ft_printf("malloc tab[%d]\n", index + 1);
+				if (!(tab[++index] = (char *) malloc(sizeof(char) * (word_size(
 						str + i, charset) + 1))))
 					return (NULL);
+			}
 			tab[index][j] = str[i];
 			tab[index][++j] = '\0';
 		}
