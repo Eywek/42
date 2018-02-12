@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:53:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 16:16:21 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:16:27 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static int	ft_exec(char *path, const char *cmd, const char *args)
 	char	*fullpath;
 	int		ret;
 
-	if (!(fullpath = malloc(sizeof(char) * (ft_strlen(cmd) + ft_strlen(path) + 2))))
+	if (!(fullpath = malloc(sizeof(char) *
+									(ft_strlen(cmd) + ft_strlen(path) + 2))))
 		ft_display_error(1);
 	ft_strcat(ft_strcat(ft_strcpy(fullpath, path), "/"), cmd);
 	if ((ret = ft_is_exec(fullpath)) == 1)

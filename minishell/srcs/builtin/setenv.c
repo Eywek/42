@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:32 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 17:35:54 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 18:52:41 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	ft_setenv(const char *content)
 		value = (char*)content + space_pos + 1;
 	else
 		value = NULL;
-	ft_set_env(ft_strdup(key), ft_strdup(value));
+	if (ft_isalpha(key[0]))
+		ft_set_env(ft_strdup(key), ft_strdup(value));
+	else
+		write(STDERR_FILENO, "Identifier must begin with a letter.", 36);
 	free(key);
 }

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:21 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 17:20:03 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 19:25:59 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,28 @@
 
 static void	ft_go(const char *path)
 {
-	if (access(path, X_OK) != 0 || chdir(path) != 0)
-		return ((void)ft_printf("cd: no such file or directory: %s\n", path));
-	ft_set_env("OLDPWD", ft_get_env("PWD"));
-	ft_set_env("PWD", path);
+	char *tmp;
+	char *tmpPath;
+
+	ft_printf("path = %s\n", path);
+	if (access(path, X_OK) != 0 || chdir(path) != 0) // TODO: NOT A DIRECTORY / PERMISSION DENIED
+	{
+		write(STDERR_FILENO, "cd: no such file or directory: ", 31);
+		write(STDERR_FILENO, path, ft_strlen(path));
+		write(STDERR_FILENO, "\n", 1);
+		g_env.exit_code = 1;
+		return ;
+	}
+	tmp = ft_strdup("OLDPWD");
+	if (ft_set_env(tmp, ft_get_env("PWD")) == 0)
+		free(tmp);
+	tmp = ft_strdup("PWD");
+	tmpPath = ft_strdup(path);
+	if (ft_set_env(tmp, tmpPath) == 0)
+	{
+		free(tmpPath);
+		free(tmp);
+	}
 }
 
 static char	*ft_links(const char *path, int follow_links)
@@ -74,8 +92,8 @@ void		ft_cd(const char *content)
 	int		follow_links;
 
 	follow_links = 0;
-	if (!content || !content[0])
-		return (ft_go(ft_get_env("HOME")));
+	if (!content || !content[0] || ft_strcmp(content, ".") == 0)
+		return (ft_strcmp(content, ".") == 0 ? "" : ft_go(ft_get_env("HOME")));
 	if (content[0] == '-' && content[1])
 	{
 		while (*content == ' ')
@@ -91,8 +109,6 @@ void		ft_cd(const char *content)
 		free(path);
 		return ;
 	}
-	if (ft_strcmp(content, ".") == 0)
-		return ;
 	path = ft_generate_path(content, follow_links);
 	ft_go(ft_remove_useless_slashs(path));
 	free(path);

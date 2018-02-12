@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 15:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/08 17:31:13 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 17:57:55 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int					ft_set_env(const char *name, const char *value)
 		if (ft_strcmp(ptr->name, name) == 0)
 		{
 			free(ptr->value);
-			ptr->value = ft_strdup(value);
+			ptr->value = value ? ft_strdup(value) : ft_strnew(1);
 			return (0);
 		}
 		ptr = ptr->next;
@@ -81,5 +81,5 @@ char				*ft_get_env(const char *name)
 			return (ptr->value);
 		ptr = ptr->next;
 	}
-	return (NULL);
+	return (ft_strnew(1));
 }

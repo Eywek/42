@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 18:07:14 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 17:18:56 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 17:46:19 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	*ft_get_link_path(char *path)
 void	ft_free_env_el(t_shell_env *el)
 {
 	free(el->name);
-	free(el->value);
+	if (el->value)
+		free(el->value);
 	free(el);
 }

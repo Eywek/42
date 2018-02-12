@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRUCTS_H
-#define MINISHELL_STRUCTS_H
+# define MINISHELL_STRUCTS_H
 
 typedef struct			s_shell_env {
 	char				*name;

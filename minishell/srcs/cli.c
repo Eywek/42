@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 14:55:43 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 19:11:23 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		ft_parse_input(char *line)
 	else
 		cmd = ft_strdup(line);
 	arg = (ft_strlen(line) > ft_strlen(cmd) + 1) ?
-		  line + ft_strlen(cmd) + 1 : "";
+		line + ft_strlen(cmd) + 1 : "";
 	while (++i < BUILTINS_COUNT)
 		if (ft_strcmp(g_builtins[i].name, cmd) == 0)
 		{
@@ -54,7 +54,7 @@ void		ft_wait_input(void)
 	{
 		ft_display_prompt();
 		if (get_next_line(STDIN_FILENO, &line) <= 0)
-			ft_display_error(0);
+			exit(0);//ft_display_error(0);
 		if (line && line[0])
 			ft_parse_input(line);
 		free(line);
