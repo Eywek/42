@@ -35,6 +35,7 @@ void	ft_free_tab(char **tab);
 void	ft_free_env(void);
 int		ft_is_exec(char *path);
 void	ft_free_env_el(t_shell_env *el);
+char	*ft_get_link_path(char *path);
 
 void    ft_cd(const char *content);
 void    ft_echo(const char *content);

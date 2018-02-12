@@ -6,7 +6,7 @@
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/28 11:34:04 by exam              #+#    #+#             */
-/*   Updated: 2018/02/12 16:18:00 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:18:18 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char			**ft_strsplitchrset(char *str, const char *charset,
 	i = -1;
 	index = -1;
 	if (first && (tab[++index] = malloc(sizeof(char) * (ft_strlen(first) + 1))))
-		ft_strcat(tab[index], first);
+		ft_strcpy(tab[index], first);
 	while (str && str[++i])
 		if (!is_separator(str[i], charset))
 		{
