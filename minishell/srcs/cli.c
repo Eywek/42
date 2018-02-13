@@ -54,7 +54,7 @@ void		ft_wait_input(void)
 	{
 		ft_display_prompt();
 		if (get_next_line(STDIN_FILENO, &line) <= 0)
-			exit(0);//ft_display_error(0);
+			exit(g_env.exit_code);
 		if (line && line[0])
 			ft_parse_input(line);
 		free(line);

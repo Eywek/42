@@ -17,7 +17,6 @@ static void	ft_go(const char *path)
 	char *tmp;
 	char *tmpPath;
 
-	ft_printf("path = %s\n", path);
 	if (access(path, X_OK) != 0 || chdir(path) != 0) // TODO: NOT A DIRECTORY / PERMISSION DENIED
 	{
 		write(STDERR_FILENO, "cd: no such file or directory: ", 31);

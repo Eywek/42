@@ -67,7 +67,9 @@ void		ft_env(const char *content)
 	g_env.use_tmp_env = 1;
 	ft_dup_env(g_env.shell_env);
 	while (content && *content)
-		if (((add = ft_strncmp(content, "-u", 2) == 0) ||
+		if (*content == ' ')
+			++content;
+		else if (((add = ft_strncmp(content, "-u", 2) == 0) ||
 			ft_strncmp(content, "--unset", 7) == 0) &&
 			ft_disable_tmp_env(0))
 			return (ft_unsetenv((char*)(content + (add ? 3 : 8))));
@@ -75,13 +77,11 @@ void		ft_env(const char *content)
 			ft_strncmp(content, "--ignore-environment", 20) == 0) &&
 			ft_disable_tmp_env(0))
 			content += (add ? 2 : 20);
-		else if (ft_strchr(content, '=') && ft_handle_setenv(++content))
+		else if (ft_strchr(content, '=') && ft_handle_setenv(content))
 			content = ft_strchr(content, ' ');
 		else if (*content != ' ')
 		{
 			ft_parse_input((char*)content);
 			return ((void)ft_disable_tmp_env(1));
 		}
-		else
-			++content;
 }

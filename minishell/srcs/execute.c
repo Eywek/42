@@ -104,6 +104,7 @@ void		ft_execute(const char *cmd, const char *args)
 		return (ft_launch(cmd, args));
 	if (ret == -1)
 		ft_display_error(4);
-	ft_display_error(3);
+	else
+		ft_display_error(3);
 	g_env.exit_code = 127;
 }

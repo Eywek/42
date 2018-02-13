@@ -18,7 +18,7 @@ int					ft_count_env(void)
 	t_shell_env	*ptr;
 
 	count = 0;
-	ptr = g_env.shell_env;
+	ptr = g_env.use_tmp_env ? g_env.tmp_env : g_env.shell_env;
 	while (ptr && ++count)
 		ptr = ptr->next;
 	return (count);
