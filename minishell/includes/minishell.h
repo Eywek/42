@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:15:40 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 15:23:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/13 17:18:40 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@
 # define ERROR_EXEC "Error on fork.\n"
 # define ERROR_CMD_NOT_FOUND "Command not found.\n"
 # define ERROR_PERMISSION_DENIED "Permission denied.\n"
+# define ERROR_INVALID_ARGUMENT "Invalid argument.\n"
+# define ERROR_TOO_MANY_SYMLINK "Too many symbolic links\n"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 19:11:23 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/13 17:22:37 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,21 @@ void		ft_parse_input(char *line)
 	free(cmd);
 }
 
+static void	proc_signal_handler(int signo)
+{
+	if (signo == SIGINT)
+	{
+		ft_putstr("\n");
+		ft_display_prompt();
+		signal(SIGINT, proc_signal_handler);
+	}
+}
+
 void		ft_wait_input(void)
 {
 	char	*line;
 
+	signal(SIGINT, proc_signal_handler);
 	while (42)
 	{
 		ft_display_prompt();
@@ -77,6 +88,8 @@ void		ft_handle_env(char **env)
 	{
 		ft_get_kv(env[i], &key, &value);
 		ft_set_env(key, value, 0);
+		free(key);
+		free(value);
 	}
 }
 

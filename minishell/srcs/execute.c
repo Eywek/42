@@ -6,10 +6,11 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:53:30 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 16:16:27 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/13 17:21:02 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/stat.h>
 #include "../includes/minishell.h"
 
 char		**ft_make_env(void)
@@ -65,7 +66,11 @@ void		ft_launch(const char *path, const char *args)
 	char	**env;
 	char	**tab;
 	pid_t	pid;
+	int		status;
+	struct stat	s;
 
+	if (stat(path, &s) == -1)
+		return (ft_display_error((g_env.exit_code = 1) + 5));
 	env = ft_make_env();
 	tab = ft_strsplitchrset((char*)args, " ", path);
 	pid = fork();
@@ -74,7 +79,9 @@ void		ft_launch(const char *path, const char *args)
 		execve(path, tab, env);
 	else if (pid < 0)
 		ft_display_error(2);
-	waitpid(pid, &g_env.exit_code, 0);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		g_env.exit_code = WEXITSTATUS(status);
 	ft_free_tab(env);
 	ft_free_tab(tab);
 }
@@ -103,8 +110,7 @@ void		ft_execute(const char *cmd, const char *args)
 	if ((ret = ft_is_exec((char*)cmd)) == 1)
 		return (ft_launch(cmd, args));
 	if (ret == -1)
-		ft_display_error(4);
-	else
-		ft_display_error(3);
+		return (ft_display_error((g_env.exit_code = 127) - 123));
+	ft_display_error(3);
 	g_env.exit_code = 127;
 }

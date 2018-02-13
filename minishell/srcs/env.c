@@ -40,8 +40,8 @@ static t_shell_env	*ft_add_env_element(const char *name, const char *value)
 
 	if (!(ptr = malloc(sizeof(t_shell_env))))
 		ft_display_error(1);
-	ptr->name = (char*)name;
-	ptr->value = (char*)value;
+	ptr->name = ft_strdup(name);
+	ptr->value = ft_strdup(value);
 	ptr->next = NULL;
 	return (ptr);
 }

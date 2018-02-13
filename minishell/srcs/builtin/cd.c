@@ -6,74 +6,57 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:21 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 19:25:59 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/13 17:13:42 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
+#include <sys/stat.h>
 #include "../../includes/minishell.h"
 
 static void	ft_go(const char *path)
 {
 	char *tmp;
-	char *tmpPath;
+	char *tmp_path;
 
-	if (access(path, X_OK) != 0 || chdir(path) != 0) // TODO: NOT A DIRECTORY / PERMISSION DENIED
-	{
-		write(STDERR_FILENO, "cd: no such file or directory: ", 31);
-		write(STDERR_FILENO, path, ft_strlen(path));
-		write(STDERR_FILENO, "\n", 1);
-		g_env.exit_code = 1;
-		return ;
-	}
+	chdir(path);
 	tmp = ft_strdup("OLDPWD");
 	if (ft_set_env(tmp, ft_get_env("PWD"), 0) == 0)
 		free(tmp);
 	tmp = ft_strdup("PWD");
-	tmpPath = ft_strdup(path);
-	if (ft_set_env(tmp, tmpPath, 0) == 0)
+	tmp_path = ft_strdup(path);
+	if (ft_set_env(tmp, tmp_path, 0) == 0)
 	{
-		free(tmpPath);
+		free(tmp_path);
 		free(tmp);
 	}
 }
 
-static char	*ft_links(const char *path, int follow_links)
+static char	*ft_path_error(const char *path)
+{
+	struct stat	s;
+
+	if (ft_strcmp(path, "-") == 0)
+		return (NULL);
+	if (!*path || lstat(path, &s) < 0 != 0)
+		return ("cd: No such file or directory: ");
+	if (!S_ISDIR(s.st_mode) && !S_ISLNK(s.st_mode))
+		return ("cd: Not a directory: ");
+	if (!S_ISLNK(s.st_mode) && access(path, R_OK) != 0)
+		return ("cd: Permission denied: ");
+	if (stat(path, &s) == -1)
+		return ("cd: Too many symbolic links: ");
+	return (NULL);
+}
+
+static char	*ft_generate_path(const char *path, int f_links)
 {
 	char	*tmp;
+	char	buf[PATH_MAX + 1];
 
-	if (follow_links)
-	{
-		tmp = (char*)path;
-		path = ft_get_link_path((char*)path);
-		free(tmp);
-	}
-	return ((char*)path);
-}
-
-static char	*ft_remove_useless_slashs(char *path)
-{
-	size_t	i;
-
-	i = ft_strlen(path);
-	while (path[--i] == '/' && i > 0)
-		path[i] = 0;
-	return (path);
-}
-
-static char	*ft_generate_path(const char *path, int follow_links)
-{
-	char	*pwd;
-	char	*p;
-
-	if (path[0] == '/')
-		return (ft_strdup(path));
-	pwd = ft_get_env("PWD");
-	if (ft_strcmp(path, "..") == 0)
-		return (ft_strsub(pwd, 0, ft_strrchr(pwd, '/') - pwd));
-	if (!(p = malloc(sizeof(char) * (ft_strlen(path) + ft_strlen(pwd) + 2))))
-		ft_display_error(1);
-	ft_strcat(ft_strcat(ft_strcpy(p, pwd), "/"), path);
-	return (ft_links(p, follow_links));
+	if ((tmp = ft_pathabs(path, buf, !f_links ? ft_get_env("PWD") : NULL)))
+		return (ft_strdup(tmp));
+	return (ft_strdup(path));
 }
 
 /*
@@ -85,14 +68,15 @@ static char	*ft_generate_path(const char *path, int follow_links)
 ** The default is to follow symbolic links, as if `-L' were specified.
 */
 
-void		ft_cd(const char *content)
+void		ft_cd(const char *content) // TODO: handle ~
 {
 	char	*path;
 	int		follow_links;
+	char	*err;
 
 	follow_links = 0;
-	if (!content || !content[0] || ft_strcmp(content, ".") == 0)
-		return (ft_strcmp(content, ".") == 0 ? "" : ft_go(ft_get_env("HOME")));
+	if (!content || !content[0])
+		return (ft_go(ft_get_env("HOME")));
 	if (content[0] == '-' && content[1])
 	{
 		while (*content == ' ')
@@ -101,14 +85,14 @@ void		ft_cd(const char *content)
 			if (*content == 'P')
 				follow_links = 1;
 	}
-	if (ft_strcmp(content, "-") == 0)
+	if ((err = ft_path_error(content)))
 	{
-		path = ft_strdup(ft_get_env("OLDPWD"));
-		ft_go(ft_links(path, follow_links));
-		free(path);
-		return ;
+		write(STDERR_FILENO, err, ft_strlen(err));
+		write(STDERR_FILENO, content, ft_strlen(content));
+		return ((void)write(STDERR_FILENO, "\n", (g_env.exit_code = 1)));
 	}
-	path = ft_generate_path(content, follow_links);
-	ft_go(ft_remove_useless_slashs(path));
+	path = ft_strcmp(content, "-") == 0 ? ft_strdup(ft_get_env("OLDPWD")) :
+			ft_generate_path(content, follow_links);
+	ft_go(path);
 	free(path);
 }

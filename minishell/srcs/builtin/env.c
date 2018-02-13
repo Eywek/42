@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:56 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 19:22:05 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/13 16:38:39 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_dup_env(t_shell_env *src)
 	ptr = src;
 	while (ptr)
 	{
-		ft_set_env(ft_strdup(ptr->name), ft_strdup(ptr->value), 1);
+		ft_set_env(ptr->name, ptr->value, 1);
 		ptr = ptr->next;
 	}
 }
@@ -40,12 +40,17 @@ static int	ft_handle_setenv(const char *content)
 {
 	char		*tmp;
 	char		*tmp2;
+	char		*space_pos;
 
 	tmp = ft_strdup(content);
-	tmp[ft_strchr(tmp, ' ') - tmp] = 0;
+	space_pos = ft_strchr(tmp, ' ');
+	if (space_pos)
+		tmp[space_pos - tmp] = 0;
 	tmp2 = ft_strdup(ft_strchr(tmp, '=') + 1);
 	tmp[ft_strchr(tmp, '=') - tmp] = 0;
 	ft_set_env(tmp, tmp2, g_env.use_tmp_env);
+	free(tmp);
+	free(tmp2);
 	return (1);
 }
 
@@ -81,6 +86,7 @@ void		ft_env(const char *content)
 			content = ft_strchr(content, ' ');
 		else if (*content != ' ')
 		{
+			content[0] == '-' ? ft_display_error(5) :
 			ft_parse_input((char*)content);
 			return ((void)ft_disable_tmp_env(1));
 		}

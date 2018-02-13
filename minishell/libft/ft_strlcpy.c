@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/13 17:03:21 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/13 17:03:21 by vtouffet         ###   ########.fr       */
+/*   Created: 2018/02/13 15:35:13 by vtouffet          #+#    #+#             */
+/*   Updated: 2018/02/13 15:35:13 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
 #include "libft.h"
 
-int	ft_getnbr(char *str, int *error)
+size_t	ft_strlcpy(char *dst, char const *src, size_t size)
 {
-	int	nb;
-	int	neg;
+	char const	*sptr;
+	size_t		slen;
 
-	nb = 0;
-	neg = 1;
-	while (*str)
+	sptr = src;
+	while (*sptr++)
+		;
+	slen = ((size_t)(sptr - src - 1));
+	if (slen < size)
+		ft_strncpy(dst, src, slen + 1);
+	else if (size != 0)
 	{
-		if (!ft_isdigit(*str) && *str != '-')
-			return (*error = 1);
-		else if (*str == '-')
-		{
-			neg = -1;
-			str++;
-			continue ;
-		}
-		nb = nb * 10 + (*str - 48);
-		if (nb > INT_MAX || nb < 0)
-			return (*error = 1);
-		str++;
+		ft_strncpy(dst, src, size - 1);
+		dst[size - 1] = '\0';
 	}
-	*error = 0;
-	return (nb * neg);
+	return (slen);
 }
