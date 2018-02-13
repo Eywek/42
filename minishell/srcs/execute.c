@@ -20,9 +20,9 @@ char		**ft_make_env(void)
 
 	if (!(env = malloc(sizeof(char *) * (ft_count_env() + 1))))
 		ft_display_error(1);
-	ptr = g_env.shell_env;
+	ptr = g_env.use_tmp_env ? g_env.tmp_env : g_env.shell_env;
 	i = -1;
-	while (ptr && g_env.exec_with_env)
+	while (ptr)
 	{
 		if (!(env[++i] = malloc((sizeof(char) * ft_strlen(ptr->name) +
 				ft_strlen(ptr->value) + 2))))
@@ -30,7 +30,6 @@ char		**ft_make_env(void)
 		ft_strcat(ft_strcat(ft_strcpy(env[i], ptr->name), "="), ptr->value);
 		ptr = ptr->next;
 	}
-	g_env.exec_with_env = 1;
 	env[++i] = 0;
 	return (env);
 }

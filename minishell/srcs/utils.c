@@ -23,19 +23,19 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
-void	ft_free_env(void)
+void	ft_free_env(t_shell_env	*env)
 {
 	t_shell_env	*ptr;
 	t_shell_env	*tmp;
 
-	ptr = g_env.shell_env;
+	ptr = env;
 	while (ptr)
 	{
 		tmp = ptr->next;
 		ft_free_env_el(ptr);
 		ptr = tmp;
 	}
-	g_env.shell_env = NULL;
+	//env = NULL;
 }
 
 int		ft_is_exec(char *path)

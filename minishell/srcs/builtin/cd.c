@@ -27,11 +27,11 @@ static void	ft_go(const char *path)
 		return ;
 	}
 	tmp = ft_strdup("OLDPWD");
-	if (ft_set_env(tmp, ft_get_env("PWD")) == 0)
+	if (ft_set_env(tmp, ft_get_env("PWD"), 0) == 0)
 		free(tmp);
 	tmp = ft_strdup("PWD");
 	tmpPath = ft_strdup(path);
-	if (ft_set_env(tmp, tmpPath) == 0)
+	if (ft_set_env(tmp, tmpPath, 0) == 0)
 	{
 		free(tmpPath);
 		free(tmp);

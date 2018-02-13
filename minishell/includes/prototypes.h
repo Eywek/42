@@ -22,7 +22,7 @@ void	ft_wait_input();
 void	ft_parse_input(char *line);
 void	ft_handle_env(char **env);
 
-int		ft_set_env(const char *name, const char *value);
+int		ft_set_env(const char *name, const char *value, int tmp);
 char	*ft_get_env(const char *name);
 void	ft_get_kv(char *line, char **key, char **value);
 int		ft_count_env();
@@ -32,7 +32,7 @@ void	ft_execute(const char *cmd, const char *args);
 char	**ft_make_env();
 
 void	ft_free_tab(char **tab);
-void	ft_free_env(void);
+void	ft_free_env(t_shell_env	*env);
 int		ft_is_exec(char *path);
 void	ft_free_env_el(t_shell_env *el);
 char	*ft_get_link_path(char *path);

@@ -28,7 +28,7 @@ void	ft_setenv(const char *content)
 	else
 		value = NULL;
 	if (ft_isalpha(key[0]))
-		ft_set_env(ft_strdup(key), ft_strdup(value));
+		ft_set_env(ft_strdup(key), ft_strdup(value), 0);
 	else
 		write(STDERR_FILENO, "Identifier must begin with a letter.", 36);
 	free(key);

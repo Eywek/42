@@ -21,9 +21,10 @@ typedef struct			s_shell_env {
 
 typedef struct			s_env {
 	t_shell_env			*shell_env;
+	t_shell_env			*tmp_env;
+	int					use_tmp_env;
 	int					exit;
 	int					exit_code;
-	int					exec_with_env;
 }						t_env;
 
 typedef struct			s_builtin {

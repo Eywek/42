@@ -60,7 +60,7 @@ void		ft_wait_input(void)
 		free(line);
 		if (g_env.exit)
 		{
-			ft_free_env();
+			ft_free_env(g_env.shell_env);
 			exit(g_env.exit_code);
 		}
 	}
@@ -76,7 +76,7 @@ void		ft_handle_env(char **env)
 	while (env[++i])
 	{
 		ft_get_kv(env[i], &key, &value);
-		ft_set_env(key, value);
+		ft_set_env(key, value, 0);
 	}
 }
 
@@ -85,7 +85,6 @@ int			main(int argc, char *argv[], char **env)
 	(void)argc;
 	(void)argv;
 	ft_memset(&g_env, 0, sizeof(g_env));
-	g_env.exec_with_env = 1;
 	ft_handle_env(env);
 	ft_wait_input();
 }

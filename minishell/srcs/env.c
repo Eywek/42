@@ -46,14 +46,17 @@ static t_shell_env	*ft_add_env_element(const char *name, const char *value)
 	return (ptr);
 }
 
-int					ft_set_env(const char *name, const char *value)
+int					ft_set_env(const char *name, const char *value, int tmp)
 {
 	t_shell_env	*ptr;
 
-	ptr = g_env.shell_env;
+	ptr = (tmp ? g_env.tmp_env : g_env.shell_env);
 	if (!ptr)
 	{
-		g_env.shell_env = ft_add_env_element(name, value);
+		if (tmp)
+			g_env.tmp_env = ft_add_env_element(name, value);
+		else
+			g_env.shell_env = ft_add_env_element(name, value);
 		return (1);
 	}
 	while (ptr->next)
