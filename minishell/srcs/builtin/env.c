@@ -36,54 +36,52 @@ static void	ft_dup_env(t_shell_env *src)
 	}
 }
 
+static int	ft_handle_setenv(const char *content)
+{
+	char		*tmp;
+	char		*tmp2;
+
+	tmp = ft_strdup(content);
+	tmp[ft_strchr(tmp, ' ') - tmp] = 0;
+	tmp2 = ft_strdup(ft_strchr(tmp, '=') + 1);
+	tmp[ft_strchr(tmp, '=') - tmp] = 0;
+	ft_set_env(tmp, tmp2, g_env.use_tmp_env);
+	return (1);
+}
+
+static int	ft_disable_tmp_env(int disable)
+{
+	if (g_env.tmp_env)
+		ft_free_env(g_env.tmp_env);
+	g_env.tmp_env = NULL;
+	g_env.use_tmp_env = disable ? 0 : 1;
+	return (1);
+}
+
 void		ft_env(const char *content)
 {
 	int			add;
-	char		*tmp;
-	char		*tmp2;
 
 	if (!content || !content[0])
 		return (ft_display_env());
 	g_env.use_tmp_env = 1;
 	ft_dup_env(g_env.shell_env);
 	while (content && *content)
-	{
-		if ((add = ft_strncmp(content, "-u", 2) == 0) ||
-			ft_strncmp(content, "--unset", 7) == 0)
-		{
-			ft_free_env(g_env.tmp_env);
-			g_env.use_tmp_env = 0;
+		if (((add = ft_strncmp(content, "-u", 2) == 0) ||
+			ft_strncmp(content, "--unset", 7) == 0) &&
+			ft_disable_tmp_env(0))
 			return (ft_unsetenv((char*)(content + (add ? 3 : 8))));
-		}
-		else if ((add = ft_strncmp(content, "-i", 2) == 0) ||
-			ft_strncmp(content, "--ignore-environment", 20) == 0)
-		{
-			if (g_env.tmp_env)
-				ft_free_env(g_env.tmp_env);
-			g_env.tmp_env = NULL;
+		else if (((add = ft_strncmp(content, "-i", 2) == 0) ||
+			ft_strncmp(content, "--ignore-environment", 20) == 0) &&
+			ft_disable_tmp_env(0))
 			content += (add ? 2 : 20);
-		}
-		else if (ft_strchr(content, '='))
-		{
-			tmp = ft_strdup(content);
-			tmp[ft_strchr(tmp, ' ') - tmp] = 0;
-			tmp2 = ft_strdup(ft_strchr(tmp, '=') + 1);
-			tmp[ft_strchr(tmp, '=') - tmp] = 0;
-			ft_printf("ft_set_env('%s', '%s', %d);\n", tmp, tmp2, g_env.use_tmp_env);
-			ft_set_env(tmp, tmp2, g_env.use_tmp_env);
-			//free(tmp);
-			//free(tmp2);
+		else if (ft_strchr(content, '=') && ft_handle_setenv(++content))
 			content = ft_strchr(content, ' ');
-		}
 		else if (*content != ' ')
 		{
 			ft_parse_input((char*)content);
-			if (g_env.tmp_env)
-				ft_free_env(g_env.tmp_env);
-			g_env.tmp_env = NULL;
-			g_env.use_tmp_env = 0;
-			break;
+			return ((void)ft_disable_tmp_env(1));
 		}
-		++content;
-	}
+		else
+			++content;
 }
