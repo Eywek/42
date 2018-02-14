@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:56 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/13 16:38:39 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:05:17 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void		ft_env(const char *content)
 			content = ft_strchr(content, ' ');
 		else if (*content != ' ')
 		{
-			content[0] == '-' ? ft_display_error(5) :
+			content[(g_env.exit_code = 0)] == '-' ? ft_display_error(5) :
 			ft_parse_input((char*)content);
-			return ((void)ft_disable_tmp_env((g_env.exit_code = 0) == 0));
+			return ((void)ft_disable_tmp_env(1));
 		}
 }
