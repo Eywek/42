@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:32 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/13 16:55:05 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:31:21 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_setenv(const char *content)
 	if (space_pos)
 		value = (char*)content + space_pos + 1;
 	else
-		value = NULL;
+		value = "";
 	if (ft_isalpha(key[0]))
 		ft_set_env((key), (value), 0);
 	else

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:21 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/14 12:24:51 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:25:20 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void		ft_cd(const char *content)
 	{
 		while (*content == ' ')
 			++content;
-		while (*(++content - 1) != ' ')
+		while (*content && *(++content - 1) != ' ')
 			if (*content == 'P')
 				follow_links = 1;
 	}

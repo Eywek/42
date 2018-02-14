@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 15:14:28 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/12 17:57:55 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:37:48 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,16 @@ static t_shell_env	*ft_add_env_element(const char *name, const char *value)
 	return (ptr);
 }
 
-int					ft_set_env(const char *name, const char *value, int tmp)
+int					ft_set_env(const char *name, const char *v, int tmp)
 {
 	t_shell_env	*ptr;
 
-	ptr = (tmp ? g_env.tmp_env : g_env.shell_env);
-	if (!ptr)
+	if (!(ptr = (tmp ? g_env.tmp_env : g_env.shell_env)))
 	{
 		if (tmp)
-			g_env.tmp_env = ft_add_env_element(name, value);
+			g_env.tmp_env = ft_add_env_element(name, v);
 		else
-			g_env.shell_env = ft_add_env_element(name, value);
+			g_env.shell_env = ft_add_env_element(name, v);
 		return (1);
 	}
 	while (ptr->next)
@@ -64,13 +63,16 @@ int					ft_set_env(const char *name, const char *value, int tmp)
 		if (ft_strcmp(ptr->name, name) == 0)
 		{
 			free(ptr->value);
-			ptr->value = value ? ft_strdup(value) : ft_strnew(1);
-			return (0);
+			return ((ptr->value = v ? ft_strdup(v) : ft_strnew(1)) == NULL);
 		}
 		ptr = ptr->next;
 	}
-	ptr->next = ft_add_env_element(name, value);
-	return (1);
+	if (ft_strcmp(ptr->name, name) == 0)
+	{
+		free(ptr->value);
+		return ((ptr->value = v ? ft_strdup(v) : ft_strnew(1)) == NULL);
+	}
+	return ((ptr->next = ft_add_env_element(name, v)) != NULL);
 }
 
 char				*ft_get_env(const char *name)
