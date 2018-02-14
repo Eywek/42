@@ -35,15 +35,6 @@ char		**ft_make_env(void)
 	return (env);
 }
 
-static void	proc_signal_handler(int signo)
-{
-	if (signo == SIGINT)
-	{
-		ft_putstr("\n");
-		signal(SIGINT, proc_signal_handler);
-	}
-}
-
 static int	ft_exec(char *path, const char *cmd, const char *args)
 {
 	char	*fullpath;
@@ -74,7 +65,6 @@ void		ft_launch(const char *path, const char *args)
 	env = ft_make_env();
 	tab = ft_strsplitchrset((char*)args, " ", path);
 	pid = fork();
-	signal(SIGINT, proc_signal_handler);
 	if (pid == 0)
 		execve(path, tab, env);
 	else if (pid < 0)

@@ -46,6 +46,7 @@ void	ft_remove(t_list *tetriminos, char ***map)
  ** Try to place tetriminos on the map
 */
 
+#include <unistd.h>
 int		ft_place(t_list *tetri, char ***map, int x, int y)
 {
 	int		xx;
@@ -57,6 +58,13 @@ int		ft_place(t_list *tetri, char ***map, int x, int y)
 	ptr = *map;
 	block = 0;
 	yy = -1;
+	write(1, "-> PLACE ", 9);
+	write(1, &(((t_tetri*)(tetri->content))->letter), 1);
+	write(1, " AT x=", 6);
+	write(1, ft_itoa(x), ft_strlen(ft_itoa(x)));
+	write(1, ", y=", 4);
+	write(1, ft_itoa(y), ft_strlen(ft_itoa(y)));
+	write(1, "\n", 1);
 	while ((content = ((t_tetri*)(tetri->content))->minos)[++yy])
 	{
 		xx = -1;
@@ -89,6 +97,13 @@ int		ft_check_place(t_list *tetri, char ***map, int x, int y)
 	ptr = *map;
 	block = 0;
 	yy = -1;
+	write(1, "TEST TO PLACE ", 14);
+	write(1, &(((t_tetri*)(tetri->content))->letter), 1);
+	write(1, " AT x=", 6);
+	write(1, ft_itoa(x), ft_strlen(ft_itoa(x)));
+	write(1, ", y=", 4);
+	write(1, ft_itoa(y), ft_strlen(ft_itoa(y)));
+	write(1, "\n", 1);
 	while ((content = ((t_tetri*)(tetri->content))->minos)[++yy])
 	{
 		xx = -1;
@@ -125,6 +140,8 @@ int		ft_algo(t_list *tetriminos, char ***map)
 					&& ft_check_place(tetriminos, map, x, y))
 			{
 				ft_place(tetriminos, map, x, y);
+				ft_display(*map);
+				ft_putchar('\n');
 				if (tetriminos->next == NULL || ft_algo(tetriminos->next, map))
 					return (1);
 				else
@@ -145,6 +162,7 @@ char	**ft_solve(t_list *tetriminos)
 	char	**map;
 
 	map_size = ft_sqrt(4 * ft_lst_count(tetriminos));
+	map_size = 1;
 	map = ft_new_tab(map_size++);
 	while (!ft_algo(tetriminos, &map))
 	{
