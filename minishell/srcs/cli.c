@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/14 14:55:44 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:59:29 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,12 @@ void		ft_handle_env(char **env)
 ** BONUS:
 ** - Gestion du signal CTRL+C -> OUI / NON
 ** - Gestion des commandes avec les ';' -> OUI / NON
-** - Prompt affichant le pwd
 ** - Droits d'execution dans le path -> OUI / NON
+** - Prompt affichant le pwd
 ** - Gestion de la tilde dans le cd
+** - Gestion du env -i / -u
+** - Gestion du -P sur cd
+** - Gestion du echo -n
 ** - Couleur qui change sur le prompt selon la dernière commande
 */
 
