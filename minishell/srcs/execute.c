@@ -63,10 +63,10 @@ static int	ft_exec(char *path, const char *cmd, const char *args)
 
 void		ft_launch(const char *path, const char *args)
 {
-	char	**env;
-	char	**tab;
-	pid_t	pid;
-	int		status;
+	char		**env;
+	char		**tab;
+	pid_t		pid;
+	int			status;
 	struct stat	s;
 
 	if (stat(path, &s) == -1)
