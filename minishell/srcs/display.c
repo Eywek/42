@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:24:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/13 17:18:24 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:43:05 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ void	ft_display_error(int code)
 		exit(1);
 	if (code == 5)
 		g_env.exit_code = 1;
+}
+
+void	ft_display_error_msg(const char *prefix, const char *suffix)
+{
+	write(STDERR_FILENO, prefix, ft_strlen(prefix));
+	write(STDERR_FILENO, suffix, ft_strlen(suffix));
+	write(STDERR_FILENO, "\n", 1);
 }
 
 void	ft_display_prompt(void)

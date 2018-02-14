@@ -17,6 +17,7 @@
 
 void	ft_display_prompt();
 void	ft_display_error(int code);
+void	ft_display_error_msg(const char *prefix, const char *suffix);
 
 void	ft_wait_input();
 void	ft_parse_input(char *line);

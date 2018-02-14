@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:21 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/14 12:25:20 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:43:38 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,8 @@ void		ft_cd(const char *content)
 	p = ft_handle_tilde(content);
 	if ((err = ft_path_error(p)))
 	{
-		write(STDERR_FILENO, err, ft_strlen(err));
-		write(STDERR_FILENO, content, ft_strlen(content));
-		return ((void)write(STDERR_FILENO, "\n", (g_env.exit_code = 1)));
+		ft_display_error_msg(err, content);
+		return ((void)(g_env.exit_code = 1));
 	}
 	ft_go((path = ft_strcmp(content, "-") == 0 ? ft_strdup(ft_get_env("OLDPWD"))
 			: ft_generate_path(p)), follow_links);
