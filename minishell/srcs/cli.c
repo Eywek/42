@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/13 17:22:37 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:54:17 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void		ft_parse_input(char *line)
 	char	*arg;
 
 	i = -1;
+	while (*line == ' ')
+		line++;
 	if ((space_pos = ft_strchr(line, ' ')))
 		cmd = ft_strsub(line, 0, space_pos - line);
 	else
@@ -59,6 +61,8 @@ static void	proc_signal_handler(int signo)
 void		ft_wait_input(void)
 {
 	char	*line;
+	char	**cmds;
+	int		i;
 
 	signal(SIGINT, proc_signal_handler);
 	while (42)
@@ -67,7 +71,13 @@ void		ft_wait_input(void)
 		if (get_next_line(STDIN_FILENO, &line) <= 0)
 			exit(g_env.exit_code);
 		if (line && line[0])
-			ft_parse_input(line);
+		{
+			cmds = ft_strsplit(line, ';');
+			i = 0;
+			while (cmds && cmds[i])
+				ft_parse_input(cmds[i++]);
+			ft_free_tab(cmds);
+		}
 		free(line);
 		if (g_env.exit)
 		{
@@ -92,6 +102,14 @@ void		ft_handle_env(char **env)
 		free(value);
 	}
 }
+
+/*
+** BONUS:
+** - Gestion du signal CTRL+C
+** - Gestion des commandes avec les ';'
+** - Prompt affichant le pwd
+** - Droits d'execution dans le path
+*/
 
 int			main(int argc, char *argv[], char **env)
 {
