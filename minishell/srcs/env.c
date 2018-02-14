@@ -86,5 +86,5 @@ char				*ft_get_env(const char *name)
 			return (ptr->value);
 		ptr = ptr->next;
 	}
-	return (ft_strnew(1));
+	return ("");
 }

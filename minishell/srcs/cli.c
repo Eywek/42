@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/14 12:56:03 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:55:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void		ft_parse_input(char *line)
 	char	*arg;
 
 	i = -1;
-	while (*line == ' ')
+	while (*line == ' ' || *line == '\t')
 		line++;
+	if (!*line)
+		return ;
 	if ((space_pos = ft_strchr(line, ' ')))
 		cmd = ft_strsub(line, 0, space_pos - line);
 	else
@@ -105,11 +107,11 @@ void		ft_handle_env(char **env)
 
 /*
 ** BONUS:
-** - Gestion du signal CTRL+C
-** - Gestion des commandes avec les ';'
+** - Gestion du signal CTRL+C -> OUI / NON
+** - Gestion des commandes avec les ';' -> OUI / NON
 ** - Prompt affichant le pwd
-** - Droits d'execution dans le path
-** - Gestion de la tilde / - dans le cd (?)
+** - Droits d'execution dans le path -> OUI / NON
+** - Gestion de la tilde dans le cd
 ** - Couleur qui change sur le prompt selon la dernière commande
 */
 
