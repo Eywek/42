@@ -52,4 +52,5 @@ void		ft_unsetenv(const char *content)
 		free(names[i++]);
 	}
 	free(names);
+	g_env.exit_code = 0;
 }

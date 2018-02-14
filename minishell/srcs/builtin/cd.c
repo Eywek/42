@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 13:55:21 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/14 12:43:38 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:43:40 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	ft_go(const char *path, int f_links)
 	}
 	if (link)
 		free((char*)path);
+	g_env.exit_code = 0;
 }
 
 static char	*ft_path_error(const char *path)

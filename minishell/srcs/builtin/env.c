@@ -88,6 +88,6 @@ void		ft_env(const char *content)
 		{
 			content[0] == '-' ? ft_display_error(5) :
 			ft_parse_input((char*)content);
-			return ((void)ft_disable_tmp_env(1));
+			return ((void)ft_disable_tmp_env((g_env.exit_code = 0) == 0));
 		}
 }

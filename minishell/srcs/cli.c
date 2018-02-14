@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:14:36 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/14 12:54:17 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:56:03 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void		ft_handle_env(char **env)
 ** - Gestion des commandes avec les ';'
 ** - Prompt affichant le pwd
 ** - Droits d'execution dans le path
+** - Gestion de la tilde / - dans le cd (?)
+** - Couleur qui change sur le prompt selon la dernière commande
 */
 
 int			main(int argc, char *argv[], char **env)

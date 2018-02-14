@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:24:29 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/14 12:43:05 by vtouffet         ###   ########.fr       */
+/*   Updated: 2018/02/14 12:43:16 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ void	ft_display_error_msg(const char *prefix, const char *suffix)
 
 void	ft_display_prompt(void)
 {
-	ft_printf("{cyan}%s {blue}>{eoc} ", ft_get_env("PWD"));
+	if (g_env.exit_code == 0)
+		ft_printf("{cyan}%s {blue}>{eoc} ", ft_get_env("PWD"));
+	else
+		ft_printf("{cyan}%s {red}>{eoc} ", ft_get_env("PWD"));
 }

@@ -27,4 +27,5 @@ void	ft_echo(const char *content)
 	write(STDIN_FILENO, content, ft_strlen(content));
 	if (!n)
 		write(STDIN_FILENO, "\n", 1);
+	g_env.exit_code = 0;
 }
