@@ -55,6 +55,7 @@ static void	proc_signal_handler(int signo)
 	if (signo == SIGINT)
 	{
 		ft_putstr("\n");
+		g_env.exit_code = 130;
 		ft_display_prompt();
 		signal(SIGINT, proc_signal_handler);
 	}
