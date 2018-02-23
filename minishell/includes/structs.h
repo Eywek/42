@@ -25,6 +25,7 @@ typedef struct			s_env {
 	int					use_tmp_env;
 	int					exit;
 	int					exit_code;
+	int					is_processing;
 }						t_env;
 
 typedef struct			s_builtin {

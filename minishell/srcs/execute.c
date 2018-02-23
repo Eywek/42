@@ -64,6 +64,7 @@ void		ft_launch(const char *path, const char *args)
 		return (ft_display_error((g_env.exit_code = 1) + 5));
 	env = ft_make_env();
 	tab = ft_strsplitchrset((char*)args, " ", path);
+	g_env.is_processing = 1;
 	pid = fork();
 	if (pid == 0)
 		execve(path, tab, env);
@@ -72,6 +73,7 @@ void		ft_launch(const char *path, const char *args)
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		g_env.exit_code = WEXITSTATUS(status);
+	g_env.is_processing = 0;
 	ft_free_tab(env);
 	ft_free_tab(tab);
 }
