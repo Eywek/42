@@ -1,0 +1,4 @@
+objs
+fractol
+cmake-build-debug
+*.o
