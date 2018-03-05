@@ -127,4 +127,5 @@ int			main(int argc, char *argv[], char **env)
 	ft_memset(&g_env, 0, sizeof(g_env));
 	ft_handle_env(env);
 	ft_wait_input();
+	return (0);
 }
