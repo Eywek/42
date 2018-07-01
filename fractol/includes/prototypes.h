@@ -23,7 +23,7 @@ void	ft_julia(t_env *env);
 
 void	ft_init(t_fractal fractal);
 void	ft_draw(t_env *env);
-void	ft_putpixel(t_env *env, int x, int y, int color);
+void	ft_putpixel(t_env *env, int x, int y, t_color color);
 
 int	ft_event_key_release(int keycode, t_env *env);
 int	ft_event_key_press(int keycode, t_env *env);

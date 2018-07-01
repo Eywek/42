@@ -15,8 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-//# include <mlx.h>
-# include "../../../../Downloads/minilibx_macos/mlx.h"
+# include <mlx.h>
 # include "structs.h"
 # include "prototypes.h"
 # include "../libft/libft.h"

@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 13:17:33 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/23 14:30:46 by valentin         ###   ########.fr       */
+/*   Updated: 2018/07/01 16:11:37 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,19 @@ int	ft_event_key_release(int keycode, t_env *env)
 
 int	ft_event_key_press(int keycode, t_env *env)
 {
-	(void)keycode;
-	(void)env;
+	if (keycode == KEY_RIGHT)
+		env->options.x = env->options.x + (0.2 / env->options.zoom);
+	else if (keycode == KEY_LEFT)
+		env->options.x = env->options.x - (0.2 / env->options.zoom);
+	if (keycode == KEY_DOWN)
+		env->options.y = env->options.y + (0.2 / env->options.zoom);
+	else if (keycode == KEY_UP)
+		env->options.y = env->options.y - (0.2 / env->options.zoom);
+	else if (keycode == KEY_PLUS)
+		env->options.zoom++;
+	else if (keycode == KEY_MINUS)
+		env->options.zoom--;
+	ft_draw(env);
 	return (1);
 }
 

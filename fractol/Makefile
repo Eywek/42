@@ -27,8 +27,8 @@ INCLUDES=-I./includes -I./libft \
 			-I/Users/valentin/Downloads/minilibx_macos
 HEADER=./includes/fractol.h ./includes/structs.h ./includes/prototypes.h
 
-MLX=-I~/Downloads/minilibx_macos ~/Downloads/minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
-#MLX=-L/usr/local/lib -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
+#MLX=-I~/Downloads/minilibx_macos ~/Downloads/minilibx_macos/libmlx.a -framework OpenGL -framework AppKit
+MLX=-L/usr/local/lib -I/usr/local/include -lmlx -framework OpenGL -framework AppKit
 
 LIB_NAME=libft.a
 LIB_PATH=./libft/

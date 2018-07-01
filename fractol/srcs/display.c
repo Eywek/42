@@ -6,7 +6,7 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 13:17:33 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/23 14:39:04 by valentin         ###   ########.fr       */
+/*   Updated: 2018/07/01 15:55:18 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_init(t_fractal fractal)
 	t_env	env;
 
 	ft_memset(&env, 0, sizeof(env));
+	env.options.zoom = 1;
+	env.options.iterations = 300;
 	env.fractal = fractal.f;
 	env.mlx_id = mlx_init();
 	env.mlx_win = mlx_new_window(env.mlx_id, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
@@ -38,9 +40,16 @@ void	ft_draw(t_env *env)
 	mlx_put_image_to_window(env->mlx_id, env->mlx_win, env->mlx_img, 0, 0);
 }
 
-void	ft_putpixel(t_env *env, int x, int y, int color)
+void	ft_putpixel(t_env *env, int x, int y, t_color color)
 {
-	if (y >= WIN_HEIGHT || x >= WIN_WIDTH || x < 0 || y < 0)
-		return ;
-	*(int *)&env->image[(y * env->size) + (x * (env->bpp / 8))] = color;
+	int		pos;
+	char	*img;
+
+	pos = (env->bpp / 8) * x;
+	if (y)
+		pos += y * env->size;
+	img = env->image;
+	img[pos] = (char)color.red; // Red
+	img[pos + 1] = (char)color.green; // Green
+	img[pos + 2] = (char)color.blue; // Blue
 }

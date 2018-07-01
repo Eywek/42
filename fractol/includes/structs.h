@@ -6,24 +6,20 @@
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 12:19:03 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/02/23 14:49:49 by valentin         ###   ########.fr       */
+/*   Updated: 2018/07/01 15:58:09 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_STRUCTS_H
 # define FRACTOL_STRUCTS_H
 
-typedef struct	s_fractal
+typedef struct	s_options
 {
-	char		*name;
-	void		(*f)(void *env);
-	double		nr;
-	double		pi;
-	double		po;
-	double		ni;
-	double		rp;
-	double		i;
-}				t_fractal;
+	double		zoom;
+	double		x;
+	double		y;
+	int			iterations;
+}				t_options;
 
 typedef struct	s_env
 {
@@ -34,7 +30,27 @@ typedef struct	s_env
 	int			bpp;
 	int			endian;
 	int			size;
-	void		(*fractal)(void *env);
+	void		(*fractal)(struct s_env *env);
+	t_options	options;
 }				t_env;
+
+typedef struct	s_fractal
+{
+	char		*name;
+	void		(*f)(t_env *env);
+//	double		nr;
+//	double		pi;
+//	double		po;
+//	double		ni;
+//	double		rp;
+//	double		i;
+}				t_fractal;
+
+typedef struct	s_color
+{
+	int	red;
+	int green;
+	int blue;
+}				t_color;
 
 #endif
