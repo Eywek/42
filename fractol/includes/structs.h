@@ -38,12 +38,11 @@ typedef struct	s_fractal
 {
 	char		*name;
 	void		(*f)(t_env *env);
-//	double		nr;
-//	double		pi;
-//	double		po;
-//	double		ni;
-//	double		rp;
-//	double		i;
+	double		nr; // new real
+	double		pi; // previous imaginary
+	double		ni; // new imaginary
+	double		pr; // previous real
+	int	    	i; // iterations
 }				t_fractal;
 
 typedef struct	s_color
