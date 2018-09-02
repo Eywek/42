@@ -14,8 +14,9 @@
 
 t_fractal	g_fractals[FRACTALS_COUNT] =
 {
-	{"julia", ft_julia}, {"mandelbrot", ft_mandelbrot},
-	{"burningship", ft_burningship}
+	{"julia", ft_julia, 0, 0, 0, 0, 0, 0, 0},
+    {"mandelbrot", ft_mandelbrot, 0, 0, 0, 0, 0, 0, 0},
+	{"burningship", ft_burningship, 0, 0, 0, 0, 0, 0, 0}
 };
 
 int		ft_handle_fractal(char *fractal)

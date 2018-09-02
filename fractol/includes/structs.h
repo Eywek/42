@@ -42,6 +42,8 @@ typedef struct	s_fractal
 	double		pi; // previous imaginary
 	double		ni; // new imaginary
 	double		pr; // previous real
+    double      tr; // tmp real
+    double      ti; // tmp imaginary
 	int	    	i; // iterations
 }				t_fractal;
 
