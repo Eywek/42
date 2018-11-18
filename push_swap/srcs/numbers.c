@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   numbers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtouffet <vtouffet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/07 19:11:45 by vtouffet          #+#    #+#             */
-/*   Updated: 2018/04/22 13:53:19 by vtouffet         ###   ########.fr       */
+/*   Created: 2018/04/22 13:52:49 by vtouffet          #+#    #+#             */
+/*   Updated: 2018/04/22 13:56:44 by vtouffet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+#include "../includes/push_swap.h"
 
-# include "checker.h"
+/*
+ * This function replace 20 4 -1 to 2 1 0
+ */
+void	ft_replace_as_simple_numbers(t_env *env)
+{
+	int	i;
 
-void	ft_push_swap_process(t_env *env);
-void	ft_display_operations(t_env env);
-void	ft_replace_as_simple_numbers(t_env *env);
-int		ft_checker_check_b(t_env env);
+	i = 0;
+	while (i < env->stack_a_size)
+	{
 
-#endif
-
+	}
+}

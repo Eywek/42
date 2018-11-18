@@ -59,11 +59,11 @@ void	ft_checker_store_stack(int size, char *tab[], int start, t_env *env)
 		}
 		if ((nb = ft_getnbr(tab[count])) == 0 &&
 			ft_strcmp(tab[count], "0") != 0)
-			ft_checker_error();
+			return ft_checker_error();
 		if (ft_in_tab(nb, env->stack_a, env->stack_a_size))
-			ft_checker_error();
+			return ft_checker_error();
 		if (!(tmp = malloc(sizeof(int) * (env->stack_a_size + 1))))
-			ft_checker_error();
+			return ft_checker_error();
 		ft_copy_tab(tmp, env->stack_a, env->stack_a_size);
 		free(env->stack_a);
 		tmp[env->stack_a_size] = nb;
